@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Dive Plans – going to-future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"grammar", id:"gt6", icon:"🤿", kartenSymbol:"🤿",
+  titel:"Dive Plans", untertitel:"going to-future: plans",
+  text:"Pack your bag – we are going to explore the ocean! Talk about plans with am / is / are going to.",
+  levels: [
+    { id:"amisare", typ:"sortieren", icon:"🎒", titel:"Pack your Bag", art:"am / is / are going to · sort",
+      anleitung:"Which word fits: **am**, **is** or **are** + going to? Tap the right box.",
+      anleitungDe:"Welches Wort passt vor *going to*: **am**, **is** oder **are**? Tippe auf das richtige Kästchen.",
+      tipp:"I **am** going to … · he / she / it **is** going to … · we / you / they **are** going to …",
+      koerbe:[
+        {t:"am", info:"I", tipp:"**I am** (I’m) going to …"},
+        {t:"is", info:"he · she · it", tipp:"**he / she / it is** going to … – also after one person: *Lisa is going to …*"},
+        {t:"are", info:"we · you · they", tipp:"**we / you / they are** going to … – also after two people: *Tom and Ali are going to …*"}
+      ],
+      items:[
+        {t:"I ___ going to swim.", k:0}, {t:"She ___ going to buy flippers.", k:1}, {t:"We ___ going to visit an island.", k:2},
+        {t:"My dad ___ going to rent a boat.", k:1, e:"*My dad* = he → **is**."}, {t:"They ___ going to take photos.", k:2}, {t:"It ___ going to be a great day.", k:1},
+        {t:"You ___ going to love it!", k:2}, {t:"Tom and Ali ___ going to bring a ball.", k:2, e:"*Tom and Ali* = they → **are**."}, {t:"I ___ not going to forget my towel.", k:0},
+        {t:"___ you going to dive?", k:2, e:"Question with **you** → **Are** you going to …?"}, {t:"___ he going to come?", k:1, e:"Question with **he** → **Is** he going to …?"},
+        {t:"The kids ___ going to build a sandcastle.", k:2}
+      ]},
+    { id:"plans", typ:"satzbau", icon:"🗺️", titel:"Plan the Trip", art:"Sentence builder · statements, negatives, questions",
+      anleitung:"Build the sentence with **going to**.",
+      anleitungDe:"Bau den Satz mit **going to**, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"am / is / are + going to + Grundform. Frage: *Are you going to …?* Verneinung: *isn’t / aren’t / I’m not going to …*",
+      punkte:2,
+      saetze:[
+        {w:["I'm","going","to","learn","to","dive"], hint:"🇩🇪 Ich werde tauchen lernen. (Das habe ich vor.)"},
+        {w:["We","are","going","to","visit","Cornwall"], hint:"🇩🇪 Wir werden Cornwall besuchen."},
+        {w:["She","isn't","going","to","stay","at","home"], hint:"🇩🇪 Sie wird nicht zu Hause bleiben."},
+        {w:["Are","you","going","to","come","with","us","?"], hint:"🇩🇪 Wirst du mit uns kommen?"},
+        {w:["What","are","you","going","to","do","?"], hint:"🇩🇪 Was hast du vor? / Was wirst du machen?"},
+        {w:["They","aren't","going","to","sail","today"], alt:[["Today","they","aren't","going","to","sail"]], hint:"🇩🇪 Sie werden heute nicht segeln."}
+      ]},
+    { id:"look", typ:"quiz", icon:"⛈️", titel:"What’s going to happen?", art:"Plans & clear signs · quiz",
+      anleitung:"Look at the situation and choose the right sentence.",
+      anleitungDe:"Schau dir die Situation an und wähle den richtigen Satz.",
+      tipp:"*going to* für Pläne (*I’ve bought a ticket.*) und wenn man schon sieht, was gleich passiert (*Look at the clouds!*).",
+      fragen:[
+        {q:"Look at those black clouds!", o:["It's going to rain.","It going to rain.","It's going rain."], c:0, e:"You can see it → **It’s going to rain.**"},
+        {q:"Ella has bought a new swimsuit.", o:["She's going to go swimming.","She going to swim.","She's going to swims."], c:0, e:"A plan → **She’s going to go swimming.**"},
+        {q:"Watch out! The boy is running too fast.", o:["He's going to fall.","He going to fall.","He's going to falls."], c:0, e:"You can see it → **He’s going to fall.**"},
+        {q:"We have tickets for the aquarium.", o:["We're going to see sharks.","We're going see sharks.","We going to see sharks."], c:0, e:"A plan → **We’re going to see sharks.**"},
+        {q:"– Are you going to watch the film? (✘)", o:["No, I'm not.","No, I don't.","No, I amn't."], c:0, e:"Short answer: No, I’m **not**."},
+        {q:"– Is your brother going to help? (✔)", o:["Yes, he is.","Yes, he does.","Yes, he going."], c:0, e:"Short answer: Yes, he **is**."},
+        {q:"My parents have sold the old boat.", o:["They're going to buy a new one.","They going to buy a new one.","They're going to bought a new one."], c:0, e:"A plan → **going to + base form**."},
+        {q:"Which question is correct?", o:["When are you going to leave?","When you are going to leave?","When are you going leave?"], c:0, e:"Question word + **are** + person + **going to** + base form."}
+      ]},
+    { id:"diary", typ:"lueckentext", icon:"🏝️", titel:"Holiday Plans", art:"Story · fill in the gaps",
+      anleitung:"Read Sophie’s message. Tap a gap and choose the right words.",
+      anleitungDe:"Lies Sophies Nachricht. Tippe auf eine Lücke und wähle die richtigen Wörter.",
+      tipp:"am / is / are + going to + Grundform.",
+      ueberschrift:"Sophie’s message",
+      text:"Hi Jack! Guess what? My family and I [[are going to|is going to|going to]] spend our holidays by the sea. My dad [[is going to|are going to|is going]] rent a little boat. My brothers [[are going to|is going to|are go to]] try surfing.\nI [[am going to|is going to|are going to]] take a diving course. I [[am not going to|is not going to|don't going to]] be scared! Mum [[isn't going to|aren't going to|not going to]] dive – she [[is going to|are going to|is going]] read on the beach. [[Are you going to|Is you going to|You are going to]] visit your grandma this summer? Write soon!",
+      erklaerung:"going to-future = **am / is / are + going to + base form** for plans."}
+  ]
+});
+</script>
+</body>
+</html>

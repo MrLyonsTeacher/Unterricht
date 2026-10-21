@@ -59,6 +59,7 @@ label{font-weight:700}
 table{border-collapse:collapse;width:100%;font-size:.95rem}
 th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
 th{font-size:.85rem;color:var(--muted)}
+.tablewrap thead th{white-space:normal;min-width:4.6rem;max-width:7.5rem;vertical-align:bottom;line-height:1.2}
 td.n{text-align:right;font-variant-numeric:tabular-nums}
 tr.invalid td{background:var(--bad-bg)}
 .del{border:0;background:none;color:var(--muted);font-size:1.2rem;min-width:40px;min-height:40px}
@@ -99,6 +100,7 @@ details summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;alig
 .rp-legend i{display:inline-block;width:.9rem;height:.9rem;border-radius:3px;vertical-align:-2px;margin-right:.3rem}
 .rp-warn{color:var(--ri);font-size:.85rem;margin-top:.5rem}
 @media (max-width:820px){ .rp-grid{grid-template-columns:1fr} }
+.rp-grid.wide{grid-template-columns:1fr} .rp-grid.wide>div:first-child{columns:2;column-gap:2.4rem} .rp-grid.wide>div:first-child>h3,.rp-grid.wide>div:first-child>.rp-note{column-span:all} .rp-grid.wide .st-row{break-inside:avoid;break-after:avoid}
 @media print{
   @page{size:A4 landscape;margin:10mm}
   body{background:#fff}
@@ -410,7 +412,7 @@ function renderReport(){
         <div class="rp-kpi"><b>${Math.round(bestP*100)} %</b><span>Bestes Ergebnis</span></div>
       </div>
     </div>
-    <div class="rp-grid">
+    <div class="rp-grid${C.heads.length>6?" wide":""}">
       <div>
         <h3>${label} im Klassenschnitt</h3>
         ${C.heads.map((h,i)=> stAvg[i]===null

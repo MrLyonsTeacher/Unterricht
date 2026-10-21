@@ -54,7 +54,8 @@ main{max-width:1120px;margin:0 auto;padding:1.4rem 1.2rem 3rem}
 .classes{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
 .cls{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 0 var(--line)}
 .cls-map{position:relative;background:#3A9FE0;aspect-ratio:16/9;overflow:hidden}
-.cls-map svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.cls-map img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cls-w{position:absolute;left:.7rem;bottom:.7rem;background:rgba(0,0,0,.62);color:#fff;border-radius:10px;padding:.1rem .6rem;font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.05rem}
 .cls-k{position:absolute;left:.7rem;top:.7rem;background:var(--sun);border:3px solid var(--ink);border-radius:12px;padding:.05rem .6rem;font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.15rem;box-shadow:2px 2px 0 var(--ink)}
 .cls-body{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
 .cls-t{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
@@ -124,7 +125,7 @@ dialog::backdrop{background:#000}
       <h3>So läuft eine Stunde</h3>
       <ol class="howto">
         <li>Klasse wählen und <b>QR-Code</b> an die Tafel werfen.</li>
-        <li>Die Schüler scannen mit dem iPad und landen direkt auf ihrer Insel.</li>
+        <li>Die Schüler scannen mit dem iPad und landen direkt in ihrer Klassenwelt.</li>
         <li>Am Ende tippen sie auf „If you’re finished, click here“ und erstellen ihren Code.</li>
         <li>Du öffnest <b>Ergebnisse einsammeln</b> und scannst alle nacheinander.</li>
       </ol>
@@ -154,7 +155,6 @@ dialog::backdrop{background:#000}
 
 <script src="qrcode.js"></script>
 <script src="katalog.js"></script>
-<script src="lernwelt/insel.js"></script>
 <script>
 "use strict";
 const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -171,20 +171,20 @@ function renderTabs(){
   document.getElementById("tabs").innerHTML = FAECHER.map(f=>`<button class="tab" role="tab" aria-selected="${f.id===tab}" data-tab="${f.id}">${f.icon} ${esc(f.name)}<span class="n">${f.n}</span></button>`).join("");
 }
 function englisch(){
-  return `<div class="sec-h"><h2>Englisch · Klasseninseln</h2><p>Ein QR-Code pro Klasse – die Schüler landen direkt auf ihrer Insel.</p></div>
+  return `<div class="sec-h"><h2>Englisch · Klassenwelten</h2><p>Ein QR-Code pro Klasse – die Schüler landen direkt in ihrer 3D-Welt mit Grammar, Vocabulary und Country &amp; people.</p></div>
   <div class="classes">${FRS.englisch.klassen.map(c=>{
     const bereiche = FRS.bereicheFuer(c.k);
     const list = bereiche.flatMap(b=>c.themen.filter(t=>t.kat===b));
     return `<article class="cls">
-      <div class="cls-map">${INSEL.render(c.k,{bereiche, mini:true})}<span class="cls-k">Klasse ${c.k}</span></div>
+      <div class="cls-map"><img src="englisch/welten/vorschau-k${c.k}.jpg" alt="" loading="lazy"><span class="cls-k">Klasse ${c.k}</span><span class="cls-w">${FRS.welt(c.k).icon} ${esc(FRS.welt(c.k).name)}</span></div>
       <div class="cls-body">
-        <div class="cls-t"><b>${esc(INSEL.NAMES[c.k])}</b><span>${list.length} ${list.length===1?"Lernwelt":"Lernwelten"} · ${bereiche.length} Bereiche</span></div>
+        <div class="cls-t"><b>${esc(FRS.welt(c.k).name)}</b><span>${list.length} ${list.length===1?"Lernwelt":"Lernwelten"} · ${bereiche.length} Bereiche</span></div>
         ${list.length ? `<ul class="topics">${list.map(t=>`<li><span class="ti" aria-hidden="true">${t.icon||"🎯"}</span>
             <span class="tt"><b>${esc(t.titel)}</b><small>${esc(FRS.kategorien[t.kat].de)} · ${esc(t.untertitel||"")}</small></span>
             <button class="qr-mini" data-qr="${esc(t.pfad)}" data-t="${esc(t.titel)}" data-s="Englisch · Klasse ${c.k}" aria-label="QR-Code für ${esc(t.titel)}">QR</button></li>`).join("")}</ul>`
-          : `<p class="empty">Noch keine Lernwelten – die Insel ist schon startklar.</p>`}
-        <div class="cls-act"><button class="btn" data-qr="englisch/insel.html?k=${c.k}" data-t="Klasse ${c.k} · ${esc(INSEL.NAMES[c.k])}" data-s="Englisch">QR-Code Klasse ${c.k}</button>
-          <a class="btn ghost" href="englisch/insel.html?k=${c.k}" target="_blank" rel="noopener">Öffnen</a></div>
+          : `<p class="empty">Noch keine Lernwelten – die Welt ist schon startklar.</p>`}
+        <div class="cls-act"><button class="btn" data-qr="englisch/welt.html?k=${c.k}" data-t="Klasse ${c.k} · ${esc(FRS.welt(c.k).name)}" data-s="Englisch">QR-Code Klasse ${c.k}</button>
+          <a class="btn ghost" href="englisch/welt.html?k=${c.k}" target="_blank" rel="noopener">Öffnen</a></div>
       </div></article>`; }).join("")}</div>`;
 }
 function liste(l){

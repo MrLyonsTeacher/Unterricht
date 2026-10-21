@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Reef Live Cam – Present Progressive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"grammar", id:"pg6", icon:"📹", kartenSymbol:"🐠",
+  titel:"Reef Live Cam", untertitel:"Present progressive: statements, negatives, questions",
+  text:"Switch on the live cam! What is happening on the reef right now? Use am / is / are + -ing.",
+  levels: [
+    { id:"ing", typ:"sortieren", icon:"✍️", titel:"-ing Workshop", art:"Spelling · sort",
+      anleitung:"How do you write the **-ing** form? Tap the right box.",
+      anleitungDe:"Wie schreibt man die **-ing**-Form? Tippe auf das richtige Kästchen.",
+      tipp:"Stummes -e fällt weg (make → making). Kurzer Vokal + Konsonant: Konsonant verdoppeln (swim → swimming). -ie wird zu -y (lie → lying).",
+      koerbe:[
+        {t:"+ ing", info:"read → reading", tipp:"Most verbs just get **-ing**: read → reading, play → playing."},
+        {t:"e → ing", info:"dance → dancing", tipp:"Verbs ending in a silent **-e** lose the e: make → making, ride → riding."},
+        {t:"double + ing", info:"swim → swimming", tipp:"Short verbs with **one vowel + one consonant** double the last letter: run → running, sit → sitting."},
+        {t:"ie → ying", info:"lie → lying", tipp:"**-ie** becomes **-y**: die → dying, tie → tying."}
+      ],
+      items:[
+        {t:"read", k:0}, {t:"play", k:0}, {t:"watch", k:0}, {t:"eat", k:0, e:"eat has two vowels (ea) → just add -ing: **eating**."},
+        {t:"dance", k:1}, {t:"make", k:1}, {t:"write", k:1}, {t:"ride", k:1},
+        {t:"swim", k:2}, {t:"run", k:2}, {t:"sit", k:2}, {t:"get", k:2},
+        {t:"lie", k:3}, {t:"die", k:3}, {t:"tie", k:3}, {t:"dive", k:1, e:"dive ends in -e → **diving**."}
+      ]},
+    { id:"nowvs", typ:"swipe", icon:"⏱️", titel:"Now or Always?", art:"Signal words · swipe",
+      anleitung:"Right now or a habit? Swipe **right for Now (-ing)** and **left for Always (simple present)**.",
+      anleitungDe:"Passiert es gerade oder immer wieder? Wische nach **rechts für Now** (present progressive) und nach **links für Always** (simple present).",
+      tipp:"Signalwörter für *gerade jetzt*: now, right now, at the moment, Look!, Listen!",
+      links:{t:"Always", icon:"🔁"}, rechts:{t:"Now", icon:"📹"},
+      karten:[
+        {t:"at the moment", r:"r", e:"**at the moment** = im Moment → present progressive."},
+        {t:"every Monday", r:"l", e:"**every Monday** → a habit: simple present."},
+        {t:"Look!", r:"r", e:"**Look!** → it is happening now."},
+        {t:"usually", r:"l", e:"**usually** → simple present."},
+        {t:"right now", r:"r", e:"**right now** → present progressive."},
+        {t:"never", r:"l", e:"**never** → simple present."},
+        {t:"Listen!", r:"r", e:"**Listen!** → it is happening now."},
+        {t:"on Sundays", r:"l", e:"**on Sundays** = jeden Sonntag → simple present."},
+        {t:"now", r:"r", e:"**now** → present progressive."},
+        {t:"often", r:"l", e:"**often** → simple present."}
+      ]},
+    { id:"amisare", typ:"quiz", icon:"🐢", titel:"Live from the Reef", art:"am / is / are · quiz",
+      anleitung:"What is happening on the live cam? Choose the right form.",
+      anleitungDe:"Was passiert gerade auf der Live-Kamera? Wähle die richtige Form.",
+      tipp:"I **am** … · he / she / it **is** … · we / you / they **are** … + Verb mit -ing.",
+      fragen:[
+        {q:"Look! The turtle **___** to the surface.", o:["is swimming","are swimming","swims"], c:0, e:"*The turtle* = it → **is swimming**."},
+        {q:"Two dolphins **___** in the waves.", o:["are playing","is playing","playing"], c:0, e:"*Two dolphins* = they → **are playing**."},
+        {q:"I **___** the live cam on my tablet.", o:["am watching","is watching","are watch"], c:0, e:"I → **am watching**."},
+        {q:"The crab **___**. It is sleeping.", o:["isn't moving","aren't moving","doesn't moving"], c:0, e:"Negative: it **isn’t** + -ing."},
+        {q:"**___** the diver taking photos?", o:["Is","Are","Does"], c:0, e:"Question: **Is** + he/she + -ing …?"},
+        {q:"– Are the fish eating? – Yes, they **___**.", o:["are","is","do"], c:0, e:"Short answer: Yes, they **are**."},
+        {q:"We **___** the octopus. It is hiding.", o:["aren't filming","isn't filming","don't filming"], c:0, e:"we → **aren’t** + -ing."},
+        {q:"What **___** the shark doing?", o:["is","are","does"], c:0, e:"*the shark* = it → What **is** the shark doing?"}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🎬", titel:"Director’s Cut", art:"Sentence builder · statements, negatives, questions",
+      anleitung:"Build the sentence: **am / is / are + -ing**.",
+      anleitungDe:"Bau den Satz, indem du die Wörter in der richtigen Reihenfolge antippst: **am / is / are + -ing**.",
+      tipp:"Frage: *Is / Are* steht vorne. Verneinung: *isn’t / aren’t / I’m not*.",
+      punkte:2,
+      saetze:[
+        {w:["The","whale","is","singing","now"], alt:[["Now","the","whale","is","singing"]], hint:"🇩🇪 Der Wal singt gerade."},
+        {w:["We","are","diving","near","the","reef"], hint:"🇩🇪 Wir tauchen gerade in der Nähe des Riffs."},
+        {w:["I'm","not","sleeping","right","now"], alt:[["Right","now","I'm","not","sleeping"]], hint:"🇩🇪 Ich schlafe gerade nicht."},
+        {w:["Are","the","children","swimming","?"], hint:"🇩🇪 Schwimmen die Kinder gerade?"},
+        {w:["What","is","the","octopus","doing","?"], hint:"🇩🇪 Was macht der Tintenfisch gerade?"},
+        {w:["She","isn't","wearing","a","wetsuit"], hint:"🇩🇪 Sie trägt (gerade) keinen Neoprenanzug."}
+      ]},
+    { id:"which", typ:"quiz", icon:"🦈", titel:"Now or Every Day?", art:"Present progressive or simple present · quiz",
+      anleitung:"Which sentence is right? Look at the signal words.",
+      anleitungDe:"Welcher Satz ist richtig? Achte auf die Signalwörter.",
+      tipp:"*now, at the moment, Look!* → am/is/are + -ing. *every day, usually, often* → simple present (he/she/it: -s!).",
+      fragen:[
+        {q:"Which sentence is correct?", o:["Look! The seal is eating a fish.","Look! The seal eats a fish.","Look! The seal eating a fish."], c:0, e:"**Look!** → it is happening now: **is eating**."},
+        {q:"Which sentence is correct?", o:["Sharks usually swim alone.","Sharks are usually swimming alone.","Sharks usually swims alone."], c:0, e:"**usually** → simple present: sharks **swim**."},
+        {q:"Which sentence is correct?", o:["I'm doing my homework at the moment.","I do my homework at the moment.","I doing my homework at the moment."], c:0, e:"**at the moment** → **I’m doing**."},
+        {q:"Which sentence is correct?", o:["My dad goes diving every summer.","My dad is going diving every summer.","My dad go diving every summer."], c:0, e:"**every summer** → simple present: he **goes**."},
+        {q:"Which sentence is correct?", o:["Listen! The birds are singing.","Listen! The birds sing.","Listen! The birds is singing."], c:0, e:"**Listen!** → now: **are singing**."},
+        {q:"Which sentence is correct?", o:["She doesn't watch TV on Mondays.","She isn't watching TV on Mondays.","She don't watch TV on Mondays."], c:0, e:"**on Mondays** = a habit → simple present negative: **doesn’t watch**."}
+      ]},
+    { id:"report", typ:"lueckentext", icon:"📡", titel:"Live Report", art:"Story · fill in the gaps",
+      anleitung:"You are the reporter! Tap a gap and choose the right form.",
+      anleitungDe:"Du bist die Reporterin / der Reporter! Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"Es passiert gerade jetzt → *am / is / are + -ing*.",
+      ueberschrift:"Breaking news from the reef",
+      text:"Hello! This is Sea TV and I [[am standing|is standing|are standing]] on a boat. Look at the water! A big whale [[is coming|are coming|comes]] closer. Two divers [[are taking|is taking|taking]] photos.\nOh! The whale [[is jumping|are jumping|is jumpping]] out of the water now! The people on the boat [[are laughing|is laughing|laughs]]. [[Are|Is|Do]] you watching at home? It's amazing!\nBut wait – the whale [[isn't swimming|aren't swimming|doesn't swimming]] away. It [[is looking|are looking|looks]] at us! I [[am not leaving|is not leaving|not leaving]] this boat. Back to the studio!",
+      erklaerung:"Present progressive = **am / is / are + verb-ing** for things that are happening **now**."}
+  ]
+});
+</script>
+</body>
+</html>

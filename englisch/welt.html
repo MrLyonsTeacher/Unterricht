@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>FRS Lernwelten – English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--ui-bg:rgba(20,20,30,.9);--ui-border:#fff;--ui-glow:rgba(255,255,255,.4);--ui-text:#fff;--ui-sub:#ccc;--ui-accent:#FFB23A;--ui-accent-ink:#1A1A1A;--ui-chip:rgba(0,0,0,.6)}
+html,body{margin:0;height:100%;overflow:hidden;font-family:Lexend,system-ui,-apple-system,sans-serif;background:#111;color:var(--ui-text)}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--ui-accent);outline-offset:3px}
+#stage{position:fixed;inset:0}
+#stage canvas{display:block}
+.ico-flag{width:1.6em;height:.8em;vertical-align:-.08em;border-radius:2px;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+
+/* Kopfzeile */
+.wbar{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0)) 14px 10px;pointer-events:none}
+.wbar>*{pointer-events:auto}
+.wk{flex:0 0 auto;background:var(--ui-accent);color:var(--ui-accent-ink);border-radius:12px;padding:3px 12px;font:700 18px Fredoka;box-shadow:0 4px 0 rgba(0,0,0,.35)}
+.wt{flex:1;min-width:0;font:700 clamp(22px,4vw,32px) Fredoka;color:#fff;text-shadow:0 0 16px var(--ui-glow),0 3px 0 rgba(0,0,0,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wchip{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;background:var(--ui-chip);border:2px solid var(--ui-border);border-radius:12px;padding:5px 12px;font:700 16px Fredoka;box-shadow:0 0 14px var(--ui-glow)}
+.wchip small{opacity:.7}
+.wfin{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-height:46px;padding:0 14px 0 0;border-radius:12px;border:2px dashed #fff;background:var(--ui-accent);color:var(--ui-accent-ink);font:700 16px Fredoka;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.35)}
+.wfin .chk{align-self:stretch;width:26px;background:repeating-conic-gradient(#1A1A1A 0 25%,#fff 0 50%) 0 0/12px 12px}
+@media (max-width:760px){ .wfin .long{display:none} } @media (min-width:761px){ .wfin .short{display:none} }
+
+/* Beschriftungen in der Welt */
+#labels{position:fixed;inset:0;z-index:4;pointer-events:none}
+.wlbl{position:absolute;left:0;top:0;pointer-events:auto;display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 12px 6px 8px;border-radius:16px;
+  background:var(--ui-bg);color:var(--ui-text);border:2.5px solid var(--ui-border);font:700 18px Fredoka;white-space:nowrap;
+  box-shadow:0 0 18px var(--ui-glow),0 5px 0 rgba(0,0,0,.4);transition:opacity .3s}
+.wlbl::after{content:"";position:absolute;left:50%;bottom:-12px;width:3px;height:10px;margin-left:-1.5px;background:var(--ui-border);border-radius:2px}
+.wl-ic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.14);font-size:20px}
+.wl-n{min-width:24px;height:24px;border-radius:999px;display:grid;place-items:center;background:var(--ui-accent);color:var(--ui-accent-ink);font-size:14px;padding:0 6px}
+.wl-n.z{background:rgba(255,255,255,.25);color:var(--ui-text)}
+.wlbl.hide{opacity:0;pointer-events:none}
+
+/* Dock unten: alle Bereiche immer erreichbar */
+.wdock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0));transform:translateX(-50%);z-index:5;display:flex;gap:10px;padding:8px;border-radius:20px;background:var(--ui-chip);border:2px solid var(--ui-border);box-shadow:0 0 18px var(--ui-glow);max-width:calc(100vw - 24px)}
+.wdock button{display:flex;align-items:center;gap:8px;min-height:54px;padding:6px 16px;border-radius:14px;border:0;background:rgba(255,255,255,.12);color:var(--ui-text);font:700 17px Fredoka;white-space:nowrap}
+.wdock button[aria-pressed="true"]{background:var(--ui-accent);color:var(--ui-accent-ink)}
+.wdock .n{min-width:22px;height:22px;border-radius:999px;display:grid;place-items:center;background:rgba(0,0,0,.25);font-size:13px;padding:0 5px}
+@media (max-width:560px){ .wdock button{padding:6px 10px;font-size:15px} .wdock .lbl-long{display:none} }
+
+/* Bereichs-Fenster */
+.wpanel{position:fixed;z-index:6;right:16px;top:76px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 180px);overflow:auto;padding:18px;border-radius:20px;
+  background:var(--ui-bg);border:2.5px solid var(--ui-border);color:var(--ui-text);box-shadow:0 0 34px var(--ui-glow),0 18px 40px rgba(0,0,0,.4);
+  transform:translateX(calc(100% + 30px));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.wpanel.on{transform:none}
+@media (max-aspect-ratio:1/1){ .wpanel{right:50%;top:auto;bottom:96px;transform:translate(50%,calc(100% + 140px));max-height:52dvh} .wpanel.on{transform:translate(50%,0)} }
+.wpanel h2{margin:0 0 2px;font:700 28px Fredoka}
+.wpanel .ort{margin:0 0 12px;color:var(--ui-sub)}
+.quest{display:grid;grid-template-columns:2.6rem 1fr auto;gap:.7rem;align-items:center;padding:.7rem .8rem;margin-top:.55rem;border-radius:14px;text-decoration:none;color:inherit;
+  background:rgba(255,255,255,.08);border:1.5px solid var(--ui-border);min-height:70px}
+.quest:hover,.quest:focus-visible{background:rgba(255,255,255,.16)}
+.q-ic{font-size:1.8rem;text-align:center}
+.q-t b{display:block;font-size:1.06rem;line-height:1.2}
+.q-t small{display:block;color:var(--ui-sub);font-size:.88rem;line-height:1.25}
+.q-bar{display:block;height:5px;background:rgba(255,255,255,.18);margin-top:.35rem;border-radius:3px;overflow:hidden}
+.q-bar i{display:block;height:100%;background:var(--ui-accent)}
+.q-r{display:flex;align-items:center;gap:.4rem;font-weight:700;font-size:.92rem}
+.q-go{background:var(--ui-accent);color:var(--ui-accent-ink);border-radius:10px;padding:.25rem .6rem;font-family:Fredoka}
+.wpanel.many .quest{min-height:58px;padding:.45rem .7rem;margin-top:.4rem}
+.wpanel.many .q-ic{font-size:1.5rem}
+.wpanel.many h2{font-size:24px}
+@media (max-aspect-ratio:1/1){ .wpanel.many{max-height:60dvh} }
+.empty{padding:.8rem;border:1.5px dashed var(--ui-border);border-radius:14px;color:var(--ui-sub);text-align:center}
+.wback{margin-top:14px;min-height:48px;padding:.4rem 1rem;border:0;border-radius:12px;background:var(--ui-accent);color:var(--ui-accent-ink);font:700 16px Fredoka}
+
+/* Ergebnis-Fenster */
+.fin{position:fixed;inset:0;z-index:8;display:grid;place-items:center;padding:1rem;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.fin[hidden]{display:none}
+.fin-win{position:relative;width:min(900px,100%);max-height:calc(100dvh - 2rem);overflow:auto;padding:1.3rem;border-radius:22px;background:var(--ui-bg);border:2.5px solid var(--ui-border);box-shadow:0 0 40px var(--ui-glow);animation:pop .4s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.fin-win h2{margin:0;text-align:center;font:700 30px Fredoka}
+.fin-win .how{text-align:center;margin:.3rem 0 1rem;color:var(--ui-sub)}
+.fin-x{position:absolute;top:.6rem;right:.6rem;width:44px;height:44px;border-radius:12px;border:2px solid var(--ui-border);background:transparent;font-size:1.5rem;line-height:1}
+.fin-row{display:flex;gap:.6rem;max-width:520px;margin:0 auto 1rem}
+.fin-row input{flex:1;min-width:0;min-height:52px;padding:.4rem .9rem;border-radius:12px;border:2px solid var(--ui-border);background:rgba(255,255,255,.1);color:#fff;font:700 1.35rem Fredoka;letter-spacing:.05em}
+.fin-row input::placeholder{color:rgba(255,255,255,.5)}
+.fin-row button{min-height:52px;padding:.4rem 1.2rem;border:0;border-radius:12px;background:var(--ui-accent);color:var(--ui-accent-ink);font:700 1.05rem Fredoka}
+.fin-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem;align-items:start}
+@media (max-width:720px){ .fin-grid{grid-template-columns:1fr} }
+.qr-card{background:#fff;color:#111;padding:.7rem;border-radius:16px;text-align:center}
+.qr-card img{display:block;width:min(42vh,300px,72vw);height:auto;image-rendering:pixelated;margin:0 auto}
+.qr-card .who{font:700 1.6rem Fredoka;margin:.3rem 0 0}
+.qr-card .tot{margin:.1rem 0 0;font-weight:700}
+.fin-tab{width:100%;border-collapse:collapse}
+.fin-tab th{text-align:left;color:var(--ui-accent);font:700 .95rem Fredoka;padding:.6rem .2rem .2rem;border-bottom:1.5px solid var(--ui-border)}
+.fin-tab td{padding:.3rem .2rem;border-bottom:1px solid rgba(255,255,255,.12);vertical-align:middle}
+.fin-tab td:last-child{text-align:right;font-weight:700;white-space:nowrap}
+.fin-tab .none td{opacity:.55}
+.fin-note{font-size:.9rem;color:var(--ui-sub);margin:.6rem 0 0}
+.fin-code{display:block;font-size:.68rem;opacity:.6;word-break:break-all;margin-top:.3rem;font-family:ui-monospace,monospace}
+.nogl{position:fixed;inset:0;display:grid;place-items:center;text-align:center;padding:2rem;font:600 18px Lexend}
+.pick{position:fixed;inset:0;overflow:auto;padding:5rem 1rem 2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;align-content:start;background:#1B2B4A}
+.pick a{display:block;border-radius:18px;overflow:hidden;background:#fff;color:#13294B;text-decoration:none;font:700 1.2rem Fredoka}
+.pick img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.pick span{display:block;padding:.6rem .9rem}
+.shake{animation:shake .35s} @keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+@media (prefers-reduced-motion: reduce){ .wpanel{transition:none} .fin-win{animation:none} }
+</style>
+<script type="importmap">{"imports":{"three":"../lernwelt/vendor/three.module.min.js","three/addons/":"../lernwelt/vendor/addons/"}}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+  <g id="ukflag" clip-path="url(#uk-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+  <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>
+</defs></svg>
+
+<div id="stage"></div>
+<header class="wbar" id="bar"></header>
+<div id="labels"></div>
+<nav class="wdock" id="dock" aria-label="Areas"></nav>
+<aside class="wpanel" id="panel" aria-live="polite"></aside>
+<div class="fin" id="fin" hidden></div>
+
+<script src="../katalog.js"></script>
+<script src="../qrcode.js"></script>
+<script src="../ergebnis.js"></script>
+<script src="../lernwelt/lernwelt.js"></script>
+<script type="module">
+const UK = `<svg class="ico-flag" viewBox="0 0 60 30" aria-hidden="true"><use href="#ukflag"/></svg>`;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = s => document.querySelector(s);
+const K = +new URLSearchParams(location.search).get("k");
+const KL = FRS.klasse(K), WI = FRS.welt(K);
+
+if(!KL){
+  $("#bar").innerHTML = `<span class="wk">FRS</span><span class="wt">Choose your class</span>`;
+  document.body.insertAdjacentHTML("beforeend", `<main class="pick">${FRS.englisch.klassen.map(c=>{ const w=FRS.welt(c.k); return `<a href="?k=${c.k}"><img src="welten/vorschau-k${c.k}.jpg" alt=""><span>Class ${c.k} · ${esc(w.name)}</span></a>`; }).join("")}</main>`);
+  $("#dock").remove();
+} else main();
+
+function prog(t){
+  try{
+    const r = JSON.parse(localStorage.getItem("lw-"+t.id+"-v1") || "null"), meta = JSON.parse(localStorage.getItem("lw-meta-"+t.id) || "null");
+    if(!r || !r.lv) return null;
+    const ids = meta && meta.ids ? meta.ids : Object.keys(r.lv).filter(id => !["urkunde","certificate"].includes(id));
+    const played = ids.filter(id => r.lv[id]); if(!played.length) return null;
+    return { pts: played.reduce((a,id)=>a+(r.lv[id].best||0),0), max: (meta && meta.max) || t.max, n: played.length, of: ids.length };
+  }catch(e){ return null; }
+}
+
+async function main(){
+  document.title = `Class ${K} · ${WI.name} – FRS Lernwelten`;
+  const BER = FRS.bereicheFuer(K), byKat = b => KL.themen.filter(t=>t.kat===b);
+  const names = {}, counts = {}, icons = {};
+  BER.forEach(b=>{ names[b]=FRS.kategorien[b].name; counts[b]=byKat(b).length; icons[b]=FRS.kategorien[b].icon; });
+  const allMax = KL.themen.reduce((a,t)=>a+t.max,0), sum = () => KL.themen.reduce((a,t)=>{ const p=prog(t); return a+(p?p.pts:0); },0);
+  const NAME_KEY = "insel-"+KL.id+"-name"; let NAME = ""; try{ NAME = localStorage.getItem(NAME_KEY) || ""; }catch(e){}
+
+  $("#bar").innerHTML = `<span class="wk">Class ${K}</span><span class="wt">${WI.icon} ${esc(WI.name)}</span>
+    ${allMax?`<span class="wchip">${UK} ${sum()}<small>/${allMax}</small></span>`:""}
+    <button class="wfin" id="finBtn"><span class="chk" aria-hidden="true"></span><span class="long">If you’re finished, click here</span><span class="short">Finished?</span></button>`;
+  $("#dock").innerHTML = BER.map(b=>`<button data-kat="${b}" aria-pressed="false"><span aria-hidden="true">${icons[b]}</span><span class="lbl-long">${esc(names[b])}</span><span class="n">${counts[b]}</span></button>`).join("");
+
+  // Welt laden
+  let W3 = null, spotsInfo = {};
+  try{
+    const mod = await import(`../lernwelt/welten/${WI.file}.js`);
+    const { start } = await import("../lernwelt/welt3d.js");
+    let ui = null;
+    W3 = await start({ seed:K*101, canvasHost:$("#stage"), labelHost:$("#labels"), names, counts, icons, lite: new URLSearchParams(location.search).has("lite"),
+      build: api => { const w = mod.build(api); ui = w.ui; spotsInfo = w.spots; return w; }, onSelect: k => openArea(k) });
+    if(ui) for(const k in ui) document.documentElement.style.setProperty("--ui-"+k, ui[k]);
+    window.__blocks = W3.count;
+  }catch(err){
+    console.error(err);
+    document.body.insertAdjacentHTML("beforeend", `<div class="nogl" style="background:linear-gradient(#1B2B4A,#2A5C8A)">Choose an area below to start.</div>`);
+  }
+
+  const P = $("#panel");
+  function openArea(k){
+    const kat = FRS.kategorien[k], list = byKat(k), ort = spotsInfo[k] && spotsInfo[k].ort || kat.ort;
+    if(W3) W3.focus(k);
+    document.querySelectorAll("#dock button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.kat===k));
+    P.innerHTML = `<h2>${kat.icon} ${esc(kat.name)}</h2><p class="ort">${esc(ort)} · ${list.length} ${list.length===1?"quest":"quests"}</p>
+      ${list.length ? list.map(t=>{ const p=prog(t), pct=p?Math.round(p.pts/p.max*100):0, tier=p?LW.tierOf(p.pts,p.max):0;
+        return `<a class="quest" href="../${esc(t.pfad)}"><span class="q-ic" aria-hidden="true">${t.icon||"🎯"}</span>
+          <span class="q-t"><b>${esc(t.titel)}</b><small>${esc(t.untertitel||"")}${p?` · ${p.n}/${p.of} games`:" · new"}</small><span class="q-bar"><i style="width:${pct}%"></i></span></span>
+          <span class="q-r">${p&&tier?LW.medal(tier,22):""}${p?`${p.pts}/${p.max}`:""}<span class="q-go">START ▸</span></span></a>`; }).join("")
+        : `<div class="empty">No quests here yet – coming soon!</div>`}
+      <button class="wback" id="back">← Back to ${esc(WI.name)}</button>`;
+    P.classList.toggle("many", list.length > 4);
+    setTimeout(()=>P.classList.add("on"), W3 ? 450 : 0);
+  }
+  function closeArea(){ P.classList.remove("on"); document.querySelectorAll("#dock button").forEach(b=>b.setAttribute("aria-pressed","false")); if(W3) W3.home(); }
+  $("#dock").addEventListener("click", e=>{ const b=e.target.closest("[data-kat]"); if(!b) return; if(b.getAttribute("aria-pressed")==="true") closeArea(); else openArea(b.dataset.kat); });
+  P.addEventListener("click", e=>{ if(e.target.closest("#back")) closeArea(); });
+
+  // Ergebnis-Code der Welt
+  const F = $("#fin");
+  function openFinish(){
+    F.innerHTML = `<section class="fin-win" role="dialog" aria-modal="true" aria-labelledby="finT"><button class="fin-x" data-close aria-label="Close">×</button>
+      <h2 id="finT">🏁 Your result</h2><p class="how">Type your initials and tap <b>Create code</b>. Then show the QR code to your teacher.<br><small>Kürzel eintragen, „Create code“ antippen und den QR-Code deiner Lehrkraft zeigen.</small></p>
+      <div class="fin-row"><input id="nm" type="text" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="e.g. LM" value="${esc(NAME)}" aria-label="Your initials"><button id="mk">${NAME?"Update":"Create code"}</button></div>
+      <div id="out"></div></section>`;
+    F.hidden = false; setTimeout(()=>$("#nm").focus({preventScroll:true}), 50);
+    if(NAME) draw(false);
+  }
+  function draw(fx){
+    const played = [], rows = []; let tot = 0;
+    BER.forEach(b=>{ const list = byKat(b); if(!list.length) return;
+      rows.push(`<tr><th colspan="3">${FRS.kategorien[b].icon} ${esc(FRS.kategorien[b].name)}</th></tr>`);
+      list.forEach(t=>{ const p=prog(t); if(p){ played.push(`${t.id}-${p.pts}`); tot+=p.pts; }
+        rows.push(`<tr class="${p?"":"none"}"><td>${t.icon||""} ${esc(t.titel)}</td><td>${p&&LW.tierOf(p.pts,p.max)?LW.medal(LW.tierOf(p.pts,p.max),20):""}</td><td>${p?`${p.pts}/${p.max}`:"–"}</td></tr>`); }); });
+    const code = UH.make(KL.id, NAME, tot, allMax, played), img = UH.qrImage(UH.link(code), 6);
+    $("#out").innerHTML = `<div class="fin-grid"><div class="qr-card">${img?`<img src="${img}" alt="QR code">`:""}<p class="who">${esc(NAME)}</p><p class="tot">${UK} ${tot} / ${allMax}</p></div>
+      <div><table class="fin-tab">${rows.join("") || "<tr><td>No quests yet.</td></tr>"}</table><p class="fin-note">If you play more, come back here – the code updates.</p><code class="fin-code">${esc(code)}</code></div></div>`;
+    if(fx) LW.confetti(120);
+  }
+  F.addEventListener("click", e=>{
+    if(e.target===F || e.target.closest("[data-close]")){ F.hidden = true; if(location.hash) history.replaceState(null,"",location.pathname+location.search); return; }
+    if(e.target.closest("#mk")){ const inp=$("#nm"), v=inp.value.replace(/[|!]/g,"").trim();
+      if(!v){ inp.classList.add("shake"); setTimeout(()=>inp.classList.remove("shake"),400); return; }
+      NAME=v; try{ localStorage.setItem(NAME_KEY,v); }catch(err){} e.target.closest("#mk").textContent="Update"; draw(true); }
+  });
+  F.addEventListener("keydown", e=>{ if(e.key==="Enter" && e.target.id==="nm"){ e.preventDefault(); $("#mk").click(); } });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ if(!F.hidden) F.hidden=true; else closeArea(); } });
+  $("#finBtn").addEventListener("click", openFinish);
+  window.addEventListener("hashchange", ()=>{ if(location.hash==="#fertig") openFinish(); });
+  if(location.hash==="#fertig") openFinish();
+  const startA = new URLSearchParams(location.search).get("a");
+  if(startA && names[startA] && location.hash!=="#fertig") setTimeout(()=>openArea(startA), W3 ? 600 : 0);
+  window.addEventListener("pageshow", e=>{ if(e.persisted) location.reload(); });
+  window.__openArea = openArea;
+}
+</script>
+</body>
+</html>

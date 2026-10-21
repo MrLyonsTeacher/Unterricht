@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>London Explorer – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"country", id:"lon6", icon:"🎡", kartenSymbol:"💂",
+  titel:"London Explorer", untertitel:"Sights, the Tube & history",
+  text:"Our ship has reached the River Thames! Explore London’s famous sights, ride the Tube and travel through its history.",
+  levels: [
+    { id:"sights", typ:"quiz", icon:"🏰", titel:"Famous Sights", art:"Sights · quiz",
+      anleitung:"Which London sight is it? Choose the right answer.",
+      anleitungDe:"Welche Sehenswürdigkeit in London ist gemeint? Wähle die richtige Antwort.",
+      tipp:"Denk an die Bilder aus dem Englischbuch: Riesenrad, Palast, Turm, Brücke …",
+      fragen:[
+        {q:"It is a giant wheel next to the River Thames. You can see all of London from the top.", o:["the London Eye","Big Ben","Tower Bridge"], c:0, e:"The **London Eye** is 135 metres high."},
+        {q:"This is the name of the big bell in the clock tower at the Houses of Parliament.", o:["Big Ben","Little John","Old Tom"], c:0, e:"**Big Ben** is really the bell – the tower is called the Elizabeth Tower."},
+        {q:"Here you can see the Crown Jewels.", o:["the Tower of London","the British Museum","Hyde Park"], c:0, e:"The **Crown Jewels** are kept in the **Tower of London**."},
+        {q:"It is the King’s official home in London. You can watch the Changing of the Guard there.", o:["Buckingham Palace","Tower Bridge","the Shard"], c:0, e:"**Buckingham Palace** – the guards with the tall black bearskin hats change here."},
+        {q:"This bridge can open in the middle so that big ships can go through.", o:["Tower Bridge","London Bridge","Westminster Bridge"], c:0, e:"**Tower Bridge** opened in 1894. It still opens for tall ships."},
+        {q:"What is the name of the river in London?", o:["the Thames","the Severn","the Rhine"], c:0, e:"The **River Thames** flows through London to the North Sea."},
+        {q:"It is a very tall building made of glass. It looks like a piece of broken glass.", o:["the Shard","the Gherkin","St Paul’s Cathedral"], c:0, e:"**The Shard** is about 310 metres high."},
+        {q:"In this big museum you can see mummies from Egypt – and it is free!", o:["the British Museum","Madame Tussauds","the London Dungeon"], c:0, e:"Entry to the **British Museum** is free."}
+      ]},
+    { id:"tube", typ:"quiz", icon:"🚇", titel:"Mind the Gap!", art:"Travelling in London · quiz",
+      anleitung:"How do you travel in London? Choose the right answer.",
+      anleitungDe:"Wie reist man in London? Wähle die richtige Antwort.",
+      tipp:"Die Londoner U-Bahn heißt *the Underground* oder *the Tube*.",
+      fragen:[
+        {q:"What do Londoners call their underground?", o:["the Tube","the Pipe","the Metro"], c:0, e:"**the Tube** – it is the oldest underground in the world (1863)."},
+        {q:"On the Tube you often hear “**Mind the gap!**”. What does it mean?", o:["Pass auf die Lücke auf!","Halte dich fest!","Nächste Haltestelle!"], c:0, e:"Between the train and the platform there is a **gap** (Lücke)."},
+        {q:"What colour are most London buses?", o:["red","blue","yellow"], c:0, e:"London’s famous buses are **red**."},
+        {q:"A bus with two floors is a …", o:["double-decker","double-bus","two-floor bus"], c:0, e:"**double-decker** – sit on the top floor for the best view!"},
+        {q:"What are London taxis often called?", o:["black cabs","black cars","dark taxis"], c:0, e:"**black cabs** – the drivers must learn all the streets of London."},
+        {q:"You want to go there and back. You buy a …", o:["return ticket","single ticket","back ticket"], c:0, e:"**return** = hin und zurück, **single** = nur hin."},
+        {q:"In London you can pay for the Tube with a card called …", o:["Oyster card","Fish card","Shell card"], c:0, e:"An **Oyster card** – or a bank card."},
+        {q:"In the UK people drive on the …", o:["left","right","middle"], c:0, e:"In the UK you drive on the **left** – look right first when you cross the road!"}
+      ]},
+    { id:"facts", typ:"swipe", icon:"✅", titel:"True or False?", art:"London facts · swipe",
+      anleitung:"Is it true? Swipe **right for True** and **left for False**.",
+      anleitungDe:"Stimmt das? Wische nach **rechts für True** (wahr) und nach **links für False** (falsch).",
+      tipp:"Wenn du unsicher bist: Lies die Erklärung danach genau – so lernst du dazu.",
+      links:{t:"False", icon:"✘"}, rechts:{t:"True", icon:"✔"},
+      karten:[
+        {t:"London is the capital of the United Kingdom.", r:"r", e:"True – **London** is the capital of England and of the UK."},
+        {t:"The River Thames flows through Paris.", r:"l", e:"False – the Thames flows through **London**."},
+        {t:"About 9 million people live in London.", r:"r", e:"True – London is one of the biggest cities in Europe."},
+        {t:"The London Eye is a clock tower.", r:"l", e:"False – the London Eye is a big **wheel**."},
+        {t:"The Tube is the oldest underground in the world.", r:"r", e:"True – it opened in **1863**."},
+        {t:"London buses are green.", r:"l", e:"False – they are **red**."},
+        {t:"In 1666 a great fire burned down a big part of London.", r:"r", e:"True – the **Great Fire of London** started in a bakery."},
+        {t:"Big Ben is the name of a bridge.", r:"l", e:"False – **Big Ben** is the bell in the clock tower."},
+        {t:"The Olympic Games were in London in 2012.", r:"r", e:"True – London hosted the Olympics in **2012**."},
+        {t:"You must pay to visit the British Museum.", r:"l", e:"False – the **British Museum** is free."}
+      ]},
+    { id:"guess", typ:"schaetzen", icon:"📏", titel:"London in Numbers", art:"Estimate · slider",
+      anleitung:"Guess the number! Move the slider and tap **OK**. The closer you are, the more flags you get.",
+      anleitungDe:"Schätze die Zahl! Bewege den Regler und tippe auf **OK**. Je näher du dran bist, desto mehr Flaggen bekommst du.",
+      tipp:"Vergleiche mit Dingen, die du kennst: Ein Haus mit 10 Stockwerken ist etwa 30 m hoch.",
+      fragen:[
+        {q:"How high is the London Eye?", min:20, max:300, step:5, start:60, unit:"m", dec:0, ans:135, tol:10, e:"The London Eye is **135 m** high – that’s like 45 houses on top of each other!"},
+        {q:"How tall is the Shard?", min:50, max:500, step:10, start:100, unit:"m", dec:0, ans:310, tol:20, e:"The Shard is about **310 m** tall – the highest building in the UK."},
+        {q:"When did the first Tube train run?", min:1750, max:2000, step:1, start:1900, unit:"", dec:0, ans:1863, tol:5, e:"The first Underground line opened in **1863**."},
+        {q:"How many people live in London? (million)", min:1, max:20, step:0.5, start:4, unit:"million", dec:1, ans:9, tol:1, e:"About **9 million** people live in London."},
+        {q:"How long is the River Thames?", min:50, max:1000, step:10, start:150, unit:"km", dec:0, ans:346, tol:30, e:"The Thames is about **346 km** long."}
+      ]},
+    { id:"history", typ:"zeitstrahl", icon:"📜", titel:"Through London’s History", art:"Timeline · 7 events",
+      anleitung:"Put the events in the right order – **the oldest first**.",
+      anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
+      tipp:"Die Römer waren sehr früh da. Das London Eye ist ziemlich neu.",
+      items:[
+        {j:"c. AD 50", t:"The Romans build a town called Londinium."},
+        {j:"1078", t:"William the Conqueror starts building the Tower of London."},
+        {j:"1666", t:"The Great Fire of London destroys most of the old city."},
+        {j:"1863", t:"The first Underground train runs."},
+        {j:"1894", t:"Tower Bridge opens."},
+        {j:"2000", t:"The London Eye opens."},
+        {j:"2012", t:"London hosts the Olympic Games."}
+      ]},
+    { id:"trip", typ:"lueckentext", icon:"📸", titel:"A Postcard from London", art:"Story · fill in the gaps",
+      anleitung:"Read Lena’s postcard. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Lenas Postkarte. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kennst du aus den anderen Spielen dieser Welt.",
+      ueberschrift:"Greetings from London!",
+      text:"Dear Grandma,\nLondon is great! On Monday we went on the [[London Eye|London Ear|London Arm]] and saw the whole city. Then we took a red [[double-decker|double-docker|two-decker]] bus to [[Buckingham Palace|Buckingham Castle|Big Palace]] and watched the Changing of the Guard.\nYesterday we visited the [[Tower of London|Tower of Paris|London Tower Bridge]] and saw the Crown Jewels. We travelled on the [[Tube|Tub|Tune]] – it was very full! At every station you hear “Mind the [[gap|gas|cap]]!” Today we are going to the [[British Museum|British Music|British Mouse]]. It’s free!\nLove, Lena",
+      erklaerung:"London words: **London Eye, double-decker, Buckingham Palace, Tower of London, Tube, Mind the gap, British Museum**."}
+  ]
+});
+</script>
+</body>
+</html>

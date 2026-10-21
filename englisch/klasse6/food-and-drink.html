@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>The Galley Café – Food & drink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"country", id:"fd6", icon:"🍟", kartenSymbol:"🍽️",
+  titel:"The Galley Café", untertitel:"British food & ordering",
+  text:"Welcome to the ship’s café! Discover British food, learn food words and order like a real Brit.",
+  levels: [
+    { id:"pairs", typ:"memory", icon:"🥕", titel:"Food Pairs", art:"English – German · memory",
+      anleitung:"Find the pairs: **English word + German word**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **englisches Wort + deutsches Wort**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Manche Wörter sind leicht (*cheese – Käse*), andere musst du lernen (*peas – Erbsen*).",
+      paare:[ {a:"cucumber", b:"Gurke"}, {a:"mushrooms", b:"Pilze"}, {a:"beans", b:"Bohnen"}, {a:"sausage", b:"Würstchen"},
+              {a:"peas", b:"Erbsen"}, {a:"onion", b:"Zwiebel"}, {a:"pear", b:"Birne"}, {a:"cheese", b:"Käse"} ]},
+    { id:"british", typ:"quiz", icon:"🇬🇧", titel:"Typically British", art:"British food · quiz",
+      anleitung:"What do you know about food in Britain? Choose the right answer.",
+      anleitungDe:"Was weißt du über das Essen in Großbritannien? Wähle die richtige Antwort.",
+      tipp:"Vorsicht, Falle: *chips* sind in Großbritannien Pommes, *crisps* sind Kartoffelchips!",
+      fragen:[
+        {q:"In Britain, **chips** are …", o:["Pommes frites","Kartoffelchips","Kekse"], c:0, e:"British **chips** = Pommes. Kartoffelchips are **crisps**."},
+        {q:"A **full English breakfast** often has …", o:["eggs, bacon, sausages and beans","cornflakes and milk","bread and jam only"], c:0, e:"A **full English** is a big hot breakfast – often with baked beans and toast."},
+        {q:"What do many people put on their fish and chips?", o:["salt and vinegar","sugar","chocolate sauce"], c:0, e:"**Salt and vinegar** (Essig) is a classic."},
+        {q:"A **Sunday roast** is …", o:["roast meat with potatoes and vegetables","a cake for Sunday","a breakfast in bed"], c:0, e:"Many families eat a **Sunday roast** with gravy (Bratensoße)."},
+        {q:"**Scones** with cream and jam are part of …", o:["afternoon tea","a full English breakfast","a packed lunch"], c:0, e:"**Afternoon tea**: tea, sandwiches, scones and cakes."},
+        {q:"Many British children eat **baked beans** …", o:["on toast","in their tea","with ice cream"], c:0, e:"**Beans on toast** is a quick and popular meal."},
+        {q:"What do British people often drink with milk?", o:["tea","orange juice","lemonade"], c:0, e:"Most British people drink their **tea with milk**."},
+        {q:"In Britain, **pudding** can also mean …", o:["dessert","soup","breakfast"], c:0, e:"“What’s for **pudding**?” = What’s for dessert?"}
+      ]},
+    { id:"packs", typ:"sortieren", icon:"🛒", titel:"Shopping Basket", art:"a bottle of, a packet of … · sort",
+      anleitung:"How do you buy it? Tap the right box.",
+      anleitungDe:"Wie kauft man das? Tippe auf das richtige Kästchen.",
+      tipp:"a bottle of = eine Flasche, a packet of = eine Packung, a cup of = eine Tasse, a bowl of = eine Schüssel.",
+      koerbe:[ {t:"a bottle of", info:"🍾", tipp:"**a bottle of** water, lemonade, ketchup …"}, {t:"a packet of", info:"📦", tipp:"**a packet of** crisps, biscuits, sweets …"},
+               {t:"a cup of", info:"☕", tipp:"**a cup of** tea, coffee, hot chocolate …"}, {t:"a bowl of", info:"🥣", tipp:"**a bowl of** soup, cereal, salad …"} ],
+      items:[ {t:"water", k:0}, {t:"lemonade", k:0}, {t:"ketchup", k:0},
+              {t:"crisps", k:1}, {t:"biscuits", k:1}, {t:"sweets", k:1},
+              {t:"tea", k:2}, {t:"coffee", k:2}, {t:"hot chocolate", k:2},
+              {t:"soup", k:3}, {t:"cereal", k:3, e:"**cereal** = Frühstücksflocken – you eat them from a bowl."}, {t:"salad", k:3} ]},
+    { id:"order", typ:"quiz", icon:"🧾", titel:"At the Counter", art:"Ordering food · quiz",
+      anleitung:"You are in a British café. What do you say?",
+      anleitungDe:"Du bist in einem britischen Café. Was sagst du?",
+      tipp:"Höflich bestellen: *Can I have …, please?* – *I’d like …, please.*",
+      fragen:[
+        {q:"You want to order a sandwich. You say:", o:["Can I have a cheese sandwich, please?","Give me sandwich.","I want sandwich now."], c:0, e:"Polite: **Can I have …, please?**"},
+        {q:"The waiter says: “**Anything else?**” This means …", o:["Sonst noch etwas?","Ist alles gut?","Bitte zahlen!"], c:0},
+        {q:"You want to know the price. You ask:", o:["How much is it?","How many is it?","What costs it?"], c:0, e:"Price → **How much** is it?"},
+        {q:"The waiter gives you your food. He says:", o:["Here you are.","Here you go away.","There you are not."], c:0, e:"**Here you are.** = Bitte schön (beim Geben)."},
+        {q:"You want a drink. You say:", o:["I'd like an orange juice, please.","I like an orange juice.","I'd liking orange juice."], c:0, e:"**I’d like** = ich hätte gern."},
+        {q:"“Eat in or take away?” – You want to eat in the café. You say:", o:["Eat in, please.","Take away, please.","Take in, please."], c:0, e:"**eat in** = hier essen, **take away** = mitnehmen."},
+        {q:"The waiter says: “That’s £4.50.” How much is it?", o:["4 pounds 50","4 euros 50","45 pounds"], c:0, e:"£ = **pound(s)**. 100 pence = 1 pound."},
+        {q:"At the end you say:", o:["Thank you. Bye!","Give me the bill now.","Finished!"], c:0}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🍳", titel:"Order like a Brit", art:"Sentence builder",
+      anleitung:"Build the sentence for the café.",
+      anleitungDe:"Bau den Satz für das Café, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Bitte = *please* – steht oft am Ende.",
+      punkte:2,
+      saetze:[
+        {w:["Can","I","have","a","cup","of","tea,","please","?"], hint:"🇩🇪 Kann ich bitte eine Tasse Tee haben?"},
+        {w:["I'd","like","fish","and","chips,","please"], hint:"🇩🇪 Ich hätte gern Fish and Chips, bitte."},
+        {w:["How","much","is","the","chocolate","cake","?"], hint:"🇩🇪 Wie viel kostet der Schokoladenkuchen?"},
+        {w:["Would","you","like","some","ketchup","?"], hint:"🇩🇪 Möchtest du/Möchten Sie etwas Ketchup?"},
+        {w:["We","haven't","got","any","milk"], hint:"🇩🇪 Wir haben keine Milch."}
+      ]},
+    { id:"cafe", typ:"lueckentext", icon:"☕", titel:"At the Galley Café", art:"Dialogue · fill in the gaps",
+      anleitung:"Read the dialogue. Tap a gap and choose the right words.",
+      anleitungDe:"Lies den Dialog. Tippe auf eine Lücke und wähle die richtigen Wörter.",
+      tipp:"*some* in Aussagen und bei höflichen Angeboten, *any* in Fragen und Verneinungen.",
+      ueberschrift:"At the café",
+      text:"Waiter: Hello! What [[would you like|do you like|you would like]]?\nMia: [[Can I have|Can I having|I can have]] a cheese sandwich, please?\nWaiter: Sorry, we haven't got [[any|some|no]] cheese today. But we've got ham.\nMia: OK, a ham sandwich, please. And [[a bottle of|a packet of|a bowl of]] water.\nWaiter: Would you like [[some|any|a]] crisps too?\nMia: No, thanks. How [[much|many|cost]] is that?\nWaiter: That's £5.20. Eat in or [[take away|take off|go away]]?\nMia: Eat in, please. Here [[you are|are you|you is]].\nWaiter: Thank you!",
+      erklaerung:"Café phrases: **What would you like? · Can I have …? · How much is it? · Here you are.** – **some** / **any**."}
+  ]
+});
+</script>
+</body>
+</html>

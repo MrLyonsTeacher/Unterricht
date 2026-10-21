@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Treasure Collectors – Present Perfect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"grammar", id:"pp6", icon:"💎", kartenSymbol:"🐚",
+  titel:"Treasure Collectors", untertitel:"Present perfect: statements, negatives, questions",
+  text:"What have you ever found under the sea? Learn have/has + past participle and collect the treasures of the reef.",
+  levels: [
+    { id:"pearls", typ:"memory", icon:"🦪", titel:"Pearl Pairs", art:"Past participles · memory",
+      anleitung:"Find the pairs: **verb + past participle** (3rd form). Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Verb + 3. Form** (past participle). Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Regelmäßige Verben: 3. Form mit -ed (*played*). Unregelmäßige musst du lernen: *go – went – gone*.",
+      paare:[ {a:"see", b:"seen"}, {a:"go", b:"gone"}, {a:"eat", b:"eaten"}, {a:"write", b:"written"},
+              {a:"be", b:"been"}, {a:"do", b:"done"}, {a:"swim", b:"swum"}, {a:"take", b:"taken"} ]},
+    { id:"hashave", typ:"sortieren", icon:"⚖️", titel:"Has or have?", art:"have / has · sort",
+      anleitung:"Which word fits: **have** or **has**? Tap the right box.",
+      anleitungDe:"Welches Wort passt: **have** oder **has**? Tippe auf das richtige Kästchen.",
+      tipp:"*has* bei he, she, it (und bei einer Person/Sache). *have* bei I, you, we, they.",
+      koerbe:[
+        {t:"have", info:"I · you · we · they", tipp:"**have** after I, you, we, they: *We have found a shell.*"},
+        {t:"has", info:"he · she · it", tipp:"**has** after he, she, it – and after one person or thing: *The diver has seen a shark.*"}
+      ],
+      items:[
+        {t:"I ___ found a shell.", k:0}, {t:"She ___ seen a whale.", k:1}, {t:"We ___ cleaned the boat.", k:0},
+        {t:"The diver ___ lost his mask.", k:1, e:"*The diver* = he → **has**."}, {t:"They ___ never been to Spain.", k:0}, {t:"My mum ___ bought a new camera.", k:1},
+        {t:"It ___ started to rain.", k:1}, {t:"You ___ won the game!", k:0}, {t:"Tom and Lisa ___ visited the aquarium.", k:0, e:"*Tom and Lisa* = they → **have**."},
+        {t:"___ you ever swum with dolphins?", k:0, e:"Question with **you** → **Have** you …?"}, {t:"___ he eaten his lunch?", k:1, e:"Question with **he** → **Has** he …?"},
+        {t:"My friends ___ gone home.", k:0, e:"*My friends* = they → **have**."}
+      ]},
+    { id:"rush", typ:"rush", icon:"🐬", titel:"Dolphin Dash", art:"Speed game · 60 seconds",
+      anleitung:"Choose the right **past participle** (3rd form) – fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wähle schnell die richtige **3. Form** (past participle)! **Ziel: 12 richtige** in 60 Sekunden.",
+      tipp:"Bei unregelmäßigen Verben ist die 3. Form oft anders als die 2. Form: *write – wrote – written*.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"go", o:["gone","went","goed"], c:0}, {q:"see", o:["seen","saw","seed"], c:0}, {q:"eat", o:["eaten","ate","eated"], c:0},
+        {q:"write", o:["written","wrote","writed"], c:0}, {q:"take", o:["taken","took","taked"], c:0}, {q:"be", o:["been","was","be"], c:0},
+        {q:"do", o:["done","did","doed"], c:0}, {q:"swim", o:["swum","swam","swimmed"], c:0}, {q:"give", o:["given","gave","gived"], c:0},
+        {q:"find", o:["found","finded","fand"], c:0}, {q:"buy", o:["bought","buyed","brought"], c:0}, {q:"make", o:["made","maked","maden"], c:0},
+        {q:"have", o:["had","haved","has"], c:0}, {q:"break", o:["broken","broke","breaked"], c:0}, {q:"forget", o:["forgotten","forgot","forgetted"], c:0},
+        {q:"play", o:["played","plaid","playen"], c:0}, {q:"visit", o:["visited","visitted","visiten"], c:0}, {q:"stop", o:["stopped","stoped","stopen"], c:0},
+        {q:"try", o:["tried","tryed","tryen"], c:0}, {q:"win", o:["won","winned","wan"], c:0}, {q:"lose", o:["lost","losed","losen"], c:0},
+        {q:"speak", o:["spoken","spoke","speaked"], c:0}, {q:"drink", o:["drunk","drank","drinked"], c:0}, {q:"fly", o:["flown","flew","flied"], c:0}
+      ]},
+    { id:"chest", typ:"satzbau", icon:"🧰", titel:"Treasure Chest Sentences", art:"Sentence builder · statements, negatives, questions",
+      anleitung:"Build the sentence: **have / has + past participle**.",
+      anleitungDe:"Bau den Satz, indem du die Wörter in der richtigen Reihenfolge antippst: **have / has + 3. Form**.",
+      tipp:"Verneinung: *haven’t / hasn’t* + 3. Form. Frage: *Have / Has* + Person + 3. Form …? *ever* und *never* stehen vor der 3. Form.",
+      punkte:2,
+      saetze:[
+        {w:["She","has","found","a","pearl"], hint:"🇩🇪 Sie hat eine Perle gefunden."},
+        {w:["I","have","never","seen","a","shark"], hint:"🇩🇪 Ich habe noch nie einen Hai gesehen."},
+        {w:["We","haven't","cleaned","the","boat"], hint:"🇩🇪 Wir haben das Boot nicht geputzt."},
+        {w:["Have","you","ever","eaten","octopus","?"], hint:"🇩🇪 Hast du jemals Tintenfisch gegessen?"},
+        {w:["He","hasn't","been","to","London"], hint:"🇩🇪 Er ist (noch) nicht in London gewesen."},
+        {w:["Has","she","ever","swum","in","the","sea","?"], hint:"🇩🇪 Ist sie jemals im Meer geschwommen?"}
+      ]},
+    { id:"ever", typ:"quiz", icon:"🐙", titel:"Have you ever …?", art:"Questions & short answers · quiz",
+      anleitung:"Choose the right answer.",
+      anleitungDe:"Wähle die richtige Antwort.",
+      tipp:"Kurzantworten: *Yes, I have. / No, I haven’t.* – *Yes, she has. / No, she hasn’t.*",
+      fragen:[
+        {q:"Have you ever been to the sea? (✔)", o:["Yes, I have.","Yes, I did.","Yes, I was."], c:0, e:"Have …? → Yes, I **have**."},
+        {q:"Has your brother ever seen a whale? (✘)", o:["No, he hasn't.","No, he haven't.","No, he didn't."], c:0, e:"Has …? → No, he **hasn’t**."},
+        {q:"Have they found the treasure? (✔)", o:["Yes, they have.","Yes, they has.","Yes, they found."], c:0, e:"Have …? → Yes, they **have**."},
+        {q:"Which sentence is correct?", o:["I have never eaten sushi.","I have eaten never sushi.","I never have eat sushi."], c:0, e:"*never* comes **before** the past participle: have **never** eaten."},
+        {q:"Which sentence is correct?", o:["She has gone to the beach.","She has went to the beach.","She have gone to the beach."], c:0, e:"she → **has** + 3rd form **gone** (not *went*)."},
+        {q:"**___** you ever swum with fish?", o:["Have","Has","Did"], c:0, e:"you → **Have** you ever …?"},
+        {q:"My friends **___** never been on a boat.", o:["have","has","are"], c:0, e:"*my friends* = they → **have**."},
+        {q:"Which sentence is correct?", o:["Has Tom ever visited Wales?","Have Tom ever visited Wales?","Has Tom ever visit Wales?"], c:0, e:"Tom = he → **Has** … **visited** (3rd form)."}
+      ]},
+    { id:"diary", typ:"lueckentext", icon:"📔", titel:"My Diving Diary", art:"Story · fill in the gaps",
+      anleitung:"Tap a gap and choose the right words.",
+      anleitungDe:"Tippe auf eine Lücke und wähle die richtigen Wörter.",
+      tipp:"*have/has* + 3. Form. Bei *he / she / it* immer *has*.",
+      ueberschrift:"My diving diary",
+      text:"I love diving! I [[have seen|has seen|have saw]] lots of colourful fish this year. My sister Mia [[has found|have found|has find]] a beautiful shell. But we [[haven't seen|hasn't seen|haven't saw]] a shark yet.\nMy dad [[has taken|have taken|has took]] a lot of photos. Our teacher asked us: “[[Have you ever|Has you ever|Did you ever]] been on a big ship?” I said: “No, I [[haven't|hasn't|didn't]].”\nMy best friend Ben [[has never swum|has swum never|have never swum]] in the sea. He [[has always been|have always been|has always be]] scared of the water. Maybe next year!",
+      erklaerung:"Present perfect = **have / has + past participle**: I **have seen**, she **has found**."}
+  ]
+});
+</script>
+</body>
+</html>

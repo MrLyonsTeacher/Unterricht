@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Word Reef – Everyday Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"vocabulary", id:"vl6", icon:"🎒", kartenSymbol:"🐠",
+  titel:"Word Reef: Everyday Life", untertitel:"Free time, clothes, weather, feelings",
+  text:"More treasures in the word reef: hobbies, clothes, weather and feelings – the words you need every day.",
+  levels: [
+    { id:"opp", typ:"memory", icon:"☯️", titel:"Opposite Oysters", art:"Opposites · memory",
+      anleitung:"Find the pairs of **opposites** (Gegenteile). Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare von **Gegenteilen**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Beispiel: *hot* (heiß) ↔ *cold* (kalt).",
+      paare:[ {a:"happy", b:"sad"}, {a:"easy", b:"difficult"}, {a:"cheap", b:"expensive"}, {a:"early", b:"late"},
+              {a:"loud", b:"quiet"}, {a:"boring", b:"exciting"}, {a:"strong", b:"weak"}, {a:"full", b:"empty"} ]},
+    { id:"sort", typ:"sortieren", icon:"🧺", titel:"Sort the Catch", art:"Word groups · sort",
+      anleitung:"Where does the word belong? Tap the right box.",
+      anleitungDe:"Zu welcher Gruppe gehört das Wort? Tippe auf das richtige Kästchen.",
+      tipp:"clothes = Kleidung, weather = Wetter, free time = Freizeit.",
+      koerbe:[ {t:"Clothes", info:"👕 T-shirt", tipp:"**Clothes**: things you wear."}, {t:"Weather", info:"☀️ sunny", tipp:"**Weather**: what it is like outside."},
+               {t:"Free time", info:"🛹 skateboarding", tipp:"**Free time**: things you do for fun."} ],
+      items:[ {t:"jacket", k:0}, {t:"trainers", k:0, e:"**trainers** = Turnschuhe."}, {t:"jumper", k:0, e:"**jumper** = Pullover."}, {t:"trousers", k:0},
+              {t:"windy", k:1}, {t:"foggy", k:1, e:"**foggy** = neblig."}, {t:"rainy", k:1}, {t:"cloudy", k:1},
+              {t:"swimming", k:2}, {t:"reading comics", k:2}, {t:"playing the guitar", k:2}, {t:"riding a horse", k:2} ]},
+    { id:"what", typ:"quiz", icon:"❓", titel:"What’s the Word?", art:"Definitions · quiz",
+      anleitung:"Read the explanation. Which word is it?",
+      anleitungDe:"Lies die Erklärung. Welches Wort ist gemeint?",
+      tipp:"Lies jedes Wort der Erklärung – oft hilft ein Schlüsselwort.",
+      fragen:[
+        {q:"You wear them on your feet when you do sport.", o:["trainers","gloves","shorts"], c:0},
+        {q:"You need it when it is raining.", o:["an umbrella","sunglasses","a scarf"], c:0},
+        {q:"You feel like this before a big test.", o:["nervous","proud","bored"], c:0},
+        {q:"It is very cold and white things fall from the sky.", o:["It's snowing.","It's sunny.","It's windy."], c:0},
+        {q:"You play it with a racket and a ball.", o:["tennis","football","chess"], c:0},
+        {q:"You feel like this when you win a prize.", o:["proud","angry","tired"], c:0},
+        {q:"You wear it around your neck when it is cold.", o:["a scarf","a belt","a cap"], c:0},
+        {q:"There is nothing to do. You feel …", o:["bored","excited","surprised"], c:0}
+      ]},
+    { id:"feel", typ:"swipe", icon:"😊", titel:"Good or Bad Mood?", art:"Feelings · swipe",
+      anleitung:"Is it a good or a bad feeling? Swipe **right for 😊 good** and **left for 😟 bad**.",
+      anleitungDe:"Ist es ein gutes oder ein schlechtes Gefühl? Wische nach **rechts für 😊 gut** und nach **links für 😟 schlecht**.",
+      tipp:"Weißt du ein Wort nicht? Denk an eine Situation, in der man sich so fühlt.",
+      links:{t:"Bad", icon:"😟"}, rechts:{t:"Good", icon:"😊"},
+      karten:[
+        {t:"happy", r:"r", e:"**happy** = glücklich."}, {t:"angry", r:"l", e:"**angry** = wütend."}, {t:"excited", r:"r", e:"**excited** = aufgeregt (vor Freude)."},
+        {t:"worried", r:"l", e:"**worried** = besorgt."}, {t:"proud", r:"r", e:"**proud** = stolz."}, {t:"bored", r:"l", e:"**bored** = gelangweilt."},
+        {t:"relaxed", r:"r", e:"**relaxed** = entspannt."}, {t:"scared", r:"l", e:"**scared** = ängstlich."}, {t:"lucky", r:"r", e:"**lucky** = glücklich (Glück haben)."},
+        {t:"lonely", r:"l", e:"**lonely** = einsam."}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Starfish Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? Choose fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? Wähle schnell! **Ziel: 12 richtige** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Pullover", o:["jumper","jumpers","jumber"], c:0}, {q:"Hose", o:["trousers","trouser","tousers"], c:0}, {q:"Turnschuhe", o:["trainers","trainer","trains"], c:0},
+        {q:"Mütze", o:["cap","cup","cop"], c:0}, {q:"Regenschirm", o:["umbrella","umbrela","rainbow"], c:0}, {q:"windig", o:["windy","windly","window"], c:0},
+        {q:"neblig", o:["foggy","froggy","fogy"], c:0}, {q:"wolkig", o:["cloudy","cloudly","loudy"], c:0}, {q:"stolz", o:["proud","prout","pride"], c:0},
+        {q:"müde", o:["tired","tried","tide"], c:0}, {q:"wütend", o:["angry","hungry","anger"], c:0}, {q:"langweilig", o:["boring","bored","borring"], c:0},
+        {q:"teuer", o:["expensive","expansive","extensive"], c:0}, {q:"einfach (leicht)", o:["easy","easily","eazy"], c:0}, {q:"schwierig", o:["difficult","different","dificult"], c:0},
+        {q:"Freizeit", o:["free time","free day","freedom"], c:0}, {q:"Gitarre spielen", o:["play the guitar","play guitarre","play the gitar"], c:0},
+        {q:"reiten", o:["ride a horse","ride on horse","drive a horse"], c:0}, {q:"Wochenende", o:["weekend","weekday","week and"], c:0}, {q:"aufgeregt", o:["excited","exciting","exited"], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"📱", titel:"My Weekend", art:"Story · fill in the gaps",
+      anleitung:"Tap a gap and choose the right word.",
+      anleitungDe:"Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Lies den ganzen Satz, bevor du wählst.",
+      ueberschrift:"Ella’s weekend",
+      text:"On Saturday the weather was terrible. It was cold and [[windy|windows|wind]], so I put on my warm [[jumper|jumping|jungle]] and my [[scarf|scare|scar]]. I stayed at home and played the [[guitar|guiter|guitars]]. In the afternoon I was a bit [[bored|boring|board]].\nBut on Sunday it was [[sunny|sun|sunday]]! My friends and I went [[swimming|swiming|swim]] in the lake. Then we had a race and I won. I was really [[proud|proof|prout]]. In the evening I was very [[tired|tried|tide]] and went to bed early.",
+      erklaerung:"Words from the reef: **windy, jumper, scarf, bored, sunny, proud, tired**."}
+  ]
+});
+</script>
+</body>
+</html>

@@ -19,13 +19,33 @@ const FRS = {
     country:    { name:"Country & people", de:"Land & Leute",          icon:"⚓", ort:"Culture Harbour" },
     exam:       { name:"Exam Prep",        de:"Prüfungsvorbereitung",  icon:"🏆", ort:"Exam Summit" }
   },
-  grundBereiche: ["grammar","vocabulary","reading","listening","writing","speaking","country"],
+  // Zurzeit aktive Bereiche (weitere wie Reading, Listening … lassen sich später wieder einschalten)
+  grundBereiche: ["grammar","vocabulary","country"],
+
+  // Welt je Klasse (3D-Klötzchenwelt in lernwelt/welten/<file>.js)
+  welten: {
+    5:  { file:"feuer",  name:"Fire World",   icon:"🔥", theme:"feuer" },
+    6:  { file:"wasser", name:"Water World",  icon:"🌊", theme:"wasser" },
+    7:  { file:"stein",  name:"Stone World",  icon:"⛏️", theme:"stein" },
+    8:  { file:"himmel", name:"Sky Castle",   icon:"☁️", theme:"himmel" },
+    9:  { file:"wald",   name:"Forest World", icon:"🌿", theme:"wald" },
+    10: { file:"eis",    name:"Ice World",    icon:"❄️", theme:"eis" }
+  },
 
   englisch: {
     klassen: [
       { k:5,  id:"e5",  themen:[] },
       { k:6,  id:"e6",  themen:[
-        { id:"sp6", kat:"grammar", titel:"Time Travel Agency", untertitel:"Simple past", pfad:"englisch/klasse6/simple-past.html", icon:"⏰", max:77 }
+        { id:"sp6",  kat:"grammar",    titel:"Time Travel Agency",       untertitel:"Simple past: statements",           pfad:"englisch/klasse6/simple-past.html",          icon:"⏰", max:59 },
+        { id:"spn6", kat:"grammar",    titel:"Shipwreck Detectives",     untertitel:"Simple past: was/were, didn’t, Did …?", pfad:"englisch/klasse6/shipwreck-detectives.html", icon:"🔎", max:56 },
+        { id:"pg6",  kat:"grammar",    titel:"Reef Live Cam",            untertitel:"Present progressive",               pfad:"englisch/klasse6/reef-live-cam.html",        icon:"📹", max:61 },
+        { id:"pp6",  kat:"grammar",    titel:"Treasure Collectors",      untertitel:"Present perfect",                   pfad:"englisch/klasse6/treasure-collectors.html",  icon:"💎", max:60 },
+        { id:"wf6",  kat:"grammar",    titel:"Ocean Oracle",             untertitel:"will-future",                       pfad:"englisch/klasse6/ocean-oracle.html",         icon:"🔮", max:47 },
+        { id:"gt6",  kat:"grammar",    titel:"Dive Plans",               untertitel:"going to-future",                   pfad:"englisch/klasse6/dive-plans.html",           icon:"🤿", max:40 },
+        { id:"vt6",  kat:"vocabulary", titel:"Word Reef: Town & Travel", untertitel:"Places, transport, directions",     pfad:"englisch/klasse6/word-reef-town.html",       icon:"🚌", max:58 },
+        { id:"vl6",  kat:"vocabulary", titel:"Word Reef: Everyday Life", untertitel:"Free time, clothes, weather, feelings", pfad:"englisch/klasse6/word-reef-life.html",   icon:"🎒", max:59 },
+        { id:"lon6", kat:"country",    titel:"London Explorer",          untertitel:"Sights, the Tube & history",        pfad:"englisch/klasse6/london-explorer.html",      icon:"🎡", max:50 },
+        { id:"fd6",  kat:"country",    titel:"The Galley Café",          untertitel:"Food & drink",                      pfad:"englisch/klasse6/food-and-drink.html",       icon:"🍟", max:54 }
       ]},
       { k:7,  id:"e7",  themen:[
         { id:"bi7", kat:"country", titel:"Discover the British Isles", untertitel:"Countries, history & culture", pfad:"englisch/klasse7/british-isles.html", icon:"🧭", max:79 }
@@ -47,7 +67,8 @@ const FRS = {
 };
 
 // Hilfsfunktionen
-FRS.bereicheFuer = k => FRS.grundBereiche.concat(k >= 9 ? ["exam"] : []);
+FRS.bereicheFuer = k => FRS.grundBereiche.slice();
+FRS.welt = k => FRS.welten[+k];
 FRS.klasse = k => FRS.englisch.klassen.find(x => x.k === +k);
 FRS.find = id => {
   for(const c of FRS.englisch.klassen){

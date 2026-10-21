@@ -4,96 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#14425A">
-<title>Discover the British Isles</title>
+<title>Discover the British Isles – Country & people</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../lernwelt/lernwelt.css">
-<style>
-:root{
-  color-scheme:light;
-  --ink:#14283C; --bg:#DCEBE4; --surface:#FFFDF7; --surface-2:#F3F7F2; --muted:#4F6272; --line:#14283C;
-  --accent:#C8102E; --accent-ink:#FFFFFF; --accent-2:#FFD166; --mid-bg:#FFF1C9;
-  --ok:#1F8A55; --ok-bg:#D8F1E3; --bad:#C8352A; --bad-bg:#FBE1DC;
-  --radius:16px; --radius-btn:12px; --radius-ic:12px;
-  --border:2px solid #14283C; --shadow:4px 4px 0 #14283C;
-  --border-btn:2px solid #14283C; --shadow-btn:3px 3px 0 #14283C; --border-opt:2px solid #14283C;
-  --border-ic:2px solid #14283C; --border-bin:2px dashed #14283C; --border-soft:2px solid #14283C;
-  --font-body:"Lexend",system-ui,-apple-system,sans-serif;
-  --font-display:"Bree Serif",Georgia,serif; --display-weight:400;
-  --ic-bg:#CFE6F2; --card-back:#14425A; --tile-bg:var(--accent-2); --tile-ink:var(--ink);
-  --chip-bg:#FFFDF7; --chip-ink:var(--ink); --how-bg:#FFFDF7;
-  --track:#C9DAD2; --star:#E8A400; --star-off:#C3D0C9; --focus:#14425A;
-}
-body{background-color:var(--bg);
-  background-image:linear-gradient(rgba(20,40,60,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(20,40,60,.06) 1px,transparent 1px);background-size:32px 32px}
-.opt,.prom{box-shadow:2px 2px 0 var(--ink)}
-.opt:active,.btn:active{box-shadow:0 0 0 var(--ink);transform:translate(3px,3px)}
-.lvl:nth-child(4n+2) .ic{background:#FFE2A8} .lvl:nth-child(4n+3) .ic{background:#D2EBD6} .lvl:nth-child(4n+4) .ic{background:#F6D2D2}
-.mcard .f{font-size:2rem}
-
-.post{position:relative;overflow:hidden;background:#14425A;color:#fff;border:var(--border);border-radius:22px;box-shadow:var(--shadow);padding:clamp(1.3rem,4vw,2.2rem);min-height:230px}
-.post::before{content:"";position:absolute;inset:0;background:
-  repeating-linear-gradient(135deg,transparent 0 22px,rgba(255,255,255,.05) 22px 23px);pointer-events:none}
-.post .tag{display:inline-block;background:var(--accent-2);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.1rem .8rem;font-weight:700}
-.post h1{font-family:"Bree Serif",Georgia,serif;font-weight:400;font-size:clamp(2.3rem,7.5vw,4rem);line-height:1;margin:.5rem 0 .6rem;max-width:11ch}
-.post p{margin:0;max-width:34ch;color:#D7E7EF;font-size:1.05rem}
-.stamps{position:absolute;right:clamp(.5rem,3vw,2rem);top:50%;transform:translateY(-50%);display:grid;grid-template-columns:repeat(2,auto);gap:.4rem .6rem}
-.stamp-c{width:92px;height:92px;border-radius:50%;border:3px dashed rgba(255,255,255,.85);display:grid;place-items:center;text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.1;padding:.4rem;color:#fff;background:rgba(255,255,255,.06)}
-.stamp-c span{display:block;font-size:2rem;line-height:1.1;margin-bottom:.1rem}
-.stamp-c:nth-child(1){transform:rotate(-10deg)} .stamp-c:nth-child(2){transform:rotate(8deg)} .stamp-c:nth-child(3){transform:rotate(6deg)} .stamp-c:nth-child(4){transform:rotate(-7deg)}
-.stamp-c:nth-child(5){grid-column:1/-1;justify-self:center;transform:rotate(-3deg)}
-@media (max-width:640px){ .stamps{opacity:.22} }
-</style>
+<link rel="stylesheet" href="../../lernwelt/themes.css">
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-    <clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
-    <g id="ukflag" clip-path="url(#uk-s)">
-      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/>
-      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-    </g>
-  </defs>
-</svg>
 <main class="lw" id="app"></main>
-
 <script src="../../qrcode.js"></script>
 <script src="../../ergebnis.js"></script>
 <script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
 <script>
-const UK = `<svg class="ico-flag" viewBox="0 0 60 30" aria-hidden="true"><use href="#ukflag"/></svg>`;
-const HERO = `
-<div class="post">
-  <div class="stamps" aria-hidden="true">
-    <div class="stamp-c"><div><span>💂</span>England</div></div>
-    <div class="stamp-c"><div><span>🏰</span>Scotland</div></div>
-    <div class="stamp-c"><div><span>🐉</span>Wales</div></div>
-    <div class="stamp-c"><div><span>🪨</span>N. Ireland</div></div>
-    <div class="stamp-c"><div><span>☘️</span>Ireland</div></div>
-  </div>
-  <span class="tag">English · Class 7 · Country & people</span>
-  <h1>Discover the British Isles</h1>
-  <p>Travel through five countries: places, history and traditions. Collect British flags and win a medal!</p>
-</div>`;
-
-const C5 = ["England","Scotland","Wales","N. Ireland","Ireland"];
-
-LW.start({
-  id: "bi7",
-  titel: "Discover the British Isles",
-  sprache: "en",
-  insel: { k:7, href:"../insel.html?k=7" },
-  hero: HERO,
-  sammel: UK,
-  punkteName: "flags",
-  kartenSymbol: "🧭",
-  konfetti: ["#C8102E","#012169","#FFFFFF","#1F8A55","#FFD166"],
+TH.start({
+  k:7, kat:"country", id:"bi7", icon:"🧭", kartenSymbol:"🧭",
+  titel:"Discover the British Isles", untertitel:"Countries, history & culture",
+  text:"Deep in the dwarves’ mountain lies a map of the British Isles. Discover four countries, their capitals, history and culture – and collect British flags!",
   lob: {3:"Brilliant! You know the British Isles really well.", 2:"Well done! Can you get three stars next time?", 1:"Good start – read the tips and try again.", 0:"Don’t give up! Have a look at the answers and try again."},
   levels: [
     { id:"names", typ:"quiz", icon:"🧭", titel:"UK, GB or British Isles?", art:"Quiz · the basics",
@@ -138,11 +66,11 @@ LW.start({
       tipp:"N. Ireland = Nordirland (UK) · Ireland = Republik Irland.",
       zeit:60, ziel:12, fest:true,
       items:[
-        {q:"Big Ben", o:C5, c:0}, {q:"Buckingham Palace", o:C5, c:0}, {q:"Stonehenge", o:C5, c:0}, {q:"Tower Bridge", o:C5, c:0}, {q:"Liverpool", o:C5, c:0},
-        {q:"Loch Ness", o:C5, c:1}, {q:"Edinburgh Castle", o:C5, c:1}, {q:"haggis", o:C5, c:1}, {q:"Highland Games", o:C5, c:1}, {q:"Ben Nevis", o:C5, c:1},
-        {q:"Snowdon (Yr Wyddfa)", o:C5, c:2}, {q:"Cardiff", o:C5, c:2}, {q:"St David’s Day", o:C5, c:2}, {q:"Conwy Castle", o:C5, c:2},
-        {q:"Giant’s Causeway", o:C5, c:3}, {q:"Belfast", o:C5, c:3}, {q:"Titanic Belfast museum", o:C5, c:3},
-        {q:"Cliffs of Moher", o:C5, c:4}, {q:"Dublin", o:C5, c:4}, {q:"Galway", o:C5, c:4}, {q:"St Patrick’s Day parade in Dublin", o:C5, c:4}
+        {q:"Big Ben", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:0}, {q:"Buckingham Palace", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:0}, {q:"Stonehenge", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:0}, {q:"Tower Bridge", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:0}, {q:"Liverpool", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:0},
+        {q:"Loch Ness", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:1}, {q:"Edinburgh Castle", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:1}, {q:"haggis", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:1}, {q:"Highland Games", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:1}, {q:"Ben Nevis", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:1},
+        {q:"Snowdon (Yr Wyddfa)", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:2}, {q:"Cardiff", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:2}, {q:"St David’s Day", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:2}, {q:"Conwy Castle", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:2},
+        {q:"Giant’s Causeway", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:3}, {q:"Belfast", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:3}, {q:"Titanic Belfast museum", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:3},
+        {q:"Cliffs of Moher", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:4}, {q:"Dublin", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:4}, {q:"Galway", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:4}, {q:"St Patrick’s Day parade in Dublin", o:["England","Scotland","Wales","N. Ireland","Ireland"], c:4}
       ]},
     { id:"history", typ:"zeitstrahl", icon:"🏛️", titel:"Through history", art:"Timeline · 8 events",
       anleitung:"Put the events in the right order – **the oldest first**.",

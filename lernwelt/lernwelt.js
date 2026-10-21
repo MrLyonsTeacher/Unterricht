@@ -24,7 +24,7 @@ const TXT = {
       codeShow:"Zeig diesen Code deiner Lehrkraft.",codeLater:"Spielst du weiter, komm danach wieder hierher – der Code passt sich an.",
       total:"Gesamt",noQR:"QR-Code konnte nicht erstellt werden. Zeig deiner Lehrkraft den Text darunter.",
       german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
-      island:"Insel",medalNames:["Noch keine Medaille","Bronze-Medaille","Silber-Medaille","Gold-Medaille"],
+      island:"Welt",medalNames:["Noch keine Medaille","Bronze-Medaille","Silber-Medaille","Gold-Medaille"],
       medalNext:(n,p,name)=>`Noch ${n} ${p} bis ${name}`,medalTop:"Höchste Medaille erreicht!",
       medalWon:"Du hast eine neue Medaille gewonnen!",medalOk:"Super!",perfect:"PERFEKT!"},
   en:{map:"Games",pts:"points",stars:"stars",next:"Next",check:"Check",again:"Play again",nextLvl:"Next game",
@@ -45,7 +45,7 @@ const TXT = {
       codeShow:"Show this code to your teacher.",codeLater:"If you play more, come back here – the code updates.",
       total:"Total",noQR:"The QR code could not be created. Show your teacher the text below.",
       german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
-      island:"Island",medalNames:["No medal yet","Bronze medal","Silver medal","Gold medal"],
+      island:"World",medalNames:["No medal yet","Bronze medal","Silver medal","Gold medal"],
       medalNext:(n,p,name)=>`${n} more ${p} for the ${name.toLowerCase()}`,medalTop:"Top medal – well done!",
       medalWon:"You won a new medal!",medalOk:"Great!",perfect:"PERFECT!"}
 };
@@ -171,7 +171,7 @@ function topbar(o){
   const lv = o.lvl;
   return `<div class="topbar">
     ${o.back?`<button class="back" data-go="" aria-label="${T.map}"><span aria-hidden="true">←</span><span class="bl"> ${T.map}</span></button>`:""}
-    ${o.island?`<button class="back" data-href="${esc(W.insel.href)}" aria-label="${T.island}"><span aria-hidden="true">🏝️</span><span class="bl"> ${T.island}</span></button>`:""}
+    ${o.island?`<button class="back" data-href="${esc(W.insel.href)}" aria-label="${T.island}"><span aria-hidden="true">${W.insel.icon||"🗺️"}</span><span class="bl"> ${T.island}</span></button>`:""}
     ${o.title?`<div class="tb-title"><span class="ic" aria-hidden="true">${o.icon||"🎯"}</span><div style="min-width:0">${o.art?`<p class="tb-art">${esc(o.art)}</p>`:""}<h1 class="disp">${esc(o.title)}</h1></div></div>`:`<span class="sp"></span>`}
     ${o.pill?`<button class="pill-fin" ${finTarget()}><span aria-hidden="true">🏁</span> ${T.finishPill}</button>`:""}
     <span class="chip" id="ptsChip"><span class="chip-ic" aria-hidden="true">${W.sammel||"⭐"}</span><span id="ptsNum">${liveTotal()}</span><span class="chip-max">/${MAX}</span></span></div>`;

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Ocean Oracle – will-future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"grammar", id:"wf6", icon:"🔮", kartenSymbol:"🔮",
+  titel:"Ocean Oracle", untertitel:"will-future: predictions",
+  text:"The old sea oracle can see the future. What will happen? Learn will and won’t and make your own predictions.",
+  levels: [
+    { id:"short", typ:"memory", icon:"🫧", titel:"Bubble Pairs", art:"Short forms · memory",
+      anleitung:"Find the pairs: **long form + short form**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Langform + Kurzform**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"*will* wird zu *’ll*: I’ll, she’ll … *will not* wird zu *won’t*.",
+      paare:[ {a:"I will", b:"I'll"}, {a:"will not", b:"won't"}, {a:"you will", b:"you'll"}, {a:"she will", b:"she'll"},
+              {a:"we will", b:"we'll"}, {a:"they will", b:"they'll"}, {a:"it will", b:"it'll"}, {a:"he will", b:"he'll"} ]},
+    { id:"when", typ:"swipe", icon:"⏳", titel:"Past or Future?", art:"Signal words · swipe",
+      anleitung:"Past or future? Swipe **right for Future** and **left for Past**.",
+      anleitungDe:"Vergangenheit oder Zukunft? Wische nach **rechts für Future** (Zukunft) und nach **links für Past** (Vergangenheit).",
+      tipp:"Zukunft: tomorrow, next …, soon, in 2050. Vergangenheit: yesterday, last …, … ago.",
+      links:{t:"Past", icon:"⏪"}, rechts:{t:"Future", icon:"🔮"},
+      karten:[
+        {t:"tomorrow", r:"r", e:"**tomorrow** = morgen → future."}, {t:"yesterday", r:"l", e:"**yesterday** → past."},
+        {t:"next week", r:"r", e:"**next** + time → future."}, {t:"last year", r:"l", e:"**last** + time → past."},
+        {t:"in 2050", r:"r", e:"A year in the future → future."}, {t:"two days ago", r:"l", e:"**ago** → past."},
+        {t:"soon", r:"r", e:"**soon** = bald → future."}, {t:"in 1912", r:"l", e:"A year in the past → past."},
+        {t:"one day", r:"r", e:"**one day** = eines Tages → future."}, {t:"when I was little", r:"l", e:"**when I was …** → past."}
+      ]},
+    { id:"predict", typ:"quiz", icon:"🌊", titel:"The Oracle Predicts", art:"will / won’t · quiz",
+      anleitung:"Choose the right words for the oracle’s prediction.",
+      anleitungDe:"Wähle die richtigen Wörter für die Vorhersage des Orakels.",
+      tipp:"*will* + Grundform: *it will rain*. Verneinung: *won’t* + Grundform. Nie: ~~will rains~~ oder ~~will to rain~~.",
+      fragen:[
+        {q:"I think it **___** sunny tomorrow.", o:["will be","will is","wills be"], c:0, e:"will + base form: **will be**."},
+        {q:"Don’t worry. The jellyfish **___** you.", o:["won't hurt","won't hurts","doesn't will hurt"], c:0, e:"Negative: **won’t** + base form."},
+        {q:"In the future, people **___** in houses under the sea.", o:["will live","will lives","will to live"], c:0, e:"will + base form: **will live**."},
+        {q:"**___** you help me with my project?", o:["Will","Do","Are"], c:0, e:"Question: **Will** + person + base form …?"},
+        {q:"– Will Tom come to the party? – No, he **___**.", o:["won't","will","doesn't"], c:0, e:"Short answer: No, he **won’t**."},
+        {q:"My sister **___** 12 next month.", o:["will be","will is","is will be"], c:0, e:"**will be** – the base form of *is* is *be*."},
+        {q:"I’m sure you **___** the test. You learned a lot!", o:["will pass","will passed","pass will"], c:0, e:"**will pass**."},
+        {q:"What **___** the weather be like at the weekend?", o:["will","is","does"], c:0, e:"Question word + **will** + subject + base form: What **will** the weather **be** like?"}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🐚", titel:"Message in a Shell", art:"Sentence builder",
+      anleitung:"Build the oracle’s sentence with **will** or **won’t**.",
+      anleitungDe:"Bau den Satz des Orakels mit **will** oder **won’t**, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Aussage: Person + *will* + Grundform. Frage: *Will* + Person + Grundform …?",
+      punkte:2,
+      saetze:[
+        {w:["I","think","it","will","rain","tomorrow"], alt:[["Tomorrow","I","think","it","will","rain"]], hint:"🇩🇪 Ich glaube, morgen wird es regnen."},
+        {w:["Robots","will","clean","our","houses"], hint:"🇩🇪 Roboter werden unsere Häuser putzen."},
+        {w:["We","won't","go","to","school","on","Saturday"], alt:[["On","Saturday","we","won't","go","to","school"]], hint:"🇩🇪 Wir werden am Samstag nicht zur Schule gehen."},
+        {w:["Will","you","help","me","?"], hint:"🇩🇪 Wirst du mir helfen?"},
+        {w:["She","will","be","twelve","next","week"], alt:[["Next","week","she","will","be","twelve"]], hint:"🇩🇪 Sie wird nächste Woche zwölf."},
+        {w:["What","will","the","weather","be","like","?"], hint:"🇩🇪 Wie wird das Wetter sein?"}
+      ]},
+    { id:"letter", typ:"lueckentext", icon:"✉️", titel:"The Oracle’s Letter", art:"Story · fill in the gaps",
+      anleitung:"The oracle writes about your future. Tap a gap and choose the right words.",
+      anleitungDe:"Das Orakel schreibt über deine Zukunft. Tippe auf eine Lücke und wähle die richtigen Wörter.",
+      tipp:"*will / won’t* + Grundform – für alle Personen gleich.",
+      ueberschrift:"Dear young diver,",
+      text:"I can see your future in my crystal ball. Next summer you [[will go|will goes|go will]] on a big trip. You [[will see|will saw|will to see]] dolphins and whales. Your best friend [[will come|will comes|wills come]] with you.\nThe weather [[won't be|won't is|will not is]] bad. But be careful: a storm [[will start|will starts|start will]] on the last day! [[Will you|You will|Do you]] be scared? No, you [[won't|will|don't]]. Your boat [[will be|will is|be will]] safe and you [[will have|will has|have will]] a great time.\nYours, the Ocean Oracle",
+      erklaerung:"will-future = **will / won’t + base form** for predictions about the future."}
+  ]
+});
+</script>
+</body>
+</html>

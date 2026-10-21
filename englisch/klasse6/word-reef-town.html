@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Word Reef – Town & Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"vocabulary", id:"vt6", icon:"🚌", kartenSymbol:"🐚",
+  titel:"Word Reef: Town & Travel", untertitel:"Places, transport, directions",
+  text:"Swim through the word reef! Places in town, ways to travel and how to give directions.",
+  levels: [
+    { id:"pairs", typ:"memory", icon:"🦀", titel:"Crab Pairs", art:"English – German · memory",
+      anleitung:"Find the pairs: **English word + German word**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **englisches Wort + deutsches Wort**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Sprich die Wörter leise mit, dann merkst du sie dir besser.",
+      paare:[ {a:"station", b:"Bahnhof"}, {a:"library", b:"Bücherei"}, {a:"bridge", b:"Brücke"}, {a:"traffic lights", b:"Ampel"},
+              {a:"underground", b:"U-Bahn"}, {a:"ticket", b:"Fahrkarte"}, {a:"corner", b:"Ecke"}, {a:"church", b:"Kirche"} ]},
+    { id:"sort", typ:"sortieren", icon:"🗂️", titel:"Sort the Shells", art:"Word groups · sort",
+      anleitung:"Where does the word belong? Tap the right box.",
+      anleitungDe:"Zu welcher Gruppe gehört das Wort? Tippe auf das richtige Kästchen.",
+      tipp:"Places = Orte, transport = Verkehrsmittel, directions = Wegbeschreibung.",
+      koerbe:[ {t:"Places", info:"🏛️ museum", tipp:"**Places** in town: museum, hospital, post office …"},
+               {t:"Transport", info:"🚆 train", tipp:"**Transport**: how you travel – bus, train, ferry …"},
+               {t:"Directions", info:"➡️ turn right", tipp:"**Directions**: how you find the way – turn left, go straight on …"} ],
+      items:[ {t:"hospital", k:0}, {t:"post office", k:0}, {t:"supermarket", k:0}, {t:"cinema", k:0},
+              {t:"ferry", k:1, e:"A **ferry** (Fähre) takes people and cars across the water."}, {t:"plane", k:1}, {t:"bike", k:1}, {t:"double-decker bus", k:1},
+              {t:"turn left", k:2}, {t:"go straight on", k:2}, {t:"opposite", k:2, e:"**opposite** = gegenüber – you use it to say where something is."}, {t:"next to", k:2} ]},
+    { id:"where", typ:"quiz", icon:"📍", titel:"Where can you …?", art:"Places · quiz",
+      anleitung:"Where can you do this? Choose the right place.",
+      anleitungDe:"Wo kann man das machen? Wähle den richtigen Ort.",
+      tipp:"Lies die Frage genau: borrow = ausleihen, post = verschicken, see a doctor = zum Arzt gehen.",
+      fragen:[
+        {q:"Where can you borrow books?", o:["at the library","at the bank","at the station"], c:0},
+        {q:"Where can you catch a train?", o:["at the station","at the church","at the museum"], c:0},
+        {q:"Where can you post a letter?", o:["at the post office","at the cinema","at the hospital"], c:0},
+        {q:"Where can you watch a film?", o:["at the cinema","at the library","at the bus stop"], c:0},
+        {q:"Where can you see old things from the past?", o:["at the museum","at the supermarket","at the swimming pool"], c:0},
+        {q:"Where can you buy bread and milk?", o:["at the supermarket","at the post office","at the theatre"], c:0},
+        {q:"Where do you wait for a bus?", o:["at the bus stop","at the car park","at the bridge"], c:0},
+        {q:"Where can you see a doctor?", o:["at the hospital","at the sports centre","at the market"], c:0}
+      ]},
+    { id:"way", typ:"satzbau", icon:"🧭", titel:"Find the Way", art:"Directions · sentence builder",
+      anleitung:"Build the sentence to give directions.",
+      anleitungDe:"Bau den Satz für eine Wegbeschreibung, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"turn left / right = links / rechts abbiegen, go straight on = geradeaus gehen, opposite = gegenüber.",
+      punkte:2,
+      saetze:[
+        {w:["Go","straight","on","and","turn","left"], hint:"🇩🇪 Geh geradeaus und bieg links ab."},
+        {w:["The","bank","is","opposite","the","park"], hint:"🇩🇪 Die Bank ist gegenüber vom Park."},
+        {w:["Turn","right","at","the","traffic","lights"], alt:[["At","the","traffic","lights","turn","right"]], hint:"🇩🇪 Bieg an der Ampel rechts ab."},
+        {w:["Excuse","me,","where","is","the","station","?"], hint:"🇩🇪 Entschuldigung, wo ist der Bahnhof?"},
+        {w:["The","café","is","next","to","the","cinema"], hint:"🇩🇪 Das Café ist neben dem Kino."}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Jellyfish Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? Choose fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? Wähle schnell! **Ziel: 12 richtige** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise – manche Antworten sehen sehr ähnlich aus.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Bahnhof", o:["station","stadium","statue"], c:0}, {q:"Brücke", o:["bridge","bright","bread"], c:0},
+        {q:"Kirche", o:["church","cherry","chair"], c:0}, {q:"Krankenhaus", o:["hospital","hostel","hotel"], c:0},
+        {q:"Fähre", o:["ferry","fairy","furry"], c:0}, {q:"Flugzeug", o:["plane","plain","planet"], c:0},
+        {q:"Haltestelle", o:["bus stop","bus shop","bus step"], c:0}, {q:"Ampel", o:["traffic lights","traffic jam","light house"], c:0},
+        {q:"gegenüber", o:["opposite","outside","over"], c:0}, {q:"neben", o:["next to","near by","in front"], c:0},
+        {q:"links abbiegen", o:["turn left","turn light","go left on"], c:0}, {q:"geradeaus", o:["straight on","straight in","right on"], c:0},
+        {q:"Fahrkarte", o:["ticket","tick","tickle"], c:0}, {q:"Straße", o:["street","sweet","strait"], c:0},
+        {q:"Bücherei", o:["library","bookshop","liberty"], c:0}, {q:"Parkhaus", o:["car park","park house","car port"], c:0},
+        {q:"Ecke", o:["corner","cover","comer"], c:0}, {q:"U-Bahn (London)", o:["the Tube","the Tub","the Tune"], c:0},
+        {q:"reisen", o:["travel","trouble","tavel"], c:0}, {q:"Stadt", o:["town","tower","tone"], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🚲", titel:"A Day in Town", art:"Story · fill in the gaps",
+      anleitung:"Tap a gap and choose the right word.",
+      anleitungDe:"Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Lies den ganzen Satz, bevor du wählst.",
+      ueberschrift:"Saturday in Brighton",
+      text:"On Saturday Ben and I took the [[train|plane|ferry]] to Brighton. At the [[station|library|church]] we bought a map. First we wanted to go to the beach. A woman said: “Go [[straight on|straight in|straight up]] and turn [[left|light|lift]] at the traffic lights. The beach is [[opposite|between|under]] the big hotel.”\nAfter lunch we went to the [[museum|hospital|post office]] and saw lots of old things. Then it started to rain, so we watched a film at the [[cinema|bus stop|bridge]]. In the evening we waited at the bus [[stop|shop|step]] and went home. What a great day!",
+      erklaerung:"Words from the reef: **station, straight on, turn left, opposite, museum, cinema, bus stop**."}
+  ]
+});
+</script>
+</body>
+</html>

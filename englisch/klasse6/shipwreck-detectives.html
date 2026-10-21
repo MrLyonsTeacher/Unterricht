@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Shipwreck Detectives – Simple Past: negatives, questions, was/were</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:6, kat:"grammar", id:"spn6", icon:"🔎", kartenSymbol:"⚓",
+  titel:"Shipwreck Detectives", untertitel:"Simple past: was/were, didn’t, Did …?",
+  text:"What happened to the old ship? Ask questions, find the mistakes and solve the case with was/were, didn’t and Did …?",
+  levels: [
+    { id:"waswere", typ:"sortieren", icon:"⚖️", titel:"Was or were?", art:"to be · sort",
+      anleitung:"Which word fits in the gap: **was** or **were**? Tap the right box.",
+      anleitungDe:"Welches Wort passt in die Lücke: **was** oder **were**? Tippe auf das richtige Kästchen.",
+      tipp:"*was* bei I, he, she, it (und bei einem Namen). *were* bei we, you, they (und bei mehreren Personen).",
+      koerbe:[
+        {t:"was", info:"I · he · she · it", tipp:"**was** after I, he, she, it – and after one person or thing: *The ship was old.*"},
+        {t:"were", info:"we · you · they", tipp:"**were** after we, you, they – and after two or more people or things: *The pirates were angry.*"}
+      ],
+      items:[
+        {t:"I ___ on the beach.", k:0}, {t:"The ship ___ very old.", k:0}, {t:"We ___ tired after the dive.", k:1},
+        {t:"The pirates ___ angry.", k:1, e:"*The pirates* = they → **were**."}, {t:"___ you at home last night?", k:1, e:"Question with **you** → **Were** you …?"},
+        {t:"The captain ___ in his cabin.", k:0, e:"*The captain* = he → **was**."}, {t:"It ___ a stormy night.", k:0}, {t:"My friends ___ on the boat.", k:1},
+        {t:"She ___ scared of the shark.", k:0}, {t:"They ___ in the old lighthouse.", k:1}, {t:"___ he a good sailor?", k:0, e:"Question with **he** → **Was** he …?"},
+        {t:"Tom and I ___ in the same team.", k:1, e:"*Tom and I* = we → **were**."}
+      ]},
+    { id:"wasnt", typ:"quiz", icon:"🧭", titel:"Captain’s Log", art:"wasn’t / weren’t · quiz",
+      anleitung:"Choose the right form of **to be** in the simple past.",
+      anleitungDe:"Wähle die richtige Form von **to be** in der Vergangenheit.",
+      tipp:"Verneinung: *wasn’t* (= was not) und *weren’t* (= were not). Fragen: *Was …?* / *Were …?*",
+      fragen:[
+        {q:"The sea **___** calm. There were big waves.", o:["wasn't","weren't","didn't"], c:0, e:"*The sea* = it → **wasn’t**."},
+        {q:"The sailors **___** happy. They wanted to go home.", o:["weren't","wasn't","don't"], c:0, e:"*The sailors* = they → **weren’t**."},
+        {q:"**___** the treasure in the box?", o:["Was","Were","Did"], c:0, e:"*the treasure* = it → **Was** the treasure …?"},
+        {q:"**___** you on the ship yesterday?", o:["Were","Was","Did"], c:0, e:"you → **Were** you …?"},
+        {q:"I **___** at school on Monday. I was ill.", o:["wasn't","weren't","didn't"], c:0, e:"I → **wasn’t**."},
+        {q:"– Were they in the cave? – No, they **___**.", o:["weren't","wasn't","didn't"], c:0, e:"Short answer: No, they **weren’t**."},
+        {q:"– Was the parrot loud? – Yes, it **___**.", o:["was","were","did"], c:0, e:"Short answer: Yes, it **was**."},
+        {q:"Where **___** the map? – It was under the bed.", o:["was","were","did"], c:0, e:"*the map* = it → Where **was** the map?"}
+      ]},
+    { id:"interview", typ:"quiz", icon:"🎙️", titel:"Interview the Witness", art:"Did …? · short answers",
+      anleitung:"Read the question and choose the right **short answer**.",
+      anleitungDe:"Lies die Frage und wähle die richtige **Kurzantwort**.",
+      tipp:"Frage mit *Did …?* → Antwort mit *did* / *didn’t*. Frage mit *Was / Were …?* → Antwort mit *was / wasn’t / were / weren’t*.",
+      fragen:[
+        {q:"Did you see the ship? (✔)", o:["Yes, I did.","Yes, I saw.","Yes, I was."], c:0, e:"Did …? → Yes, I **did**."},
+        {q:"Did the captain swim to the island? (✘)", o:["No, he didn't.","No, he wasn't.","No, he don't."], c:0, e:"Did …? → No, he **didn’t**."},
+        {q:"Were the boxes heavy? (✔)", o:["Yes, they were.","Yes, they did.","Yes, they was."], c:0, e:"Were …? → Yes, they **were**."},
+        {q:"Was it dark? (✘)", o:["No, it wasn't.","No, it didn't.","No, it weren't."], c:0, e:"Was …? → No, it **wasn’t**."},
+        {q:"Did they find the gold? (✔)", o:["Yes, they did.","Yes, they found.","Yes, they were."], c:0, e:"Did …? → Yes, they **did**."},
+        {q:"Did you hear a noise? (✘)", o:["No, I didn't.","No, I hadn't.","No, I wasn't."], c:0, e:"Did …? → No, I **didn’t**."},
+        {q:"Was your sister on the boat? (✔)", o:["Yes, she was.","Yes, she did.","Yes, she were."], c:0, e:"Was …? → Yes, she **was**."},
+        {q:"Did the dog bark? (✘)", o:["No, it didn't.","No, it doesn't.","No, it wasn't."], c:0, e:"Did …? → No, it **didn’t**."}
+      ]},
+    { id:"pirate", typ:"satzbau", icon:"🏴‍☠️", titel:"Pirate Code", art:"Sentence builder · didn’t & Did …?",
+      anleitung:"Build the sentence. After **did / didn’t** the verb stays in its base form: *I didn’t go*.",
+      anleitungDe:"Bau den Satz, indem du die Wörter in der richtigen Reihenfolge antippst. Nach **did / didn’t** steht das Verb in der Grundform: *I didn’t go* – nicht ~~I didn’t went~~.",
+      tipp:"Verneinung: didn’t + Grundform. Frage: Did + Person + Grundform …?",
+      punkte:2,
+      saetze:[
+        {w:["I","didn't","play","football","yesterday"], alt:[["Yesterday","I","didn't","play","football"]], hint:"🇩🇪 Ich habe gestern nicht Fußball gespielt."},
+        {w:["She","didn't","go","to","school","on","Monday"], alt:[["On","Monday","she","didn't","go","to","school"]], hint:"🇩🇪 Sie ist am Montag nicht zur Schule gegangen."},
+        {w:["Did","you","see","the","film","?"], hint:"🇩🇪 Hast du den Film gesehen?"},
+        {w:["Did","they","visit","London","last","summer","?"], hint:"🇩🇪 Haben sie letzten Sommer London besucht?"},
+        {w:["We","didn't","have","breakfast","this","morning"], alt:[["This","morning","we","didn't","have","breakfast"]], hint:"🇩🇪 Wir haben heute Morgen nicht gefrühstückt."},
+        {w:["Where","did","you","go","last","weekend","?"], hint:"🇩🇪 Wohin bist du letztes Wochenende gegangen?"}
+      ]},
+    { id:"mistake", typ:"quiz", icon:"🕵️", titel:"Spot the Mistake", art:"Quiz · which sentence is right?",
+      anleitung:"Only **one** sentence is correct. Find it!",
+      anleitungDe:"Nur **ein** Satz ist richtig. Finde ihn!",
+      tipp:"Achte auf did/didn’t + Grundform, auf was/were und auf die Schreibweise.",
+      fragen:[
+        {q:"Which sentence is correct?", o:["She didn't went home.","She didn't go home.","She don't go home.","She didn't goes home."], c:1, e:"didn’t + base form: She didn’t **go** home."},
+        {q:"Which sentence is correct?", o:["Did you saw Tom?","Did you see Tom?","Do you saw Tom?","Did you seen Tom?"], c:1, e:"Did + person + base form: Did you **see** Tom?"},
+        {q:"Which sentence is correct?", o:["We was at the zoo.","We were at the zoo.","We is at the zoo yesterday.","We be at the zoo."], c:1, e:"we → **were**."},
+        {q:"Which sentence is correct?", o:["He played tennis last week.","He plaied tennis last week.","He play tennis last week.","He playd tennis last week."], c:0, e:"play ends in vowel + y → just add -ed: **played**."},
+        {q:"Which sentence is correct?", o:["The bus stoped.","The bus stopped.","The bus stopt.","The bus stoping."], c:1, e:"stop → **stopped** (double the p)."},
+        {q:"Which sentence is correct?", o:["My sister buyed a bike.","My sister bought a bike.","My sister brought a bike.","My sister buys a bike yesterday."], c:1, e:"buy → **bought**. Careful: *brought* is the past of *bring*!"}
+      ]}
+    ,{ id:"report", typ:"lueckentext", icon:"📜", titel:"The Detective’s Report", art:"Story · fill in the gaps",
+      anleitung:"Tap a gap and choose the right word.",
+      anleitungDe:"Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Nach *didn’t* und nach *Did …?* steht die Grundform: *didn’t find*, *Did … see?*",
+      ueberschrift:"Case 17: The Silver Star",
+      text:"The Silver Star [[was|were|did]] a big old ship. Last night there [[was|were|did]] a storm. The sailors [[were|was|did]] on the beach, so they [[didn't|wasn't|weren't]] see the ship. In the morning it [[wasn't|didn't|weren't]] there any more!\nI asked the captain: “[[Did|Was|Were]] you hear anything?” – “No, I [[didn't|wasn't|don't]]. I was asleep.” Then I asked two kids: “[[Were|Was|Did]] you on the beach?” – “Yes, we [[were|was|did]]. We [[didn't|weren't|wasn't]] sleep. We saw a light on the water!”",
+      erklaerung:"**was / were** for *to be* – **didn’t / Did** + base form for all other verbs."}
+  ]
+});
+</script>
+</body>
+</html>
