@@ -23,9 +23,12 @@ const TXT = {
       initials:"Dein Kürzel",initialsPh:"z. B. LeMü",create:"Code erstellen",update:"Code aktualisieren",
       codeShow:"Zeig diesen Code deiner Lehrkraft.",codeLater:"Spielst du weiter, komm danach wieder hierher – der Code passt sich an.",
       total:"Gesamt",noQR:"QR-Code konnte nicht erstellt werden. Zeig deiner Lehrkraft den Text darunter.",
-      german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:"},
-  en:{map:"Map",pts:"points",stars:"stars",next:"Next",check:"Check",again:"Play again",nextLvl:"Next game",
-      toMap:"Map",right:"Correct!",wrong:"Not quite.",correctIs:"Correct answer:",timeUp:"Time’s up!",
+      german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
+      island:"Insel",medalNames:["Noch keine Medaille","Bronze-Medaille","Silber-Medaille","Gold-Medaille"],
+      medalNext:(n,p,name)=>`Noch ${n} ${p} bis ${name}`,medalTop:"Höchste Medaille erreicht!",
+      medalWon:"Du hast eine neue Medaille gewonnen!",medalOk:"Super!",perfect:"PERFEKT!"},
+  en:{map:"Games",pts:"points",stars:"stars",next:"Next",check:"Check",again:"Play again",nextLvl:"Next game",
+      toMap:"All games",right:"Correct!",wrong:"Not quite.",correctIs:"Correct answer:",timeUp:"Time’s up!",
       start:"Start",record:"New best score!",best:"Best",open:"not played yet",result:"See results",
       saved:"Your progress is only saved on this device.",reset:"Start again from zero",
       resetQ:"Delete all points and your initials?",
@@ -41,8 +44,28 @@ const TXT = {
       initials:"Your initials",initialsPh:"e.g. LM",create:"Create code",update:"Update code",
       codeShow:"Show this code to your teacher.",codeLater:"If you play more, come back here – the code updates.",
       total:"Total",noQR:"The QR code could not be created. Show your teacher the text below.",
-      german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:"}
+      german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
+      island:"Island",medalNames:["No medal yet","Bronze medal","Silver medal","Gold medal"],
+      medalNext:(n,p,name)=>`${n} more ${p} for the ${name.toLowerCase()}`,medalTop:"Top medal – well done!",
+      medalWon:"You won a new medal!",medalOk:"Great!",perfect:"PERFECT!"}
 };
+
+/* ---------- Medaillen ---------- */
+const TIERS = [0.5, 0.75, 0.9];                  // Bronze ab 50 %, Silber ab 75 %, Gold ab 90 %
+function tierOf(pts, max){ let t=0; if(max) TIERS.forEach((p,i)=>{ if(pts/max >= p-1e-9) t=i+1; }); return t; }
+let MEDAL_UID = 0;
+function medalSvg(t, size){
+  const C = [["#EEF1F5","#C9D0DA","#9AA3AF"],["#F7C9A0","#C27A45","#7E441C"],["#FBFCFE","#B4BCC8","#6E7887"],["#FFE68A","#E3A51A","#9A6500"]][t];
+  const id = "mg"+(++MEDAL_UID), cx=50, cy=78;
+  const star = Array.from({length:10},(_,i)=>{ const r=i%2?7.5:17, a=-Math.PI/2+i*Math.PI/5; return (cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1); }).join(" ");
+  return `<svg class="medal" viewBox="0 0 100 120" width="${size}" height="${size*1.2}" aria-hidden="true">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C[0]}"/><stop offset=".55" stop-color="${C[1]}"/><stop offset="1" stop-color="${C[2]}"/></linearGradient></defs>
+    ${t?`<path d="M28 0 L48 52 L35 58 L15 5 Z" fill="#2F5DA8"/><path d="M72 0 L52 52 L65 58 L85 5 Z" fill="#E0362C"/>`:`<path d="M28 0 L48 52 L35 58 L15 5 Z M72 0 L52 52 L65 58 L85 5 Z" fill="#D5DAE2"/>`}
+    <circle cx="${cx}" cy="${cy}" r="36" fill="url(#${id})" stroke="${C[2]}" stroke-width="4" ${t?"":'stroke-dasharray="7 6"'}/>
+    <circle cx="${cx}" cy="${cy}" r="27" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/>
+    ${t?`<polygon points="${star}" fill="#fff" fill-opacity=".9" stroke="${C[2]}" stroke-width="2.5" stroke-linejoin="round"/>`:`<text x="50" y="90" text-anchor="middle" font-size="34" font-weight="800" fill="#9AA3AF" font-family="system-ui,sans-serif">?</text>`}
+  </svg>`;
+}
 const FLAG_DE = `<svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`;
 
 let W, T, S, KEY, APP, MAX = 0, cleanups = [], CUR = null, RUN = 0;
@@ -112,12 +135,12 @@ function fly(fromEl, onLand){
     {duration:700,easing:"cubic-bezier(.3,.7,.6,1)",fill:"forwards"});
   setTimeout(()=>{ outer.remove(); onLand && onLand(); }, 700);
 }
-function confetti(){
-  if(reduced()) return;
+function confetti(n){
+  if(reduced()) return; n = n || 120;
   const c=document.createElement("canvas"); c.id="confetti"; document.body.appendChild(c);
   const x=c.getContext("2d"), dpr=window.devicePixelRatio||1; c.width=innerWidth*dpr; c.height=innerHeight*dpr; x.scale(dpr,dpr);
   const cols = W.konfetti || ["#F26A1B","#FFC233","#2E9E66","#2F5DA8"];
-  const P = Array.from({length:120},()=>({x:innerWidth/2+(Math.random()-.5)*160,y:innerHeight*.35,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,s:Math.random()*8+5,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:cols[Math.floor(Math.random()*cols.length)]}));
+  const P = Array.from({length:n},()=>({x:innerWidth/2+(Math.random()-.5)*160,y:innerHeight*.35,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,s:Math.random()*8+5,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:cols[Math.floor(Math.random()*cols.length)]}));
   let t=0;(function f(){ x.clearRect(0,0,innerWidth,innerHeight);
     P.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/3,p.s,p.s*.6);x.restore();});
     if(++t<110 && c.isConnected) requestAnimationFrame(f); else c.remove(); })();
@@ -141,13 +164,16 @@ function sheet(kind, head, body, label, onNext){
 }
 
 /* ---------- Gerüst ---------- */
+// Wohin führt "Fertig"? In einer Klasseninsel zur Insel, sonst zur eigenen Code-Seite
+const finTarget = () => W.insel ? `data-href="${esc(W.insel.href)}#fertig"` : `data-go="fertig"`;
 function topbar(o){
   o = o || {};
   const lv = o.lvl;
   return `<div class="topbar">
     ${o.back?`<button class="back" data-go="" aria-label="${T.map}"><span aria-hidden="true">←</span><span class="bl"> ${T.map}</span></button>`:""}
+    ${o.island?`<button class="back" data-href="${esc(W.insel.href)}" aria-label="${T.island}"><span aria-hidden="true">🏝️</span><span class="bl"> ${T.island}</span></button>`:""}
     ${o.title?`<div class="tb-title"><span class="ic" aria-hidden="true">${o.icon||"🎯"}</span><div style="min-width:0">${o.art?`<p class="tb-art">${esc(o.art)}</p>`:""}<h1 class="disp">${esc(o.title)}</h1></div></div>`:`<span class="sp"></span>`}
-    ${o.pill?`<button class="pill-fin" data-go="fertig"><span aria-hidden="true">🏁</span> ${T.finishPill}</button>`:""}
+    ${o.pill?`<button class="pill-fin" ${finTarget()}><span aria-hidden="true">🏁</span> ${T.finishPill}</button>`:""}
     <span class="chip" id="ptsChip"><span class="chip-ic" aria-hidden="true">${W.sammel||"⭐"}</span><span id="ptsNum">${liveTotal()}</span><span class="chip-max">/${MAX}</span></span></div>`;
 }
 function howBox(text, de, tip){
@@ -170,12 +196,15 @@ function fit(){
 function home(){
   const lvls = LV();
   const st = lvls.reduce((a,l)=>a+starsFor(best(l.id),maxOf(l)),0);
-  return topbar() + `<header class="hero">${W.hero}</header>
-  <button class="finish-banner" data-go="fertig"><span class="fb-flag" aria-hidden="true"></span>
+  const tier = tierOf(total(), MAX), nextP = TIERS[tier] !== undefined ? Math.ceil(TIERS[tier]*MAX - 1e-9) - total() : 0;
+  return topbar({island:!!W.insel}) + `<header class="hero">${W.hero}</header>
+  <button class="finish-banner" ${finTarget()}><span class="fb-flag" aria-hidden="true"></span>
     <span class="fb-txt"><b>${T.finishBtn}</b><span>${T.finishSub}</span></span><span class="fb-arrow" aria-hidden="true">🏁</span></button>
   <div class="stats">
     <div class="panel stat"><b>${total()}<small> / ${MAX}</small></b><span>${T.pts}</span><div class="meter"><i style="width:${Math.round(total()/MAX*100)}%"></i></div></div>
     <div class="panel stat"><b>${st}<small> / ${lvls.length*3}</small></b><span>${T.stars}</span><div class="meter"><i style="width:${Math.round(st/(lvls.length*3)*100)}%"></i></div></div>
+    <div class="panel stat medal-stat${tier?" has":""}">${medalSvg(tier, 46)}<div><b class="m-name">${T.medalNames[tier]}</b>
+      <span>${tier>=3 ? T.medalTop : T.medalNext(nextP, T.pts, T.medalNames[tier+1])}</span></div></div>
   </div>
   <div class="levels">${lvls.map(l=>{
     const m=maxOf(l), b=best(l.id);
@@ -189,9 +218,10 @@ function home(){
 
 function render(){
   cleanups.forEach(f=>{ try{f();}catch(e){} }); cleanups=[];
-  document.querySelectorAll("#confetti,.pop,.flyer").forEach(x=>x.remove());
+  document.querySelectorAll("#confetti,.pop,.flyer,.medal-pop").forEach(x=>x.remove());
   closeSheet(); CUR=null; RUN=0;
   const h = location.hash.slice(1);
+  if(h==="fertig" && W.insel){ location.replace(W.insel.href+"#fertig"); return; }
   if(h==="fertig"){
     APP.innerHTML = topbar({back:true, title:T.codeTitle, icon:"🏁"}) + howBox(T.codeHow, W.sprache==="en"?TXT.de.codeHow:null) + `<div id="area"></div>`;
     document.title = T.codeTitle+" – "+W.titel; fit(); finale($("#area")); return;
@@ -208,20 +238,31 @@ function render(){
 
 function finish(l, A, pts, info){
   closeSheet();
-  const m = maxOf(l), old = S.lv[l.id], rec = old && pts > old.best;
+  const m = maxOf(l), old = S.lv[l.id], rec = old && pts > old.best, before = total();
   S.lv[l.id] = {best: Math.max(pts, old?old.best:0), runs:(old?old.runs:0)+1}; save();
+  const tierBefore = tierOf(before, MAX), tierAfter = tierOf(total(), MAX), perfect = m>0 && pts===m;
   CUR = null; RUN = 0; updateChip(false);
   const st = starsFor(pts, m), idx = LV().indexOf(l), nx = LV()[idx+1];
   const msg = (W.lob||{})[st] || "";
   A.innerHTML = `<div class="panel result" role="status">
+    ${perfect?`<div class="stamp" aria-hidden="true">${T.perfect}</div>`:""}
     <div class="bigstars">${starHtml(st)}</div>
     <p class="pts">${pts} / ${m}</p>
     ${info?`<p class="res-info">${esc(info)}</p>`:""}
     ${msg?`<p class="res-msg">${esc(msg)}</p>`:""}
     ${rec?`<span class="rec">${T.record}</span>`:""}
-    <div class="row">${nx?`<button class="btn big" data-go="l=${esc(nx.id)}">${T.nextLvl}: ${esc(nx.titel)}</button>`:`<button class="btn big" data-go="fertig">🏁 ${T.finishBtn}</button>`}
+    <div class="row">${nx?`<button class="btn big" data-go="l=${esc(nx.id)}">${T.nextLvl}: ${esc(nx.titel)}</button>`:`<button class="btn big" ${finTarget()}>🏁 ${T.finishBtn}</button>`}
       <button class="btn alt" data-again>${T.again}</button><button class="btn alt" data-go="">${T.toMap}</button></div></div>`;
-  if(st>=2) confetti();
+  if(perfect || st===3) confetti(140); else if(st===2) confetti(45);
+  if(tierAfter > tierBefore) setTimeout(()=>medalPop(tierAfter), perfect||st===3 ? 1300 : 600);
+}
+function medalPop(t){
+  const d=document.createElement("div"); d.className="medal-pop"; d.setAttribute("role","dialog"); d.setAttribute("aria-label", T.medalNames[t]);
+  d.innerHTML = `<div class="mp-card"><div class="mp-medal">${medalSvg(t, 150)}</div>
+    <h2 class="disp">${T.medalNames[t]}</h2><p>${T.medalWon}</p><p class="mp-pts">${W.sammel||"⭐"} ${total()} / ${MAX}</p>
+    <button class="btn big">${T.medalOk}</button></div>`;
+  document.body.appendChild(d); confetti(160);
+  const b=d.querySelector(".btn"); b.focus({preventScroll:true}); b.onclick=()=>d.remove();
 }
 
 function progressBar(arr, cur){ return `<div class="progress" aria-hidden="true">${arr.map((v,i)=>`<i class="${v===true?"ok":v===false?"no":i===cur?"cur":""}"></i>`).join("")}</div>`; }
@@ -360,7 +401,7 @@ GAMES.rush = (l, A, done) => {
   function next(){
     if(over || !$("#rq")) return;
     if(!pool.length) pool = shuffle(l.items);
-    cur = pool.pop(); const order = shuffle(cur.o.map((_,j)=>j));
+    cur = pool.pop(); const order = l.fest ? cur.o.map((_,j)=>j) : shuffle(cur.o.map((_,j)=>j));
     $("#rq").innerHTML = rich(cur.q);
     $("#ro").innerHTML = order.map(j=>`<button class="opt" data-j="${j}">${esc(cur.o[j])}</button>`).join("");
     lock=false;
@@ -544,6 +585,7 @@ const LW = {
     W = world; T = Object.assign({}, TXT[W.sprache||"de"], W.punkteName?{pts:W.punkteName}:{}); KEY = "lw-"+W.id+"-v1"; APP = document.getElementById("app");
     MAX = W.levels.reduce((a,l)=>a+maxOf(l),0);
     load();
+    try{ localStorage.setItem("lw-meta-"+W.id, JSON.stringify({max:MAX, titel:W.titel, ids:W.levels.map(l=>l.id)})); }catch(e){}
     document.addEventListener("click", e=>{
       // Übersetzung
       const tr = e.target.closest("[data-tr]");
@@ -551,6 +593,8 @@ const LW = {
       if(e.target.closest("[data-trx]")){ const p=e.target.closest(".tr-pop"); p.hidden=true; const f=p.parentElement.querySelector("[data-tr]"); f.setAttribute("aria-expanded","false"); f.focus(); return; }
       document.querySelectorAll(".tr-pop:not([hidden])").forEach(p=>{ if(!p.contains(e.target)){ p.hidden=true; p.parentElement.querySelector("[data-tr]").setAttribute("aria-expanded","false"); } });
       // Navigation
+      const hr = e.target.closest("[data-href]");
+      if(hr){ location.href = hr.dataset.href; return; }
       const g = e.target.closest("[data-go]");
       if(g){ const to=g.dataset.go; if(location.hash.slice(1)===to) render(); else location.hash=to; return; }
       if(e.target.closest("[data-again]")){ render(); window.scrollTo(0,0); return; }
@@ -561,7 +605,8 @@ const LW = {
     window.addEventListener("resize", ()=>{ fit(); const s=$("#sheet"), a=$("#area"); if(s&&a) a.style.paddingBottom=(s.offsetHeight+10)+"px"; });
     render();
   },
-  maxima(world){ return world.levels.map(maxOf); }
+  maxima(world){ return world.levels.map(maxOf); },
+  medal: medalSvg, tierOf, confetti: n => { if(!W) W = {}; confetti(n); }
 };
 window.LW = LW;
 })();

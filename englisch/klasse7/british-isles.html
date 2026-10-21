@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#14425A">
+<title>Discover the British Isles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<style>
+:root{
+  color-scheme:light;
+  --ink:#14283C; --bg:#DCEBE4; --surface:#FFFDF7; --surface-2:#F3F7F2; --muted:#4F6272; --line:#14283C;
+  --accent:#C8102E; --accent-ink:#FFFFFF; --accent-2:#FFD166; --mid-bg:#FFF1C9;
+  --ok:#1F8A55; --ok-bg:#D8F1E3; --bad:#C8352A; --bad-bg:#FBE1DC;
+  --radius:16px; --radius-btn:12px; --radius-ic:12px;
+  --border:2px solid #14283C; --shadow:4px 4px 0 #14283C;
+  --border-btn:2px solid #14283C; --shadow-btn:3px 3px 0 #14283C; --border-opt:2px solid #14283C;
+  --border-ic:2px solid #14283C; --border-bin:2px dashed #14283C; --border-soft:2px solid #14283C;
+  --font-body:"Lexend",system-ui,-apple-system,sans-serif;
+  --font-display:"Bree Serif",Georgia,serif; --display-weight:400;
+  --ic-bg:#CFE6F2; --card-back:#14425A; --tile-bg:var(--accent-2); --tile-ink:var(--ink);
+  --chip-bg:#FFFDF7; --chip-ink:var(--ink); --how-bg:#FFFDF7;
+  --track:#C9DAD2; --star:#E8A400; --star-off:#C3D0C9; --focus:#14425A;
+}
+body{background-color:var(--bg);
+  background-image:linear-gradient(rgba(20,40,60,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(20,40,60,.06) 1px,transparent 1px);background-size:32px 32px}
+.opt,.prom{box-shadow:2px 2px 0 var(--ink)}
+.opt:active,.btn:active{box-shadow:0 0 0 var(--ink);transform:translate(3px,3px)}
+.lvl:nth-child(4n+2) .ic{background:#FFE2A8} .lvl:nth-child(4n+3) .ic{background:#D2EBD6} .lvl:nth-child(4n+4) .ic{background:#F6D2D2}
+.mcard .f{font-size:2rem}
+
+.post{position:relative;overflow:hidden;background:#14425A;color:#fff;border:var(--border);border-radius:22px;box-shadow:var(--shadow);padding:clamp(1.3rem,4vw,2.2rem);min-height:230px}
+.post::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(135deg,transparent 0 22px,rgba(255,255,255,.05) 22px 23px);pointer-events:none}
+.post .tag{display:inline-block;background:var(--accent-2);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.1rem .8rem;font-weight:700}
+.post h1{font-family:"Bree Serif",Georgia,serif;font-weight:400;font-size:clamp(2.3rem,7.5vw,4rem);line-height:1;margin:.5rem 0 .6rem;max-width:11ch}
+.post p{margin:0;max-width:34ch;color:#D7E7EF;font-size:1.05rem}
+.stamps{position:absolute;right:clamp(.5rem,3vw,2rem);top:50%;transform:translateY(-50%);display:grid;grid-template-columns:repeat(2,auto);gap:.4rem .6rem}
+.stamp-c{width:92px;height:92px;border-radius:50%;border:3px dashed rgba(255,255,255,.85);display:grid;place-items:center;text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.1;padding:.4rem;color:#fff;background:rgba(255,255,255,.06)}
+.stamp-c span{display:block;font-size:2rem;line-height:1.1;margin-bottom:.1rem}
+.stamp-c:nth-child(1){transform:rotate(-10deg)} .stamp-c:nth-child(2){transform:rotate(8deg)} .stamp-c:nth-child(3){transform:rotate(6deg)} .stamp-c:nth-child(4){transform:rotate(-7deg)}
+.stamp-c:nth-child(5){grid-column:1/-1;justify-self:center;transform:rotate(-3deg)}
+@media (max-width:640px){ .stamps{opacity:.22} }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <g id="ukflag" clip-path="url(#uk-s)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
+    </g>
+  </defs>
+</svg>
+<main class="lw" id="app"></main>
+
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script>
+const UK = `<svg class="ico-flag" viewBox="0 0 60 30" aria-hidden="true"><use href="#ukflag"/></svg>`;
+const HERO = `
+<div class="post">
+  <div class="stamps" aria-hidden="true">
+    <div class="stamp-c"><div><span>💂</span>England</div></div>
+    <div class="stamp-c"><div><span>🏰</span>Scotland</div></div>
+    <div class="stamp-c"><div><span>🐉</span>Wales</div></div>
+    <div class="stamp-c"><div><span>🪨</span>N. Ireland</div></div>
+    <div class="stamp-c"><div><span>☘️</span>Ireland</div></div>
+  </div>
+  <span class="tag">English · Class 7 · Country & people</span>
+  <h1>Discover the British Isles</h1>
+  <p>Travel through five countries: places, history and traditions. Collect British flags and win a medal!</p>
+</div>`;
+
+const C5 = ["England","Scotland","Wales","N. Ireland","Ireland"];
+
+LW.start({
+  id: "bi7",
+  titel: "Discover the British Isles",
+  sprache: "en",
+  insel: { k:7, href:"../insel.html?k=7" },
+  hero: HERO,
+  sammel: UK,
+  punkteName: "flags",
+  kartenSymbol: "🧭",
+  konfetti: ["#C8102E","#012169","#FFFFFF","#1F8A55","#FFD166"],
+  lob: {3:"Brilliant! You know the British Isles really well.", 2:"Well done! Can you get three stars next time?", 1:"Good start – read the tips and try again.", 0:"Don’t give up! Have a look at the answers and try again."},
+  levels: [
+    { id:"names", typ:"quiz", icon:"🧭", titel:"UK, GB or British Isles?", art:"Quiz · the basics",
+      anleitung:"What is the difference between the UK, Great Britain and the British Isles? Choose the right answer.",
+      anleitungDe:"Was ist der Unterschied zwischen dem UK, Großbritannien und den Britischen Inseln? Wähle die richtige Antwort.",
+      tipp:"Great Britain ist die große Insel. Das UK ist ein Staat. Die British Isles sind eine Inselgruppe.",
+      fragen:[
+        {q:"Which countries are on the island of Great Britain?", o:["England, Scotland and Wales","England and Scotland","England, Scotland, Wales and Northern Ireland","Only England"], c:0, e:"Great Britain is the biggest island. **England, Scotland and Wales** are on it."},
+        {q:"What does “UK” stand for?", o:["The United Kingdom of Great Britain and Northern Ireland","The United Kings","The Union of Kingdoms","The Universal Kingdom"], c:0, e:"The **UK** is one country with four parts: England, Scotland, Wales and Northern Ireland."},
+        {q:"Is the Republic of Ireland part of the UK?", o:["No – it is an independent country","Yes","Only Dublin","Only in summer"], c:0, e:"The Republic of Ireland is its own country. Only **Northern Ireland** belongs to the UK."},
+        {q:"What are the “British Isles”?", o:["A group of islands with Great Britain, Ireland and many small islands","Another name for England","A city in Scotland","A football team"], c:0, e:"The **British Isles** are a group of islands – the two big ones are Great Britain and Ireland."},
+        {q:"What is the capital of the UK?", o:["London","Edinburgh","Manchester","Dublin"], c:0, e:"**London** is the capital of the UK – and of England."},
+        {q:"Which money do people use in Dublin?", o:["The euro","The pound","The dollar","The franc"], c:0, e:"Ireland is in the EU and uses the **euro**. In Northern Ireland (UK) people pay with **pounds**."},
+        {q:"Who is the head of state of the UK today?", o:["King Charles III","The Prime Minister","Queen Elizabeth II","The Mayor of London"], c:0, e:"**Charles III** became king in 2022 after Queen Elizabeth II died."}
+      ]},
+    { id:"where", typ:"sortieren", icon:"🗺️", titel:"Where is it?", art:"Sort · places",
+      anleitung:"In which country is this place? Tap the right box.",
+      anleitungDe:"In welchem Land liegt dieser Ort? Tippe auf das richtige Kästchen.",
+      tipp:"Northern Ireland gehört zum UK, die Republic of Ireland nicht. Beide liegen auf der Insel Irland.",
+      koerbe:[
+        {t:"England", info:"capital: London"}, {t:"Scotland", info:"capital: Edinburgh"}, {t:"Wales", info:"capital: Cardiff"},
+        {t:"Northern Ireland", info:"capital: Belfast"}, {t:"Republic of Ireland", info:"capital: Dublin"}
+      ],
+      items:[
+        {t:"London", k:0}, {t:"Manchester", k:0}, {t:"Stonehenge", k:0, e:"**Stonehenge** is a very old stone circle in the south of England."}, {t:"Oxford", k:0},
+        {t:"Edinburgh", k:1}, {t:"Loch Ness", k:1, e:"**Loch Ness** is a long lake in Scotland – famous for “Nessie”."}, {t:"Ben Nevis", k:1}, {t:"Glasgow", k:1},
+        {t:"Cardiff", k:2}, {t:"Snowdon (Yr Wyddfa)", k:2, e:"**Snowdon** – in Welsh **Yr Wyddfa** – is the highest mountain in Wales."}, {t:"Swansea", k:2},
+        {t:"Belfast", k:3}, {t:"Giant’s Causeway", k:3, e:"The **Giant’s Causeway** has about 40,000 stone columns. A legend says a giant built it."},
+        {t:"Dublin", k:4}, {t:"Cliffs of Moher", k:4}, {t:"Galway", k:4}
+      ]},
+    { id:"symbols", typ:"memory", icon:"🐉", titel:"Capitals & symbols", art:"Memory · 8 pairs",
+      anleitung:"Find the pairs: **capital or symbol + country**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Hauptstadt oder Symbol + Land**. Je weniger Züge du brauchst, desto mehr Flaggen bekommst du.",
+      tipp:"Wales: roter Drache · Schottland: Distel · Irland: Kleeblatt (shamrock) · England: Rose.",
+      paare:[
+        {a:"Edinburgh", b:"capital of Scotland"}, {a:"Cardiff", b:"capital of Wales"}, {a:"Belfast", b:"capital of Northern Ireland"}, {a:"Dublin", b:"capital of Ireland"},
+        {a:"red dragon", b:"symbol of Wales"}, {a:"thistle", b:"symbol of Scotland"}, {a:"shamrock", b:"symbol of Ireland"}, {a:"rose", b:"symbol of England"}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Country rush", art:"Speed game · 60 seconds",
+      anleitung:"Which country is it? Be fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Zu welchem Land gehört das? Sei schnell! **Ziel: 12 richtige** in 60 Sekunden.",
+      tipp:"N. Ireland = Nordirland (UK) · Ireland = Republik Irland.",
+      zeit:60, ziel:12, fest:true,
+      items:[
+        {q:"Big Ben", o:C5, c:0}, {q:"Buckingham Palace", o:C5, c:0}, {q:"Stonehenge", o:C5, c:0}, {q:"Tower Bridge", o:C5, c:0}, {q:"Liverpool", o:C5, c:0},
+        {q:"Loch Ness", o:C5, c:1}, {q:"Edinburgh Castle", o:C5, c:1}, {q:"haggis", o:C5, c:1}, {q:"Highland Games", o:C5, c:1}, {q:"Ben Nevis", o:C5, c:1},
+        {q:"Snowdon (Yr Wyddfa)", o:C5, c:2}, {q:"Cardiff", o:C5, c:2}, {q:"St David’s Day", o:C5, c:2}, {q:"Conwy Castle", o:C5, c:2},
+        {q:"Giant’s Causeway", o:C5, c:3}, {q:"Belfast", o:C5, c:3}, {q:"Titanic Belfast museum", o:C5, c:3},
+        {q:"Cliffs of Moher", o:C5, c:4}, {q:"Dublin", o:C5, c:4}, {q:"Galway", o:C5, c:4}, {q:"St Patrick’s Day parade in Dublin", o:C5, c:4}
+      ]},
+    { id:"history", typ:"zeitstrahl", icon:"🏛️", titel:"Through history", art:"Timeline · 8 events",
+      anleitung:"Put the events in the right order – **the oldest first**.",
+      anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
+      tipp:"BC = vor Christus, AD = nach Christus. Je kleiner die Jahreszahl nach Christus, desto älter.",
+      items:[
+        {j:"c. 2500 BC", t:"People build Stonehenge."},
+        {j:"AD 43", t:"The Romans come to Britain."},
+        {j:"AD 122", t:"The Romans start building Hadrian’s Wall in the north."},
+        {j:"793", t:"Vikings attack the island of Lindisfarne."},
+        {j:"1066", t:"William the Conqueror wins the Battle of Hastings."},
+        {j:"1215", t:"King John agrees to the Magna Carta."},
+        {j:"1605", t:"Guy Fawkes tries to blow up Parliament."},
+        {j:"2023", t:"Charles III is crowned king."}
+      ]},
+    { id:"traditions", typ:"quiz", icon:"🎉", titel:"Traditions & food", art:"Quiz · culture",
+      anleitung:"Festivals, food and sport: what do you know? Choose the right answer.",
+      anleitungDe:"Feste, Essen und Sport: Was weißt du? Wähle die richtige Antwort.",
+      tipp:"Patron saint = Schutzheiliger. Jedes Land hat einen eigenen Tag für ihn.",
+      fragen:[
+        {q:"On 17 March people in Ireland celebrate …", o:["St Patrick’s Day","Bonfire Night","Burns Night","St David’s Day"], c:0, e:"**St Patrick** is the patron saint of Ireland. People wear green and watch big parades."},
+        {q:"What happens on Bonfire Night (5 November)?", o:["Fireworks and big fires","People look for Easter eggs","People open Christmas presents","There is a big football final"], c:0, e:"People remember **Guy Fawkes**, who tried to blow up Parliament in 1605."},
+        {q:"Haggis is a traditional dish from …", o:["Scotland","Wales","Ireland","England"], c:0, e:"**Haggis** is from Scotland. People often eat it on Burns Night in January."},
+        {q:"What is a kilt?", o:["A traditional Scottish skirt for men","A Welsh hat","An Irish dance","An English cake"], c:0, e:"A **kilt** is made of **tartan** – a cloth with colourful squares and lines."},
+        {q:"On St David’s Day (1 March) many people in Wales wear …", o:["a daffodil or a leek","a rose","a shamrock","a kilt"], c:0, e:"The **daffodil** and the **leek** are symbols of Wales."},
+        {q:"Which sport is very popular in Wales?", o:["Rugby","Baseball","Ice hockey","American football"], c:0, e:"**Rugby** is like a national sport in Wales."},
+        {q:"Which fast Irish sport is played with sticks and a small ball?", o:["Hurling","Cricket","Golf","Tennis"], c:0, e:"**Hurling** is one of the oldest field sports in the world."},
+        {q:"What is “afternoon tea”?", o:["Tea with sandwiches, scones and cakes","Tea for breakfast","A tea shop","Cold tea with ice"], c:0, e:"**Afternoon tea** is a small meal in the afternoon. Scones with cream and jam are a must!"}
+      ]},
+    { id:"facts", typ:"swipe", icon:"✅", titel:"True or false?", art:"Swipe · fun facts",
+      anleitung:"Is it true? Swipe **right for True** and **left for False**.",
+      anleitungDe:"Stimmt das? Wische nach **rechts für True** (wahr) und nach **links für False** (falsch).",
+      tipp:"Lies genau: Oft ist nur das Land falsch.",
+      links:{t:"False", icon:"✗"}, rechts:{t:"True", icon:"✓"},
+      karten:[
+        {t:"In the UK, people drive on the left.", r:"r", e:"Right! In Ireland, too."},
+        {t:"The Loch Ness Monster lives in a lake in Wales.", r:"l", e:"**Loch Ness** is in **Scotland**."},
+        {t:"Ben Nevis in Scotland is the highest mountain in the UK.", r:"r", e:"Ben Nevis is **1,345 m** high."},
+        {t:"In Northern Ireland, people pay with euros.", r:"l", e:"Northern Ireland is part of the UK – people pay with **pounds**."},
+        {t:"In Wales, many road signs are in Welsh and English.", r:"r", e:"**Welsh** is an official language in Wales. *Croeso* means “welcome”."},
+        {t:"St Patrick is the patron saint of Wales.", r:"l", e:"St Patrick is the patron saint of **Ireland**. The patron saint of Wales is **St David**."},
+        {t:"Big Ben is the name of the big bell in the clock tower.", r:"r", e:"The tower is called the **Elizabeth Tower**, the bell is **Big Ben**."},
+        {t:"Shakespeare was born in Scotland.", r:"l", e:"Shakespeare was born in **Stratford-upon-Avon** in England."},
+        {t:"The Titanic was built in Belfast.", r:"r", e:"Today there is a big Titanic museum in **Belfast**."},
+        {t:"The red dragon is on the flag of Wales.", r:"r", e:"A legend tells how a **red dragon** fought a white dragon – and won."}
+      ]},
+    { id:"postcard", typ:"lueckentext", icon:"✉️", titel:"A postcard from Scotland", art:"Reading · fill in the gaps",
+      anleitung:"Mia is on holiday in Scotland. Tap a gap and choose the right word.",
+      anleitungDe:"Mia macht Urlaub in Schottland. Tippe auf eine Lücke und wähle das passende Wort.",
+      tipp:"Achte auf die Zeit: *yesterday* → simple past, *tomorrow* → Zukunft.",
+      ueberschrift:"Greetings from Edinburgh!",
+      text:"Dear Tom,\nGreetings from Edinburgh, the [[capital|island|village]] of Scotland! Yesterday we [[visited|visit|visiting]] the castle. It is on a big [[rock|lake|beach]] in the middle of the city. Then we [[walked|walk|walks]] along the Royal Mile. A man in a [[kilt|crown|raincoat]] played the [[bagpipes|piano|drums]]. For dinner I [[ate|eated|eat]] haggis – it was [[better|good|best]] than I thought! Tomorrow we’re [[going|go|went]] to Loch Ness. Maybe we’ll [[see|saw|seen]] Nessie!\nLove, Mia",
+      erklaerung:"*Yesterday* → simple past: visited, walked, ate. After *will* the verb stays in the base form: we’ll **see**."}
+  ]
+});
+</script>
+</body>
+</html>

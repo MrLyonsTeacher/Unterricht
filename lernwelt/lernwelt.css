@@ -31,7 +31,7 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manip
 .back{flex:0 0 auto;min-height:46px;min-width:46px;padding:.35rem .9rem;border-radius:999px;background:var(--surface);border:var(--border);font-weight:700}
 .tb-title{flex:1;min-width:0;display:flex;gap:.6rem;align-items:center}
 .tb-title .ic{flex:0 0 auto;width:2.6rem;height:2.6rem;border-radius:var(--radius-ic,12px);display:grid;place-items:center;font-size:1.45rem;background:var(--ic-bg,var(--accent-2));border:var(--border-ic,0)}
-.tb-title h1{font-size:clamp(1.25rem,3.4vw,1.8rem);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-title h1{font-size:clamp(1.25rem,3.4vw,1.8rem);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-bottom:.12em;line-height:1.1}
 .tb-art{margin:0;color:var(--muted);font-size:.82rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .85rem;min-height:42px;border-radius:999px;background:var(--chip-bg,var(--surface));color:var(--chip-ink,var(--ink));border:var(--border);font-weight:800;font-variant-numeric:tabular-nums}
 .chip-ic{font-size:1.05rem;line-height:1}
@@ -244,3 +244,28 @@ input[type=range]{width:100%;height:48px;accent-color:var(--accent)}
 @media (prefers-reduced-motion: reduce){
   .mcard .in,.meter i{transition:none} .shake{animation:none} .pop{animation-duration:.01s} .sheet,.tr-pop{animation:none}
 }
+
+/* Medaillen */
+.medal-stat{display:flex;align-items:center;gap:.7rem;flex:1.3 1 230px}
+.medal-stat .medal{flex:0 0 auto;filter:grayscale(1) opacity(.55)}
+.medal-stat.has .medal{filter:none}
+.medal-stat b.m-name{font-family:var(--font-display);font-size:1.25rem;line-height:1.1}
+.medal-stat span{display:block}
+.medal-pop{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:1rem;background:rgba(10,14,30,.55);animation:lw-fade .25s ease-out}
+.mp-card{background:var(--surface);color:var(--ink);border:var(--border);border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:1.4rem 1.6rem 1.6rem;text-align:center;max-width:380px;width:100%}
+.mp-card h2{font-size:2rem;margin:.2rem 0}
+.mp-card p{margin:.2rem 0 .8rem;color:var(--muted)}
+.mp-card .mp-pts{font-weight:800;color:var(--ink);font-size:1.15rem}
+.mp-medal{position:relative;display:inline-block;animation:lw-medal 1s cubic-bezier(.2,.9,.3,1.3) both}
+.mp-medal::after{content:"";position:absolute;inset:40% -10% 0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.85) 50%,transparent 60%);mix-blend-mode:overlay;animation:lw-shine 1.6s .9s ease-in-out both}
+@keyframes lw-medal{0%{transform:scale(.2) rotateY(540deg);opacity:0}70%{opacity:1}100%{transform:scale(1) rotateY(0)}}
+@keyframes lw-shine{from{transform:translateX(-60%)}to{transform:translateX(60%)}}
+@keyframes lw-fade{from{opacity:0}}
+/* Perfekt-Stempel */
+.result{position:relative}
+.stamp{position:absolute;top:.9rem;right:1rem;padding:.25rem .9rem;border:4px solid var(--ok);color:var(--ok);border-radius:12px;font-family:var(--font-display);font-weight:var(--display-weight,800);
+  font-size:1.6rem;letter-spacing:.06em;transform:rotate(12deg);animation:lw-stamp .45s cubic-bezier(.2,.9,.3,1.4) both;background:var(--surface)}
+@keyframes lw-stamp{from{transform:rotate(12deg) scale(2.6);opacity:0}}
+/* Knopf zurück zur Insel */
+.back[data-href]{background:var(--accent-2);color:var(--ink)}
+@media (prefers-reduced-motion: reduce){ .mp-medal,.mp-medal::after,.stamp,.medal-pop{animation:none} }

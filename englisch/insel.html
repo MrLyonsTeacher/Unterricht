@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A8DD5">
+<title>FRS Lernwelten – English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../lernwelt/insel.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <g id="ukflag" clip-path="url(#uk-s)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
+    </g>
+  </defs>
+</svg>
+
+<header class="ibar" id="bar"></header>
+<main class="imap" id="map"></main>
+<nav class="ichips" id="chips" aria-label="Areas"></nav>
+<div class="sys" id="sys" hidden></div>
+
+<script src="../katalog.js"></script>
+<script src="../qrcode.js"></script>
+<script src="../ergebnis.js"></script>
+<script src="../lernwelt/lernwelt.js"></script>
+<script src="../lernwelt/insel.js"></script>
+<script>
+"use strict";
+const UK = `<svg class="ico-flag" viewBox="0 0 60 30" aria-hidden="true"><use href="#ukflag"/></svg>`;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = s => document.querySelector(s);
+const K = +new URLSearchParams(location.search).get("k");
+const KL = FRS.klasse(K);
+
+/* ---------- Fortschritt aus den Themen lesen ---------- */
+function prog(t){
+  try{
+    const r = JSON.parse(localStorage.getItem("lw-"+t.id+"-v1") || "null");
+    const meta = JSON.parse(localStorage.getItem("lw-meta-"+t.id) || "null");
+    if(!r || !r.lv) return null;
+    const ids = meta && meta.ids ? meta.ids : Object.keys(r.lv).filter(id => !["urkunde","certificate"].includes(id));
+    const played = ids.filter(id => r.lv[id]);
+    if(!played.length) return null;
+    return { pts: played.reduce((a,id)=>a+(r.lv[id].best||0),0), max: (meta && meta.max) || t.max, n: played.length, of: ids.length };
+  }catch(e){ return null; }
+}
+const NAME_KEY = KL ? "insel-"+KL.id+"-name" : "";
+let NAME = ""; try{ NAME = localStorage.getItem(NAME_KEY) || ""; }catch(e){}
+
+/* ---------- Ohne Klasse: Auswahl zeigen ---------- */
+if(!KL){
+  $("#bar").innerHTML = `<div class="ib-title"><span class="ib-k">FRS</span><span class="ib-name">Choose your class</span></div>`;
+  $("#map").outerHTML = `<main class="pick">${FRS.englisch.klassen.map(c=>`<a href="?k=${c.k}">${INSEL.render(c.k,{bereiche:FRS.bereicheFuer(c.k),mini:true})}<b>Class ${c.k} · ${INSEL.NAMES[c.k]}</b></a>`).join("")}</main>`;
+  $("#chips").remove();
+} else start();
+
+function start(){
+  document.title = `Class ${K} · ${INSEL.NAMES[K]} – FRS Lernwelten`;
+  const BER = FRS.bereicheFuer(K);
+  const byKat = b => KL.themen.filter(t => t.kat === b);
+  const counts = {}, names = {};
+  BER.forEach(b => { counts[b] = byKat(b).length; names[b] = FRS.kategorien[b].name; });
+  const allMax = KL.themen.reduce((a,t)=>a+t.max,0);
+  const sum = () => KL.themen.reduce((a,t)=>{ const p=prog(t); return a+(p?p.pts:0); },0);
+
+  $("#bar").innerHTML = `<div class="ib-title"><span class="ib-k">Class ${K}</span><span class="ib-name">${INSEL.NAMES[K]}</span></div>
+    ${allMax?`<span class="chip" title="British flags">${UK} ${sum()}<small>/${allMax}</small></span>`:""}
+    <button class="ib-fin" id="finBtn"><span class="chk" aria-hidden="true"></span><span class="long">If you’re finished, click here</span><span class="short">Finished?</span></button>`;
+  $("#map").innerHTML = INSEL.render(K, {bereiche:BER, counts, names});
+  $("#chips").innerHTML = BER.map(b=>`<button class="ichip" data-kat="${b}"><span aria-hidden="true">${FRS.kategorien[b].icon}</span>${esc(names[b])}<span class="n${counts[b]?"":" z"}">${counts[b]}</span></button>`).join("");
+
+  /* ---------- System-Fenster ---------- */
+  const SYS = $("#sys");
+  let lastFocus = null;
+  function frame(inner, cls){
+    lastFocus = document.activeElement;
+    SYS.innerHTML = `<div class="sys-back" data-close></div>
+      <section class="sys-win ${cls||""}" role="dialog" aria-modal="true" aria-labelledby="sysT">
+        <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+        <button class="sys-x" data-close aria-label="Close">×</button>${inner}</section>`;
+    SYS.hidden = false;
+    setTimeout(()=>{ const f = SYS.querySelector(".quest, input, .sys-x"); if(f) f.focus({preventScroll:true}); }, 60);
+  }
+  function close(){
+    const w = SYS.querySelector(".sys-win"); if(!w || SYS.hidden) return;
+    w.classList.add("out");
+    setTimeout(()=>{ SYS.hidden = true; SYS.innerHTML = ""; if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true}); }, 200);
+    if(location.hash) history.replaceState(null, "", location.pathname + location.search);
+  }
+  function openArea(b){
+    const kat = FRS.kategorien[b], list = byKat(b);
+    const rows = list.map(t=>{
+      const p = prog(t), pct = p ? Math.round(p.pts/p.max*100) : 0, tier = p ? LW.tierOf(p.pts, p.max) : 0;
+      return `<li><a class="quest" href="../${esc(t.pfad)}">
+        <span class="q-ic" aria-hidden="true">${t.icon||"🎯"}</span>
+        <span class="q-t"><b>${esc(t.titel)}</b><small>${esc(t.untertitel||"")}${p?` · ${p.n}/${p.of} games played`:" · new"}</small><span class="q-bar"><i style="width:${pct}%"></i></span></span>
+        <span class="q-r">${p&&tier?LW.medal(tier,24):""}<span>${p?`${p.pts}/${p.max}`:""}</span><span class="q-go">START ▸</span></span></a></li>`;
+    }).join("");
+    frame(`<div class="sys-head"><span class="sys-ico" aria-hidden="true">!</span><h2 class="sys-tag" id="sysT" style="margin:0">${esc(kat.name)}</h2></div>
+      <p class="sys-loc">${esc(kat.ort)} · ${esc(kat.de)}</p>
+      ${list.length ? `<p class="sys-msg">${list.length===1?"1 quest is":list.length+" quests are"} waiting for you.</p><ul class="sys-list">${rows}</ul>`
+        : `<p class="sys-msg">No quests here yet.<small>Hier gibt es noch keine Aufgaben – bald kommt mehr!</small></p><div class="sys-empty">New quests are coming soon.</div>`}`);
+  }
+
+  /* ---------- Ergebnis-Code der Insel ---------- */
+  function openFinish(){
+    frame(`<div class="sys-head"><span class="sys-ico" aria-hidden="true">!</span><h2 class="sys-tag" id="sysT" style="margin:0">Result</h2></div>
+      <p class="sys-msg">Type your initials and tap <b>Create code</b>. Then show the QR code to your teacher.
+        <small>Kürzel eintragen, „Create code“ antippen und den QR-Code deiner Lehrkraft zeigen.</small></p>
+      <div class="fin-row"><input id="nm" type="text" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="e.g. LM" value="${esc(NAME)}" aria-label="Your initials">
+        <button class="sys-btn" id="mk">${NAME?"Update":"Create code"}</button></div>
+      <div id="out"></div>`, "fin-win");
+    if(NAME) draw(false);
+  }
+  function draw(fx){
+    const played = [], rowsHtml = [];
+    let tot = 0;
+    BER.forEach(b=>{
+      const list = byKat(b); if(!list.length) return;
+      rowsHtml.push(`<tr><th colspan="3">${FRS.kategorien[b].icon} ${esc(FRS.kategorien[b].name)}</th></tr>`);
+      list.forEach(t=>{ const p = prog(t);
+        if(p){ played.push(`${t.id}-${p.pts}`); tot += p.pts; }
+        rowsHtml.push(`<tr class="${p?"":"none"}"><td>${t.icon||""} ${esc(t.titel)}</td><td>${p&&LW.tierOf(p.pts,p.max)?LW.medal(LW.tierOf(p.pts,p.max),20):""}</td><td>${p?`${p.pts}/${p.max}`:"–"}</td></tr>`); });
+    });
+    const code = UH.make(KL.id, NAME, tot, allMax, played);
+    const img = UH.qrImage(UH.link(code), 6);
+    $("#out").innerHTML = `<div class="fin-grid">
+      <div class="qr-card">${img?`<img src="${img}" alt="QR code">`:"<p>QR code error</p>"}<p class="who">${esc(NAME)}</p><p class="tot">${UK} ${tot} / ${allMax}</p></div>
+      <div><table class="fin-tab">${rowsHtml.join("") || `<tr><td>No quests yet.</td></tr>`}</table>
+        <p class="fin-note">If you play more, come back here – the code updates.</p><code class="fin-code">${esc(code)}</code></div></div>`;
+    if(fx) LW.confetti(120);
+  }
+  SYS.addEventListener("click", e=>{
+    if(e.target.closest("[data-close]")){ close(); return; }
+    if(e.target.closest("#mk")){
+      const inp = $("#nm"), v = inp.value.replace(/[|!]/g,"").trim();
+      if(!v){ inp.classList.add("shake"); inp.focus(); setTimeout(()=>inp.classList.remove("shake"),400); return; }
+      NAME = v; try{ localStorage.setItem(NAME_KEY, v); }catch(err){}
+      e.target.closest("#mk").textContent = "Update"; draw(true);
+    }
+  });
+  SYS.addEventListener("keydown", e=>{ if(e.key==="Enter" && e.target.id==="nm"){ e.preventDefault(); $("#mk").click(); } });
+  document.addEventListener("keydown", e=>{
+    if(e.key==="Escape") close();
+    const g = e.target.closest && e.target.closest(".lm-lbl");
+    if(g && (e.key==="Enter" || e.key===" ")){ e.preventDefault(); openArea(g.dataset.kat); }
+  });
+  document.addEventListener("click", e=>{
+    if(e.target.closest("#finBtn")){ openFinish(); return; }
+    const k = e.target.closest("#map [data-kat], #chips [data-kat]"); if(k) openArea(k.dataset.kat);
+  });
+  window.addEventListener("hashchange", ()=>{ if(location.hash==="#fertig") openFinish(); });
+  if(location.hash==="#fertig") openFinish();
+  // zurück von einem Thema (Browser-Cache): Punkte neu anzeigen
+  window.addEventListener("pageshow", e=>{ if(e.persisted) location.reload(); });
+}
+</script>
+</body>
+</html>

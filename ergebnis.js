@@ -43,7 +43,8 @@
     let name; try{ name = decodeURIComponent(f[2]); }catch(e){ name = f[2]; }
     return {
       id: f[1], name, pts: +f[3], max: +f[4],
-      parts: f[5] ? f[5].split(".").map(Number) : [],
+      parts: f[5] ? f[5].split(".").filter(x=>!x.includes("-")).map(Number) : [],
+      topics: f[5] ? Object.fromEntries(f[5].split(".").filter(x=>x.includes("-")).map(x=>{ const i=x.lastIndexOf("-"); return [x.slice(0,i), +x.slice(i+1)]; })) : {},
       time: f[6], valid: hash(SALT + body) === f[7], raw: s
     };
   }

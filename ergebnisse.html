@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Ergebnisse einsammeln</title>
+<title>Ergebnisse einsammeln – FRS Lernwelten</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
@@ -124,11 +124,17 @@ details summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;alig
 #sessList span{color:var(--muted);font-weight:400}
 .cam{aspect-ratio:3/4}
 @media (orientation:landscape){ .cam{aspect-ratio:4/3} }
+.rp-table td.c-n{background:#F1F3F2;color:#9AA39F}
+.rp-legend i.c-n{background:#F1F3F2;border:1px solid #DDE2DF}
+.rp-table td.fbk{text-align:left;white-space:normal;min-width:11rem;font-size:.8rem;line-height:1.25}
+.fb-s{color:var(--gi);font-weight:700;display:block}.fb-w{color:var(--ri);font-weight:700;display:block}.fb-m{color:var(--yi)}.fb-none{color:#9AA39F}
+.grp-row th{font-size:.72rem;color:var(--ac);border-bottom:2px solid var(--ac) !important;padding-bottom:.15rem}
+.st-sub{font-size:.75rem;color:var(--mu);margin:-.15rem 0 .35rem 7rem}
 </style>
 </head>
 <body>
 <main>
-  <p style="margin:0 0 .6rem"><a href="./">← Zu den Materialien</a></p>
+  <p style="margin:0 0 .6rem"><a href="./">← FRS Lernwelten</a></p>
   <h1>Ergebnisse einsammeln</h1>
   <p class="sub">Kamera starten und die Codes der Schüler einfach nacheinander vor die Kamera halten – wie an einer Kasse. Jeder neue Code piept einmal. Alles wird nur auf diesem Gerät gespeichert.</p>
 
@@ -191,12 +197,31 @@ details summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;alig
 <canvas id="cv" hidden></canvas>
 <script src="jsQR.js"></script>
 <script src="ergebnis.js"></script>
-<script src="materialien.js"></script>
+<script src="katalog.js"></script>
 <script>
 const KEY = "uh-ergebnisse-v1";
 const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const MATS = (typeof MATERIALIEN!=="undefined"?MATERIALIEN:[]).filter(m=>m.id);
-const matInfo = id => MATS.find(m=>m.id===id) || {titel:"Material „"+id+"“", stationen:[]};
+const matInfo = id => (typeof FRS!=="undefined" && FRS.find(id)) || {typ:"material", titel:"Material „"+id+"“", stationen:[]};
+// Spalten einer Auswertung: bei Klasseninseln die Themen (gruppiert nach Bereich), sonst die Stationen eines Materials
+function cols(info, rows){
+  if(info.typ==="insel"){
+    return { insel:true, heads:info.themen.map(t=>t.titel), smax:info.themen.map(t=>t.max), groups:info.themen.map(t=>t.kat), ids:info.themen.map(t=>t.id) };
+  }
+  const n = Math.max(0, (info.stationen||[]).length, ...rows.map(r=>r.parts.length));
+  return { insel:false, heads:Array.from({length:n},(_,i)=>info.stationen && info.stationen[i] ? info.stationen[i] : "Teil "+(i+1)),
+    smax:Array.from({length:n},(_,i)=> info.stationenMax && info.stationenMax[i] ? info.stationenMax[i] : Math.max(1,...rows.map(r=>+r.parts[i]||0))), groups:null };
+}
+// Werte eines Eintrags passend zu den Spalten; null = nicht bearbeitet
+function vals(r, C){
+  if(C.insel) return C.ids.map(id => r.topics && Object.prototype.hasOwnProperty.call(r.topics,id) ? r.topics[id] : null);
+  return C.heads.map((_,i)=> r.parts[i]===undefined || r.parts[i]==="" ? null : +r.parts[i]);
+}
+// Prozent eines Eintrags: bei Inseln bezogen auf die bearbeiteten Themen
+function pctOf(r, C){
+  if(!C.insel) return r.max ? r.pts/r.max : 0;
+  const v = vals(r,C); let m=0, p=0; v.forEach((x,i)=>{ if(x!==null){ m+=C.smax[i]; p+=x; } });
+  return m ? p/m : 0;
+}
 
 let DATA = [];
 try{ DATA = JSON.parse(localStorage.getItem(KEY)) || []; }catch(e){}
@@ -305,19 +330,18 @@ function renderTable(){
   const rows = shown(), info = matInfo(fMat.value);
   document.getElementById("count").textContent = DATA.length ? `${DATA.length} Ergebnis${DATA.length===1?"":"se"} gespeichert.` : "";
   if(!rows.length){ document.getElementById("table").innerHTML = `<p class="empty">Noch keine Ergebnisse. Starte die Kamera und lass die Schüler ihren Code zeigen.</p>`; return; }
-  const nParts = Math.max(...rows.map(r=>r.parts.length));
-  const heads = Array.from({length:nParts},(_,i)=>info.stationen && info.stationen[i] ? info.stationen[i] : "Teil "+(i+1));
-  const avg = rows.reduce((a,r)=>a+r.pts/r.max,0)/rows.length;
+  const C = cols(info, rows);
+  const avg = rows.reduce((a,r)=>a+pctOf(r,C),0)/rows.length;
   document.getElementById("table").innerHTML = `<table>
-    <thead><tr><th>Name</th><th>Gruppe</th><th>Punkte</th><th>%</th>${heads.map(h=>`<th>${esc(h)}</th>`).join("")}<th>Abgegeben</th><th></th></tr></thead>
-    <tbody>${rows.map(r=>{ const pc=Math.round(r.pts/r.max*100);
+    <thead><tr><th>Name</th><th>Gruppe</th><th>Punkte</th><th>%</th>${C.heads.map(h=>`<th>${esc(h)}</th>`).join("")}<th>Abgegeben</th><th></th></tr></thead>
+    <tbody>${rows.map(r=>{ const pc=Math.round(pctOf(r,C)*100), v=vals(r,C);
       return `<tr class="${r.valid?"":"invalid"}">
         <td>${r.valid?"":"⚠ "}${esc(r.name)}</td><td>${esc(r.grp)}</td>
         <td class="n">${r.pts}/${r.max}</td><td class="n"><span class="bar" style="width:${Math.round(Math.min(pc,100)*0.6)}px"></span>${pc}</td>
-        ${heads.map((_,i)=>`<td class="n">${r.parts[i] ?? ""}</td>`).join("")}
+        ${v.map((x,i)=>`<td class="n">${x===null?"–":x+"/"+C.smax[i]}</td>`).join("")}
         <td>${esc(r.time.replace("T"," "))}</td>
         <td><button class="del" data-del="${esc(r.key)}" aria-label="${esc(r.name)} löschen">×</button></td></tr>`; }).join("")}</tbody>
-  </table><p class="count">${rows.length} Schüler · Durchschnitt ${Math.round(avg*100)} %</p>`;
+  </table><p class="count">${rows.length} Schüler · Durchschnitt ${Math.round(avg*100)} %${C.insel?" (bezogen auf die bearbeiteten Themen)":""}</p>`;
 }
 fMat.onchange = renderTable; fGrp.onchange = renderTable;
 document.addEventListener("click",e=>{
@@ -331,11 +355,10 @@ document.getElementById("clear").onclick = ()=>{
 };
 document.getElementById("csv").onclick = ()=>{
   const rows = shown(); if(!rows.length) return;
-  const info = matInfo(fMat.value), n = Math.max(...rows.map(r=>r.parts.length));
-  const heads = Array.from({length:n},(_,i)=>info.stationen && info.stationen[i] ? info.stationen[i] : "Teil "+(i+1));
+  const info = matInfo(fMat.value), C = cols(info, rows);
   const q = v => `"${String(v).replace(/"/g,'""')}"`;
-  const lines = [["Name","Gruppe","Punkte","Maximal","Prozent",...heads,"Abgegeben","Code gültig"].map(q).join(";")]
-    .concat(rows.map(r=>[r.name,r.grp,r.pts,r.max,Math.round(r.pts/r.max*100),...heads.map((_,i)=>r.parts[i] ?? ""),r.time.replace("T"," "),r.valid?"ja":"NEIN"].map(q).join(";")));
+  const lines = [["Name","Gruppe","Punkte","Maximal","Prozent",...C.heads,"Abgegeben","Code gültig"].map(q).join(";")]
+    .concat(rows.map(r=>[r.name,r.grp,r.pts,r.max,Math.round(pctOf(r,C)*100),...vals(r,C).map(x=>x===null?"":x),r.time.replace("T"," "),r.valid?"ja":"NEIN"].map(q).join(";")));
   const blob = new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
   a.download = `Ergebnisse ${info.titel.replace(/[^\wäöüÄÖÜß &-]/g,"")} ${new Date().toISOString().slice(0,10)}.csv`;
@@ -345,49 +368,72 @@ document.getElementById("csv").onclick = ()=>{
 let rpSort = "name";
 function cls(p){ return p>=0.8 ? "c-g" : p>=0.5 ? "c-y" : "c-r"; }
 function colorOf(p){ return p>=0.8 ? "#2E9E66" : p>=0.5 ? "#D9A21B" : "#D2493A"; }
+// Kurz-Rückmeldung: starke und schwache Bereiche (Inseln) bzw. Stationen
+function feedback(r, C){
+  const v = vals(r,C), units = {};
+  v.forEach((x,i)=>{ if(x===null) return; const u = C.insel ? C.groups[i] : i; (units[u] = units[u] || {p:0,m:0}); units[u].p += x; units[u].m += C.smax[i]; });
+  const keys = Object.keys(units);
+  if(!keys.length) return `<span class="fb-none">noch nichts bearbeitet</span>`;
+  const nm = u => C.insel ? (FRS.kategorien[u] ? FRS.kategorien[u].de : u) : C.heads[u];
+  const strong = keys.filter(u=>units[u].p/units[u].m>=.8).map(nm), weak = keys.filter(u=>units[u].p/units[u].m<.5).map(nm);
+  const parts = [];
+  if(strong.length) parts.push(`<span class="fb-s">Stark: ${esc(strong.join(", "))}</span>`);
+  if(weak.length) parts.push(`<span class="fb-w">Üben: ${esc(weak.join(", "))}</span>`);
+  if(!parts.length) parts.push(`<span class="fb-m">solide (50–79 %)</span>`);
+  return parts.join(" ");
+}
 function renderReport(){
   const all = shown(); if(!all.length) return false;
   const valid = all.filter(r=>r.valid), invalid = all.filter(r=>!r.valid);
-  const info = matInfo(fMat.value);
-  const n = Math.max(...all.map(r=>r.parts.length));
-  const heads = Array.from({length:n},(_,i)=>info.stationen && info.stationen[i] ? info.stationen[i] : "Teil "+(i+1));
-  const smax = Array.from({length:n},(_,i)=> info.stationenMax && info.stationenMax[i] ? info.stationenMax[i] : Math.max(1,...all.map(r=>r.parts[i]||0)));
+  const info = matInfo(fMat.value), C = cols(info, all);
   const base = valid.length ? valid : all;
-  const avg = base.reduce((a,r)=>a+r.pts/r.max,0)/base.length;
-  const stAvg = heads.map((_,i)=> base.reduce((a,r)=>a+(r.parts[i]||0),0)/base.length/smax[i]);
-  const weakest = stAvg.map((p,i)=>({p,i})).sort((a,b)=>a.p-b.p).slice(0,2).filter(x=>x.p<0.8);
-  const rows = valid.slice().sort(rpSort==="pts" ? (a,b)=>b.pts/b.max-a.pts/a.max || a.name.localeCompare(b.name,"de") : (a,b)=>a.name.localeCompare(b.name,"de")).concat(invalid);
+  const avg = base.reduce((a,r)=>a+pctOf(r,C),0)/base.length;
+  const done = C.heads.map((_,i)=> base.filter(r=>vals(r,C)[i]!==null));
+  const stAvg = C.heads.map((_,i)=> done[i].length ? done[i].reduce((a,r)=>a+vals(r,C)[i],0)/done[i].length/C.smax[i] : null);
+  const weakest = stAvg.map((p,i)=>({p,i})).filter(x=>x.p!==null).sort((a,b)=>a.p-b.p).slice(0,2).filter(x=>x.p<0.8);
+  const rows = valid.slice().sort(rpSort==="pts" ? (a,b)=>pctOf(b,C)-pctOf(a,C) || a.name.localeCompare(b.name,"de") : (a,b)=>a.name.localeCompare(b.name,"de")).concat(invalid);
   const grp = fGrp.value==="*" ? ([...new Set(all.map(r=>r.grp))].filter(Boolean).join(", ") || "alle Gruppen") : (fGrp.value || "ohne Gruppe");
-  const best = Math.max(...base.map(r=>r.pts/r.max));
+  const bestP = Math.max(...base.map(r=>pctOf(r,C)));
+  // Gruppenzeile über den Themen (nur Inseln)
+  let groupRow = "";
+  if(C.insel){
+    const spans = []; C.groups.forEach(g=>{ const l=spans[spans.length-1]; if(l && l.g===g) l.n++; else spans.push({g,n:1}); });
+    groupRow = `<tr class="grp-row"><th></th><th></th>${spans.map(s=>`<th colspan="${s.n}">${FRS.kategorien[s.g]?FRS.kategorien[s.g].icon+" "+esc(FRS.kategorien[s.g].de):esc(s.g)}</th>`).join("")}<th></th></tr>`;
+  }
+  const label = C.insel ? "Themen" : "Stationen";
   document.getElementById("rpPage").innerHTML = `
     <div class="rp-head">
       <div><h2>${esc(info.titel)}</h2><p>${esc(grp)} · Stand ${new Date().toLocaleDateString("de-DE")}</p></div>
       <div class="rp-kpis">
         <div class="rp-kpi"><b>${base.length}</b><span>Schüler</span></div>
         <div class="rp-kpi"><b>${Math.round(avg*100)} %</b><span>Durchschnitt</span></div>
-        <div class="rp-kpi"><b>${Math.round(best*100)} %</b><span>Bestes Ergebnis</span></div>
+        <div class="rp-kpi"><b>${Math.round(bestP*100)} %</b><span>Bestes Ergebnis</span></div>
       </div>
     </div>
     <div class="rp-grid">
       <div>
-        <h3>Stationen im Klassenschnitt</h3>
-        ${heads.map((h,i)=>`<div class="st-row"><span>${esc(h)}</span><span class="st-track"><span class="st-fill" style="display:block;width:${Math.round(stAvg[i]*100)}%;background:${colorOf(stAvg[i])}"></span></span><span class="pc">${Math.round(stAvg[i]*100)}</span></div>`).join("")}
+        <h3>${label} im Klassenschnitt</h3>
+        ${C.heads.map((h,i)=> stAvg[i]===null
+          ? `<div class="st-row"><span>${esc(h)}</span><span class="st-track"></span><span class="pc">–</span></div>`
+          : `<div class="st-row"><span>${esc(h)}</span><span class="st-track"><span class="st-fill" style="display:block;width:${Math.round(stAvg[i]*100)}%;background:${colorOf(stAvg[i])}"></span></span><span class="pc">${Math.round(stAvg[i]*100)}</span></div>`
+            + (C.insel?`<div class="st-sub">bearbeitet von ${done[i].length} / ${base.length}</div>`:"")).join("")}
         <div class="rp-note">${weakest.length
-          ? `<b>Wiederholen lohnt sich bei:</b> ${weakest.map(w=>esc(heads[w.i])+" ("+Math.round(w.p*100)+" %)").join(" und ")}`
-          : `<b>Alle Stationen im grünen Bereich.</b>`}
-          <br><span style="color:var(--mu)">Niedrige Werte können auch heißen, dass eine Station noch nicht bearbeitet wurde.</span></div>
+          ? `<b>Wiederholen lohnt sich bei:</b> ${weakest.map(w=>esc(C.heads[w.i])+" ("+Math.round(w.p*100)+" %)").join(" und ")}`
+          : `<b>Alles im grünen Bereich.</b>`}
+          <br><span style="color:var(--mu)">${C.insel?"„–“ heißt: Thema noch nicht bearbeitet. Prozente beziehen sich nur auf bearbeitete Themen.":"Niedrige Werte können auch heißen, dass eine Station noch nicht bearbeitet wurde."}</span></div>
       </div>
       <div>
-        <h3>Einzelergebnisse (in Prozent je Station)</h3>
+        <h3>Einzelergebnisse (in Prozent)</h3>
         <table class="rp-table">
-          <thead><tr><th>Name</th><th style="text-align:left">Gesamt</th>${heads.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead>
-          <tbody>${rows.map(r=>{ const pc=r.pts/r.max;
+          <thead>${groupRow}<tr><th>Name</th><th style="text-align:left">Gesamt</th>${C.heads.map(h=>`<th>${esc(h)}</th>`).join("")}<th style="text-align:left">Kurz-Rückmeldung</th></tr></thead>
+          <tbody>${rows.map(r=>{ const pc=pctOf(r,C), v=vals(r,C);
             return `<tr><td class="nm" title="${esc(r.name)}">${r.valid?"":"⚠ "}${esc(r.name)}</td>
               <td class="tot"><span class="tb" style="width:${Math.round(Math.min(pc,1)*50)}px"></span><b>${Math.round(pc*100)} %</b> <span style="color:var(--mu)">${r.pts}/${r.max}</span></td>
-              ${heads.map((_,i)=>{ const v=r.parts[i]; if(v===undefined) return `<td></td>`; const p=v/smax[i];
-                return `<td class="${cls(p)}" title="${v} von ${smax[i]} Punkten">${Math.round(Math.min(p,1)*100)}</td>`; }).join("")}</tr>`; }).join("")}</tbody>
+              ${v.map((x,i)=>{ if(x===null) return `<td class="c-n">–</td>`; const p=x/C.smax[i];
+                return `<td class="${cls(p)}" title="${x} von ${C.smax[i]} Punkten">${Math.round(Math.min(p,1)*100)}</td>`; }).join("")}
+              <td class="fbk">${feedback(r,C)}</td></tr>`; }).join("")}</tbody>
         </table>
-        <div class="rp-legend"><span><i class="c-g"></i>ab 80 %</span><span><i class="c-y"></i>50–79 %</span><span><i class="c-r"></i>unter 50 %</span></div>
+        <div class="rp-legend"><span><i class="c-g"></i>ab 80 %</span><span><i class="c-y"></i>50–79 %</span><span><i class="c-r"></i>unter 50 %</span>${C.insel?`<span><i class="c-n"></i>nicht bearbeitet</span>`:""}</div>
         ${invalid.length?`<p class="rp-warn">⚠ ${invalid.length} Code${invalid.length>1?"s":""} mit falscher Prüfziffer (vermutlich verändert) – nicht im Durchschnitt enthalten.</p>`:""}
       </div>
     </div>`;
