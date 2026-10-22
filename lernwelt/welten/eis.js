@@ -1,4 +1,4 @@
-// Klasse 10 · Ice World – Frostburg, Kristallhöhlen und Polarhafen unter Polarlichtern
+// Klasse 10 · Ice Region – Frostburg, Kristallhöhlen und Polarhafen unter Polarlichtern
 export function build(A){
   const { rand, fbm, vn, pick, set, get, fill, walls, disk, ring, cyl, tube, ball, dome, cone, line, topAt, terrain, tex, P, noise, stripes, bricks, rings, topEdge, planks, glassT } = A;
   const T = {

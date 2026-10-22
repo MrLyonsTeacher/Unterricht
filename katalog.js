@@ -24,12 +24,12 @@ const FRS = {
 
   // Welt je Klasse (3D-Klötzchenwelt in lernwelt/welten/<file>.js)
   welten: {
-    5:  { file:"feuer",  name:"Fire World",   icon:"🔥", theme:"feuer" },
+    5:  { file:"feuer",  name:"Fire Island",   icon:"🔥", theme:"feuer" },
     6:  { file:"wasser", name:"Water World",  icon:"🌊", theme:"wasser" },
-    7:  { file:"stein",  name:"Stone World",  icon:"⛏️", theme:"stein" },
+    7:  { file:"stein",  name:"Dwarven Caves",  icon:"⛏️", theme:"stein" },
     8:  { file:"himmel", name:"Sky Castle",   icon:"☁️", theme:"himmel" },
-    9:  { file:"wald",   name:"Forest World", icon:"🌿", theme:"wald" },
-    10: { file:"eis",    name:"Ice World",    icon:"❄️", theme:"eis" }
+    9:  { file:"wald",   name:"Woodlands", icon:"🌿", theme:"wald" },
+    10: { file:"eis",    name:"Ice Region",    icon:"❄️", theme:"eis" }
   },
 
   englisch: {

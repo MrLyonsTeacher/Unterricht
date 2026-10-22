@@ -1,4 +1,4 @@
-// Klasse 7 · Stone World – Zwergenhöhle mit Edelsteinen, Mine und Schmiede
+// Klasse 7 · Dwarven Caves – Zwergenhöhle mit Edelsteinen, Mine und Schmiede
 export function build(A){
   const { rand, fbm, pick, set, get, fill, walls, disk, ring, cyl, tube, ball, dome, cone, line, topAt, tex, P, noise, stripes, bricks, rings, planks } = A;
   const ore = (base, spot) => tex(g=>{ for(let x=0;x<16;x++) for(let y=0;y<16;y++) P(g,x,y,pick(base)); for(let i=0;i<5;i++){ const x=1+Math.floor(rand()*13), y=1+Math.floor(rand()*13); P(g,x,y,spot[0]); P(g,x+1,y,spot[1]); P(g,x,y+1,spot[1]); } });

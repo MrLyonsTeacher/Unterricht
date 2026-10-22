@@ -1,4 +1,4 @@
-// Klasse 9 · Forest World – Elbenwald mit Riesenbäumen, Mondbrunnen und Flussdorf
+// Klasse 9 · Woodlands – Elbenwald mit Riesenbäumen, Mondbrunnen und Flussdorf
 export function build(A){
   const { rand, fbm, vn, pick, set, get, fill, walls, disk, ring, cyl, tube, ball, dome, cone, line, topAt, terrain, tex, P, noise, stripes, bricks, rings, topEdge, planks, glassT } = A;
   const T = {
