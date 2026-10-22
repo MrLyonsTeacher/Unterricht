@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Mall of America – Adjectives, adverbs and one/ones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"adj8", icon:"🛍️", kartenSymbol:"🛍️",
+  titel:"Mall of America", untertitel:"Adjectives & adverbs · one/ones",
+  text:"Shopping in one of the biggest malls in the USA! Describe things with adjectives and adverbs – and don’t repeat yourself: use one and ones.",
+  lernen: {
+    adj: { titel:"Adjectives, adverbs and one/ones", folien:[
+      {bild:"✨", titel:"Adjectives", text:"Adjectives describe **nouns**: *The flight is **quick**.* – *a **quick** flight*. After *be, look, sound, feel, taste, smell* we use adjectives: *The place **looks good**.*", de:"**Adjektive** beschreiben Nomen (wie ist etwas?). Nach *be, look, sound, feel, taste* steht ein Adjektiv."},
+      {bild:"🏃", titel:"Adverbs", text:"Adverbs describe **verbs**: *They fly us there **quickly**.* Most adverbs = adjective + **-ly**: quick → quickly, careful → carefully, easy → **easily**.", de:"**Adverbien** beschreiben Verben (wie macht man etwas?). Meist: Adjektiv + **-ly**."},
+      {bild:"⚠️", titel:"Irregular adverbs", text:"**good → well**, **fast → fast**, **hard → hard**, **late → late**. *She speaks English **well**. He works **hard**.*", de:"Unregelmäßig: good → **well**, fast → **fast**, hard → **hard**."},
+      {bild:"👖", titel:"one / ones", text:"We use **one** and **ones** so we don’t repeat a noun: *I need new jeans. The old **ones** are too short.* – *I like the red cap, not the blue **one**.*", de:"**one** (Einzahl) und **ones** (Mehrzahl) ersetzen ein Nomen, damit man es nicht wiederholen muss."}
+    ]}
+  },
+  levels: [
+    { id:"aa", typ:"sortieren", lernen:"adj", icon:"⚖️", titel:"Adjective or Adverb?", art:"Sort",
+      anleitung:"Which word fits in the gap? Tap the right box.",
+      anleitungDe:"Welches Wort passt in die Lücke? Tippe auf das richtige Kästchen.",
+      tipp:"Beschreibt das Wort ein Nomen oder nach be/look/sound → Adjektiv. Beschreibt es ein Verb → Adverb.",
+      koerbe:[ {t:"adjective", info:"quick, good"}, {t:"adverb", info:"quickly, well"} ],
+      items:[
+        {t:"The escalator is very ___ (slow / slowly).", k:0}, {t:"She walked ___ through the mall. (slow / slowly)", k:1},
+        {t:"This pizza tastes ___ (good / well).", k:0}, {t:"He plays basketball very ___ (good / well).", k:1},
+        {t:"The shop assistant was ___ (friendly / friendlily).", k:0, e:"*friendly* is already an adjective – there is no adverb *friendlily*."}, {t:"Please drive ___ (careful / carefully).", k:1},
+        {t:"The new sneakers look ___ (great / greatly).", k:0}, {t:"They answered ___ (quick / quickly).", k:1},
+        {t:"It was an ___ test. (easy / easily)", k:0}, {t:"I found the shop ___ (easy / easily).", k:1}
+      ]},
+    { id:"quiz", typ:"quiz", lernen:"adj", icon:"🎢", titel:"Mall Adventure", art:"Adjectives & adverbs · quiz",
+      anleitung:"Choose the right word.",
+      anleitungDe:"Wähle das richtige Wort.",
+      tipp:"good → well, fast → fast, hard → hard.",
+      fragen:[
+        {q:"The roller coaster in the mall goes really **___**.", o:["fast","fastly","faster"], c:0, e:"fast → adverb **fast** (no -ly)."},
+        {q:"You speak English very **___**!", o:["well","good","goodly"], c:0},
+        {q:"The shoes were **___** expensive.", o:["terribly","terrible","terribler"], c:0, e:"An adverb can also describe an adjective: **terribly** expensive."},
+        {q:"She worked **___** to save money for a new phone.", o:["hard","hardly","hardy"], c:0, e:"Careful: *hardly* = kaum!"},
+        {q:"The music in that shop sounds **___**.", o:["loud","loudly","louded"], c:0, e:"After *sound* → adjective."},
+        {q:"The flight was **___**.", o:["quick","quickly","quicker than"], c:0},
+        {q:"They fly us there **___**.", o:["quickly","quick","quicky"], c:0},
+        {q:"He smiled **___** when he saw the price.", o:["happily","happy","happyly"], c:0, e:"happy → **happily** (y → i)."}
+      ]},
+    { id:"ones", typ:"quiz", lernen:"adj", icon:"👟", titel:"This One or That One?", art:"one / ones · quiz",
+      anleitung:"Choose **one** or **ones**.",
+      anleitungDe:"Wähle **one** oder **ones**.",
+      tipp:"Einzahl → one, Mehrzahl → ones.",
+      fragen:[
+        {q:"I need new jeans. The old **___** are too short.", o:["ones","one","it"], c:0, e:"jeans = plural → **ones**."},
+        {q:"Do you like the red cap or the black **___**?", o:["one","ones","it"], c:0},
+        {q:"These sneakers are nice, but I prefer the white **___**.", o:["ones","one","them"], c:0},
+        {q:"My phone is old. I want a new **___**.", o:["one","ones","it"], c:0},
+        {q:"Which T-shirts do you want? – The cheap **___**.", o:["ones","one","it"], c:0},
+        {q:"This store is big, but the **___** next to it is even bigger.", o:["one","ones","it"], c:0}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Shopping Rush", art:"Adverbs · 60 seconds",
+      anleitung:"Choose the right **adverb**. **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wähle das richtige **Adverb**. **Ziel: 12** in 60 Sekunden.",
+      tipp:"Meist -ly. Aber: good → well, fast → fast, hard → hard.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"quick", o:["quickly","quickely","quick"], c:0}, {q:"good", o:["well","goodly","good"], c:0}, {q:"easy", o:["easily","easyly","easy"], c:0},
+        {q:"careful", o:["carefully","carefuly","carefull"], c:0}, {q:"fast", o:["fast","fastly","fastely"], c:0}, {q:"happy", o:["happily","happyly","happy"], c:0},
+        {q:"loud", o:["loudly","loudely","louds"], c:0}, {q:"hard", o:["hard","hardly","harder"], c:0}, {q:"terrible", o:["terribly","terriblely","terrible"], c:0},
+        {q:"angry", o:["angrily","angryly","angry"], c:0}, {q:"quiet", o:["quietly","quitely","quiet"], c:0}, {q:"bad", o:["badly","badely","bad"], c:0},
+        {q:"polite", o:["politely","politly","polite"], c:0}, {q:"real", o:["really","realy","real"], c:0}, {q:"slow", o:["slowly","slowely","slow"], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🛒", titel:"Black Friday", art:"Text · fill in the gaps",
+      anleitung:"Read about Black Friday. Tap a gap and choose the right word.",
+      anleitungDe:"Lies über den Black Friday. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Nomen/be → Adjektiv. Verb → Adverb.",
+      ueberschrift:"My first Black Friday",
+      text:"Black Friday is the day after Thanksgiving. The stores open really [[early|earlily|earlier than]] and the prices are [[low|lowly|lower than]]. I went to the mall with my cousin. We waited [[patiently|patient|patiently than]] in a long line. When the doors opened, people ran [[fast|fastly|faster than]] to the shops.\nI wanted new headphones, but the cheap [[ones|one|it]] were sold out, so I bought a more expensive [[one|ones|them]]. My cousin found a [[beautiful|beautifully|beauty]] jacket. In the evening we were [[terribly|terrible|terribles]] tired – but very [[happy|happily|happiness]]!",
+      erklaerung:"**adjectives** (nouns, after *be*) · **adverbs** (verbs) · **one/ones** instead of a noun."}
+  ]
+});
+</script>
+</body>
+</html>

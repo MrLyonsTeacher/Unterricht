@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>High School Rules – Modals & substitutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"mod8", icon:"🏫", kartenSymbol:"🎓",
+  titel:"High School Rules", untertitel:"Modal auxiliaries & their substitutes",
+  text:"Lockers, electives and strict rules: What are you allowed to do at an American high school? Learn can, must, may – and their substitutes.",
+  lernen: {
+    mod: { titel:"Modals and their substitutes", folien:[
+      {bild:"💪", titel:"can → be able to", text:"*I **can** swim.* In other tenses we use **be able to**: *I **was able to** choose electives. I **will be able to** drive next year.*", de:"**can** (können) hat nur zwei Formen (can/could). Für andere Zeiten: **be able to**."},
+      {bild:"✅", titel:"may → be allowed to", text:"*You **may** leave.* = permission. Other tenses: *I **was allowed to** stay up late. We **won’t be allowed to** use phones.*", de:"**may** (dürfen) → in anderen Zeiten: **be allowed to**."},
+      {bild:"❗", titel:"must → have to", text:"*You **must** wear a helmet.* Past and future: *I **had to** get up early. You **will have to** take a test.*", de:"**must** (müssen) → in anderen Zeiten: **have to** (had to, will have to)."},
+      {bild:"⚠️", titel:"mustn’t ≠ don’t have to", text:"**mustn’t** = es ist verboten: *You **mustn’t** run in the hall.* – **don’t have to** = nicht nötig: *You **don’t have to** wear a uniform.*", de:"**mustn’t** = darf nicht (Verbot). **needn’t / don’t have to** = muss nicht (nicht nötig)."},
+      {bild:"💡", titel:"should", text:"**should** gives advice: *You **should** talk to your teacher.* – *You **shouldn’t** be late.*", de:"**should** = sollte (Ratschlag)."}
+    ]}
+  },
+  levels: [
+    { id:"sort", typ:"sortieren", lernen:"mod", icon:"🗂️", titel:"Rule Sorter", art:"Meaning · sort",
+      anleitung:"What does the sentence mean? Tap the right box.",
+      anleitungDe:"Was bedeutet der Satz? Tippe auf das richtige Kästchen.",
+      tipp:"Erlaubt – Pflicht – Verbot – nicht nötig.",
+      koerbe:[ {t:"allowed", info:"✅ may / be allowed to"}, {t:"necessary", info:"❗ must / have to"}, {t:"forbidden", info:"⛔ mustn’t"}, {t:"not necessary", info:"😌 don’t have to"} ],
+      items:[
+        {t:"You may use the computer room.", k:0}, {t:"We were allowed to choose an elective.", k:0}, {t:"Students can eat in the cafeteria.", k:0},
+        {t:"You must be on time.", k:1}, {t:"We had to put our things in lockers.", k:1}, {t:"You have to wear sports clothes in PE.", k:1},
+        {t:"You mustn’t use your phone in class.", k:2}, {t:"You mustn’t run in the hallways.", k:2}, {t:"You aren’t allowed to smoke on campus.", k:2},
+        {t:"You don’t have to wear a uniform.", k:3}, {t:"We didn’t have to do homework on Friday.", k:3}, {t:"You needn’t bring lunch.", k:3, e:"**needn’t** = don’t have to → not necessary."}
+      ]},
+    { id:"subst", typ:"quiz", lernen:"mod", icon:"🔁", titel:"Substitute Teacher", art:"Substitutes · quiz",
+      anleitung:"Choose the right **substitute** form.",
+      anleitungDe:"Wähle die richtige **Ersatzform**.",
+      tipp:"Signalwörter beachten: yesterday → was/had …, tomorrow / next year → will be able to / will have to.",
+      fragen:[
+        {q:"Last year I **___** choose my own classes.", o:["was allowed to","may","must"], c:0, e:"Past → **was allowed to**."},
+        {q:"Next year she **___** drive to school.", o:["will be able to","can will","will can"], c:0, e:"Future → **will be able to**."},
+        {q:"Yesterday we **___** stay at school until 5 pm.", o:["had to","must","have to"], c:0, e:"Past of *must* → **had to**."},
+        {q:"In the US you **___** go to school until you are 16 or older.", o:["have to","are able","may to"], c:0, e:"An obligation → **have to**."},
+        {q:"When he was five, he **___** read.", o:["was able to","can","is able"], c:0, e:"Past ability → **was able to** (or *could*)."},
+        {q:"Students **___** leave the campus at lunch. It’s against the rules.", o:["aren't allowed to","don't have to","needn't"], c:0, e:"Against the rules → **aren’t allowed to**."},
+        {q:"It’s a holiday tomorrow – we **___** get up early.", o:["won't have to","mustn't","can't"], c:0, e:"Not necessary in the future → **won’t have to**."},
+        {q:"You look sick. You **___** see a doctor.", o:["should","must to","are allowed"], c:0, e:"Advice → **should**."}
+      ]},
+    { id:"swipe", typ:"swipe", lernen:"mod", icon:"⛔", titel:"Forbidden or Not Needed?", art:"mustn’t vs don’t have to · swipe",
+      anleitung:"Which word fits? Swipe **left for mustn’t** and **right for don’t have to**.",
+      anleitungDe:"Welches Wort passt? Wische nach **links für mustn’t** (Verbot) und nach **rechts für don’t have to** (nicht nötig).",
+      tipp:"mustn’t = darf nicht · don’t have to = muss nicht.",
+      links:{t:"mustn't", icon:"⛔"}, rechts:{t:"don't have to", icon:"😌"},
+      karten:[
+        {t:"You ___ cheat in a test.", r:"l", e:"Cheating is forbidden → **mustn’t**."},
+        {t:"You ___ come to the party if you don’t want to.", r:"r", e:"It’s your choice → **don’t have to**."},
+        {t:"You ___ drive without a license.", r:"l", e:"Forbidden → **mustn’t**."},
+        {t:"It’s Saturday – you ___ go to school.", r:"r", e:"Not necessary → **don’t have to**."},
+        {t:"You ___ feed the animals in the zoo.", r:"l", e:"Not allowed → **mustn’t**."},
+        {t:"You ___ pay – the museum is free.", r:"r", e:"Not necessary → **don’t have to**."},
+        {t:"You ___ swim here – there are sharks!", r:"l", e:"Dangerous and forbidden → **mustn’t**."},
+        {t:"We ___ wear a uniform at our school.", r:"r", e:"Not necessary → **don’t have to**."},
+        {t:"You ___ shout in the library.", r:"l", e:"Forbidden → **mustn’t**."},
+        {t:"You ___ buy a ticket online – you can pay on the bus.", r:"r", e:"Not necessary → **don’t have to**."}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🔒", titel:"Locker Talk", art:"Sentence builder",
+      anleitung:"Build the sentence about school rules.",
+      anleitungDe:"Bau den Satz über Schulregeln, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Nach *can, must, may, should* steht die Grundform ohne *to*.",
+      punkte:2,
+      saetze:[
+        {w:["We","had","to","put","our","things","in","lockers"], hint:"🇩🇪 Wir mussten unsere Sachen in Spinde räumen."},
+        {w:["You","weren't","allowed","to","keep","things","in","the","classroom"], hint:"🇩🇪 Man durfte keine Sachen im Klassenzimmer lassen."},
+        {w:["I","was","able","to","choose","electives"], hint:"🇩🇪 Ich konnte Wahlfächer wählen."},
+        {w:["Will","we","have","to","take","a","test","?"], hint:"🇩🇪 Werden wir einen Test schreiben müssen?"},
+        {w:["You","shouldn't","be","late","for","class"], hint:"🇩🇪 Du solltest nicht zu spät zum Unterricht kommen."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"✉️", titel:"Email from Ohio", art:"Text · fill in the gaps",
+      anleitung:"Lena is an exchange student in Ohio. Tap a gap and choose the right words.",
+      anleitungDe:"Lena ist Austauschschülerin in Ohio. Tippe auf eine Lücke und wähle die richtigen Wörter.",
+      tipp:"Zeit beachten: Vergangenheit → had to / was allowed to / was able to.",
+      ueberschrift:"Hi from Ohio!",
+      text:"Hi Jonas,\nmy first week at Lincoln High was crazy! On the first day I [[had to|must|have to]] get up at 6 am because the school bus comes so early. We [[weren't allowed to|mustn't|don't have to]] use our phones in class – the teacher took them! The good thing: I [[was able to|can|could to]] choose my electives. I chose photography and cooking.\nWe [[don't have to|mustn't|aren't allowed]] wear a uniform, but we [[mustn't|don't have to|needn't]] wear caps in class. Next week I [[will be able to|will can|can will]] join the soccer team. Coach says I [[should|must to|am allowed]] practise every day. Write soon!\nLena",
+      erklaerung:"Substitutes: **had to, was allowed to, was able to, will be able to**."}
+  ]
+});
+</script>
+</body>
+</html>

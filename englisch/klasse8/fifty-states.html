@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>50 States Challenge – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"country", id:"states8", icon:"🇺🇸", kartenSymbol:"⭐",
+  titel:"50 States Challenge", untertitel:"States, capitals, regions & nicknames",
+  text:"Fifty stars on the flag, fifty states on the map. How well do you know the USA? Watch, learn and take the challenge!",
+  lernen: {
+    usa: { titel:"The USA at a glance", folien:[
+      {video:"UpaC_P3tE7M", titel:"Watch first: the 50 states song", text:"Watch the video and see where the states are on the map. Try to remember a few of them!", de:"Schau das Video und achte darauf, wo die Staaten auf der Karte liegen. Versuch dir ein paar zu merken!"},
+      {bild:"🇺🇸", titel:"50 states", text:"The **United States of America** has **50 states**. The **50 stars** on the flag stand for the states, the **13 stripes** for the first 13 colonies. About **340 million** people live in the USA.", de:"Die USA haben **50 Bundesstaaten**. Die **50 Sterne** auf der Flagge stehen für die Staaten, die **13 Streifen** für die ersten 13 Kolonien. Etwa **340 Millionen** Menschen leben dort."},
+      {bild:"🏛️", titel:"The capital", text:"The capital is **Washington, D.C.** It is **not** a state – it is a special district. The President lives in the **White House** there. The biggest city is **New York City**.", de:"Hauptstadt ist **Washington, D.C.** – das ist **kein** Bundesstaat, sondern ein eigener Bezirk. Dort wohnt der Präsident im **Weißen Haus**. Größte Stadt ist **New York City**."},
+      {bild:"🧭", titel:"Four regions", text:"The **Northeast** (e.g. New York, Massachusetts), the **Midwest** (e.g. Illinois, Ohio), the **South** (e.g. Texas, Florida) and the **West** (e.g. California, Colorado).", de:"Vier Regionen: **Nordosten**, **Mittlerer Westen**, **Süden** und **Westen**."},
+      {bild:"📏", titel:"Biggest and smallest", text:"**Alaska** is the biggest state, **Rhode Island** the smallest. **California** has the most people (about 39 million), **Texas** is second. **Hawaii** is made of islands in the Pacific.", de:"**Alaska** ist der größte Staat, **Rhode Island** der kleinste. **Kalifornien** hat die meisten Einwohner, **Texas** ist Zweiter. **Hawaii** besteht aus Inseln im Pazifik."},
+      {bild:"🏷️", titel:"Nicknames", text:"Every state has a nickname: California – **the Golden State**, Texas – **the Lone Star State**, Florida – **the Sunshine State**, New York – **the Empire State**, Hawaii – **the Aloha State**, Alaska – **the Last Frontier**.", de:"Jeder Staat hat einen Spitznamen, z. B. Kalifornien – „Golden State“, Texas – „Lone Star State“, Florida – „Sunshine State“."},
+      {bild:"🏙️", titel:"Capitals are often small", text:"The capital is often **not** the biggest city: California – **Sacramento**, Texas – **Austin**, New York – **Albany**, Florida – **Tallahassee**, Illinois – **Springfield**. But: Massachusetts – **Boston**, Georgia – **Atlanta**, Colorado – **Denver**.", de:"Die Hauptstadt ist oft **nicht** die größte Stadt eines Staates."},
+      {bild:"🎆", titel:"4th of July", text:"On **4 July 1776** the colonies declared independence from Britain. That’s why **Independence Day** is the biggest national holiday – with fireworks and barbecues.", de:"Am **4. Juli 1776** erklärten die Kolonien ihre Unabhängigkeit von Großbritannien. Deshalb ist der **Independence Day** der wichtigste Nationalfeiertag."}
+    ]}
+  },
+  levels: [
+    { id:"regions", typ:"sortieren", lernen:"usa", icon:"🧭", titel:"Four Regions", art:"States · sort",
+      anleitung:"In which region is the state? Tap the right box.",
+      anleitungDe:"In welcher Region liegt der Staat? Tippe auf das richtige Kästchen.",
+      tipp:"Northeast = oben rechts, Midwest = Mitte oben, South = unten, West = links.",
+      koerbe:[ {t:"Northeast", info:"↗️"}, {t:"Midwest", info:"⬆️"}, {t:"South", info:"⬇️"}, {t:"West", info:"⬅️"} ],
+      items:[
+        {t:"New York", k:0}, {t:"Massachusetts", k:0}, {t:"Pennsylvania", k:0}, {t:"Illinois", k:1}, {t:"Ohio", k:1}, {t:"Michigan", k:1},
+        {t:"Texas", k:2}, {t:"Florida", k:2}, {t:"Louisiana", k:2}, {t:"California", k:3}, {t:"Nevada", k:3}, {t:"Colorado", k:3}
+      ]},
+    { id:"capitals", typ:"rush", lernen:"usa", icon:"🏛️", titel:"Capital Rush", art:"State capitals · 60 seconds",
+      anleitung:"What’s the capital of the state? **Goal: 10** in 60 seconds.",
+      anleitungDe:"Wie heißt die Hauptstadt des Staates? **Ziel: 10** in 60 Sekunden.",
+      tipp:"Vorsicht: Die größte Stadt ist oft nicht die Hauptstadt!",
+      zeit:60, ziel:10,
+      items:[
+        {q:"California", o:["Sacramento","Los Angeles","San Francisco"], c:0, e:"**Sacramento** – not L.A.!"}, {q:"Texas", o:["Austin","Houston","Dallas"], c:0},
+        {q:"New York", o:["Albany","New York City","Buffalo"], c:0}, {q:"Florida", o:["Tallahassee","Miami","Orlando"], c:0},
+        {q:"Illinois", o:["Springfield","Chicago","Peoria"], c:0}, {q:"Massachusetts", o:["Boston","Salem","Cambridge"], c:0},
+        {q:"Georgia", o:["Atlanta","Savannah","Augusta"], c:0}, {q:"Colorado", o:["Denver","Aspen","Boulder"], c:0},
+        {q:"Washington (state)", o:["Olympia","Seattle","Washington, D.C."], c:0, e:"The state of Washington is in the north-west. Its capital is **Olympia**."},
+        {q:"Pennsylvania", o:["Harrisburg","Philadelphia","Pittsburgh"], c:0}, {q:"Hawaii", o:["Honolulu","Hilo","Maui"], c:0},
+        {q:"Alaska", o:["Juneau","Anchorage","Fairbanks"], c:0}, {q:"Arizona", o:["Phoenix","Tucson","Flagstaff"], c:0},
+        {q:"Tennessee", o:["Nashville","Memphis","Knoxville"], c:0}, {q:"Louisiana", o:["Baton Rouge","New Orleans","Lafayette"], c:0},
+        {q:"Nevada", o:["Carson City","Las Vegas","Reno"], c:0}, {q:"Ohio", o:["Columbus","Cleveland","Cincinnati"], c:0}, {q:"Michigan", o:["Lansing","Detroit","Ann Arbor"], c:0}
+      ]},
+    { id:"nick", typ:"memory", lernen:"usa", icon:"🏷️", titel:"Nickname Memory", art:"State + nickname · memory",
+      anleitung:"Find the pairs: **state + nickname**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Staat + Spitzname**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Gold → Kalifornien (Goldrausch), Sonne → Florida, Stern → Texas.",
+      paare:[ {a:"California", b:"Golden State"}, {a:"Texas", b:"Lone Star State"}, {a:"Florida", b:"Sunshine State"}, {a:"New York", b:"Empire State"},
+              {a:"Hawaii", b:"Aloha State"}, {a:"Alaska", b:"Last Frontier"}, {a:"Illinois", b:"Land of Lincoln"}, {a:"New Jersey", b:"Garden State"} ]},
+    { id:"facts", typ:"swipe", lernen:"usa", icon:"✅", titel:"True or False?", art:"USA facts · swipe",
+      anleitung:"Is it true? Swipe **right for True** and **left for False**.",
+      anleitungDe:"Stimmt das? Wische nach **rechts für True** und nach **links für False**.",
+      tipp:"Denk an die Infokarten.",
+      links:{t:"False", icon:"✘"}, rechts:{t:"True", icon:"✔"},
+      karten:[
+        {t:"The USA has 52 states.", r:"l", e:"False – **50** states."}, {t:"Washington, D.C. is the capital of the USA.", r:"r"},
+        {t:"Washington, D.C. is a state.", r:"l", e:"False – it is a special **district**."}, {t:"Alaska is the biggest state.", r:"r"},
+        {t:"The 13 stripes on the flag stand for the first 13 colonies.", r:"r"}, {t:"Los Angeles is the capital of California.", r:"l", e:"False – **Sacramento** is."},
+        {t:"Independence Day is on 4 July.", r:"r"}, {t:"Texas is the smallest state.", r:"l", e:"False – **Rhode Island** is the smallest. Texas is the second biggest."},
+        {t:"Hawaii is in the Pacific Ocean.", r:"r"}, {t:"Most people in the USA live in Alaska.", r:"l", e:"False – **California** has the most people."}
+      ]},
+    { id:"guess", typ:"schaetzen", icon:"📏", titel:"USA in Numbers", art:"Estimate · slider",
+      anleitung:"Guess the number! Move the slider and tap **OK**. The closer you are, the more flags you get.",
+      anleitungDe:"Schätze die Zahl! Je näher du dran bist, desto mehr Flaggen bekommst du.",
+      tipp:"Deutschland hat etwa 84 Millionen Einwohner.",
+      fragen:[
+        {q:"How many people live in the USA? (million)", min:50, max:800, step:10, start:100, unit:"million", dec:0, ans:340, tol:30, e:"About **340 million** people – four times as many as in Germany."},
+        {q:"How many people live in California? (million)", min:1, max:100, step:1, start:10, unit:"million", dec:0, ans:39, tol:4, e:"About **39 million** – almost half of Germany!"},
+        {q:"How many time zones does the mainland USA have (without Alaska and Hawaii)?", min:1, max:10, step:1, start:2, unit:"", dec:0, ans:4, tol:0, e:"**4**: Eastern, Central, Mountain and Pacific Time."},
+        {q:"In which year did the colonies declare independence?", min:1600, max:1900, step:1, start:1700, unit:"", dec:0, ans:1776, tol:5, e:"**1776** – on 4 July."}
+      ]}
+  ]
+});
+</script>
+</body>
+</html>

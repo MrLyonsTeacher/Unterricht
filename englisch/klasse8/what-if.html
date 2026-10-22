@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>What If …? – If-clauses I & II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"if8", icon:"🛣️", kartenSymbol:"🚗",
+  titel:"Road Trip: What If …?", untertitel:"If-clauses type I & II",
+  text:"On the road across the USA: What will you do if it rains? What would you do if you had a car? Master both types of if-clauses.",
+  lernen: {
+    ifs: { titel:"If-clauses type I and II", folien:[
+      {bild:"☔", titel:"Type I – real and possible", text:"*If it **rains**, we **will stay** in the motel.* → **if + simple present**, **will + base form**. It is possible that it rains.", de:"**Typ I**: wirklich möglich. **if + simple present**, Hauptsatz mit **will + Grundform**."},
+      {bild:"🙋", titel:"Type I – more examples", text:"*If you **ask** me, I**’ll help** you.* – *If we **don’t hurry**, we **won’t catch** the bus.* Never use *will* in the if-part!", de:"Im if-Satz steht **nie will**: ~~If it will rain~~."},
+      {bild:"💭", titel:"Type II – unreal or unlikely", text:"*If I **had** a car, I **would drive** around town.* → **if + simple past**, **would + base form**. But I don’t have a car – it’s a dream.", de:"**Typ II**: unwahrscheinlich oder nur vorgestellt. **if + simple past**, Hauptsatz mit **would + Grundform**."},
+      {bild:"👑", titel:"If I were …", text:"With *be* we often use **were** for all persons: *If I **were** rich, I **would buy** a ranch.*", de:"Bei *be* steht oft **were**, auch bei I/he/she: *If I were you …*"},
+      {bild:"🔀", titel:"The order can change", text:"*I **would travel** to Hawaii **if** I **won** the lottery.* – no comma when the if-clause comes second.", de:"Der if-Satz kann auch hinten stehen – dann ohne Komma."}
+    ]}
+  },
+  levels: [
+    { id:"type", typ:"swipe", lernen:"ifs", icon:"🔀", titel:"Real or Dream?", art:"Type I or II · swipe",
+      anleitung:"Which type is it? Swipe **left for Type I** (real) and **right for Type II** (dream).",
+      anleitungDe:"Welcher Typ? Wische nach **links für Typ I** (real möglich) und nach **rechts für Typ II** (Traum / unwahrscheinlich).",
+      tipp:"Typ I: if + present, will. Typ II: if + past, would.",
+      links:{t:"Type I", icon:"☔"}, rechts:{t:"Type II", icon:"💭"},
+      karten:[
+        {t:"If it rains, we’ll go to a museum.", r:"l"}, {t:"If I had a million dollars, I would buy a plane.", r:"r"},
+        {t:"If you hurry, you’ll catch the bus.", r:"l"}, {t:"If I were president, I would make school shorter.", r:"r"},
+        {t:"We won’t get lost if we use the map.", r:"l"}, {t:"She would visit Hawaii if she had more time.", r:"r"},
+        {t:"If they win, they’ll celebrate all night.", r:"l"}, {t:"If I could fly, I would cross the Rockies.", r:"r"},
+        {t:"If you don’t study, you won’t pass.", r:"l"}, {t:"What would you do if you met a bear?", r:"r"}
+      ]},
+    { id:"one", typ:"quiz", lernen:"ifs", icon:"☔", titel:"Motel or Campsite?", art:"Type I · quiz",
+      anleitung:"Choose the right form for **if-clauses type I**.",
+      anleitungDe:"Wähle die richtige Form für **Bedingungssätze Typ I**.",
+      tipp:"Im if-Teil: simple present. Im Hauptsatz: will / won’t.",
+      fragen:[
+        {q:"If it **___** tomorrow, we’ll stay in the motel.", o:["rains","will rain","rained"], c:0, e:"if-clause → **simple present**."},
+        {q:"If we leave early, we **___** the Grand Canyon by noon.", o:["will reach","reach","would reached"], c:0, e:"Main clause → **will + base form**."},
+        {q:"If you **___** sunscreen, you’ll get a sunburn.", o:["don't use","won't use","didn't use"], c:0, e:"Negative simple present: **don’t use**."},
+        {q:"What **___** if the car breaks down?", o:["will we do","we will do","do we will"], c:0, e:"Question: **will + subject + verb**."},
+        {q:"If Dad **___** tired, Mom will drive.", o:["is","will be","were"], c:0},
+        {q:"I’ll send you a photo if I **___** a bison.", o:["see","will see","saw"], c:0, e:"if-clause second → still **simple present**."}
+      ]},
+    { id:"two", typ:"quiz", lernen:"ifs", icon:"💭", titel:"Dream Trip", art:"Type II · quiz",
+      anleitung:"Choose the right form for **if-clauses type II**.",
+      anleitungDe:"Wähle die richtige Form für **Bedingungssätze Typ II**.",
+      tipp:"Im if-Teil: simple past (were). Im Hauptsatz: would + Grundform.",
+      fragen:[
+        {q:"If I **___** a car, I would drive around town.", o:["had","have","would have"], c:0, e:"if-clause → **simple past**: had."},
+        {q:"If she lived in California, she **___** every day.", o:["would surf","will surf","surfed"], c:0, e:"Main clause → **would + base form**."},
+        {q:"If I **___** you, I would take the train.", o:["were","am","will be"], c:0, e:"**If I were you …** – a typical piece of advice."},
+        {q:"We **___** to New York if the tickets weren’t so expensive.", o:["would fly","will fly","flew"], c:0},
+        {q:"What would you do if you **___** a famous actor?", o:["met","meet","would meet"], c:0, e:"if-clause → **simple past**: met."},
+        {q:"If they **___** English, they would understand the guide.", o:["spoke","speak","would speak"], c:0},
+        {q:"I **___** happier if I didn’t have so much homework.", o:["would be","will be","were"], c:0},
+        {q:"If it **___** so hot, we would hike in Death Valley.", o:["weren't","isn't","won't be"], c:0, e:"Unreal (it **is** hot) → **weren’t**."}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🗺️", titel:"Travel Talk", art:"Sentence builder",
+      anleitung:"Build the if-sentence.",
+      anleitungDe:"Bau den if-Satz, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Steht der if-Satz vorne, kommt ein Komma.",
+      punkte:2,
+      saetze:[
+        {w:["If","you","ask","me,","I'll","help","you"], alt:[["I'll","help","you","if","you","ask","me"]], hint:"🇩🇪 Wenn du mich fragst, helfe ich dir."},
+        {w:["If","I","had","a","car,","I","would","drive","around","town"], alt:[["I","would","drive","around","town","if","I","had","a","car"]], hint:"🇩🇪 Wenn ich ein Auto hätte, würde ich durch die Stadt fahren."},
+        {w:["What","will","you","do","if","it","snows","?"], hint:"🇩🇪 Was machst du, wenn es schneit?"},
+        {w:["If","I","were","you,","I","would","stay","at","home"], hint:"🇩🇪 Wenn ich du wäre, würde ich zu Hause bleiben."},
+        {w:["We","won't","be","late","if","we","leave","now"], alt:[["If","we","leave","now,","we","won't","be","late"]], hint:"🇩🇪 Wir kommen nicht zu spät, wenn wir jetzt losfahren."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🏜️", titel:"Route 66 Chat", art:"Dialogue · fill in the gaps",
+      anleitung:"Read the chat. Tap a gap and choose the right form.",
+      anleitungDe:"Lies den Chat. Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"Real möglich → Typ I. Nur ein Traum → Typ II.",
+      ueberschrift:"Max & Kayla",
+      text:"Max: If the weather [[is|will be|were]] good tomorrow, we’ll drive to Santa Monica.\nKayla: Cool! If we get there early, we [[will rent|would rent|rent]] bikes.\nMax: And if it [[rains|will rain|rained]]?\nKayla: Then we [[will go|would go|go]] to a museum. But honestly, if I [[had|have|would have]] more money, I would fly to Hawaii instead.\nMax: Ha! If I [[were|am|will be]] rich, I [[would buy|will buy|buy]] an old Cadillac and drive the whole Route 66.\nKayla: If you [[don't hurry|won't hurry|didn't hurry]], you’ll miss the bus right now!",
+      erklaerung:"Type I: **if + present → will**. Type II: **if + past → would**."}
+  ]
+});
+</script>
+</body>
+</html>

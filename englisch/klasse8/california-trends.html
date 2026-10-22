@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>California Trends – Present tenses & present perfect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"pres8", icon:"📱", kartenSymbol:"🏄",
+  titel:"California Trends", untertitel:"Simple present, present progressive, present perfect (since/for)",
+  text:"Surfers, influencers and tech trends: describe life in California and talk about how long things have been popular.",
+  lernen: {
+    pres: { titel:"Present tenses – a quick review", folien:[
+      {bild:"🔁", titel:"Simple present", text:"Habits, facts, timetables: *She **never forgets** her smartphone.* – *It **is** always sunnier here.* Signal words: **always, usually, often, never, every day**.", de:"**simple present**: Gewohnheiten und Tatsachen. he/she/it: **-s**!"},
+      {bild:"📹", titel:"Present progressive", text:"Right now / at the moment: *She**’s talking** on the phone right now.* – *A surfer **is standing** next to a bus.* Signal words: **now, right now, at the moment, Look!**", de:"**present progressive**: passiert gerade. **am/is/are + -ing**."},
+      {bild:"🧭", titel:"Present perfect with since and for", text:"Something started in the past and is still true: *I**’ve had** this account **since** I was 13.* – *I **haven’t seen** Tom **for** a long time.*", de:"**present perfect**: begann in der Vergangenheit und gilt noch. **have/has + 3. Form**."},
+      {bild:"📍", titel:"since or for?", text:"**since** + a point in time: *since 2020, since Monday, since I was 13*. **for** + a period of time: *for three years, for a week, for ages*.", de:"**since** + Zeitpunkt (seit 2020). **for** + Zeitraum (seit drei Jahren)."}
+    ]}
+  },
+  levels: [
+    { id:"sf", typ:"sortieren", lernen:"pres", icon:"⏱️", titel:"Since or For?", art:"Time words · sort",
+      anleitung:"**since** or **for**? Tap the right box.",
+      anleitungDe:"**since** oder **for**? Tippe auf das richtige Kästchen.",
+      tipp:"since + Zeitpunkt, for + Zeitraum.",
+      koerbe:[ {t:"since", info:"point in time"}, {t:"for", info:"period of time"} ],
+      items:[
+        {t:"2019", k:0}, {t:"three years", k:1}, {t:"last summer", k:0}, {t:"a long time", k:1}, {t:"Monday", k:0}, {t:"two weeks", k:1},
+        {t:"I was 13", k:0}, {t:"ages", k:1}, {t:"8 o’clock", k:0}, {t:"ten minutes", k:1}, {t:"my birthday", k:0}, {t:"half an hour", k:1}
+      ]},
+    { id:"now", typ:"quiz", lernen:"pres", icon:"🏄", titel:"Venice Beach Live", art:"Simple present or progressive · quiz",
+      anleitung:"Choose the right form.",
+      anleitungDe:"Wähle die richtige Form.",
+      tipp:"Gewohnheit → simple present. Gerade jetzt → present progressive.",
+      fragen:[
+        {q:"Look! That surfer **___** a huge wave.", o:["is riding","rides","ride"], c:0, e:"**Look!** → right now."},
+        {q:"It **___** much in Los Angeles.", o:["doesn't rain","isn't raining","don't rain"], c:0, e:"A general fact → simple present."},
+        {q:"My sister **___** a video right now.", o:["is posting","posts","post"], c:0},
+        {q:"Influencers usually **___** new content every day.", o:["post","are posting","posts"], c:0, e:"**usually** → simple present."},
+        {q:"What **___** you **___** at the moment?", o:["are – doing","do – do","did – do"], c:0},
+        {q:"Tom never **___** his skateboard at home.", o:["leaves","is leaving","leave"], c:0, e:"**never** + he → **leaves**."},
+        {q:"Shh! The baby **___**.", o:["is sleeping","sleeps","sleep"], c:0},
+        {q:"In California it **___** always a lot sunnier than in Germany.", o:["is","is being","are"], c:0}
+      ]},
+    { id:"since", typ:"quiz", lernen:"pres", icon:"📈", titel:"Trend Report", art:"Present perfect · since/for · quiz",
+      anleitung:"Choose the right words.",
+      anleitungDe:"Wähle die richtigen Wörter.",
+      tipp:"have/has + 3. Form; since + Zeitpunkt, for + Zeitraum.",
+      fragen:[
+        {q:"I **___** this account since I was 13.", o:["have had","had","have"], c:0, e:"Still true today → present perfect."},
+        {q:"She has lived in San Diego **___** five years.", o:["for","since","ago"], c:0, e:"five years = a period → **for**."},
+        {q:"The internet **___** the world.", o:["has changed","have changed","changed since"], c:0, e:"the internet = it → **has changed**."},
+        {q:"I **___** Tom for a long time.", o:["haven't seen","didn't see","haven't saw"], c:0},
+        {q:"How long **___** you **___** skateboarding?", o:["have – been","did – be","are – being"], c:0},
+        {q:"This app has been popular **___** 2022.", o:["since","for","from"], c:0, e:"2022 = a point in time → **since**."},
+        {q:"Why **___** these videos been so successful?", o:["have","has","did"], c:0},
+        {q:"We have known each other **___** primary school.", o:["since","for","ago"], c:0}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🌴", titel:"Present a Region", art:"Sentence builder",
+      anleitung:"Build the sentence.",
+      anleitungDe:"Bau den Satz, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Achte auf die Signalwörter.",
+      punkte:2,
+      saetze:[
+        {w:["A","surfer","is","standing","next","to","a","bus"], hint:"🇩🇪 Ein Surfer steht (gerade) neben einem Bus."},
+        {w:["It's","always","a","lot","sunnier","and","warmer","here"], hint:"🇩🇪 Hier ist es immer viel sonniger und wärmer."},
+        {w:["I've","had","an","account","since","I","was","13"], hint:"🇩🇪 Ich habe seit ich 13 bin einen Account."},
+        {w:["She","has","worked","in","Silicon","Valley","for","two","years"], alt:[["For","two","years","she","has","worked","in","Silicon","Valley"]], hint:"🇩🇪 Sie arbeitet seit zwei Jahren im Silicon Valley."},
+        {w:["Are","you","watching","the","live","stream","?"], hint:"🇩🇪 Schaust du gerade den Livestream?"}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🎙️", titel:"Podcast: Trends", art:"Text · fill in the gaps",
+      anleitung:"Read the podcast script. Tap a gap and choose the right form.",
+      anleitungDe:"Lies das Podcast-Skript. Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"Gerade jetzt? Immer? Seit wann?",
+      ueberschrift:"West Coast Trends – Episode 12",
+      text:"Hi everyone! Right now I [[am sitting|sit|have sat]] in a café in Santa Monica. Outside, people [[are skating|skate|have skated]] along the beach. Here in California people [[love|are loving|loves]] new trends.\nOne trend [[has been|is|was being]] popular since last year: “silent walks”. You [[walk|are walking|walks]] for 30 minutes without your phone. My friend Zoe [[has done|does|did since]] it for six months. She says she [[feels|is feeling|feel]] much better. I [[haven't tried|didn't try|don't tried]] it yet – but maybe I will after this episode!",
+      erklaerung:"**simple present** (habits) · **present progressive** (now) · **present perfect + since/for** (until now)."}
+  ]
+});
+</script>
+</body>
+</html>

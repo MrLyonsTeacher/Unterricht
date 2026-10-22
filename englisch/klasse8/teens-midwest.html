@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Teens in the Midwest – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"country", id:"mid8", icon:"🌽", kartenSymbol:"🌪️",
+  titel:"Teens in the Midwest", untertitel:"High school life, jobs & tornado alley",
+  text:"Corn fields, big skies and wild storms – and teenagers who go to high school just like you. How different is their life?",
+  lernen: {
+    school: { titel:"High school in the USA", folien:[
+      {bild:"🏫", titel:"Grades 9 to 12", text:"American teens go to **high school** from **grade 9 to 12**. A student in grade 9 is a **freshman**, then a **sophomore**, a **junior** and a **senior**.", de:"In den USA gehen Jugendliche von **Klasse 9 bis 12** auf die **High School**: freshman (9), sophomore (10), junior (11), senior (12)."},
+      {bild:"🚌", titel:"A school day", text:"Many students take the **yellow school bus**. School often starts around **8 am** and ends around **3 pm**. Lunch is in the **cafeteria**. Students keep their things in **lockers**.", de:"Viele fahren mit dem **gelben Schulbus**. Unterricht meist ca. 8–15 Uhr, Mittagessen in der **Cafeteria**, Sachen im **Spind**."},
+      {bild:"🎨", titel:"Electives and clubs", text:"Students can choose **electives** like photography, cooking or drama. After school there are **clubs** and **sports teams** – school sport is very important.", de:"Man kann **Wahlfächer** wählen (z. B. Fotografie, Kochen). Nachmittags gibt es **Clubs** und **Sportteams**."},
+      {bild:"🎓", titel:"Prom and graduation", text:"At the end of high school there is **prom**, a big dance, and **graduation**: students wear a **cap and gown** and get their **diploma**.", de:"Am Ende gibt es den **Prom** (großer Ball) und die **Graduation** mit Hut und Robe."},
+      {bild:"🚗", titel:"Driving at 16", text:"In many states teens can get a **driver’s license** at **16**. Before that they need a **learner’s permit** and must practise with an adult.", de:"In vielen Staaten darf man mit **16** den **Führerschein** machen. Vorher braucht man eine **Lernerlaubnis**."},
+      {bild:"💵", titel:"Student jobs", text:"Many teens have **part-time jobs**: babysitting, mowing lawns, working as a **lifeguard** or in a fast-food restaurant.", de:"Viele Jugendliche haben **Nebenjobs**: Babysitten, Rasenmähen, als Rettungsschwimmer oder im Fast-Food-Restaurant."}
+    ]},
+    storms: { titel:"The Midwest and tornado alley", folien:[
+      {video:"kE3Afc9uEf8", titel:"Watch: Where is tornado alley?", text:"Find out where **tornado alley** is and why there are so many tornadoes there.", de:"Finde heraus, wo **Tornado Alley** liegt und warum es dort so viele Tornados gibt."},
+      {bild:"🌽", titel:"The heartland", text:"The **Midwest** is in the middle of the USA. There are huge **farms** – Iowa and Illinois are famous for **corn**. The biggest city is **Chicago**, “the Windy City”.", de:"Der **Mittlere Westen** liegt in der Mitte der USA – mit riesigen **Farmen** (Mais). Größte Stadt: **Chicago**, „the Windy City“."},
+      {bild:"🌊", titel:"The Great Lakes", text:"In the north are the **five Great Lakes**: Superior, Michigan, Huron, Erie and Ontario. **Lake Superior** is the biggest.", de:"Im Norden liegen die **fünf Großen Seen**. Der größte ist der **Lake Superior**."},
+      {bild:"🌪️", titel:"Tornado alley", text:"Warm, wet air from the **Gulf of Mexico** meets cold, dry air from the north. This can make **terrifying storms**. Most tornadoes come in **spring** and early summer.", de:"Warme, feuchte Luft vom **Golf von Mexiko** trifft auf kalte, trockene Luft aus dem Norden. So entstehen **heftige Stürme**, meist im **Frühling** und Frühsommer."},
+      {bild:"🚨", titel:"Stay safe", text:"When the **siren** goes off, go to the **basement** or a room without windows in the middle of the house. Never stay in a car or a mobile home.", de:"Wenn die **Sirene** heult: in den **Keller** oder einen fensterlosen Raum in der Mitte des Hauses. Nie im Auto oder Wohnwagen bleiben."},
+      {bild:"🗿", titel:"Mount Rushmore", text:"In **South Dakota** you can see **Mount Rushmore**: the faces of four presidents – Washington, Jefferson, Theodore Roosevelt and Lincoln – carved into a mountain.", de:"In **South Dakota** sind am **Mount Rushmore** vier Präsidentengesichter in den Fels gehauen."}
+    ]}
+  },
+  levels: [
+    { id:"compare", typ:"swipe", lernen:"school", icon:"🏫", titel:"USA or Germany?", art:"School life · swipe",
+      anleitung:"Typical for a US high school or for a German school? Swipe **left for Germany** and **right for USA**.",
+      anleitungDe:"Typisch für eine High School in den USA oder eine Schule in Deutschland? Wische nach **links für Deutschland** und nach **rechts für die USA**.",
+      tipp:"Denk an Schulbus, Spinde, Wahlfächer und Prom.",
+      links:{t:"Germany", icon:"🇩🇪"}, rechts:{t:"USA", icon:"🇺🇸"},
+      karten:[
+        {t:"Students take a yellow school bus.", r:"r"}, {t:"Students stay in the same class with the same classmates in most lessons.", r:"l"},
+        {t:"Students keep their things in lockers in the hallway.", r:"r"}, {t:"There is a big dance called prom.", r:"r"},
+        {t:"Many schools end at lunchtime.", r:"l"}, {t:"School teams are very important – with cheerleaders and big games.", r:"r"},
+        {t:"Students say the Pledge of Allegiance in the morning.", r:"r", e:"In many US schools students promise loyalty to the flag."}, {t:"Grades go from 1 (very good) to 6.", r:"l", e:"In the US grades are letters: **A** is the best, **F** means fail."},
+        {t:"Students graduate with cap and gown.", r:"r"}, {t:"You can do an Ausbildung after grade 9 or 10.", r:"l"}
+      ]},
+    { id:"school", typ:"quiz", lernen:"school", icon:"🎓", titel:"High School Quiz", art:"Quiz",
+      anleitung:"What do you know about high school in the USA?",
+      anleitungDe:"Was weißt du über die High School in den USA?",
+      tipp:"freshman – sophomore – junior – senior",
+      fragen:[
+        {q:"A student in **grade 9** is a …", o:["freshman","senior","junior"], c:0},
+        {q:"A student in **grade 12** is a …", o:["senior","sophomore","freshman"], c:0},
+        {q:"What is an **elective**?", o:["a subject you can choose","a school election","an exam"], c:0},
+        {q:"What do students get at graduation?", o:["a diploma","a driver's license","a locker"], c:0},
+        {q:"What is the best grade in a US school?", o:["A","1","F"], c:0, e:"**A** = excellent, **F** = fail."},
+        {q:"In many states teens can get a driver's license at …", o:["16","18","21"], c:0},
+        {q:"Where do students eat lunch?", o:["in the cafeteria","in the gym","in the locker room"], c:0}
+      ]},
+    { id:"storms", typ:"quiz", lernen:"storms", icon:"🌪️", titel:"Tornado Alley", art:"Midwest · quiz",
+      anleitung:"What do you know about the Midwest and tornadoes?",
+      anleitungDe:"Was weißt du über den Mittleren Westen und Tornados?",
+      tipp:"Schau dir das Video und die Infokarten an.",
+      fragen:[
+        {q:"Why are there so many tornadoes in tornado alley?", o:["warm, wet air meets cold, dry air","there are many volcanoes","it is close to the North Pole"], c:0},
+        {q:"When do most tornadoes happen?", o:["in spring and early summer","in winter","only at night"], c:0},
+        {q:"Where should you go when there is a tornado warning?", o:["to the basement","into your car","onto the roof"], c:0},
+        {q:"Which city is called “the Windy City”?", o:["Chicago","New York","Miami"], c:0},
+        {q:"Iowa and Illinois are famous for …", o:["corn","oranges","gold"], c:0},
+        {q:"How many Great Lakes are there?", o:["5","3","10"], c:0},
+        {q:"What can you see at Mount Rushmore?", o:["four presidents’ faces","a huge waterfall","the biggest mall"], c:0}
+      ]},
+    { id:"day", typ:"zeitstrahl", icon:"⏰", titel:"A Day at Lincoln High", art:"Order · daily routine",
+      anleitung:"Put Emma’s school day in the right order – **the earliest first**.",
+      anleitungDe:"Bring Emmas Schultag in die richtige Reihenfolge – **das Früheste zuerst**.",
+      tipp:"Achte auf die Uhrzeiten nach dem Lösen.",
+      items:[
+        {j:"6:45 am", t:"Emma takes the yellow school bus."}, {j:"7:45 am", t:"She puts her books in her locker."}, {j:"8:00 am", t:"Everybody says the Pledge of Allegiance."},
+        {j:"11:30 am", t:"She has lunch in the cafeteria."}, {j:"1:00 pm", t:"Her elective: photography."}, {j:"3:00 pm", t:"Soccer practice with the school team."},
+        {j:"5:30 pm", t:"She works at the ice cream shop."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"✉️", titel:"Letter from Kansas", art:"Text · fill in the gaps",
+      anleitung:"Read the letter. Tap a gap and choose the right word.",
+      anleitungDe:"Lies den Brief. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"Hi from Kansas!",
+      text:"Hi Lukas,\nmy exchange year in Kansas is amazing! I’m a [[sophomore|senior|freshman]] here, so I’m in grade 10. Every morning I take the yellow [[school bus|school boat|school car]]. My favorite [[elective|election|electric]] is cooking.\nLast week we had a scary [[tornado|tomato|torpedo]] warning. When the [[siren|sirup|signal]] went off, we all went into the [[basement|basketball|balcony]]. Luckily nothing happened.\nMy host brother is 16, so he has his [[driver's license|driving lesson|license plate]] and drives us to soccer [[practice|practise|practical]]. Next spring there’s [[prom|promise|program]] – I need a suit!\nBest, Felix",
+      erklaerung:"Midwest words: **sophomore, school bus, elective, tornado, siren, basement, driver’s license, prom**."}
+  ]
+});
+</script>
+</body>
+</html>

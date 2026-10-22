@@ -50,7 +50,25 @@ const FRS = {
       { k:7,  id:"e7",  themen:[
         { id:"bi7", kat:"country", titel:"Discover the British Isles", untertitel:"Countries, history & culture", pfad:"englisch/klasse7/british-isles.html", icon:"🧭", max:79 }
       ]},
-      { k:8,  id:"e8",  themen:[] },
+      { k:8,  id:"e8",  themen:[
+        { id:"past8", kat:"grammar", titel:"Ellis Island Archive", untertitel:"Simple past & past perfect", pfad:"englisch/klasse8/ellis-island-archive.html", icon:"🗽", max:47 },
+        { id:"mod8", kat:"grammar", titel:"High School Rules", untertitel:"Modals & substitutes", pfad:"englisch/klasse8/high-school-rules.html", icon:"🏫", max:47 },
+        { id:"if8", kat:"grammar", titel:"Road Trip: What If …?", untertitel:"If-clauses I & II", pfad:"englisch/klasse8/what-if.html", icon:"🛣️", max:42 },
+        { id:"who8", kat:"grammar", titel:"Who’s Who in New York?", untertitel:"Questions · who", pfad:"englisch/klasse8/whos-who.html", icon:"❓", max:49 },
+        { id:"pres8", kat:"grammar", titel:"California Trends", untertitel:"Present tenses · since/for", pfad:"englisch/klasse8/california-trends.html", icon:"📱", max:46 },
+        { id:"pass8", kat:"grammar", titel:"Made in the USA", untertitel:"Passive voice", pfad:"englisch/klasse8/made-in-the-usa.html", icon:"🏭", max:48 },
+        { id:"rep8", kat:"grammar", titel:"The Southern Reporter", untertitel:"Reported speech", pfad:"englisch/klasse8/southern-reporter.html", icon:"📰", max:40 },
+        { id:"adj8", kat:"grammar", titel:"Mall of America", untertitel:"Adjectives & adverbs · one/ones", pfad:"englisch/klasse8/mall-of-america.html", icon:"🛍️", max:45 },
+        { id:"vcity8", kat:"vocabulary", titel:"Words: Big City & New Life", untertitel:"City, immigration, travel", pfad:"englisch/klasse8/words-big-city.html", icon:"🏙️", max:52 },
+        { id:"vschool8", kat:"vocabulary", titel:"Words: School, Jobs & Weather", untertitel:"High school, jobs, storms", pfad:"englisch/klasse8/words-school-jobs.html", icon:"🎒", max:49 },
+        { id:"vtrend8", kat:"vocabulary", titel:"Words: Trends & Opinions", untertitel:"Small talk, opinions, culture", pfad:"englisch/klasse8/words-trends-opinions.html", icon:"💬", max:47 },
+        { id:"states8", kat:"country", titel:"50 States Challenge", untertitel:"States, capitals, regions", pfad:"englisch/klasse8/fifty-states.html", icon:"🇺🇸", max:48 },
+        { id:"nyc8", kat:"country", titel:"Gateway NYC", untertitel:"Sights & immigration", pfad:"englisch/klasse8/gateway-nyc.html", icon:"🗽", max:39 },
+        { id:"mid8", kat:"country", titel:"Teens in the Midwest", untertitel:"High school & tornado alley", pfad:"englisch/klasse8/teens-midwest.html", icon:"🌽", max:40 },
+        { id:"ne8", kat:"country", titel:"The Northeast & Thanksgiving", untertitel:"Mayflower & independence", pfad:"englisch/klasse8/northeast-thanksgiving.html", icon:"🦃", max:36 },
+        { id:"cal8", kat:"country", titel:"California Dreams", untertitel:"Gold Rush & the West", pfad:"englisch/klasse8/california-dreams.html", icon:"🌴", max:35 },
+        { id:"south8", kat:"country", titel:"Southern Life", untertitel:"Food, music & civil rights", pfad:"englisch/klasse8/southern-life.html", icon:"🎷", max:38 }
+      ] },
       { k:9,  id:"e9",  themen:[
         { id:"emp9", kat:"country", titel:"Rise and Fall of the British Empire", untertitel:"History, colonies & the Commonwealth", pfad:"englisch/klasse9/british-empire.html", icon:"🌍", max:55 }
       ] },

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Gateway NYC – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"country", id:"nyc8", icon:"🗽", kartenSymbol:"🍎",
+  titel:"Gateway NYC", untertitel:"Sights, boroughs & immigration",
+  text:"The Big Apple: skyscrapers, yellow cabs and millions of stories. Explore New York City and find out why so many people came here.",
+  lernen: {
+    nyc: { titel:"New York City", folien:[
+      {video:"Y7QUd6VSaNQ", titel:"Watch first: NYC’s top sights", text:"Take a quick video tour through New York City. Which places would you like to visit?", de:"Mach eine kurze Video-Tour durch New York. Welche Orte würdest du gern besuchen?"},
+      {bild:"🍎", titel:"The Big Apple", text:"**New York City** is the biggest city in the USA – about **8.5 million** people live there. Its nickname is **the Big Apple**. It has **five boroughs**: Manhattan, Brooklyn, Queens, the Bronx and Staten Island.", de:"**New York City** ist die größte Stadt der USA (ca. 8 Mio. Einwohner). Spitzname: **the Big Apple**. Fünf Stadtbezirke: Manhattan, Brooklyn, Queens, Bronx, Staten Island."},
+      {bild:"🗽", titel:"The Statue of Liberty", text:"The **Statue of Liberty** was a **gift from France** in **1886**. For millions of immigrants it was the first thing they saw of America – a symbol of **freedom**.", de:"Die **Freiheitsstatue** war ein **Geschenk Frankreichs** (1886) – für Millionen Einwanderer das Erste, was sie von Amerika sahen."},
+      {bild:"🏙️", titel:"Skyscrapers", text:"**One World Trade Center** is the **tallest building in the USA** (541 m). It stands where the Twin Towers stood before the attacks on **11 September 2001**. The **Empire State Building** (1931) is famous, too.", de:"**One World Trade Center** ist das **höchste Gebäude der USA** (541 m). Es steht dort, wo bis zum **11. September 2001** die Twin Towers standen."},
+      {bild:"🌳", titel:"Central Park & Times Square", text:"**Central Park** is a huge park in the middle of Manhattan. **Times Square** is famous for its bright **billboards**. The **Rockefeller Center** has a great view of the skyline.", de:"**Central Park** ist ein riesiger Park mitten in Manhattan. **Times Square** ist berühmt für seine leuchtenden Werbetafeln."},
+      {bild:"🌉", titel:"Brooklyn Bridge", text:"The **Brooklyn Bridge** opened in **1883**. It connects Manhattan and Brooklyn. Many people walk across it to enjoy the view.", de:"Die **Brooklyn Bridge** wurde **1883** eröffnet und verbindet Manhattan mit Brooklyn."},
+      {video:"5vAcMhJSwCA", titel:"Ellis Island – gateway to America", text:"Between **1892** and **1954** about **12 million** immigrants arrived at **Ellis Island**. Doctors checked them, officials asked questions – then most of them could start a new life.", de:"Zwischen **1892** und **1954** kamen rund **12 Millionen** Einwanderer über **Ellis Island**. Sie wurden untersucht und befragt – dann konnten die meisten ein neues Leben beginnen."},
+      {bild:"🌍", titel:"A city of immigrants", text:"People from all over the world live in NYC. There are neighborhoods like **Chinatown** and **Little Italy**. More than **200 languages** are spoken in the city.", de:"In NYC leben Menschen aus der ganzen Welt, z. B. in **Chinatown** und **Little Italy**. Es werden über **200 Sprachen** gesprochen."}
+    ]}
+  },
+  levels: [
+    { id:"sights", typ:"quiz", lernen:"nyc", icon:"🏙️", titel:"Sightseeing Quiz", art:"Quiz",
+      anleitung:"Which place is it? Choose the right answer.",
+      anleitungDe:"Welcher Ort ist gemeint? Wähle die richtige Antwort.",
+      tipp:"Denk an das Video und die Infokarten.",
+      fragen:[
+        {q:"It was a gift from France and is a symbol of freedom.", o:["the Statue of Liberty","the Empire State Building","Central Park"], c:0},
+        {q:"It is the tallest building in the USA.", o:["One World Trade Center","the Empire State Building","the Chrysler Building"], c:0},
+        {q:"A square famous for its bright billboards and crowds.", o:["Times Square","Union Square","Washington Square"], c:0},
+        {q:"A huge park in the middle of Manhattan.", o:["Central Park","Hyde Park","Golden Gate Park"], c:0},
+        {q:"It opened in 1883 and connects Manhattan and Brooklyn.", o:["the Brooklyn Bridge","Tower Bridge","the Golden Gate Bridge"], c:0},
+        {q:"The island where millions of immigrants arrived.", o:["Ellis Island","Long Island","Rhode Island"], c:0},
+        {q:"What is New York’s nickname?", o:["the Big Apple","the Windy City","the Big Easy"], c:0, e:"*The Windy City* = Chicago, *The Big Easy* = New Orleans."},
+        {q:"Which one is **not** a borough of New York City?", o:["Hollywood","Brooklyn","Queens"], c:0, e:"Hollywood is in **Los Angeles**."}
+      ]},
+    { id:"boro", typ:"memory", icon:"🗺️", titel:"Five Boroughs", art:"Place + fact · memory",
+      anleitung:"Find the pairs: **place + fact**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Ort + Information**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Lies die Infokarten noch einmal, wenn du unsicher bist.",
+      paare:[ {a:"Manhattan", b:"Times Square & Central Park"}, {a:"Brooklyn", b:"famous bridge since 1883"}, {a:"Staten Island", b:"free ferry past the Statue of Liberty"}, {a:"the Bronx", b:"home of the Yankees & hip hop"},
+              {a:"Queens", b:"most languages in the city"}, {a:"Ellis Island", b:"12 million immigrants"}, {a:"Wall Street", b:"stock exchange"}, {a:"Broadway", b:"theaters & musicals"} ]},
+    { id:"ellis", typ:"zeitstrahl", icon:"📜", titel:"New York Through Time", art:"Timeline · 7 events",
+      lernen:{ titel:"New York through time", folien:[
+        {bild:"⛵", jahr:"1625", titel:"New Amsterdam", text:"Dutch settlers start a town on Manhattan: **New Amsterdam**.", de:"Niederländische Siedler gründen auf Manhattan **Nieuw Amsterdam**."},
+        {bild:"🇬🇧", jahr:"1664", titel:"New York", text:"The English take the town and rename it **New York**.", de:"Die Engländer übernehmen die Stadt und nennen sie **New York**."},
+        {bild:"🌉", jahr:"1883", titel:"Brooklyn Bridge", text:"The **Brooklyn Bridge** opens.", de:"Die **Brooklyn Bridge** wird eröffnet."},
+        {bild:"🗽", jahr:"1886", titel:"Lady Liberty", text:"The **Statue of Liberty** is opened.", de:"Die **Freiheitsstatue** wird eingeweiht."},
+        {bild:"🧳", jahr:"1892", titel:"Ellis Island", text:"The immigration station on **Ellis Island** opens.", de:"Die Einwanderungsstation auf **Ellis Island** öffnet."},
+        {bild:"🏢", jahr:"1931", titel:"Empire State Building", text:"The **Empire State Building** is finished.", de:"Das **Empire State Building** wird fertig."},
+        {bild:"🏙️", jahr:"2014", titel:"One World Trade Center", text:"**One World Trade Center** opens – the tallest building in the USA.", de:"**One World Trade Center** öffnet – das höchste Gebäude der USA."}
+      ]},
+      anleitung:"Put the events in the right order – **the oldest first**.",
+      anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
+      tipp:"Erst kamen die Niederländer, dann die Engländer …",
+      items:[
+        {j:"1625", t:"Dutch settlers start New Amsterdam."}, {j:"1664", t:"The English rename the town New York."},
+        {j:"1883", t:"The Brooklyn Bridge opens."}, {j:"1886", t:"The Statue of Liberty is opened."},
+        {j:"1892", t:"Ellis Island opens."}, {j:"1931", t:"The Empire State Building is finished."}, {j:"2014", t:"One World Trade Center opens."}
+      ]},
+    { id:"guess", typ:"schaetzen", icon:"📏", titel:"NYC in Numbers", art:"Estimate · slider",
+      anleitung:"Guess the number! Move the slider and tap **OK**.",
+      anleitungDe:"Schätze die Zahl! Bewege den Regler und tippe auf **OK**.",
+      tipp:"Ein Stockwerk ist etwa 3–4 m hoch.",
+      fragen:[
+        {q:"How tall is One World Trade Center?", min:100, max:900, step:10, start:300, unit:"m", dec:0, ans:541, tol:30, e:"**541 m** – that’s 1,776 feet, like the year of independence!"},
+        {q:"How many people live in New York City? (million)", min:1, max:30, step:0.5, start:3, unit:"million", dec:1, ans:8.5, tol:1, e:"About **8.5 million** people – more than any other US city."},
+        {q:"How many immigrants arrived at Ellis Island? (million)", min:1, max:50, step:1, start:5, unit:"million", dec:0, ans:12, tol:2, e:"About **12 million** between 1892 and 1954."},
+        {q:"How many languages are spoken in NYC?", min:10, max:500, step:10, start:50, unit:"", dec:0, ans:200, tol:40, e:"More than **200** – some say up to 800!"}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🚕", titel:"A Day in Manhattan", art:"Text · fill in the gaps",
+      anleitung:"Read Tim’s blog. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Tims Blog. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"NYC – Day 1",
+      text:"We started our day with a free ferry ride from [[Staten Island|Long Island|Rhode Island]]. From the boat we had a great view of the [[Statue of Liberty|Statue of Freedom|Liberty Bell]]. Then we visited [[Ellis Island|Easter Island|Liberty Island]], where millions of [[immigrants|tourists|soldiers]] once arrived.\nIn the afternoon we walked across the [[Brooklyn Bridge|Golden Gate Bridge|Tower Bridge]] and had pizza in Brooklyn. In the evening we went to [[Times Square|Red Square|Trafalgar Square]] – the [[billboards|blackboards|skateboards]] were so bright! My feet hurt, but I love the [[Big Apple|Big Easy|Windy City]]!",
+      erklaerung:"NYC words: **Staten Island ferry, Statue of Liberty, Ellis Island, Brooklyn Bridge, Times Square, the Big Apple**."}
+  ]
+});
+</script>
+</body>
+</html>

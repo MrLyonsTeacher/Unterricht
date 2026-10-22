@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Who's Who in New York? – Questions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"who8", icon:"❓", kartenSymbol:"🎤",
+  titel:"Who’s Who in New York?", untertitel:"Questions · questions with who",
+  text:"Interview people in the streets of New York! Ask the right questions – with do/does/did and with who.",
+  lernen: {
+    q: { titel:"Asking questions", folien:[
+      {bild:"❓", titel:"Questions with do / does / did", text:"*Do you like turkey?* – *Does she live in Brooklyn?* – *Where did you go?* → **(question word) + do/does/did + subject + base form**.", de:"Fragen mit Hilfsverb: **(Fragewort) + do/does/did + Person + Grundform**."},
+      {bild:"🙋", titel:"Who as subject", text:"*Who **likes** you?* – *Who **saw** the accident?* Here **who** is the subject. We **don’t** use do/does/did!", de:"Fragt **who** nach dem **Subjekt** (wer?), steht **kein do/does/did**: *Who likes you?*"},
+      {bild:"🎯", titel:"Who as object", text:"*Who **do** you like?* – *Who **did** you call?* Here **you** is the subject, **who** is the object. So we need do/does/did.", de:"Fragt **who** nach dem **Objekt** (wen/wem?), braucht man **do/does/did**: *Who do you like?*"},
+      {bild:"🔍", titel:"The test", text:"Answer the question: *Who likes you? – **Tom** likes me.* (Tom = subject) · *Who do you like? – I like **Tom**.* (Tom = object)", de:"Test: Beantworte die Frage – steht die Antwort vorne (Subjekt) oder hinten (Objekt)?"}
+    ]}
+  },
+  levels: [
+    { id:"subobj", typ:"sortieren", lernen:"q", icon:"🎯", titel:"Subject or Object?", art:"Who-questions · sort",
+      anleitung:"Does **who** ask about the subject or the object? Tap the right box.",
+      anleitungDe:"Fragt **who** nach dem Subjekt (wer?) oder nach dem Objekt (wen/wem?)? Tippe auf das richtige Kästchen.",
+      tipp:"Ohne do/does/did → Subjekt. Mit do/does/did → Objekt.",
+      koerbe:[ {t:"subject", info:"Who likes you?"}, {t:"object", info:"Who do you like?"} ],
+      items:[
+        {t:"Who lives in this apartment?", k:0}, {t:"Who did you meet in Times Square?", k:1}, {t:"Who called the police?", k:0},
+        {t:"Who does Mia text every day?", k:1}, {t:"Who won the game?", k:0}, {t:"Who did they invite?", k:1},
+        {t:"Who knows the way to Central Park?", k:0}, {t:"Who do you admire?", k:1}, {t:"Who painted this picture?", k:0},
+        {t:"Who did the reporter interview?", k:1}
+      ]},
+    { id:"right", typ:"quiz", lernen:"q", icon:"🎤", titel:"Street Interview", art:"Questions · quiz",
+      anleitung:"Which question is correct?",
+      anleitungDe:"Welche Frage ist richtig?",
+      tipp:"Achte auf do/does/did und die Grundform.",
+      fragen:[
+        {q:"Answer: **Sam** ate the last bagel.", o:["Who ate the last bagel?","Who did eat the last bagel?","Who did Sam eat?"], c:0, e:"Asking about the subject → **no did**."},
+        {q:"Answer: Lisa called **her grandma**.", o:["Who did Lisa call?","Who called Lisa?","Who Lisa called?"], c:0, e:"Asking about the object → **did + base form**."},
+        {q:"Answer: He works **in a bakery**.", o:["Where does he work?","Where he works?","Where does he works?"], c:0},
+        {q:"Answer: They moved to New York **in 2019**.", o:["When did they move to New York?","When they moved to New York?","When did they moved to New York?"], c:0},
+        {q:"Answer: **My cousin** lives in Queens.", o:["Who lives in Queens?","Who does live in Queens?","Who do live in Queens?"], c:0},
+        {q:"Answer: I like **pizza** best.", o:["What do you like best?","What you like best?","What likes you best?"], c:0},
+        {q:"Answer: **The Yankees** won.", o:["Who won?","Who did win?","Who did they win?"], c:0},
+        {q:"Answer: She saw **a famous rapper**.", o:["Who did she see?","Who saw she?","Who did she saw?"], c:0}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🗽", titel:"Ask the New Yorker", art:"Sentence builder",
+      anleitung:"Build the question.",
+      anleitungDe:"Bau die Frage, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Fragewort – Hilfsverb – Person – Verb.",
+      punkte:2,
+      saetze:[
+        {w:["Who","likes","hip","hop","?"], hint:"🇩🇪 Wer mag Hip-Hop?"},
+        {w:["Who","do","you","like","?"], hint:"🇩🇪 Wen magst du?"},
+        {w:["Where","did","you","grow","up","?"], hint:"🇩🇪 Wo bist du aufgewachsen?"},
+        {w:["How","long","have","you","lived","here","?"], hint:"🇩🇪 Wie lange wohnst du schon hier?"},
+        {w:["What","does","your","dad","do","?"], hint:"🇩🇪 Was macht dein Vater (beruflich)?"},
+        {w:["Who","told","you","about","this","place","?"], hint:"🇩🇪 Wer hat dir von diesem Ort erzählt?"}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Question Rush", art:"do / does / did / – · 60 seconds",
+      anleitung:"Which word fits in the gap? **Goal: 12** in 60 seconds. (–) means: no extra word.",
+      anleitungDe:"Welches Wort passt in die Lücke? **Ziel: 12** in 60 Sekunden. (–) heißt: kein Hilfswort.",
+      tipp:"who als Subjekt → (–).",
+      zeit:60, ziel:12, fest:true,
+      items:[
+        {q:"Where ___ you live?", o:["do","does","did","–"], c:0}, {q:"Who ___ broke the window?", o:["do","does","did","–"], c:3},
+        {q:"___ she like basketball?", o:["do","does","did","–"], c:1}, {q:"What ___ you do last weekend?", o:["do","does","did","–"], c:2},
+        {q:"Who ___ knows the answer?", o:["do","does","did","–"], c:3}, {q:"Who ___ you meet yesterday?", o:["do","does","did","–"], c:2},
+        {q:"When ___ the store open?", o:["do","does","did","–"], c:1}, {q:"___ they visit the Statue of Liberty?", o:["do","does","did","–"], c:2},
+        {q:"Who ___ lives next door?", o:["do","does","did","–"], c:3}, {q:"How ___ your brother get to school?", o:["do","does","did","–"], c:1},
+        {q:"Why ___ you leave so early yesterday?", o:["do","does","did","–"], c:2}, {q:"Who ___ wrote this song?", o:["do","does","did","–"], c:3},
+        {q:"What ___ your parents think?", o:["do","does","did","–"], c:0}, {q:"Who ___ she call every night?", o:["do","does","did","–"], c:1},
+        {q:"Who ___ made dinner?", o:["do","does","did","–"], c:3}, {q:"___ you ever go to concerts?", o:["do","does","did","–"], c:0}
+      ]},
+    { id:"talk", typ:"lueckentext", icon:"💬", titel:"Small Talk in Brooklyn", art:"Dialogue · fill in the gaps",
+      anleitung:"Complete the small talk. Tap a gap and choose the right words.",
+      anleitungDe:"Vervollständige den Smalltalk. Tippe auf eine Lücke und wähle die richtigen Wörter.",
+      tipp:"Who als Subjekt: ohne do/does/did.",
+      ueberschrift:"At a street fair",
+      text:"Jade: Hey! What’s up? [[Do you live|You live|Does you live]] around here?\nBen: Yes, in Brooklyn. And you? Where [[are you from|you are from|do you from]]?\nJade: Germany. I’m here with my class. [[Who is|Who does|Who do]] that guy with the guitar?\nBen: That’s Marco. Everybody knows him. [[Who taught|Who did teach|Who teached]] him? Nobody – he learned it on YouTube!\nJade: Cool. [[Who do you|Who you|Who does you]] usually hang out with?\nBen: My cousins. [[Did you see|Saw you|Did you saw]] the fireworks last night?\nJade: Yes! [[Who organized|Who did organize|Who organizes did]] them?\nBen: The city. How’s it going with your trip?",
+      erklaerung:"Questions: **do/does/did + base form** – but **who** as subject: no do/does/did."}
+  ]
+});
+</script>
+</body>
+</html>

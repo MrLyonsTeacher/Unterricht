@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>The Northeast & Thanksgiving – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"country", id:"ne8", icon:"🦃", kartenSymbol:"🍂",
+  titel:"The Northeast & Thanksgiving", untertitel:"Niagara Falls, the Mayflower, American history",
+  text:"Waterfalls, colourful leaves and the place where American history began. Find out about the Pilgrims and the story of Thanksgiving.",
+  lernen: {
+    ne: { titel:"The Northeast", folien:[
+      {bild:"🍂", titel:"New England", text:"Six states in the north-east are called **New England**, e.g. **Massachusetts**, Maine and Vermont. In **fall** the leaves turn red, orange and yellow – tourists call it **fall foliage**.", de:"Sechs Staaten im Nordosten heißen **New England**. Im **Herbst** färben sich die Blätter rot und orange (**fall foliage**)."},
+      {bild:"💦", titel:"Niagara Falls", text:"The amazing **Niagara Falls** are on the border between **New York State** and **Canada**. Millions of tourists visit them every year – some take a boat right up to the falls.", de:"Die **Niagarafälle** liegen an der Grenze zwischen dem Staat **New York** und **Kanada**."},
+      {bild:"🎓", titel:"Boston", text:"**Boston** is one of the oldest cities in the USA. Nearby is **Harvard**, the oldest university in the USA (1636).", de:"**Boston** ist eine der ältesten Städte der USA. In der Nähe liegt **Harvard**, die älteste Universität der USA (1636)."},
+      {bild:"☕", titel:"The Boston Tea Party", text:"In **1773** angry colonists threw British tea into Boston Harbor. They didn’t want to pay **taxes** to Britain without having a say. This led to the fight for **independence**.", de:"**1773** warfen wütende Kolonisten britischen Tee ins Hafenbecken von Boston – Protest gegen **Steuern** ohne Mitsprache. Das führte zum Unabhängigkeitskampf."},
+      {bild:"🔔", titel:"Philadelphia", text:"In **Philadelphia** the **Declaration of Independence** was signed in **1776**. You can still see the **Liberty Bell** there.", de:"In **Philadelphia** wurde **1776** die Unabhängigkeitserklärung unterzeichnet. Dort steht die **Liberty Bell**."}
+    ]},
+    tg: { titel:"The story of Thanksgiving", folien:[
+      {video:"brqIER2KHbE", titel:"Watch first: the Mayflower", text:"Watch the story of the **Mayflower** and the **first Thanksgiving**.", de:"Schau dir die Geschichte der **Mayflower** und des **ersten Thanksgiving** an."},
+      {bild:"⛵", jahr:"1620", titel:"The Mayflower", text:"About **100 Pilgrims** sailed from England on the **Mayflower**. They wanted to live their religion freely. After **66 days** they arrived at **Plymouth**.", de:"Rund **100 Pilger** segelten auf der **Mayflower** von England los, um ihren Glauben frei zu leben. Nach **66 Tagen** kamen sie in **Plymouth** an."},
+      {bild:"❄️", jahr:"1620", titel:"A hard winter", text:"The first winter was terrible. About **half** of the Pilgrims died of cold, hunger and illness.", de:"Der erste Winter war schrecklich. Etwa **die Hälfte** der Pilger starb."},
+      {bild:"🌽", jahr:"1621", titel:"Help from the Wampanoag", text:"The **Wampanoag**, the Native Americans who lived there, showed the Pilgrims how to grow **corn**, fish and hunt.", de:"Die **Wampanoag**, die Ureinwohner dort, zeigten den Pilgern, wie man **Mais** anbaut, fischt und jagt."},
+      {bild:"🍗", jahr:"1621", titel:"The first Thanksgiving", text:"After the **harvest** in autumn 1621, Pilgrims and Wampanoag celebrated together for three days. Today this is seen as the **first Thanksgiving**.", de:"Nach der **Ernte** im Herbst 1621 feierten Pilger und Wampanoag drei Tage zusammen – das „erste Thanksgiving“."},
+      {bild:"🦃", titel:"Thanksgiving today", text:"Thanksgiving is on the **fourth Thursday in November**. Families eat **turkey**, **cranberry sauce**, **mashed potatoes** and **pumpkin pie**. In New York there is the big **Macy’s Thanksgiving Day Parade**.", de:"Thanksgiving ist am **vierten Donnerstag im November**. Es gibt **Truthahn**, **Preiselbeersoße** und **Kürbiskuchen**."},
+      {bild:"🪶", titel:"Two views", text:"For many **Native Americans** the day is also a day of **mourning**: the settlers later took their land, and many of them died.", de:"Für viele **Native Americans** ist der Tag auch ein **Trauertag**: Die Siedler nahmen ihnen später Land, viele starben."}
+    ]}
+  },
+  levels: [
+    { id:"ne", typ:"quiz", lernen:"ne", icon:"💦", titel:"Northeast Quiz", art:"Quiz",
+      anleitung:"What do you know about the Northeast?",
+      anleitungDe:"Was weißt du über den Nordosten der USA?",
+      tipp:"Denk an die Infokarten.",
+      fragen:[
+        {q:"Where are Niagara Falls?", o:["on the border with Canada","in Florida","near Los Angeles"], c:0},
+        {q:"What is **fall foliage**?", o:["colourful leaves in autumn","a football game","a type of pie"], c:0},
+        {q:"What happened at the Boston Tea Party?", o:["colonists threw British tea into the harbor","people drank tea with the king","a big tea shop opened"], c:0},
+        {q:"Why were the colonists angry?", o:["they had to pay taxes without having a say","there was no tea","the weather was bad"], c:0},
+        {q:"Where was the Declaration of Independence signed?", o:["Philadelphia","Boston","Washington, D.C."], c:0},
+        {q:"Which is the oldest university in the USA?", o:["Harvard","Stanford","Yale"], c:0},
+        {q:"New England is a group of …", o:["six states","six cities","six islands"], c:0}
+      ]},
+    { id:"tl", typ:"zeitstrahl", lernen:"tg", icon:"⛵", titel:"From the Mayflower to Independence", art:"Timeline · 6 events",
+      anleitung:"Put the events in the right order – **the oldest first**.",
+      anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
+      tipp:"Die Pilger kamen zuerst, die Unabhängigkeit kam viel später.",
+      items:[
+        {j:"1620", t:"The Mayflower arrives at Plymouth."}, {j:"1621", t:"Pilgrims and Wampanoag celebrate the harvest."}, {j:"1636", t:"Harvard University is founded."},
+        {j:"1773", t:"The Boston Tea Party."}, {j:"1776", t:"The Declaration of Independence is signed."}, {j:"1863", t:"Abraham Lincoln makes Thanksgiving a national holiday."}
+      ]},
+    { id:"tg", typ:"quiz", lernen:"tg", icon:"🦃", titel:"Thanksgiving Quiz", art:"Quiz",
+      anleitung:"What do you know about Thanksgiving?",
+      anleitungDe:"Was weißt du über Thanksgiving?",
+      tipp:"Schau dir das Video an.",
+      fragen:[
+        {q:"Why did the Pilgrims leave England?", o:["to live their religion freely","to find gold","to go on holiday"], c:0},
+        {q:"Who helped the Pilgrims to survive?", o:["the Wampanoag","the French","the British army"], c:0},
+        {q:"What did the Wampanoag teach the Pilgrims?", o:["how to grow corn","how to build skyscrapers","how to play baseball"], c:0},
+        {q:"When is Thanksgiving today?", o:["the fourth Thursday in November","4 July","25 December"], c:0},
+        {q:"What do most families eat on Thanksgiving?", o:["turkey","hot dogs","sushi"], c:0},
+        {q:"Which pie is typical for Thanksgiving?", o:["pumpkin pie","apple strudel","cheesecake"], c:0},
+        {q:"Why is Thanksgiving a sad day for many Native Americans?", o:["settlers later took their land","they don’t like turkey","it is always cold"], c:0}
+      ]},
+    { id:"words", typ:"memory", icon:"🍂", titel:"Thanksgiving Words", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Wörter rund um Thanksgiving.",
+      paare:[ {a:"harvest", b:"Ernte"}, {a:"turkey", b:"Truthahn"}, {a:"pumpkin", b:"Kürbis"}, {a:"settler", b:"Siedler"},
+              {a:"to be grateful", b:"dankbar sein"}, {a:"feast", b:"Festmahl"}, {a:"to survive", b:"überleben"}, {a:"parade", b:"Umzug"} ]},
+    { id:"story", typ:"lueckentext", icon:"🥧", titel:"Our Thanksgiving", art:"Text · fill in the gaps",
+      anleitung:"Read Hannah’s text. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Hannahs Text. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"Thanksgiving with my host family",
+      text:"Thanksgiving is on the fourth [[Thursday|Tuesday|Thirsday]] in November. In the morning we watched the big [[parade|paradise|parachute]] in New York on TV. Then my host mom put a huge [[turkey|Turkey|turtle]] in the oven.\nBefore dinner everybody said what they were [[grateful|great|grape]] for. We had mashed potatoes, cranberry sauce and [[pumpkin|pumping|pumpkins]] pie. My host dad told the story of the [[Pilgrims|pilots|pirates]] and the [[Wampanoag|Navajo|Vikings]], who had helped them after their first hard winter. What a [[feast|fist|fest]]!",
+      erklaerung:"Thanksgiving words: **Thursday, parade, turkey, grateful, pumpkin pie, Pilgrims, Wampanoag, feast**."}
+  ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Made in the USA – Passive voice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"pass8", icon:"🏭", kartenSymbol:"📦",
+  titel:"Made in the USA", untertitel:"Passive voice: simple present & simple past",
+  text:"Jeans, burgers and big cities: find out what is made, grown and built in the USA – and who did it. The passive voice helps you.",
+  lernen: {
+    pass: { titel:"The passive voice", folien:[
+      {bild:"🏭", titel:"Active or passive?", text:"Active: *Workers **make** T-shirts.* – Passive: *T-shirts **are made** by workers.* In the passive the **action** is more important than the person who does it.", de:"Im **Passiv** ist wichtig, **was** passiert – nicht, **wer** es tut."},
+      {bild:"👖", titel:"Passive – simple present", text:"**am/is/are + 3rd form**: *A lot of T-shirts **are made** of cotton.* – *English **is spoken** here.*", de:"Passiv Gegenwart: **am/is/are + 3. Form**."},
+      {bild:"🏙️", titel:"Passive – simple past", text:"**was/were + 3rd form**: *The city **was founded** by the French.* – *The new dishes **were brought** in by European settlers.*", de:"Passiv Vergangenheit: **was/were + 3. Form**."},
+      {bild:"🙋", titel:"by + person", text:"If you want to say who did it, use **by**: *The dish is made **with** chicken.* – *Jeans **were invented by** Levi Strauss and Jacob Davis.*", de:"Wer es getan hat, sagt man mit **by** („von“)."}
+    ]}
+  },
+  levels: [
+    { id:"ap", typ:"swipe", lernen:"pass", icon:"🔀", titel:"Active or Passive?", art:"Swipe",
+      anleitung:"Is the sentence **active** or **passive**? Swipe left for Active and right for Passive.",
+      anleitungDe:"Ist der Satz **Aktiv** oder **Passiv**? Wische nach links für Aktiv und nach rechts für Passiv.",
+      tipp:"Passiv: be + 3. Form.",
+      links:{t:"Active", icon:"🏃"}, rechts:{t:"Passive", icon:"📦"},
+      karten:[
+        {t:"Cotton is grown in Texas.", r:"r"}, {t:"Farmers grow corn in Iowa.", r:"l"},
+        {t:"The Golden Gate Bridge was opened in 1937.", r:"r"}, {t:"New Orleans was founded by the French.", r:"r"},
+        {t:"Many tourists visit Florida.", r:"l"}, {t:"Spanish is spoken by millions of Americans.", r:"r"},
+        {t:"My uncle built this house.", r:"l"}, {t:"Hamburgers are sold everywhere.", r:"r"},
+        {t:"The students made a video.", r:"l"}, {t:"The first iPhone was presented in 2007.", r:"r"}
+      ]},
+    { id:"form", typ:"quiz", lernen:"pass", icon:"🏗️", titel:"Factory Check", art:"Passive forms · quiz",
+      anleitung:"Choose the right passive form.",
+      anleitungDe:"Wähle die richtige Passivform.",
+      tipp:"Gegenwart: is/are + 3. Form. Vergangenheit: was/were + 3. Form.",
+      fragen:[
+        {q:"A lot of T-shirts **___** of cotton.", o:["are made","is made","are make"], c:0},
+        {q:"The city **___** by the French in 1718.", o:["was founded","is founded","were founded"], c:0, e:"Past, singular → **was founded**."},
+        {q:"Gumbo **___** with rice, vegetables and meat or seafood.", o:["is cooked","are cooked","cooks"], c:0},
+        {q:"The new dishes **___** in by European settlers.", o:["were brought","was brought","were bringed"], c:0},
+        {q:"Oranges **___** in Florida and California.", o:["are grown","is grown","are grew"], c:0},
+        {q:"The Statue of Liberty **___** to the USA by France.", o:["was given","were given","is gave"], c:0},
+        {q:"Millions of burgers **___** every day.", o:["are eaten","is eaten","are ate"], c:0},
+        {q:"When **___** the White House **___**?", o:["was – built","did – built","is – build"], c:0, e:"Passive question: **was + subject + 3rd form**."}
+      ]},
+    { id:"build", typ:"satzbau", lernen:"pass", icon:"🧱", titel:"Build it Passive", art:"Sentence builder",
+      anleitung:"Build the passive sentence.",
+      anleitungDe:"Bau den Passivsatz, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Subjekt + be + 3. Form (+ by …).",
+      punkte:2,
+      saetze:[
+        {w:["A","lot","of","T-shirts","are","made","of","cotton"], hint:"🇩🇪 Viele T-Shirts werden aus Baumwolle hergestellt."},
+        {w:["The","city","was","founded","by","the","French"], hint:"🇩🇪 Die Stadt wurde von den Franzosen gegründet."},
+        {w:["The","dish","is","made","with","chicken"], hint:"🇩🇪 Das Gericht wird mit Hähnchen zubereitet."},
+        {w:["Jeans","were","invented","in","the","USA"], hint:"🇩🇪 Jeans wurden in den USA erfunden."},
+        {w:["English","and","Spanish","are","spoken","in","Texas"], hint:"🇩🇪 In Texas wird Englisch und Spanisch gesprochen."}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Passive Rush", art:"is / are / was / were · 60 seconds",
+      anleitung:"Choose the right form of **be**. **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wähle die richtige Form von **be**. **Ziel: 12** in 60 Sekunden.",
+      tipp:"Einzahl/Mehrzahl und Zeit beachten.",
+      zeit:60, ziel:12, fest:true,
+      items:[
+        {q:"Coffee ___ grown in Hawaii.", o:["is","are","was","were"], c:0}, {q:"The pyramids ___ built thousands of years ago.", o:["is","are","was","were"], c:3},
+        {q:"This song ___ written in 1985.", o:["is","are","was","were"], c:2}, {q:"Cars ___ made in Detroit.", o:["is","are","was","were"], c:1},
+        {q:"The first burger ___ sold in the 1900s.", o:["is","are","was","were"], c:2}, {q:"These photos ___ taken yesterday.", o:["is","are","was","were"], c:3},
+        {q:"Pizza ___ loved all over the world.", o:["is","are","was","were"], c:0}, {q:"Many languages ___ spoken in New York.", o:["is","are","was","were"], c:1},
+        {q:"The bridge ___ opened in 1883.", o:["is","are","was","were"], c:2}, {q:"Tickets ___ sold online now.", o:["is","are","was","were"], c:1},
+        {q:"The windows ___ broken last night.", o:["is","are","was","were"], c:3}, {q:"Basketball ___ invented in 1891.", o:["is","are","was","were"], c:2},
+        {q:"Maple syrup ___ produced in Vermont.", o:["is","are","was","were"], c:0}, {q:"The Olympics ___ held in Los Angeles in 1984.", o:["is","are","was","were"], c:3}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🍤", titel:"Food from the South", art:"Text · fill in the gaps",
+      anleitung:"Read about Southern food. Tap a gap and choose the right form.",
+      anleitungDe:"Lies über Essen aus dem Süden. Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"Passiv: be + 3. Form.",
+      ueberschrift:"Multicultural food in Louisiana",
+      text:"New Orleans [[was founded|is founded|founded]] by the French in 1718. Later, many new dishes [[were brought|was brought|brought]] in by people from Africa, Spain and the Caribbean. Today gumbo [[is eaten|are eaten|eats]] all over Louisiana. It [[is made|are made|is make]] with okra, rice and meat or seafood.\nJambalaya is another famous dish. The rice [[is cooked|cooked|is cook]] together with sausage and spices. Every year, lots of crawfish [[are caught|is caught|are catched]] in the rivers and swamps. Many recipes [[were written|was written|were wrote]] down by grandmothers – and they [[are still used|still use|are still use]] today!",
+      erklaerung:"Passive: **is/are + 3rd form** (present) · **was/were + 3rd form** (past)."}
+  ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Words: Big City & New Life – Vocabulary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"vocabulary", id:"vcity8", icon:"🏙️", kartenSymbol:"🗽",
+  titel:"Words: Big City & New Life", untertitel:"City, immigration, travel",
+  text:"Skyscrapers, subways and a new start: the words you need for New York and for stories about moving to a new country.",
+  levels: [
+    { id:"pairs", typ:"memory", icon:"🧩", titel:"City Pairs", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Sprich die Wörter leise mit.",
+      paare:[ {a:"skyscraper", b:"Wolkenkratzer"}, {a:"subway", b:"U-Bahn (US)"}, {a:"sidewalk", b:"Gehweg (US)"}, {a:"neighborhood", b:"Stadtviertel"},
+              {a:"landmark", b:"Wahrzeichen"}, {a:"crowded", b:"überfüllt"}, {a:"apartment", b:"Wohnung (US)"}, {a:"block", b:"Häuserblock"} ]},
+    { id:"ae", typ:"sortieren", icon:"🇬🇧", titel:"British or American?", art:"BE vs AE · sort",
+      anleitung:"Is the word **British English** or **American English**? Tap the right box.",
+      anleitungDe:"Ist das Wort **britisches** oder **amerikanisches Englisch**? Tippe auf das richtige Kästchen.",
+      tipp:"Paare: flat – apartment, underground – subway, pavement – sidewalk …",
+      koerbe:[ {t:"British English", info:"🇬🇧"}, {t:"American English", info:"🇺🇸"} ],
+      items:[
+        {t:"flat", k:0}, {t:"apartment", k:1}, {t:"underground", k:0}, {t:"subway", k:1}, {t:"pavement", k:0}, {t:"sidewalk", k:1},
+        {t:"lift", k:0}, {t:"elevator", k:1}, {t:"holiday", k:0}, {t:"vacation", k:1}, {t:"queue", k:0}, {t:"line", k:1},
+        {t:"chips", k:0, e:"BE **chips** = AE **French fries**."}, {t:"French fries", k:1}, {t:"autumn", k:0}, {t:"fall", k:1}
+      ]},
+    { id:"new", typ:"quiz", icon:"🧳", titel:"Starting a New Life", art:"Immigration words · quiz",
+      anleitung:"Which word fits the explanation?",
+      anleitungDe:"Welches Wort passt zur Erklärung?",
+      tipp:"Lies die Erklärung genau.",
+      fragen:[
+        {q:"A person who comes to live in a new country.", o:["immigrant","tourist","citizen"], c:0},
+        {q:"A person who has all the rights of a country, e.g. can vote.", o:["citizen","visitor","refugee"], c:0, e:"**citizen** = Staatsbürger(in)."},
+        {q:"A person who must leave their home because of war or danger.", o:["refugee","settler","passenger"], c:0, e:"**refugee** = Flüchtling."},
+        {q:"To become a US citizen you have to pass a …", o:["citizenship test","driving test","school test"], c:0},
+        {q:"The official document you need to travel to another country.", o:["passport","ticket","license"], c:0},
+        {q:"To leave your country and live in another one.", o:["emigrate","immigrate","celebrate"], c:0, e:"**emigrate** = auswandern (from), **immigrate** = einwandern (to)."},
+        {q:"To get **used to** something means …", o:["sich an etwas gewöhnen","etwas benutzen","etwas vermissen"], c:0, e:"*I slowly got used to it.*"},
+        {q:"A feeling of being sad because you are far away from home.", o:["homesick","excited","jealous"], c:0}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Subway Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Wolkenkratzer", o:["skyscraper","skyscrapper","skycraper"], c:0}, {q:"Einwanderer", o:["immigrant","emmigrant","imigrant"], c:0},
+        {q:"Sehenswürdigkeit", o:["sight","side","site"], c:0}, {q:"Freiheit", o:["freedom","freetime","freeness"], c:0},
+        {q:"Staatsbürgerschaft", o:["citizenship","citizen ship","cityship"], c:0}, {q:"überfüllt", o:["crowded","crowed","clouded"], c:0},
+        {q:"Gehweg (US)", o:["sidewalk","sideway","walkside"], c:0}, {q:"Aufzug (US)", o:["elevator","elevater","lift-off"], c:0},
+        {q:"Urlaub (US)", o:["vacation","vocation","vacancy"], c:0}, {q:"Viertel", o:["neighborhood","neighborwood","naiborhood"], c:0},
+        {q:"Heimweh haben", o:["be homesick","be homeless","be housesick"], c:0}, {q:"Gelegenheit", o:["opportunity","oportunity","opportunety"], c:0},
+        {q:"Brücke", o:["bridge","brigde","bridget"], c:0}, {q:"Hafen", o:["harbor","harbar","habour"], c:0},
+        {q:"ankommen", o:["arrive","arrived","arive"], c:0}, {q:"vermissen", o:["miss","mist","mess"], c:0},
+        {q:"Straßenkunst", o:["street art","road art","street arts"], c:0}, {q:"vielfältig", o:["diverse","divers","diversed"], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"📝", titel:"Amir’s First Weeks", art:"Text · fill in the gaps",
+      anleitung:"Read the article about Amir. Tap a gap and choose the right word.",
+      anleitungDe:"Lies den Artikel über Amir. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"Going to a new country",
+      text:"When Amir, 14, came to New York from Syria, everything was new. His family lived in a small [[apartment|apartmant|department]] in Queens. Every morning he took the [[subway|subwave|sideway]] to school. The trains were always [[crowded|crowned|crowed]].\nAt first he was very [[homesick|homeless|houseless]] and missed his friends. But after he had stopped counting the weeks, he slowly got [[used to|use to|using to]] it. He loved walking on the [[sidewalks|sideways|seasides]] and looking up at the [[skyscrapers|skyscrapes|scrapers]]. One day he wants to become a US [[citizen|city|citation]].",
+      erklaerung:"City & new life words: **apartment, subway, crowded, homesick, get used to, sidewalk, skyscraper, citizen**."}
+  ]
+});
+</script>
+</body>
+</html>

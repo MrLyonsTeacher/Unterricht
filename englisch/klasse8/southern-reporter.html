@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>The Southern Reporter – Reported speech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"rep8", icon:"📰", kartenSymbol:"📰",
+  titel:"The Southern Reporter", untertitel:"Reported speech with and without backshift",
+  text:"You are a reporter on a trip through the South. Tell your readers what people said – with reported speech.",
+  lernen: {
+    rep: { titel:"Reported speech", folien:[
+      {bild:"💬", titel:"What is reported speech?", text:"Direct speech: *“I like New York,” she says.* – Reported speech: *She says (that) she **likes** New York.* We report what somebody said.", de:"Mit **indirekter Rede** gibt man wieder, was jemand gesagt hat."},
+      {bild:"▶️", titel:"Without backshift", text:"If the reporting verb is in the **present** (*says, tells, wants to know*), the tense **does not change**: *He says the jungle trail **sounds** interesting.*", de:"Steht das einleitende Verb in der **Gegenwart** (says), bleibt die Zeit **gleich**."},
+      {bild:"⏪", titel:"With backshift", text:"If the reporting verb is in the **past** (*said, told, asked*), the tense goes **one step back**: *“I **have** a problem.” → He said (that) he **had** a problem.*", de:"Steht das einleitende Verb in der **Vergangenheit** (said), rückt die Zeit **einen Schritt zurück**."},
+      {bild:"📋", titel:"Backshift table", text:"am/is → **was** · present → **past** · present progressive → **past progressive** · past / present perfect → **past perfect** · will → **would** · can → **could**", de:"Zeitverschiebung: is → was, present → past, will → would, can → could, past/present perfect → past perfect."},
+      {bild:"👉", titel:"Pronouns and places change", text:"*“**I** love **my** dog.” → She said **she** loved **her** dog.* Often *here → there, today → that day, tomorrow → the next day*.", de:"Auch Pronomen und Orts-/Zeitangaben ändern sich: I → she, here → there, tomorrow → the next day."},
+      {bild:"❓", titel:"Reported questions", text:"*“Can your dad drive us?” → He wants to know **if** your dad **can** drive us.* – No question order, no question mark!", de:"Fragen: mit **if/whether** oder Fragewort – **ohne** Fragestellung und ohne Fragezeichen."}
+    ]}
+  },
+  levels: [
+    { id:"no", typ:"quiz", lernen:"rep", icon:"▶️", titel:"Live Ticker", art:"Without backshift · quiz",
+      anleitung:"Report the sentence. The reporting verb is in the **present** – no backshift!",
+      anleitungDe:"Gib den Satz wieder. Das einleitende Verb steht in der **Gegenwart** – keine Zeitverschiebung!",
+      tipp:"Nur Pronomen anpassen: I → he/she, my → his/her.",
+      fragen:[
+        {q:"Kim: “I like hip hop.” → Kim says (that) she **___** hip hop.", o:["likes","liked","like"], c:0},
+        {q:"Jay: “The trail sounds interesting.” → He says the trail **___** interesting.", o:["sounds","sounded","sound"], c:0},
+        {q:"Mia: “We are going to Nashville.” → Mia says they **___** to Nashville.", o:["are going","were going","go"], c:0},
+        {q:"Dad: “I have lost my keys.” → Dad says he **___** his keys.", o:["has lost","had lost","have lost"], c:0},
+        {q:"Ella: “Can your dad drive us?” → She wants to know **___** your dad can drive us.", o:["if","that","does"], c:0, e:"Yes/no question → **if**."},
+        {q:"Tom: “Where is the museum?” → Tom asks where the museum **___**.", o:["is","was","is it"], c:0, e:"No question order: **where the museum is**."}
+      ]},
+    { id:"back", typ:"quiz", lernen:"rep", icon:"⏪", titel:"Yesterday’s Interview", art:"With backshift · quiz",
+      anleitung:"Report the sentence. The reporting verb is in the **past** – use backshift!",
+      anleitungDe:"Gib den Satz wieder. Das einleitende Verb steht in der **Vergangenheit** – Zeit zurückverschieben!",
+      tipp:"is → was, present → past, will → would, can → could, past → past perfect.",
+      fragen:[
+        {q:"“I have a problem.” → He said (that) he **___** a problem.", o:["had","has","have had"], c:0},
+        {q:"“I am tired.” → She said she **___** tired.", o:["was","is","were"], c:0},
+        {q:"“We will help you.” → They said they **___** help us.", o:["would","will","wanted"], c:0},
+        {q:"“I can play the banjo.” → He said he **___** play the banjo.", o:["could","can","can to"], c:0},
+        {q:"“I saw an alligator.” → She told me she **___** an alligator.", o:["had seen","has seen","sees"], c:0, e:"simple past → **past perfect**."},
+        {q:"“We are eating gumbo.” → They said they **___** gumbo.", o:["were eating","are eating","ate"], c:0},
+        {q:"“I have never been to Texas.” → He said he **___** to Texas.", o:["had never been","has never been","never was"], c:0},
+        {q:"“Do you like jazz?” → She asked me **___** jazz.", o:["if I liked","do I like","if did I like"], c:0, e:"Reported question: **if + subject + backshifted verb**."}
+      ]},
+    { id:"swipe", typ:"swipe", lernen:"rep", icon:"🔎", titel:"Backshift or Not?", art:"Swipe",
+      anleitung:"Is the reported sentence correct? Swipe **right for correct** and **left for wrong**.",
+      anleitungDe:"Ist der Satz in indirekter Rede richtig? Wische nach **rechts für richtig** und nach **links für falsch**.",
+      tipp:"Schau zuerst auf das einleitende Verb: says → keine Verschiebung, said → Verschiebung.",
+      links:{t:"Wrong", icon:"✘"}, rechts:{t:"Correct", icon:"✔"},
+      karten:[
+        {t:"“I live in Memphis.” → She says she lives in Memphis.", r:"r"},
+        {t:"“I live in Memphis.” → She said she lives in Memphis.", r:"l", e:"said → backshift: she **lived** in Memphis."},
+        {t:"“I will call you.” → He said he would call me.", r:"r"},
+        {t:"“We can come.” → They said they can came.", r:"l", e:"can → **could**: they could come."},
+        {t:"“I am hungry.” → Lily says she is hungry.", r:"r"},
+        {t:"“Is it far?” → He asked if it was far.", r:"r"},
+        {t:"“Where do you live?” → She asked where do I live.", r:"l", e:"No question order: she asked **where I lived**."},
+        {t:"“I met Elvis!” → Grandpa told us he had met Elvis.", r:"r"}
+      ]},
+    { id:"build", typ:"satzbau", icon:"✍️", titel:"Write the Article", art:"Sentence builder",
+      anleitung:"Build the sentence in reported speech.",
+      anleitungDe:"Bau den Satz in indirekter Rede, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Pronomen und Zeit anpassen.",
+      punkte:2,
+      saetze:[
+        {w:["She","says","she","likes","New","York"], hint:"💬 “I like New York,” she says."},
+        {w:["He","said","he","had","a","problem"], hint:"💬 “I have a problem,” he said."},
+        {w:["He","wants","to","know","if","your","dad","can","drive","us"], hint:"💬 “Can your dad drive us?” he asks."},
+        {w:["They","told","me","they","would","come","back"], hint:"💬 “We will come back,” they told me."},
+        {w:["She","asked","where","I","lived"], hint:"💬 “Where do you live?” she asked."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🎷", titel:"Jazz Night Report", art:"Text · fill in the gaps",
+      anleitung:"Complete the newspaper report. Tap a gap and choose the right form.",
+      anleitungDe:"Vervollständige den Zeitungsbericht. Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"said/told/asked → Zeit zurückverschieben.",
+      ueberschrift:"Young musicians in New Orleans",
+      text:"Last night I met Andre, 15, on Frenchmen Street. He told me that he [[played|plays|had play]] the trumpet in a street band. He said he [[had started|has started|started had]] when he was seven. I asked him if he [[was|is|were]] nervous before concerts. He laughed and said he [[wasn't|isn't|doesn't]].\nHis friend Leah said they [[would play|will play|would played]] at a festival the next day. She told me that she [[could|can|could to]] sing and play the piano. When I asked them what their dream [[was|is|did be]], they said they [[wanted|want|had want]] to tour the world.",
+      erklaerung:"Backshift after **said / told / asked**: present → past, will → would, can → could, past → past perfect."}
+  ]
+});
+</script>
+</body>
+</html>

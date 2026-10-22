@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Southern Life – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"country", id:"south8", icon:"🎷", kartenSymbol:"🎸",
+  titel:"Southern Life", untertitel:"Food, music & the civil rights movement",
+  text:"Gumbo, jazz and southern hospitality – but also a long fight for equal rights. Discover the South of the USA.",
+  lernen: {
+    south: { titel:"The South – lifestyle and culture", folien:[
+      {bild:"🤠", titel:"The South", text:"The **South** has its own lifestyle and customs. People are known for **southern hospitality** – they are very friendly to guests. You often hear **“y’all”** (= you all).", de:"Der **Süden** hat seinen eigenen Lebensstil. Typisch ist **southern hospitality** (Gastfreundschaft) und das Wort **„y’all“**."},
+      {bild:"🍤", titel:"Multicultural food", text:"In **Louisiana** people eat **gumbo** and **jambalaya** – dishes with French, African and Spanish roots. In **Texas** **Tex-Mex** food is popular. Typical for the South: **fried chicken**, **BBQ** and **grits**.", de:"In **Louisiana** isst man **Gumbo** und **Jambalaya** – mit französischen, afrikanischen und spanischen Wurzeln. In **Texas** ist **Tex-Mex** beliebt."},
+      {bild:"🎺", titel:"Music", text:"**New Orleans** is the birthplace of **jazz**. **Memphis** is famous for **blues** and **Elvis Presley** (Graceland). **Nashville** in Tennessee is called **Music City** – the home of **country music**.", de:"**New Orleans** ist die Geburtsstadt des **Jazz**. **Memphis**: Blues und Elvis. **Nashville**: „Music City“, Heimat der **Country-Musik**."},
+      {bild:"🎭", titel:"Mardi Gras", text:"**Mardi Gras** in New Orleans is a huge carnival with **parades**, masks and colourful beads.", de:"**Mardi Gras** in New Orleans ist ein riesiger Karneval mit **Umzügen**, Masken und bunten Ketten."},
+      {bild:"🚀", titel:"Space and swamps", text:"In **Houston**, Texas, is NASA’s **Mission Control**, and rockets start from **Florida**. In the **Everglades** in Florida you can see **alligators**.", de:"In **Houston** sitzt die NASA-Missionskontrolle, Raketen starten in **Florida**. In den **Everglades** leben **Alligatoren**."}
+    ]},
+    rights: { titel:"The civil rights movement", folien:[
+      {video:"jFlm-GtsUkE", titel:"Watch first: Who was Rosa Parks?", text:"Watch the video about **Rosa Parks** and the **civil rights movement**.", de:"Schau dir das Video über **Rosa Parks** und die **Bürgerrechtsbewegung** an."},
+      {bild:"🚫", jahr:"1950s", titel:"Segregation", text:"In many Southern states Black and white people were kept apart: separate schools, buses, restaurants. This was called **segregation**. It was **discrimination**.", de:"In vielen Südstaaten wurden Schwarze und Weiße getrennt – Schulen, Busse, Restaurants. Das nannte man **Segregation** – eine Form der **Diskriminierung**."},
+      {bild:"🚌", jahr:"1955", titel:"Rosa Parks", text:"In **Montgomery, Alabama**, **Rosa Parks** refused to give her bus seat to a white man. She was arrested. Black people then **boycotted** the buses for more than a year.", de:"In **Montgomery, Alabama**, weigerte sich **Rosa Parks**, ihren Sitzplatz im Bus für einen Weißen freizumachen. Sie wurde verhaftet. Danach **boykottierten** Schwarze die Busse über ein Jahr lang."},
+      {bild:"🗣️", jahr:"1963", titel:"“I have a dream”", text:"**Martin Luther King Jr.** fought for equal rights **without violence**. In **1963** he gave his famous speech **“I have a dream”** in Washington, D.C.", de:"**Martin Luther King Jr.** kämpfte **gewaltfrei** für gleiche Rechte. **1963** hielt er in Washington die Rede **„I have a dream“**."},
+      {bild:"⚖️", jahr:"1964", titel:"The Civil Rights Act", text:"In **1964** the **Civil Rights Act** made segregation in public places **illegal**. But the fight against racism goes on until today.", de:"**1964** verbot der **Civil Rights Act** die Rassentrennung an öffentlichen Orten. Der Kampf gegen Rassismus geht bis heute weiter."}
+    ]}
+  },
+  levels: [
+    { id:"culture", typ:"quiz", lernen:"south", icon:"🎺", titel:"Southern Culture", art:"Quiz",
+      anleitung:"What do you know about the South?",
+      anleitungDe:"Was weißt du über den Süden der USA?",
+      tipp:"Denk an die Infokarten.",
+      fragen:[
+        {q:"Which city is the birthplace of jazz?", o:["New Orleans","Nashville","Houston"], c:0},
+        {q:"Which city is called **Music City** – the home of country music?", o:["Nashville","Memphis","Atlanta"], c:0},
+        {q:"Where did Elvis Presley live (Graceland)?", o:["Memphis","Miami","Dallas"], c:0},
+        {q:"What is **Mardi Gras**?", o:["a big carnival in New Orleans","a type of soup","a music style"], c:0},
+        {q:"What does **y’all** mean?", o:["you all","yes, always","yellow"], c:0},
+        {q:"What is **southern hospitality**?", o:["being very friendly to guests","a hospital in the South","a type of food"], c:0},
+        {q:"Where can you see alligators in the wild?", o:["in the Everglades","in Central Park","at Niagara Falls"], c:0}
+      ]},
+    { id:"food", typ:"sortieren", lernen:"south", icon:"🍤", titel:"Southern Kitchen", art:"Food · sort",
+      anleitung:"Where does it come from? Tap the right box.",
+      anleitungDe:"Woher kommt es? Tippe auf das richtige Kästchen.",
+      tipp:"Louisiana: französische/kreolische Küche. Texas: Tex-Mex. Musik: jazz, blues, country.",
+      koerbe:[ {t:"Louisiana food", info:"🍤"}, {t:"Tex-Mex", info:"🌮"}, {t:"Music style", info:"🎸"} ],
+      items:[
+        {t:"gumbo", k:0}, {t:"jambalaya", k:0}, {t:"crawfish boil", k:0}, {t:"beignets", k:0, e:"**Beignets** are sweet fried pastries – famous in New Orleans."},
+        {t:"nachos", k:1}, {t:"fajitas", k:1}, {t:"chili con carne", k:1}, {t:"quesadillas", k:1},
+        {t:"jazz", k:2}, {t:"blues", k:2}, {t:"country", k:2}, {t:"rock 'n' roll", k:2}
+      ]},
+    { id:"rights", typ:"zeitstrahl", lernen:"rights", icon:"⚖️", titel:"The Fight for Equal Rights", art:"Timeline · 5 events",
+      anleitung:"Put the events in the right order – **the oldest first**.",
+      anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
+      tipp:"Erst der Busstreik, dann die Rede, dann das Gesetz.",
+      items:[
+        {j:"1865", t:"Slavery ends in the USA."}, {j:"1955", t:"Rosa Parks refuses to give up her seat on the bus."},
+        {j:"1963", t:"Martin Luther King Jr.: “I have a dream.”"}, {j:"1964", t:"The Civil Rights Act becomes law."}, {j:"2009", t:"Barack Obama becomes the first Black president."}
+      ]},
+    { id:"rq", typ:"quiz", lernen:"rights", icon:"✊", titel:"Civil Rights Quiz", art:"Quiz",
+      anleitung:"What do you know about the civil rights movement?",
+      anleitungDe:"Was weißt du über die Bürgerrechtsbewegung?",
+      tipp:"Schau dir das Video an.",
+      fragen:[
+        {q:"What was **segregation**?", o:["keeping Black and white people apart","a type of music","a school subject"], c:0},
+        {q:"What did Rosa Parks do in 1955?", o:["She refused to give up her bus seat.","She became president.","She wrote a song."], c:0},
+        {q:"In which city did this happen?", o:["Montgomery, Alabama","New York","Chicago"], c:0},
+        {q:"What is a **boycott**?", o:["people stop using or buying something as a protest","a type of bus","a big party"], c:0},
+        {q:"How did Martin Luther King Jr. fight for equal rights?", o:["without violence","with weapons","with money"], c:0},
+        {q:"What did the Civil Rights Act of 1964 do?", o:["It made segregation in public places illegal.","It ended the Gold Rush.","It started Thanksgiving."], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🎷", titel:"A Trip to New Orleans", art:"Text · fill in the gaps",
+      anleitung:"Read Ben’s travel blog. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Bens Reiseblog. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"NOLA, baby!",
+      text:"We arrived in New Orleans just in time for [[Mardi Gras|Mardi Grass|Mary Gras]]! The [[parades|paradise|parachutes]] were loud and colourful. Everywhere there were bands playing [[jazz|jeans|jam]]. For dinner we had [[gumbo|gumball|jumbo]] with rice – delicious!\nThe people here are so friendly. A man in a café said: “How are [[y'all|yo all|you'll]] doing?” That’s [[southern hospitality|south hospital|southern hostility]]! Next we’re driving to Montgomery to learn about [[Rosa Parks|Rosa Park|Rose Parker]] and the civil rights [[movement|moving|monument]].",
+      erklaerung:"Southern words: **Mardi Gras, parades, jazz, gumbo, y’all, southern hospitality, civil rights movement**."}
+  ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Ellis Island Archive – Simple past & past perfect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"grammar", id:"past8", icon:"🗽", kartenSymbol:"🧳",
+  titel:"Ellis Island Archive", untertitel:"Simple past & past perfect",
+  text:"Open the old immigration files! Tell the stories of people who came to New York – with the simple past and the past perfect.",
+  lernen: {
+    pp: { titel:"Past perfect – the past before the past", folien:[
+      {bild:"⏪", titel:"Simple past", text:"We use the **simple past** for finished actions in the past: *He **opened** a shop. We **didn’t see** the zoo. It **wasn’t** a safe place.*", de:"Das **simple past** benutzt man für abgeschlossene Handlungen in der Vergangenheit."},
+      {bild:"⏮️", titel:"Past perfect = had + 3rd form", text:"The **past perfect** shows that something happened **before** another action in the past: *After I **had come** home, I took a shower.*", de:"Das **past perfect** (Vorvergangenheit) zeigt, dass etwas **vor** einer anderen Handlung in der Vergangenheit passiert ist. Bildung: **had + 3. Form**."},
+      {bild:"🧳", titel:"Two actions – which was first?", text:"*Before Maria went to America, she **had sold** her house.* First she sold the house (past perfect), then she went (simple past).", de:"Zuerst hat sie das Haus verkauft (past perfect), dann ist sie gegangen (simple past)."},
+      {bild:"🚫", titel:"Negatives and questions", text:"*They **hadn’t seen** the sea before.* – ***Had** you ever **seen** skyscrapers before?*", de:"Verneinung: **hadn’t + 3. Form**. Frage: **Had + Person + 3. Form …?**"},
+      {bild:"🔑", titel:"Signal words", text:"**after, before, already, never … before, by the time, when** often go with the past perfect.", de:"Signalwörter: **after, before, already, never … before, by the time, when**."}
+    ]}
+  },
+  levels: [
+    { id:"forms", typ:"rush", icon:"⚡", titel:"Passport Rush", art:"Irregular verbs · 60 seconds",
+      anleitung:"Choose the right **past participle** (3rd form) – fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wähle schnell die richtige **3. Form**. **Ziel: 12 richtige** in 60 Sekunden.",
+      tipp:"Past perfect braucht die 3. Form: had **gone**, had **seen**, had **written**.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"leave", o:["left","leaved","leaft"], c:0}, {q:"bring", o:["brought","bringed","brang"], c:0}, {q:"become", o:["become","became","becomed"], c:0},
+        {q:"begin", o:["begun","began","beginned"], c:0}, {q:"choose", o:["chosen","chose","choosed"], c:0}, {q:"forget", o:["forgotten","forgot","forgetted"], c:0},
+        {q:"get", o:["got","getted","gat"], c:0}, {q:"hide", o:["hidden","hid","hided"], c:0}, {q:"know", o:["known","knew","knowed"], c:0},
+        {q:"lose", o:["lost","losed","losen"], c:0}, {q:"pay", o:["paid","payed","paied"], c:0}, {q:"sell", o:["sold","selled","sellen"], c:0},
+        {q:"speak", o:["spoken","spoke","speaked"], c:0}, {q:"steal", o:["stolen","stole","stealed"], c:0}, {q:"take", o:["taken","took","taked"], c:0},
+        {q:"tell", o:["told","telled","tolden"], c:0}, {q:"think", o:["thought","thinked","thank"], c:0}, {q:"wear", o:["worn","wore","weared"], c:0},
+        {q:"write", o:["written","wrote","writed"], c:0}, {q:"fly", o:["flown","flew","flied"], c:0}, {q:"see", o:["seen","saw","seed"], c:0}, {q:"go", o:["gone","went","goed"], c:0}
+      ]},
+    { id:"first", typ:"quiz", lernen:"pp", icon:"🧭", titel:"What Happened First?", art:"Past perfect · quiz",
+      anleitung:"Read the sentence. Which action happened **first**?",
+      anleitungDe:"Lies den Satz. Welche Handlung ist **zuerst** passiert?",
+      tipp:"Die Handlung im past perfect (had + 3. Form) war zuerst.",
+      fragen:[
+        {q:"When Anna arrived at Ellis Island, her brother **had** already **left**.", o:["Her brother left.","Anna arrived."], c:0, e:"*had left* = past perfect → this happened first."},
+        {q:"After they **had passed** the health check, they **took** the ferry to Manhattan.", o:["They passed the health check.","They took the ferry."], c:0},
+        {q:"Tom **had never seen** a skyscraper before he **came** to New York.", o:["He hadn’t seen a skyscraper (before).","He came to New York."], c:0},
+        {q:"The ship **left** Liverpool after the passengers **had said** goodbye.", o:["The passengers said goodbye.","The ship left."], c:0},
+        {q:"By the time Luca **found** a job, he **had spent** all his money.", o:["He spent all his money.","He found a job."], c:0},
+        {q:"She **was** tired because she **hadn’t slept** on the ship.", o:["She didn’t sleep on the ship.","She was tired."], c:0}
+      ]},
+    { id:"build", typ:"satzbau", lernen:"pp", icon:"📜", titel:"Immigrant Stories", art:"Sentence builder",
+      anleitung:"Build the sentence with the **past perfect** and the **simple past**.",
+      anleitungDe:"Bau den Satz mit **past perfect** und **simple past**, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"past perfect = had + 3. Form. Was zuerst passiert ist, steht im past perfect.",
+      punkte:2,
+      saetze:[
+        {w:["After","she","had","sold","her","house,","she","bought","a","ticket"], hint:"🇩🇪 Nachdem sie ihr Haus verkauft hatte, kaufte sie eine Fahrkarte."},
+        {w:["They","had","never","seen","the","ocean","before"], hint:"🇩🇪 Sie hatten den Ozean noch nie zuvor gesehen."},
+        {w:["Had","you","ever","been","to","New","York","before","?"], hint:"🇩🇪 Warst du schon einmal vorher in New York gewesen?"},
+        {w:["When","we","arrived,","the","ship","had","already","left"], hint:"🇩🇪 Als wir ankamen, war das Schiff schon abgefahren."},
+        {w:["He","hadn't","learned","English","before","he","came"], hint:"🇩🇪 Er hatte kein Englisch gelernt, bevor er kam."},
+        {w:["She","was","happy","because","she","had","found","a","job"], hint:"🇩🇪 Sie war glücklich, weil sie eine Arbeit gefunden hatte."}
+      ]},
+    { id:"which", typ:"quiz", icon:"⚖️", titel:"Simple Past or Past Perfect?", art:"Quiz · choose the form",
+      anleitung:"Choose the right form.",
+      anleitungDe:"Wähle die richtige Form.",
+      tipp:"Zwei Handlungen in der Vergangenheit: die frühere im past perfect, die spätere im simple past.",
+      fragen:[
+        {q:"When I got to the station, the train **___**.", o:["had already left","already left","has already left"], c:0, e:"The train left **before** I got there → past perfect."},
+        {q:"Yesterday we **___** the Statue of Liberty.", o:["visited","had visited","have visit"], c:0, e:"Only one action, a finished time (*yesterday*) → simple past."},
+        {q:"She couldn’t pay because she **___** her wallet.", o:["had lost","lost","has lost"], c:0, e:"She lost her wallet **before** → past perfect."},
+        {q:"After they had eaten, they **___** for a walk.", o:["went","had gone","have gone"], c:0, e:"The later action → simple past."},
+        {q:"I **___** never **___** a hot dog before I went to New York.", o:["had – eaten","have – eaten","did – eat"], c:0, e:"*never … before* + past action → past perfect."},
+        {q:"In 1892 Ellis Island **___**.", o:["opened","had opened","has opened"], c:0, e:"A date in the past → simple past."},
+        {q:"**___** they **___** a place to live before they arrived?", o:["Had – found","Did – found","Have – find"], c:0, e:"Question in the past perfect: **Had** + subject + 3rd form."},
+        {q:"We **___** the museum because it was closed.", o:["didn't visit","hadn't visit","didn't visited"], c:0, e:"Negative simple past: **didn’t + base form**."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🗃️", titel:"File No. 1907", art:"Story · fill in the gaps",
+      anleitung:"Read Giulia’s story from the archive. Tap a gap and choose the right form.",
+      anleitungDe:"Lies Giulias Geschichte aus dem Archiv. Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"Was war zuerst? → had + 3. Form.",
+      ueberschrift:"Giulia Rossi, 14, from Naples",
+      text:"In 1907 Giulia and her mother [[left|had left|leaved]] Italy. Her father [[had gone|went|has gone]] to New York two years before. After they [[had travelled|travelled|have travelled]] for twelve days, they finally [[saw|had seen|seed]] the Statue of Liberty.\nAt Ellis Island a doctor [[checked|had checked|checks]] their eyes. Giulia was nervous because she [[had heard|heard|has heard]] stories about families who had to go back. But the doctor smiled. When they came out of the hall, her father [[was|had been|were]] already waiting. He [[had found|found|has found]] a small flat in Little Italy. Giulia [[had never seen|never saw|has never seen]] such tall buildings before!",
+      erklaerung:"The action that happened **earlier** → **had + 3rd form**."}
+  ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Words: School, Jobs & Weather – Vocabulary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"vocabulary", id:"vschool8", icon:"🎒", kartenSymbol:"🎓",
+  titel:"Words: School, Jobs & Weather", untertitel:"High school, student jobs, extreme weather",
+  text:"Lockers, electives, part-time jobs and tornadoes: the words for teen life in the Midwest.",
+  levels: [
+    { id:"pairs", typ:"memory", icon:"🧩", titel:"High School Pairs", art:"Word – meaning · memory",
+      anleitung:"Find the pairs: **word + meaning**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Wort + Bedeutung**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Typische Wörter aus einer amerikanischen High School.",
+      paare:[ {a:"locker", b:"a small cupboard for your things"}, {a:"elective", b:"a subject you choose"}, {a:"grade", b:"a class level, e.g. 9th grade"}, {a:"freshman", b:"a student in 9th grade"},
+              {a:"cafeteria", b:"where you eat lunch at school"}, {a:"principal", b:"the head of a school"}, {a:"prom", b:"a big dance at the end of the year"}, {a:"graduation", b:"the ceremony when you finish school"} ]},
+    { id:"jobs", typ:"quiz", icon:"💼", titel:"Student Jobs", art:"Jobs · quiz",
+      anleitung:"Which job is it?",
+      anleitungDe:"Welcher Job ist gemeint?",
+      tipp:"Lies, was die Person macht.",
+      fragen:[
+        {q:"You look after small children when their parents are out.", o:["babysitter","lifeguard","cashier"], c:0},
+        {q:"You watch swimmers at the pool and help in an emergency.", o:["lifeguard","waiter","dog walker"], c:0},
+        {q:"You take money from customers in a store.", o:["cashier","customer","manager"], c:0},
+        {q:"You bring food and drinks to people in a restaurant.", o:["server / waiter","chef","guest"], c:0},
+        {q:"You cut the grass in other people’s gardens.", o:["mow lawns","wash cars","deliver papers"], c:0},
+        {q:"A person who buys something in a shop.", o:["customer","costumer","custom"], c:0, e:"Careful: *costume* = Kostüm!"},
+        {q:"What do you do if a customer **complains**?", o:["listen and try to help","laugh","go home"], c:0, e:"**complain** = sich beschweren."},
+        {q:"Money that you earn for your work.", o:["wage / salary","tip only","pocket money"], c:0, e:"A **tip** is extra money from happy customers."}
+      ]},
+    { id:"weather", typ:"sortieren", icon:"🌪️", titel:"Storm Chasers", art:"Word groups · sort",
+      anleitung:"Where does the word belong? Tap the right box.",
+      anleitungDe:"Zu welcher Gruppe gehört das Wort? Tippe auf das richtige Kästchen.",
+      tipp:"Wetter – Schule – Arbeit.",
+      koerbe:[ {t:"Weather", info:"🌪️"}, {t:"School", info:"🏫"}, {t:"Work", info:"💼"} ],
+      items:[
+        {t:"tornado", k:0}, {t:"thunderstorm", k:0}, {t:"hail", k:0, e:"**hail** = Hagel."}, {t:"flood", k:0},
+        {t:"locker", k:1}, {t:"report card", k:1}, {t:"homework", k:1}, {t:"semester", k:1},
+        {t:"customer", k:2}, {t:"part-time job", k:2}, {t:"boss", k:2}, {t:"shift", k:2, e:"A **shift** = Schicht (at work)."}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Bell Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Schließfach", o:["locker","looker","lock"], c:0}, {q:"Wahlfach", o:["elective","selective","election"], c:0}, {q:"Schulleiter(in)", o:["principal","principle","prinzipal"], c:0},
+        {q:"Zeugnis (US)", o:["report card","report cart","school paper"], c:0}, {q:"Führerschein (US)", o:["driver's license","drive's license","driving card"], c:0},
+        {q:"sich beschweren", o:["complain","complane","explain"], c:0}, {q:"Kunde", o:["customer","costumer","custumer"], c:0},
+        {q:"verdienen", o:["earn","learn","ear"], c:0}, {q:"Gewitter", o:["thunderstorm","thunder storm s","thundastorm"], c:0},
+        {q:"Wirbelsturm", o:["tornado","tornardo","tomato"], c:0}, {q:"Hagel", o:["hail","hall","hale"], c:0},
+        {q:"furchterregend", o:["terrifying","terrified","terrific"], c:0}, {q:"Nebenjob", o:["part-time job","half job","side work"], c:0},
+        {q:"sich bewerben", o:["apply","apple","aply"], c:0}, {q:"Erfahrung", o:["experience","experiment","expierence"], c:0},
+        {q:"zuverlässig", o:["reliable","realiable","relyable"], c:0}, {q:"Pflichtfach", o:["required subject","must subject","forced subject"], c:0},
+        {q:"Abschlussfeier", o:["graduation","gradation","graduate"], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"📋", titel:"Job Application", art:"Text · fill in the gaps",
+      anleitung:"Read Jake’s application. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Jakes Bewerbung. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"Application for a summer job",
+      text:"Dear Ms Miller,\nI would like to [[apply|apple|explain]] for the summer job at your ice cream shop. I am 15 and a [[freshman|freshmen|fresh man]] at Kansas City High. I am friendly and [[reliable|reliably|relying]]. Last summer I worked as a [[babysitter|babyseater|lifeguard]] for my neighbors, so I have some [[experience|experiment|expedition]] with kids.\nI am good with [[customers|costumers|costumes]] and I stay calm when somebody [[complains|complanes|explains]]. I can work every afternoon after school, but I don’t have a [[driver's license|driving lesson|license plate]] yet. My [[principal|principle|prince]] can write a reference for me.\nYours sincerely,\nJake Peterson",
+      erklaerung:"Words: **apply, freshman, reliable, experience, customer, complain, driver’s license, principal**."}
+  ]
+});
+</script>
+</body>
+</html>

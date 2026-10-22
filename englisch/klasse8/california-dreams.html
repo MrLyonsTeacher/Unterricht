@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>California Dreams – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:8, kat:"country", id:"cal8", icon:"🌴", kartenSymbol:"🏄",
+  titel:"California Dreams", untertitel:"Gold Rush, Hollywood & the West",
+  text:"Gold, movie stars and tech giants: California has always been a land of dreams. Dig into its history and discover the West.",
+  lernen: {
+    gold: { titel:"The California Gold Rush", folien:[
+      {video:"76-Z517SwtM", titel:"Watch first: the Gold Rush", text:"Watch the short video about the **Gold Rush of 1849**.", de:"Schau dir das kurze Video über den **Goldrausch von 1849** an."},
+      {bild:"✨", jahr:"1848", titel:"Gold!", text:"In January **1848** a worker found **gold** at **Sutter’s Mill** near Sacramento. Soon the news spread all over the world.", de:"Im Januar **1848** fand ein Arbeiter an **Sutter’s Mill** **Gold**. Die Nachricht verbreitete sich weltweit."},
+      {bild:"⛏️", jahr:"1849", titel:"The forty-niners", text:"Most gold seekers arrived in **1849**, so they were called the **forty-niners**. In just a few years about **300,000** people came to California. Very few of them became rich.", de:"Die meisten Goldsucher kamen **1849** – deshalb hießen sie **forty-niners**. In wenigen Jahren kamen rund **300.000** Menschen nach Kalifornien. Nur wenige wurden reich."},
+      {bild:"🏛️", jahr:"1850", titel:"A new state", text:"Because so many people had come, California became the **31st state** of the USA in **1850**. **San Francisco** grew from a small village into a big city.", de:"Weil so viele Menschen gekommen waren, wurde Kalifornien **1850** der **31. Bundesstaat**. **San Francisco** wuchs zur Großstadt."},
+      {bild:"👖", jahr:"1873", titel:"Blue jeans", text:"Miners needed strong trousers. **Levi Strauss** and **Jacob Davis** got a patent for **jeans** with metal rivets in **1873**.", de:"Goldsucher brauchten robuste Hosen. **Levi Strauss** und **Jacob Davis** ließen sich **1873** **Jeans** mit Nieten patentieren."},
+      {bild:"💔", titel:"The dark side", text:"For the **Native Americans** of California the Gold Rush was a disaster: they lost their land, and many thousands died. Many Chinese workers were treated unfairly, too.", de:"Für die **Ureinwohner** Kaliforniens war der Goldrausch eine Katastrophe. Auch viele chinesische Arbeiter wurden ungerecht behandelt."}
+    ]},
+    west: { titel:"California today", folien:[
+      {bild:"🎬", titel:"Hollywood", text:"**Hollywood** in **Los Angeles** is the home of the American **film industry**. On the **Walk of Fame** you can see stars with famous names.", de:"**Hollywood** in **Los Angeles** ist das Zentrum der US-**Filmindustrie**."},
+      {bild:"💻", titel:"Silicon Valley", text:"Near **San Francisco** is **Silicon Valley**. Big **tech companies** like Apple and Google started here.", de:"Bei **San Francisco** liegt das **Silicon Valley** mit großen Tech-Firmen wie Apple und Google."},
+      {bild:"🌉", titel:"The Golden Gate Bridge", text:"The famous red **Golden Gate Bridge** in **San Francisco** opened in **1937**.", de:"Die rote **Golden Gate Bridge** in **San Francisco** wurde **1937** eröffnet."},
+      {bild:"🏜️", titel:"Nature", text:"California has beaches, mountains and deserts. **Death Valley** is one of the hottest places on Earth. **Yosemite National Park** is famous for its huge rocks and waterfalls.", de:"Kalifornien hat Strände, Berge und Wüsten. **Death Valley** gehört zu den heißesten Orten der Erde, der **Yosemite-Nationalpark** ist berühmt für Felsen und Wasserfälle."},
+      {bild:"👥", titel:"The most people", text:"California is the state with the **most people** – about **39 million**. Many people speak **Spanish** as well as English.", de:"Kalifornien hat die **meisten Einwohner** aller Staaten (ca. 39 Mio.). Viele sprechen auch **Spanisch**."}
+    ]}
+  },
+  levels: [
+    { id:"tl", typ:"zeitstrahl", lernen:"gold", icon:"⛏️", titel:"Gold Rush Timeline", art:"Timeline · 6 events",
+      anleitung:"Put the events in the right order – **the oldest first**.",
+      anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
+      tipp:"Erst das Gold, dann die Menschen, dann der neue Staat …",
+      items:[
+        {j:"1848", t:"Gold is found at Sutter’s Mill."}, {j:"1849", t:"Thousands of forty-niners arrive."}, {j:"1850", t:"California becomes the 31st state."},
+        {j:"1873", t:"Levi Strauss and Jacob Davis get a patent for jeans."}, {j:"1937", t:"The Golden Gate Bridge opens."}, {j:"1955", t:"Disneyland opens in Anaheim."}
+      ]},
+    { id:"gold", typ:"quiz", lernen:"gold", icon:"✨", titel:"Gold Rush Quiz", art:"Quiz",
+      anleitung:"What do you know about the Gold Rush?",
+      anleitungDe:"Was weißt du über den Goldrausch?",
+      tipp:"Schau dir das Video an.",
+      fragen:[
+        {q:"Where was gold found in 1848?", o:["at Sutter’s Mill","in Hollywood","in New York"], c:0},
+        {q:"Who were the **forty-niners**?", o:["people who came to find gold in 1849","a football team only","49 soldiers"], c:0, e:"Today the San Francisco football team is named after them!"},
+        {q:"Did most gold diggers become rich?", o:["No, very few did","Yes, all of them","Yes, most of them"], c:0},
+        {q:"Which city grew very fast because of the Gold Rush?", o:["San Francisco","Chicago","Boston"], c:0},
+        {q:"What did miners need – and Levi Strauss sold?", o:["strong trousers (jeans)","smartphones","surfboards"], c:0},
+        {q:"What did the Gold Rush mean for many Native Americans?", o:["they lost their land and many died","they all became rich","nothing changed"], c:0}
+      ]},
+    { id:"west", typ:"memory", lernen:"west", icon:"🎬", titel:"California Hotspots", art:"Place + fact · memory",
+      anleitung:"Find the pairs: **place + fact**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Ort + Information**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Lies die Infokarten.",
+      paare:[ {a:"Hollywood", b:"film industry"}, {a:"Silicon Valley", b:"tech companies"}, {a:"Golden Gate Bridge", b:"red bridge, 1937"}, {a:"Death Valley", b:"one of the hottest places"},
+              {a:"Yosemite", b:"national park with waterfalls"}, {a:"Sacramento", b:"state capital"}, {a:"Sutter's Mill", b:"gold found in 1848"}, {a:"Santa Monica", b:"end of Route 66"} ]},
+    { id:"facts", typ:"swipe", lernen:"west", icon:"✅", titel:"True or False?", art:"California facts · swipe",
+      anleitung:"Is it true? Swipe **right for True** and **left for False**.",
+      anleitungDe:"Stimmt das? Wische nach **rechts für True** und nach **links für False**.",
+      tipp:"Denk an die Infokarten.",
+      links:{t:"False", icon:"✘"}, rechts:{t:"True", icon:"✔"},
+      karten:[
+        {t:"California has more people than any other US state.", r:"r"}, {t:"Los Angeles is the capital of California.", r:"l", e:"False – **Sacramento**."},
+        {t:"Hollywood is part of Los Angeles.", r:"r"}, {t:"The Golden Gate Bridge is in Los Angeles.", r:"l", e:"False – it is in **San Francisco**."},
+        {t:"Many people in California speak Spanish.", r:"r"}, {t:"Death Valley is one of the coldest places on Earth.", r:"l", e:"False – one of the **hottest**."},
+        {t:"Apple and Google started in Silicon Valley.", r:"r"}, {t:"California became a state in 1776.", r:"l", e:"False – in **1850**."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🏄", titel:"Postcard from L.A.", art:"Text · fill in the gaps",
+      anleitung:"Read the postcard. Tap a gap and choose the right word.",
+      anleitungDe:"Lies die Postkarte. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"Greetings from the Golden State!",
+      text:"Hi Mila,\nCalifornia is amazing! It’s always a lot [[sunnier|sunny|sunnyer]] and warmer here. Yesterday we walked along the Walk of Fame in [[Hollywood|Holywood|Hollyworld]] and saw the stars of famous actors.\nToday we drove to [[Santa Monica|Santa Maria|San Marino]], where Route 66 ends, and watched the [[surfers|servers|suffers]]. Next week we’re going to San Francisco to see the [[Golden Gate Bridge|Golden Gold Bridge|Brooklyn Bridge]]. My dad wants to visit an old [[gold|golf|cold]] mine, because his great-great-grandfather was a [[forty-niner|fifty-niner|forty-nine]]!\nLove, Jana",
+      erklaerung:"California words: **Hollywood, Santa Monica, surfers, Golden Gate Bridge, gold mine, forty-niner**."}
+  ]
+});
+</script>
+</body>
+</html>
