@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Unit 4 Words – Let's celebrate!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"vocabulary", id:"vu4", icon:"🎂", kartenSymbol:"🎈",
+  titel:"Unit 4 Words: Let’s celebrate!", untertitel:"Months, dates, birthdays, food, shopping",
+  text:"Months and dates, birthday parties, food and shopping: all words from Unit 4 – party time on Fire Island!",
+  levels: [
+    { id:"food", typ:"memory", icon:"🍰", titel:"Party Food Memory", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Essen und Party-Wörter aus Unit 4.",
+      paare:[ {a:"butter", b:"Butter"}, {a:"flour", b:"Mehl"}, {a:"sugar", b:"Zucker"}, {a:"egg", b:"Ei"},
+              {a:"biscuit", b:"Keks"}, {a:"crisp", b:"Kartoffelchip"}, {a:"candle", b:"Kerze"}, {a:"present", b:"Geschenk"} ]},
+    { id:"shop", typ:"sortieren", icon:"🛒", titel:"Shopping List", art:"a bottle of, a packet of … · sort",
+      anleitung:"How do you buy it? Tap the right box.",
+      anleitungDe:"Wie kauft man das? Tippe auf das richtige Kästchen.",
+      tipp:"bottle = Flasche, packet = Packung, bar = Tafel, box = Schachtel.",
+      koerbe:[ {t:"a bottle of", info:"🍼"}, {t:"a packet of", info:"📦"}, {t:"a bar of", info:"🍫"}, {t:"a box of", info:"🥚"} ],
+      items:[ {t:"milk", k:0}, {t:"water", k:0}, {t:"lemonade", k:0}, {t:"butter", k:1}, {t:"biscuits", k:1}, {t:"tea", k:1}, {t:"candles", k:1},
+              {t:"chocolate", k:2, e:"**a bar of chocolate** = eine Tafel Schokolade."}, {t:"eggs", k:3}, {t:"chocolates", k:3, e:"**a box of chocolates** = eine Schachtel Pralinen."} ]},
+    { id:"dates", typ:"quiz", icon:"📅", titel:"Birthday Dates", art:"Months & ordinal numbers · quiz",
+      anleitung:"Choose the right answer.",
+      anleitungDe:"Wähle die richtige Antwort.",
+      tipp:"Man schreibt *7th July* und sagt *on the seventh of July*.",
+      fragen:[
+        {q:"What comes after **April**?", o:["May","March","June"], c:0}, {q:"The **3rd** is …", o:["the third","the three","the thirdth"], c:0},
+        {q:"The **1st** is …", o:["the first","the oneth","the one"], c:0}, {q:"The **12th** is …", o:["the twelfth","the twelveth","the twelve"], c:0},
+        {q:"How do you say **7th July**?", o:["the seventh of July","seven July","July the seven"], c:0}, {q:"My birthday is **___** 7th July.", o:["on","in","at"], c:0, e:"Date → **on**: on 7th July. Month → **in**: in July."},
+        {q:"The Notting Hill Carnival is **___** August.", o:["in","on","at"], c:0}, {q:"Halloween is in …", o:["October","December","March"], c:0}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Word Test Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise – wie in einem Vokabeltest.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"feiern",o:["celebrate","celebrat","selebrate"],c:0},{q:"Kostüm",o:["costume","custom","costum"],c:0},{q:"gruselig",o:["scary","scarry","scared"],c:0},
+        {q:"sammeln",o:["collect","colect","correct"],c:0},{q:"Geld",o:["money","many","monney"],c:0},{q:"Abend",o:["evening","evning","event"],c:0},
+        {q:"Kleidung",o:["clothes","cloths","close"],c:0},{q:"Geburtstag",o:["birthday","birthdy","berthday"],c:0},{q:"Weihnachten",o:["Christmas","Chrismas","Christmes"],c:0},
+        {q:"Überraschung",o:["surprise","suprise","surprize"],c:0},{q:"immer",o:["always","allways","alway"],c:0},{q:"manchmal",o:["sometimes","sometime","somtimes"],c:0},
+        {q:"Flasche",o:["bottle","botle","battle"],c:0},{q:"Dose",o:["can","cane","dose"],c:0},{q:"Einkaufszettel",o:["shopping list","shop list","buying list"],c:0},
+        {q:"Wechselgeld",o:["change","chance","cash back"],c:0},{q:"Einladung",o:["invitation","invitaion","invitashun"],c:0},{q:"Luftballon",o:["balloon","baloon","ballon"],c:0},
+        {q:"Wie bitte?",o:["Pardon?","Please?","Sorry me?"],c:0},{q:"Tante-Emma-Laden",o:["corner shop","aunt shop","small shopping"],c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🛍️", titel:"At the Corner Shop", art:"Dialogue · fill in the gaps",
+      anleitung:"Dave is at the corner shop. Tap a gap and choose the right word.",
+      anleitungDe:"Dave ist im Laden an der Ecke. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus Unit 4.",
+      ueberschrift:"Shopping for Jay’s party",
+      text:"Shop assistant: Hello! How can I [[help|hello|hold]] you?\nDave: Hi! I need some things for a birthday [[cake|cage|cape]]. Can I have a [[packet|pocket|parrot]] of butter and a box of [[eggs|ecks|legs]], please?\nShop assistant: Here you are. [[Anything|Everything|Nothing]] else?\nDave: Yes, a bottle of [[lemonade|lemonaid|lemon]] and a bar of chocolate. How [[much|many|mutch]] is that?\nShop assistant: That’s £4.25.\nDave: Here you are.\nShop assistant: Thanks. Here’s your [[change|chance|chain]].\nDave: Thank you!\nShop assistant: You’re [[welcome|welcom|well come]].",
+      erklaerung:"Shopping words: **How can I help you? · packet · box · Anything else? · How much is that? · change · You’re welcome**."}
+  ]
+});
+</script>
+</body>
+</html>

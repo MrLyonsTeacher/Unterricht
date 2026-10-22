@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Unit 1 Words – Family & My Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"vocabulary", id:"vu1", icon:"🏠", kartenSymbol:"🏠",
+  titel:"Unit 1 Words: I’m from Greenwich", untertitel:"Hello, numbers, colours, family, my room",
+  text:"All the words from Welcome, Zoom in and Unit 1: say hello, count, name colours, talk about your family and your room.",
+  levels: [
+    { id:"fam", typ:"memory", icon:"👨‍👩‍👧", titel:"Family Memory", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Familienwörter aus Unit 1.",
+      paare:[ {a:"mum / mother", b:"Mama / Mutter"}, {a:"dad / father", b:"Papa / Vater"}, {a:"sister", b:"Schwester"}, {a:"brother", b:"Bruder"},
+              {a:"aunt", b:"Tante"}, {a:"uncle", b:"Onkel"}, {a:"cousin", b:"Cousin / Cousine"}, {a:"grandmother", b:"Großmutter"} ]},
+    { id:"room", typ:"sortieren", icon:"🛏️", titel:"Tidy Your Room", art:"Word groups · sort",
+      anleitung:"Where does the word belong? Tap the right box.",
+      anleitungDe:"Zu welcher Gruppe gehört das Wort? Tippe auf das richtige Kästchen.",
+      tipp:"Zimmer-Sachen, Farben oder Familie?",
+      koerbe:[ {t:"room things", info:"🛏️"}, {t:"colours", info:"🎨"}, {t:"family", info:"👪"} ],
+      items:[ {t:"table", k:0}, {t:"chair", k:0}, {t:"shelf", k:0}, {t:"wardrobe", k:0}, {t:"carpet", k:0},
+              {t:"purple", k:1}, {t:"grey", k:1}, {t:"orange", k:1}, {t:"brown", k:1},
+              {t:"parents", k:2}, {t:"grandfather", k:2}, {t:"cousin", k:2} ]},
+    { id:"quiz", typ:"quiz", icon:"👋", titel:"Hello, Greenwich!", art:"Phrases · quiz",
+      anleitung:"What do you say? Choose the right answer.",
+      anleitungDe:"Was sagst du? Wähle die richtige Antwort.",
+      tipp:"Ganze Sätze lernen hilft!",
+      fragen:[
+        {q:"Somebody asks: “What’s your name?”", o:["My name is Ben.","I’m eleven.","I’m from Greenwich."], c:0},
+        {q:"Somebody asks: “How old are you?”", o:["I’m eleven.","I’m fine.","I’m Ben."], c:0},
+        {q:"Somebody asks: “Where are you from?”", o:["I’m from Greenwich.","I’m twelve.","It’s blue."], c:0},
+        {q:"You meet a new friend. You say:", o:["Nice to meet you.","See you later.","Goodbye."], c:0},
+        {q:"Somebody knocks on the door. You ask:", o:["Who is it?","How old are you?","What colour is it?"], c:0},
+        {q:"Your friend leaves. You say:", o:["See you later!","Hello there!","Nice to meet you."], c:0},
+        {q:"What is **12** in English?", o:["twelve","twenty","eleven"], c:0},
+        {q:"What’s **under** in German?", o:["unter","neben","auf"], c:0}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Word Test Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise – wie in einem Vokabeltest.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Schlafzimmer",o:["bedroom","bedrom","bad room"],c:0},{q:"Kleiderschrank",o:["wardrobe","wardrop","cupboard"],c:0},{q:"Teppich",o:["carpet","carpit","cabbage"],c:0},
+        {q:"Regal",o:["shelf","shelve","shell"],c:0},{q:"Handy",o:["mobile","mobil","handy"],c:0},{q:"Wecker",o:["alarm clock","wake clock","alarm watch"],c:0},
+        {q:"Garten",o:["garden","gardon","garten"],c:0},{q:"Freund/Freundin",o:["friend","frend","freind"],c:0},{q:"Haustier",o:["pet","pat","pit"],c:0},
+        {q:"Meerschweinchen",o:["guinea pig","sea pig","guinea pick"],c:0},{q:"Fahrrad",o:["bike","bik","bicke"],c:0},{q:"Unordnung",o:["mess","mass","mist"],c:0},
+        {q:"Zeitschrift",o:["magazine","magazin","magasine"],c:0},{q:"Lieblings-",o:["favourite","favorit","favourit"],c:0},{q:"Küche",o:["kitchen","kitchin","chicken"],c:0},
+        {q:"Wohnzimmer",o:["living room","live room","sitting rom"],c:0},{q:"Badezimmer",o:["bathroom","bathrum","bathrom"],c:0},{q:"lila",o:["purple","purpel","pink"],c:0},
+        {q:"Glückszahl",o:["lucky number","happy number","luck number"],c:0},{q:"Farbe",o:["colour","collour","coloure"],c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🛏️", titel:"Luke’s Room", art:"Text · fill in the gaps",
+      anleitung:"Read about Luke’s room. Tap a gap and choose the right word.",
+      anleitungDe:"Lies über Lukes Zimmer. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus Unit 1.",
+      ueberschrift:"Luke, your room is a mess!",
+      text:"It’s Saturday and Luke is at [[home|house|room]]. His [[bedroom|bathroom|kitchen]] is green and it’s nice – but it’s a [[mess|mass|miss]]! There’s a T-shirt [[under|on|next]] the bed and two books on the [[floor|flower|flour]].\n“Where is my [[mobile|mobil|magazine]]?” Luke asks. “I can’t [[find|fine|fight]] it!” His mum says: “Look on the [[shelf|shell|self]] next to your [[wardrobe|wardrop|window]].” – “Thanks, Mum!”",
+      erklaerung:"Unit 1 words: **home, bedroom, mess, under, floor, mobile, find, shelf, wardrobe**."}
+  ]
+});
+</script>
+</body>
+</html>

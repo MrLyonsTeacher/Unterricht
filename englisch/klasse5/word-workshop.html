@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Word Forge – plurals, 's, a/an, I/me/my</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"grammar", id:"word5", icon:"⚒️", kartenSymbol:"⚒️",
+  titel:"The Word Forge", untertitel:"Plurals · s-genitive · a/an · I – me – my",
+  text:"In the hot forge of Fire Island we make words: one boy, two boys – Dave’s cat – a boy, an animal – I, me, my.",
+  lernen: {
+    w: { titel:"Small words, big help", folien:[
+      {bild:"👦", titel:"Plurals", text:"Most words get **-s**: *boy → boys*. After s, sh, ch, x: **-es**: *box → boxes*. Consonant + y: **-ies**: *family → families*. Irregular: *man → men, woman → women, child → children, mouse → mice, fish → fish*.", de:"Mehrzahl meist mit **-s**, manchmal **-es** oder **-ies**. Unregelmäßige Formen musst du lernen."},
+      {bild:"🐱", titel:"The s-genitive", text:"***Dave’s** cat* = the cat of Dave. – *my **sister’s** room*. Plural with -s: *my **parents’** car*.", de:"**s-Genitiv**: Wem gehört etwas? *Dave’s cat* = Daves Katze."},
+      {bild:"🅰️", titel:"a or an?", text:"**a** before a consonant **sound**: *a boy, a bike*. **an** before a vowel **sound**: *an animal, an egg, an orange*.", de:"**a** vor Konsonanten-Laut, **an** vor Vokal-Laut (a, e, i, o, u)."},
+      {bild:"🙋", titel:"I – me – my", text:"*I* like Luke. → Luke likes ***me***. → This is ***my*** dog. – *he – him – his, she – her – her, we – us – our, they – them – their*.", de:"Personalpronomen und Begleiter: I – me – my, he – him – his, she – her – her …"}
+    ]}
+  },
+  levels: [
+    { id:"pl", typ:"sortieren", lernen:"w", icon:"👦", titel:"Plural Forge", art:"Plurals · sort",
+      anleitung:"How do you make the plural? Tap the right box.",
+      anleitungDe:"Wie bildet man die Mehrzahl? Tippe auf das richtige Kästchen.",
+      tipp:"-s, -es, -ies – oder unregelmäßig?",
+      koerbe:[ {t:"+ s", info:"boy → boys"}, {t:"+ es", info:"box → boxes"}, {t:"y → ies", info:"baby → babies"}, {t:"irregular", info:"man → men"} ],
+      items:[ {t:"cat", k:0}, {t:"book", k:0}, {t:"day", k:0, e:"Vowel + y → just **-s**: days."}, {t:"box", k:1}, {t:"bus", k:1}, {t:"sandwich", k:1},
+              {t:"family", k:2}, {t:"party", k:2}, {t:"city", k:2}, {t:"child", k:3, e:"child → **children**."}, {t:"mouse", k:3, e:"mouse → **mice**."}, {t:"woman", k:3, e:"woman → **women**."} ]},
+    { id:"aan", typ:"swipe", lernen:"w", icon:"🅰️", titel:"a or an?", art:"Swipe",
+      anleitung:"Which word fits? Swipe **left for a** and **right for an**.",
+      anleitungDe:"Welches Wort passt? Wische nach **links für a** und nach **rechts für an**.",
+      tipp:"an vor a, e, i, o, u (Laut!).",
+      links:{t:"a", icon:"🅰️"}, rechts:{t:"an", icon:"🔤"},
+      karten:[ {t:"___ animal", r:"r"}, {t:"___ dog", r:"l"}, {t:"___ egg", r:"r"}, {t:"___ bike", r:"l"}, {t:"___ orange", r:"r"},
+               {t:"___ banana", r:"l"}, {t:"___ elephant", r:"r"}, {t:"___ exercise book", r:"r"}, {t:"___ pencil", r:"l"}, {t:"___ uncle", r:"r"} ]},
+    { id:"gen", typ:"quiz", lernen:"w", icon:"🐱", titel:"Whose Is It?", art:"s-genitive · quiz",
+      anleitung:"Choose the right form.",
+      anleitungDe:"Wähle die richtige Form.",
+      tipp:"Dave’s cat = die Katze von Dave.",
+      fragen:[
+        {q:"The cat of Dave is …", o:["Dave's cat","Daves cat","the cat Dave"], c:0}, {q:"The room of my sister is …", o:["my sister's room","my sisters room","my room sister"], c:0},
+        {q:"The bike of Luke is …", o:["Luke's bike","Lukes bike","bike's Luke"], c:0}, {q:"The car of my parents is …", o:["my parents' car","my parent's car","my parentses car"], c:0, e:"Plural with -s → apostrophe **after** the s: parents’."},
+        {q:"This is **___** dog. (Olivia)", o:["Olivia's","Olivias","Olivia"], c:0}, {q:"Sherlock is **___** pet. (Luke)", o:["Luke's","Lukes'","Luke"], c:0}
+      ]},
+    { id:"pro", typ:"quiz", lernen:"w", icon:"🙋", titel:"I – me – my", art:"Pronouns · quiz",
+      anleitung:"Choose the right word.",
+      anleitungDe:"Wähle das richtige Wort.",
+      tipp:"I – me – my, he – him – his, she – her – her, we – us – our, they – them – their.",
+      fragen:[
+        {q:"Lucy is next to **___**. (I)", o:["me","my","I"], c:0}, {q:"Luke has a dog. **___** dog is Sherlock.", o:["His","Him","He"], c:0},
+        {q:"Olivia’s sister is five. **___** sister is cute.", o:["Her","She","His"], c:0}, {q:"Dave and Luke are there. Can you see **___**?", o:["them","they","their"], c:0},
+        {q:"The Frasers are in **___** garden.", o:["their","them","they"], c:0}, {q:"It’s Jay’s party. I have a present for **___**.", o:["him","his","he"], c:0},
+        {q:"Me and Lucy are sisters. **___** dad is cool.", o:["Our","Us","We"], c:0}, {q:"This is **___** book, Ben. (you)", o:["your","you","yours"], c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🏠", titel:"Ben’s Family", art:"Text · fill in the gaps",
+      anleitung:"Read Ben’s text. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Bens Text. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Mehrzahl, ’s, a/an, my/his/her …",
+      ueberschrift:"My family",
+      text:"Hi, I’m Ben. This is [[my|me|I]] family. I have two [[sisters|sister|sisteres]] and [[a|an|the]] older brother. My [[sister's|sisters|sister]] name is Amy. [[Her|She|His]] room is next to my room.\nWe have three [[pets|pet|petes]]: a dog, [[an|a|the]] old cat and two [[mice|mouses|mices]]. My dad likes [[them|they|their]] a lot. [[Our|Us|We]] house is in Greenwich.",
+      erklaerung:"**plurals** (sisters, mice) · **’s** (sister’s) · **a/an** · **my, her, our, them**."}
+  ]
+});
+</script>
+</body>
+</html>

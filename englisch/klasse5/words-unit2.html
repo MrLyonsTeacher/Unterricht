@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Unit 2 Words – This is my school</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"vocabulary", id:"vu2", icon:"🎒", kartenSymbol:"✏️",
+  titel:"Unit 2 Words: This is my school", untertitel:"School things, subjects, days, classroom phrases",
+  text:"Pens, rulers, timetables and Maths: all the words from Unit 2 about school.",
+  levels: [
+    { id:"things", typ:"memory", icon:"✏️", titel:"School Bag Memory", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Schulsachen aus Unit 2.",
+      paare:[ {a:"ruler", b:"Lineal"}, {a:"eraser", b:"Radiergummi"}, {a:"pencil case", b:"Federmäppchen"}, {a:"exercise book", b:"Übungsheft"},
+              {a:"glue", b:"Klebstoff"}, {a:"pencil sharpener", b:"Anspitzer"}, {a:"calculator", b:"Taschenrechner"}, {a:"felt-tip", b:"Filzstift"} ]},
+    { id:"subj", typ:"sortieren", icon:"📚", titel:"Timetable Sorter", art:"Word groups · sort",
+      anleitung:"Where does the word belong? Tap the right box.",
+      anleitungDe:"Zu welcher Gruppe gehört das Wort? Tippe auf das richtige Kästchen.",
+      tipp:"Schulfach, Wochentag oder Schulsache?",
+      koerbe:[ {t:"subjects", info:"📚"}, {t:"days", info:"📅"}, {t:"school things", info:"✏️"} ],
+      items:[ {t:"Maths", k:0}, {t:"Science", k:0}, {t:"History", k:0}, {t:"PE", k:0}, {t:"Wednesday", k:1}, {t:"Thursday", k:1}, {t:"Saturday", k:1}, {t:"Tuesday", k:1},
+              {t:"pen", k:2}, {t:"bag", k:2}, {t:"pencil", k:2}, {t:"workbook", k:2} ]},
+    { id:"class", typ:"quiz", icon:"🏫", titel:"In the Classroom", art:"Phrases · quiz",
+      anleitung:"What does it mean? Choose the right answer.",
+      anleitungDe:"Was bedeutet das? Wähle die richtige Antwort.",
+      tipp:"Diese Sätze hörst du jeden Tag.",
+      fragen:[
+        {q:"“Put your hands up.”", o:["Meldet euch.","Hände waschen.","Steht auf."], c:0}, {q:"“Take out your books, please.”", o:["Holt bitte eure Bücher heraus.","Bringt die Bücher weg.","Lest die Bücher."], c:0},
+        {q:"“Excuse me, can you close the window, please?”", o:["Entschuldigung, kannst du bitte das Fenster schließen?","Öffne bitte das Fenster.","Schau aus dem Fenster."], c:0},
+        {q:"“Sorry, I forgot my homework.”", o:["Entschuldigung, ich habe meine Hausaufgaben vergessen.","Ich habe keine Lust.","Ich bin krank."], c:0},
+        {q:"What’s **Sportunterricht** in English?", o:["PE","DT","RE"], c:0}, {q:"What’s **DT**?", o:["Technik","Deutsch","Religion"], c:0},
+        {q:"What’s **Klassenlehrer** in an English school?", o:["tutor","caretaker","singer"], c:0}, {q:"What’s **Hausmeister**?", o:["caretaker","teacher","tutor"], c:0}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Word Test Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise – wie in einem Vokabeltest.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Mittwoch",o:["Wednesday","Wendsday","Wednesdy"],c:0},{q:"Donnerstag",o:["Thursday","Thirsday","Tuesday"],c:0},{q:"Schulfach",o:["subject","subjekt","object"],c:0},
+        {q:"Stundenplan",o:["timetable","timetabble","timetabel"],c:0},{q:"Tafel",o:["board","bored","bord"],c:0},{q:"Seite",o:["page","site","paige"],c:0},
+        {q:"Rechtschreibung",o:["spelling","speling","spell"],c:0},{q:"lustig",o:["funny","funy","fun"],c:0},{q:"langweilig",o:["boring","bored","boaring"],c:0},
+        {q:"schwierig",o:["difficult","dificult","different"],c:0},{q:"interessant",o:["interesting","intresting","interested"],c:0},{q:"Witz",o:["joke","jock","juke"],c:0},
+        {q:"Pause",o:["break","brake","brek"],c:0},{q:"Schuluniform",o:["uniform","uniforme","unifrom"],c:0},{q:"Schulhof",o:["playground","playgraund","playgrund"],c:0},
+        {q:"Übung",o:["exercise","exersice","excercise"],c:0},{q:"vergessen",o:["forget","forgett","foget"],c:0},{q:"Tonstudio",o:["recording studio","record studio","sound room"],c:0},
+        {q:"zuhören",o:["listen","lisen","lesson"],c:0},{q:"Schulstunde",o:["lesson","lessen","listen"],c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🏫", titel:"Holly’s School", art:"Text · fill in the gaps",
+      anleitung:"Read Holly’s text. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Hollys Text. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus Unit 2.",
+      ueberschrift:"My school",
+      text:"I go to Thomas Tallis School. I’m in [[Year|Yard|Yeah]] 7 and my tutor [[group|grape|grip]] is 7RS. We wear a school [[uniform|uniforme|unicorn]]. Mr Swindon is my [[tutor|tooter|teacher's]].\nMy favourite [[subject|subjekt|object]] is Science – it’s really [[interesting|interested|intresting]]. Maths isn’t [[easy|easily|eazy]] for me. At [[break|brake|bread]] I go to the cafeteria with my friends. On [[Wednesdays|Wendsdays|Wednesday's]] we have PE – that’s fun!",
+      erklaerung:"Unit 2 words: **Year, tutor group, uniform, tutor, subject, interesting, easy, break, Wednesday**."}
+  ]
+});
+</script>
+</body>
+</html>

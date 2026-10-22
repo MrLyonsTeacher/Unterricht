@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Dragon Questions – don't, doesn't, Do, Does</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"grammar", id:"spq5", icon:"🔥", kartenSymbol:"❓",
+  titel:"Dragon Questions", untertitel:"Simple present: don’t, doesn’t, Do …?, Does …?",
+  text:"Interview the dragons of Fire Island! Ask questions and say what they don’t do – with do and does.",
+  lernen: {
+    q: { titel:"Negatives and questions", folien:[
+      {bild:"🚫", titel:"don’t and doesn’t", text:"*I **don’t** play. – He **doesn’t** play.* After **don’t / doesn’t** the verb has **no -s**: ~~He doesn’t plays~~.", de:"Verneinung: **don’t** (I, you, we, they) – **doesn’t** (he, she, it). Danach: Grundform ohne -s!"},
+      {bild:"❓", titel:"Do and Does", text:"***Do** you play? – **Does** he play?* Again: **no -s** on the verb!", de:"Fragen: **Do** (I, you, we, they) – **Does** (he, she, it) + Grundform."},
+      {bild:"👍", titel:"Short answers", text:"*Do you like football? – Yes, I **do**. / No, I **don’t**.* – *Does she like cats? – Yes, she **does**. / No, she **doesn’t**.*", de:"Kurzantworten mit **do / don’t / does / doesn’t**."},
+      {bild:"🔎", titel:"Question words", text:"***Where do** you go then? **What does** he eat? **When do** you get up?*", de:"Mit Fragewort: **Where / What / When + do/does + Person + Verb**."}
+    ]}
+  },
+  levels: [
+    { id:"dd", typ:"swipe", lernen:"q", icon:"🚫", titel:"don't or doesn't?", art:"Swipe",
+      anleitung:"Which word fits? Swipe **left for don’t** and **right for doesn’t**.",
+      anleitungDe:"Welches Wort passt? Wische nach **links für don’t** und nach **rechts für doesn’t**.",
+      tipp:"he, she, it → doesn’t.",
+      links:{t:"don't", icon:"👈"}, rechts:{t:"doesn't", icon:"👉"},
+      karten:[ {t:"I ___ like snakes.", r:"l"}, {t:"The dragon ___ eat bananas.", r:"r"}, {t:"We ___ go to school on Sundays.", r:"l"}, {t:"My dad ___ watch TV.", r:"r"},
+               {t:"They ___ have a pet.", r:"l"}, {t:"It ___ sleep at night.", r:"r"}, {t:"You ___ play the guitar.", r:"l"}, {t:"Olivia ___ like tea.", r:"r"},
+               {t:"Penguins ___ like the sun.", r:"l"}, {t:"The snake ___ sleep at night.", r:"r"} ]},
+    { id:"q", typ:"quiz", lernen:"q", icon:"❓", titel:"Interview a Dragon", art:"Do / Does · short answers · quiz",
+      anleitung:"Choose the right word.",
+      anleitungDe:"Wähle das richtige Wort.",
+      tipp:"Do (I, you, we, they) – Does (he, she, it).",
+      fragen:[
+        {q:"**___** you like hot food?", o:["Do","Does","Are"], c:0}, {q:"**___** your sister play netball?", o:["Does","Do","Is"], c:0},
+        {q:"Where **___** you go after school?", o:["do","does","are"], c:0}, {q:"What **___** the tiger eat?", o:["does","do","is"], c:0},
+        {q:"Does he **___** football?", o:["like","likes","liking"], c:0, e:"After *does* → **base form**: like."}, {q:"– Do you have a pet? – Yes, I **___**.", o:["do","does","am"], c:0},
+        {q:"– Does Flamy like water? – No, he **___**.", o:["doesn't","don't","isn't"], c:0}, {q:"When **___** you get up?", o:["do","does","are"], c:0}
+      ]},
+    { id:"mistake", typ:"quiz", icon:"🕵️", titel:"Spot the Mistake", art:"Which sentence is right?",
+      anleitung:"Only **one** sentence is correct. Find it!",
+      anleitungDe:"Nur **ein** Satz ist richtig. Finde ihn!",
+      tipp:"Nach don’t/doesn’t/do/does: kein -s!",
+      fragen:[
+        {q:"Which sentence is correct?", o:["He doesn't like cats.","He don't like cats.","He doesn't likes cats."], c:0},
+        {q:"Which sentence is correct?", o:["Does she play tennis?","Do she play tennis?","Does she plays tennis?"], c:0},
+        {q:"Which sentence is correct?", o:["We don't go to school on Saturday.","We doesn't go to school on Saturday.","We not go to school on Saturday."], c:0},
+        {q:"Which sentence is correct?", o:["Where do you live?","Where you live?","Where does you live?"], c:0},
+        {q:"Which sentence is correct?", o:["The monkey doesn't sleep.","The monkey don't sleep.","The monkey doesn't sleeps."], c:0},
+        {q:"Which sentence is correct?", o:["Do they like pizza?","Does they like pizza?","Do they likes pizza?"], c:0}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🧱", titel:"Question Builder", art:"Sentence builder",
+      anleitung:"Build the question or sentence.",
+      anleitungDe:"Bau die Frage oder den Satz, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Do/Does + Person + Grundform.",
+      punkte:2,
+      saetze:[
+        {w:["Do","you","like","your","work","?"], hint:"🇩🇪 Magst du deine Arbeit?"}, {w:["Does","he","like","football","?"], hint:"🇩🇪 Mag er Fußball?"},
+        {w:["Where","do","you","go","then","?"], hint:"🇩🇪 Wohin gehst du dann?"}, {w:["Penguins","don't","like","bananas"], hint:"🇩🇪 Pinguine mögen keine Bananen."},
+        {w:["The","snake","doesn't","sleep","at","night"], hint:"🇩🇪 Die Schlange schläft nachts nicht."}, {w:["What","does","the","tiger","eat","?"], hint:"🇩🇪 Was frisst der Tiger?"}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🎙️", titel:"Zoo Interview", art:"Dialogue · fill in the gaps",
+      anleitung:"Holly interviews Fred, the zookeeper. Tap a gap and choose the right word.",
+      anleitungDe:"Holly interviewt Fred, den Tierpfleger. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Do/Does – don’t/doesn’t.",
+      ueberschrift:"Holly meets the zookeeper",
+      text:"Holly: [[Do|Does|Are]] you like your work, Fred?\nFred: Yes, I [[do|does|am]]. I love animals!\nHolly: What [[does|do|is]] the tiger eat?\nFred: He eats 7 kilograms of meat a day. But he [[doesn't|don't|isn't]] eat fruit.\nHolly: [[Do|Does|Is]] the penguins like bananas?\nFred: No, they [[don't|doesn't|aren't]]! They eat fish.\nHolly: And the snake? Does it [[sleep|sleeps|sleeping]] at night?\nFred: No, it [[doesn't|don't|isn't]]. It sleeps in the day.",
+      erklaerung:"**do / does** in questions – **don’t / doesn’t** in negatives – then the **base form**."}
+  ]
+});
+</script>
+</body>
+</html>

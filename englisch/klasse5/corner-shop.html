@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>At the Corner Shop – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"country", id:"shop5", icon:"💷", kartenSymbol:"🪙",
+  titel:"At the Corner Shop", untertitel:"British money, food & shopping",
+  text:"Pounds and pence, crisps and biscuits: go shopping in a real British corner shop!",
+  lernen: {
+    money: { titel:"Money and shopping in Britain", folien:[
+      {bild:"💷", titel:"Pounds and pence", text:"In Britain people pay with **pounds** (**£**) and **pence** (**p**). **100 pence = 1 pound.**", de:"In Großbritannien bezahlt man mit **Pfund** (£) und **Pence** (p). **100 Pence = 1 Pfund.**"},
+      {bild:"🪙", titel:"Saying prices", text:"*99p* = ninety-nine **p** (pee). *£1.25* = one pound twenty-five. *£2.24* = two pounds twenty-four.", de:"Preise sagen: *£1.25* = „one pound twenty-five“."},
+      {bild:"🏪", titel:"The corner shop", text:"A **corner shop** is a small shop near your home. You can buy milk, bread, sweets, newspapers and **crisps** there.", de:"Ein **corner shop** ist ein kleiner Laden in der Nähe – wie ein Tante-Emma-Laden."},
+      {bild:"🥔", titel:"Crisps and chips", text:"Careful: **crisps** are *Kartoffelchips*. **Chips** are *Pommes frites* in Britain!", de:"Achtung: **crisps** = Kartoffelchips, **chips** = Pommes!"},
+      {bild:"🗣️", titel:"In the shop", text:"*How can I help you?* – *Can I have a bottle of milk, please?* – *Anything else?* – *How much is it?* – *Here’s your change.* – *Thank you!*", de:"Typische Sätze beim Einkaufen."}
+    ]}
+  },
+  levels: [
+    { id:"money", typ:"quiz", lernen:"money", icon:"💷", titel:"Money, Money, Money", art:"Prices · quiz",
+      anleitung:"Choose the right answer.",
+      anleitungDe:"Wähle die richtige Antwort.",
+      tipp:"100p = £1",
+      fragen:[
+        {q:"How many pence are one pound?", o:["100","10","1,000"], c:0}, {q:"How do you say **£1.25**?", o:["one pound twenty-five","one twenty-five pence","twelve pounds five"], c:0},
+        {q:"How do you say **99p**?", o:["ninety-nine p","nine nine pounds","ninety pence nine"], c:0}, {q:"Two biscuits cost 50p each. How much is that?", o:["£1","50p","£2"], c:0},
+        {q:"What are **crisps** in German?", o:["Kartoffelchips","Pommes frites","Kekse"], c:0}, {q:"What are **chips** in Britain?", o:["Pommes frites","Kartoffelchips","Kekse"], c:0},
+        {q:"You pay £5 for something that costs £4.25. Your change is …", o:["75p","£1.75","25p"], c:0}
+      ]},
+    { id:"how", typ:"sortieren", lernen:"money", icon:"🧺", titel:"Fill the Basket", art:"a bag of, a can of … · sort",
+      anleitung:"How do you buy it? Tap the right box.",
+      anleitungDe:"Wie kauft man das? Tippe auf das richtige Kästchen.",
+      tipp:"bag = Tüte, can = Dose, kilogram = Kilo, loaf = Laib.",
+      koerbe:[ {t:"a bag of", info:"🛍️"}, {t:"a can of", info:"🥫"}, {t:"a kilogram of", info:"⚖️"}, {t:"a loaf of", info:"🍞"} ],
+      items:[ {t:"apples", k:0}, {t:"nuts", k:0}, {t:"crisps", k:0}, {t:"peaches", k:1}, {t:"pet food", k:1}, {t:"tomatoes", k:1},
+              {t:"oranges", k:2}, {t:"bananas", k:2}, {t:"bread", k:3} ]},
+    { id:"say", typ:"quiz", lernen:"money", icon:"🗣️", titel:"What Do You Say?", art:"Shopping phrases · quiz",
+      anleitung:"You are in the corner shop. What do you say?",
+      anleitungDe:"Du bist im Laden an der Ecke. Was sagst du?",
+      tipp:"Höflich: please, thank you.",
+      fragen:[
+        {q:"You want a bottle of milk.", o:["Can I have a bottle of milk, please?","Give milk!","I want milk now."], c:0},
+        {q:"You want to know the price.", o:["How much is it?","How many is it?","What costs?"], c:0},
+        {q:"The shop assistant says: “Anything else?” You don’t need more.", o:["No, thanks.","Yes, please.","Here you are."], c:0},
+        {q:"You give the money to the shop assistant.", o:["Here you are.","You’re welcome.","Pardon?"], c:0},
+        {q:"You didn’t understand.", o:["Can you say that again, please?","Thank you.","Anything else?"], c:0},
+        {q:"Somebody says “Thanks!” to you.", o:["You’re welcome.","Here’s your change.","How can I help you?"], c:0}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Shop Rush", art:"Food words · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Milch",o:["milk","milc","melk"],c:0},{q:"Brot",o:["bread","bred","braed"],c:0},{q:"Käse",o:["cheese","chese","cheeze"],c:0},{q:"Pfirsich",o:["peach","peech","pitch"],c:0},
+        {q:"Nüsse",o:["nuts","nutz","notes"],c:0},{q:"Äpfel",o:["apples","apels","appels"],c:0},{q:"Mehl",o:["flour","flower","floor"],c:0},{q:"Zucker",o:["sugar","suger","shugar"],c:0},
+        {q:"Limonade",o:["lemonade","limonade","lemonaid"],c:0},{q:"Erdbeere",o:["strawberry","strawbery","strowberry"],c:0},{q:"Eiscreme",o:["ice cream","ice crem","eis cream"],c:0},
+        {q:"Kartoffelchips",o:["crisps","chips","crips"],c:0},{q:"Kekse",o:["biscuits","biscits","cookys"],c:0},{q:"Tomaten",o:["tomatoes","tomatos","tomates"],c:0},
+        {q:"Schokolade",o:["chocolate","chocolat","schokolate"],c:0},{q:"Bananen",o:["bananas","bananes","bananen"],c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🏪", titel:"Shopping for a Cake", art:"Dialogue · fill in the gaps",
+      anleitung:"Olivia goes to the corner shop. Tap a gap and choose the right word.",
+      anleitungDe:"Olivia geht in den Laden an der Ecke. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Einkaufswörter.",
+      ueberschrift:"At Mr Patel’s corner shop",
+      text:"Mr Patel: Hello Olivia! How can I [[help|hold|heal]] you?\nOlivia: Hi! I need [[some|any|much]] things for a cake. Can I have a [[packet|pocket|bottle]] of sugar and a bag of [[flour|flower|floor]], please?\nMr Patel: Here you are. Anything [[else|elf|also]]?\nOlivia: Yes, a [[bar|bag|box]] of chocolate. How much [[is|are|am]] that?\nMr Patel: That’s £3.50.\nOlivia: Here you are – £5.\nMr Patel: Thanks. And here’s your [[change|chance|cheese]]: £1.50.",
+      erklaerung:"Shopping: **How can I help you? · some · a packet of · a bag of · Anything else? · a bar of · change**."}
+  ]
+});
+</script>
+</body>
+</html>

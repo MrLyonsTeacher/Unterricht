@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Dragon Days – Simple present</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"grammar", id:"spr5", icon:"🐉", kartenSymbol:"🐲",
+  titel:"Dragon Days", untertitel:"Simple present: I play – he plays · word order",
+  text:"What does a little fire dragon do every day? Talk about habits and daily routines with the simple present.",
+  lernen: {
+    sp: { titel:"The simple present", folien:[
+      {bild:"🔁", titel:"Every day", text:"We use the **simple present** for things we do **again and again**: *I **play** football every day. We **go** to school by bus.*", de:"Das **simple present** benutzt man für Dinge, die man **regelmäßig** tut."},
+      {bild:"🐉", titel:"he, she, it – the s must fit!", text:"With **he, she, it** the verb gets an **-s**: *I play – he **plays**. I like – she **likes**.*", de:"Bei **he, she, it** bekommt das Verb ein **-s**: „he, she, it – das s muss mit!“"},
+      {bild:"✏️", titel:"-es and -ies", text:"*go → **goes**, watch → **watches**, wash → **washes***. Consonant + y: *fly → **flies**, study → **studies***. But: *play → **plays***.", de:"Nach -o, -sh, -ch, -s, -x: **-es**. Konsonant + y → **-ies**. Vokal + y → nur -s."},
+      {bild:"📍", titel:"Word order", text:"Subject – verb – object: *I **love** parties.* Words like **always, often, sometimes, never** come **before** the verb: *We **often play** games.* But after *be*: *He **is always** late.*", de:"Satzstellung: **Subjekt – Verb – Objekt**. always/often/never stehen **vor** dem Verb, aber **nach** am/is/are."}
+    ]}
+  },
+  levels: [
+    { id:"s", typ:"sortieren", lernen:"sp", icon:"✏️", titel:"s, es or ies?", art:"he/she/it · sort",
+      anleitung:"What does the verb look like with **he/she/it**? Tap the right box.",
+      anleitungDe:"Wie heißt das Verb mit **he/she/it**? Tippe auf das richtige Kästchen.",
+      tipp:"Meist -s. Nach o, sh, ch, s, x: -es. Konsonant + y: -ies.",
+      koerbe:[ {t:"+ s", info:"play → plays"}, {t:"+ es", info:"go → goes"}, {t:"y → ies", info:"fly → flies"} ],
+      items:[ {t:"play", k:0, e:"Vowel + y → just **-s**: plays."}, {t:"like", k:0}, {t:"read", k:0}, {t:"eat", k:0},
+              {t:"go", k:1}, {t:"watch", k:1}, {t:"wash", k:1}, {t:"do", k:1, e:"do → **does**."},
+              {t:"fly", k:2}, {t:"study", k:2}, {t:"cry", k:2}, {t:"carry", k:2} ]},
+    { id:"form", typ:"quiz", lernen:"sp", icon:"🐲", titel:"The Dragon’s Day", art:"Simple present · quiz",
+      anleitung:"Choose the right form.",
+      anleitungDe:"Wähle die richtige Form.",
+      tipp:"he, she, it – das s muss mit!",
+      fragen:[
+        {q:"Flamy the dragon **___** up at six o’clock.", o:["gets","get","getting"], c:0}, {q:"I **___** my teeth every morning.", o:["brush","brushes","brushs"], c:0},
+        {q:"My sister **___** to school by bus.", o:["goes","go","gos"], c:0}, {q:"We **___** pizza on Fridays.", o:["eat","eats","eating"], c:0},
+        {q:"Holly **___** her dog after school.", o:["walks","walk","walkes"], c:0}, {q:"The bird **___** over the volcano.", o:["flies","flys","fly"], c:0},
+        {q:"They **___** TV in the evening.", o:["watch","watches","watchs"], c:0}, {q:"Luke **___** his homework at four.", o:["does","do","dos"], c:0}
+      ]},
+    { id:"order", typ:"satzbau", lernen:"sp", icon:"📍", titel:"Word Order", art:"always · often · never · sentence builder",
+      anleitung:"Build the sentence. Where do **always, often, sometimes, never** go?",
+      anleitungDe:"Bau den Satz. Wo stehen **always, often, sometimes, never**?",
+      tipp:"Vor dem Verb – aber nach am/is/are.",
+      punkte:2,
+      saetze:[
+        {w:["We","often","play","games"], hint:"🇩🇪 Wir spielen oft Spiele."}, {w:["I","love","parties"], hint:"🇩🇪 Ich liebe Partys."},
+        {w:["My","dad","never","gets","up","late"], hint:"🇩🇪 Mein Papa steht nie spät auf."}, {w:["She","is","always","happy"], hint:"🇩🇪 Sie ist immer glücklich."},
+        {w:["I","sometimes","go","to","the","cinema"], hint:"🇩🇪 Ich gehe manchmal ins Kino."}, {w:["Sherlock","always","sleeps","on","my","bed"], hint:"🇩🇪 Sherlock schläft immer auf meinem Bett."}
+      ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Dragon Rush", art:"he/she/it form · 60 seconds",
+      anleitung:"Choose the **he/she/it** form – fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wähle schnell die Form für **he/she/it**! **Ziel: 12** in 60 Sekunden.",
+      tipp:"-s, -es oder -ies?",
+      zeit:60, ziel:12,
+      items:[ {q:"play",o:["plays","plaies","playes"],c:0},{q:"go",o:["goes","gos","goies"],c:0},{q:"fly",o:["flies","flys","flyes"],c:0},{q:"watch",o:["watches","watchs","watchies"],c:0},
+              {q:"do",o:["does","dos","doies"],c:0},{q:"like",o:["likes","likees","like"],c:0},{q:"have",o:["has","haves","havs"],c:0,e:"Irregular: have → **has**."},{q:"study",o:["studies","studys","studyes"],c:0},
+              {q:"wash",o:["washes","washs","washies"],c:0},{q:"read",o:["reads","readies","reades"],c:0},{q:"sleep",o:["sleeps","sleepes","sleepies"],c:0},{q:"cry",o:["cries","crys","cryes"],c:0},
+              {q:"swim",o:["swims","swimes","swimmies"],c:0},{q:"fix",o:["fixes","fixs","fixies"],c:0},{q:"say",o:["says","saies","sayes"],c:0},{q:"run",o:["runs","runes","runies"],c:0} ]},
+    { id:"story", typ:"lueckentext", icon:"🌋", titel:"A Day on Fire Island", art:"Text · fill in the gaps",
+      anleitung:"Read about Flamy’s day. Tap a gap and choose the right form.",
+      anleitungDe:"Lies über Flamys Tag. Tippe auf eine Lücke und wähle die richtige Form.",
+      tipp:"he/she/it → -s.",
+      ueberschrift:"Flamy the little dragon",
+      text:"Flamy is a little dragon. He [[lives|live|living]] on Fire Island. Every morning he [[gets|get|getting]] up at six o’clock. Then he [[has|have|haves]] breakfast – hot lava soup!\nAt eight he [[goes|go|gos]] to dragon school. His friends [[play|plays|playes]] fire football at break. Flamy [[often wins|wins often|often win]]. In the afternoon he [[watches|watch|watchs]] TV. His mum [[cooks|cook|cookes]] dinner and his sister [[flies|flys|fly]] around the volcano. At nine o’clock Flamy [[goes|go|going]] to bed.",
+      erklaerung:"Simple present: **he/she/it + s** – lives, gets, has, goes, watches, flies."}
+  ]
+});
+</script>
+</body>
+</html>

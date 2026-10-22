@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>School in England – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"country", id:"sch5", icon:"👔", kartenSymbol:"🎒",
+  titel:"School in England", untertitel:"Uniforms, tutor groups & school days",
+  text:"Year 7, uniforms and a tutor group: how is school in England different from school in Germany?",
+  lernen: {
+    sch: { titel:"School in England", folien:[
+      {video:"HwrC8oCdpQY", titel:"Watch: Schools in Britain", text:"Watch the short video about **schools in Britain**. What is different from your school?", de:"Schau dir das kurze Video über **Schulen in Großbritannien** an. Was ist anders als an deiner Schule?"},
+      {bild:"7️⃣", titel:"Year 7", text:"In England, students start **secondary school** at **11**. Their first year is **Year 7** – that’s like **Klasse 5** in Germany.", de:"In England kommt man mit **11** auf die weiterführende Schule. Das erste Jahr heißt **Year 7** – wie die **Klasse 5** bei uns."},
+      {bild:"👔", titel:"School uniform", text:"Most students wear a **school uniform**: a blazer or jumper, a shirt, a **tie**, trousers or a skirt and black shoes.", de:"Die meisten tragen eine **Schuluniform**: Blazer oder Pulli, Hemd, **Krawatte**, Hose oder Rock und schwarze Schuhe."},
+      {bild:"👩‍🏫", titel:"Tutor group", text:"Every class is a **tutor group** (e.g. 7RS) with a **tutor**. In the morning there is **registration**: the tutor checks who is there.", de:"Jede Klasse ist eine **tutor group** mit einem **tutor** (Klassenlehrer). Morgens gibt es **registration** (Anwesenheitskontrolle)."},
+      {bild:"🏫", titel:"A long school day", text:"School is from about **9 am to 3:30 pm** – every day. At lunchtime students eat in the **cafeteria** or have a **packed lunch**. Sometimes there is an **assembly** in the big hall.", de:"Der Schultag geht etwa von **9 bis 15:30 Uhr**. Mittags isst man in der **Cafeteria** oder hat ein **Lunchpaket**. Manchmal gibt es eine **Versammlung** in der Aula."},
+      {bild:"🏆", titel:"Houses and clubs", text:"Many schools have **houses** – teams that win points. After school there are **clubs**, for example football, drama or a **talent show**.", de:"Viele Schulen haben **Houses** – Teams, die Punkte sammeln. Nachmittags gibt es **Clubs** wie Fußball, Theater oder eine **Talentshow**."}
+    ]}
+  },
+  levels: [
+    { id:"cmp", typ:"swipe", lernen:"sch", icon:"🏫", titel:"England or Germany?", art:"Swipe",
+      anleitung:"Typical for a school in England or in Germany? Swipe **left for Germany** and **right for England**.",
+      anleitungDe:"Typisch für eine Schule in England oder in Deutschland? Wische nach **links für Deutschland** und nach **rechts für England**.",
+      tipp:"Denk an Uniform, Tutor und lange Schultage.",
+      links:{t:"Germany", icon:"🇩🇪"}, rechts:{t:"England", icon:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+      karten:[
+        {t:"Students wear a school uniform with a tie.", r:"r"}, {t:"School often ends at lunchtime.", r:"l"}, {t:"The first year at secondary school is Year 7.", r:"r"},
+        {t:"The first year at secondary school is Klasse 5.", r:"l"}, {t:"In the morning there is registration with the tutor.", r:"r"},
+        {t:"Students are in houses and win points.", r:"r"}, {t:"Grades go from 1 to 6.", r:"l"}, {t:"Students have assembly in the big hall.", r:"r"}
+      ]},
+    { id:"quiz", typ:"quiz", lernen:"sch", icon:"👔", titel:"School Quiz", art:"Quiz",
+      anleitung:"What do you know about school in England?",
+      anleitungDe:"Was weißt du über die Schule in England?",
+      tipp:"Schau dir das Video an.",
+      fragen:[
+        {q:"How old are students in Year 7?", o:["11 or 12","9","15"], c:0}, {q:"What do most students wear?", o:["a school uniform","pyjamas","sports clothes all day"], c:0},
+        {q:"What is a **tutor group**?", o:["a class with a tutor","a sports team","a school trip"], c:0}, {q:"What happens at **registration**?", o:["The tutor checks who is there.","Students eat lunch.","Students play football."], c:0},
+        {q:"When does school usually end?", o:["at about 3:30 pm","at 12 o’clock","at 6 pm"], c:0}, {q:"What is a **packed lunch**?", o:["food you bring from home","a big dinner","a school bag"], c:0},
+        {q:"What are **houses** at school?", o:["teams that win points","buildings for teachers","classrooms"], c:0}
+      ]},
+    { id:"uni", typ:"memory", lernen:"sch", icon:"👕", titel:"Uniform Memory", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Kleidung und Schulwörter.",
+      paare:[ {a:"tie", b:"Krawatte"}, {a:"blazer", b:"Sakko / Blazer"}, {a:"jumper", b:"Pullover"}, {a:"skirt", b:"Rock"},
+              {a:"tutor", b:"Klassenlehrer(in)"}, {a:"assembly", b:"Schulversammlung"}, {a:"packed lunch", b:"Lunchpaket"}, {a:"uniform", b:"Uniform"} ]},
+    { id:"day", typ:"zeitstrahl", icon:"⏰", titel:"Holly’s School Day", art:"Order · school day",
+      anleitung:"Put Holly’s school day in the right order – **the earliest first**.",
+      anleitungDe:"Bring Hollys Schultag in die richtige Reihenfolge – **das Früheste zuerst**.",
+      tipp:"Nach dem Prüfen siehst du die Uhrzeiten.",
+      items:[ {j:"7:30", t:"Holly puts on her school uniform."}, {j:"8:45", t:"Registration with her tutor."}, {j:"9:00", t:"Assembly in the big hall."},
+              {j:"10:30", t:"Break in the playground."}, {j:"12:30", t:"Lunch in the cafeteria."}, {j:"3:30", t:"School ends."}, {j:"3:45", t:"Netball club."} ]},
+    { id:"story", typ:"lueckentext", icon:"✉️", titel:"My New School", art:"Text · fill in the gaps",
+      anleitung:"Read Luke’s text. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Lukes Text. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"My first week at Thomas Tallis",
+      text:"I’m in [[Year 7|Year 5|Class 7]] now. Every day I wear my school [[uniform|uniforme|union]] – a blue jumper and a [[tie|tea|toe]]. At 8:45 we have [[registration|registry|regulation]] with our tutor, Mr Swindon.\nOn Mondays there is an [[assembly|assembling|ambulance]] in the big hall. At lunchtime I eat my [[packed lunch|pack lunch|lunch pack]] in the cafeteria. School ends at half past [[three|tree|free]]. My [[house|horse|home]] is called “Newton” – we have 120 points!",
+      erklaerung:"School words: **Year 7, uniform, tie, registration, assembly, packed lunch, house**."}
+  ]
+});
+</script>
+</body>
+</html>

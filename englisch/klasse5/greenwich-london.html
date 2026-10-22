@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Hello Greenwich! – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"country", id:"gre5", icon:"🕰️", kartenSymbol:"🌍",
+  titel:"Hello Greenwich!", untertitel:"Greenwich, London & the UK",
+  text:"Meet Olivia, Luke and their friends in Greenwich! Discover their part of London – the place where the world’s time begins.",
+  lernen: {
+    gre: { titel:"Greenwich and London", folien:[
+      {bild:"🗺️", titel:"Greenwich", text:"**Greenwich** is a part of **London**. It is in the **south-east** of the city, next to the **River Thames**.", de:"**Greenwich** ist ein Stadtteil von **London** im Südosten, an der **Themse**."},
+      {video:"EljVban1E2w", titel:"Watch: Why Greenwich?", text:"Watch this very short video: why is the **Prime Meridian** in Greenwich?", de:"Schau dir das sehr kurze Video an: Warum liegt der Nullmeridian in Greenwich?"},
+      {bild:"🌍", titel:"The Prime Meridian", text:"At the **Royal Observatory** there is a famous line: the **Prime Meridian** (0°). You can stand with one foot in the **east** and one foot in the **west** of the world!", de:"Am **Royal Observatory** gibt es eine berühmte Linie: den **Nullmeridian** (0°). Man kann mit einem Fuß im Osten und einem im Westen der Welt stehen!"},
+      {bild:"🕰️", titel:"Greenwich Mean Time", text:"The world’s time zones start in Greenwich. That’s why we say **GMT – Greenwich Mean Time**.", de:"Die Zeitzonen der Welt beginnen in Greenwich: **GMT – Greenwich Mean Time**."},
+      {bild:"⛵", titel:"The Cutty Sark", text:"The **Cutty Sark** is a famous old **ship**. It was very fast and brought **tea** from China to Britain. Today it is a museum.", de:"Die **Cutty Sark** ist ein berühmtes altes **Segelschiff**. Es brachte **Tee** aus China nach Großbritannien. Heute ist es ein Museum."},
+      {bild:"🌳", titel:"Greenwich Park", text:"**Greenwich Park** is a big park on a hill. From there you have a great view of London’s skyscrapers.", de:"Der **Greenwich Park** liegt auf einem Hügel – mit toller Aussicht auf die Hochhäuser Londons."},
+      {bild:"🇬🇧", titel:"London and the UK", text:"**London** is the capital of **England** and of the **UK**. The UK has four countries: **England, Scotland, Wales and Northern Ireland**. The head of state is **King Charles III**.", de:"**London** ist die Hauptstadt von England und dem UK. Das UK hat vier Länder: England, Schottland, Wales und Nordirland. Staatsoberhaupt: **König Charles III.**"},
+      {bild:"🚌", titel:"Typical London", text:"Red **double-decker** buses, black **taxis**, the **Tube** (underground) and **Big Ben** – the bell in the famous clock tower.", de:"Typisch London: rote **Doppeldeckerbusse**, schwarze **Taxis**, die **Tube** (U-Bahn) und **Big Ben**."}
+    ]}
+  },
+  levels: [
+    { id:"quiz", typ:"quiz", lernen:"gre", icon:"🕰️", titel:"Greenwich Quiz", art:"Quiz",
+      anleitung:"What do you know about Greenwich? Choose the right answer.",
+      anleitungDe:"Was weißt du über Greenwich? Wähle die richtige Antwort.",
+      tipp:"Schau dir die Infokarten an.",
+      fragen:[
+        {q:"Greenwich is a part of …", o:["London","Manchester","New York"], c:0}, {q:"Which river is next to Greenwich?", o:["the Thames","the Rhine","the Nile"], c:0},
+        {q:"What is the **Prime Meridian**?", o:["the 0° line","a big bridge","a football club"], c:0}, {q:"What does **GMT** mean?", o:["Greenwich Mean Time","Great Morning Tea","Green Map Town"], c:0},
+        {q:"What is the **Cutty Sark**?", o:["an old ship","a park","a shop"], c:0}, {q:"What did the Cutty Sark bring to Britain?", o:["tea","cars","bananas"], c:0},
+        {q:"Where is the Prime Meridian?", o:["at the Royal Observatory","in a supermarket","on a bus"], c:0}
+      ]},
+    { id:"uk", typ:"memory", lernen:"gre", icon:"🇬🇧", titel:"UK Memory", art:"Pairs · memory",
+      anleitung:"Find the pairs. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Länder und Hauptstädte, London-Symbole.",
+      paare:[ {a:"England", b:"London"}, {a:"Scotland", b:"Edinburgh"}, {a:"Wales", b:"Cardiff"}, {a:"Northern Ireland", b:"Belfast"},
+              {a:"Big Ben", b:"a big bell"}, {a:"the Tube", b:"London’s underground"}, {a:"double-decker", b:"a bus with two floors"}, {a:"Charles III", b:"the King"} ]},
+    { id:"tf", typ:"swipe", lernen:"gre", icon:"✅", titel:"True or False?", art:"Swipe",
+      anleitung:"Is it true? Swipe **right for True** and **left for False**.",
+      anleitungDe:"Stimmt das? Wische nach **rechts für True** und nach **links für False**.",
+      tipp:"Lies genau.",
+      links:{t:"False", icon:"✘"}, rechts:{t:"True", icon:"✔"},
+      karten:[
+        {t:"Greenwich is in London.", r:"r"}, {t:"The Cutty Sark is a plane.", r:"l", e:"It’s a **ship**."}, {t:"London buses are red.", r:"r"},
+        {t:"The UK has six countries.", r:"l", e:"It has **four**."}, {t:"In Greenwich you can stand in the east and in the west at the same time.", r:"r"},
+        {t:"The capital of the UK is Paris.", r:"l", e:"It’s **London**."}, {t:"Big Ben is a bell.", r:"r"}, {t:"The Tube is a river.", r:"l", e:"The Tube is London’s **underground**."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"✉️", titel:"Olivia’s Email", art:"Text · fill in the gaps",
+      anleitung:"Read Olivia’s email. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Olivias E-Mail. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus dieser Lernwelt.",
+      ueberschrift:"Hello from Greenwich!",
+      text:"Hi Lena,\nI’m Olivia and I’m from [[Greenwich|Green Witch|Greenland]]. It’s in [[London|Londen|Leeds]], next to the River [[Thames|Tames|Rhine]]. My favourite place is [[Greenwich Park|Green Park|Central Park]] – the view is great!\nAt the Royal Observatory you can stand on the [[Prime Meridian|Prime Minister|Prime Number]]. My little sister loves the [[Cutty Sark|Cutty Shark|Cutty Star]] – it’s an old [[ship|sheep|shop]]. On Saturdays we take a red [[double-decker|double-docker|two-decker]] bus into the city. Come and visit me!\nOlivia",
+      erklaerung:"Greenwich words: **Greenwich, London, Thames, Greenwich Park, Prime Meridian, Cutty Sark, ship, double-decker**."}
+  ]
+});
+</script>
+</body>
+</html>

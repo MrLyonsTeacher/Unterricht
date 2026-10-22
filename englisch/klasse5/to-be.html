@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Volcano Hello – to be</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"grammar", id:"be5", icon:"👋", kartenSymbol:"🌋",
+  titel:"Volcano Hello", untertitel:"to be: am, is, are – questions & negatives",
+  text:"Welcome to Fire Island! Say who you are, where you are from and ask questions – with am, is and are.",
+  lernen: {
+    be: { titel:"to be – am, is, are", folien:[
+      {bild:"👋", titel:"I am – you are", text:"**I am** Ben. → **I’m** Ben. – **You are** my friend. → **You’re** my friend.", de:"**I am** = ich bin, **you are** = du bist / ihr seid. Kurzformen: I’m, you’re."},
+      {bild:"🐶", titel:"he is – she is – it is", text:"**He is** eleven. → **He’s** eleven. – **She is** nice. → **She’s** nice. – **It is** a bat. → **It’s** a bat.", de:"he/she/it → **is** (Kurzform: he’s, she’s, it’s)."},
+      {bild:"👨‍👩‍👧", titel:"we are – they are", text:"**We are** in Greenwich. → **We’re** in Greenwich. – **They are** my pets. → **They’re** my pets.", de:"we/you/they → **are** (Kurzform: we’re, they’re)."},
+      {bild:"❓", titel:"Questions", text:"Put **am/is/are** first: ***Are** you ready?* – ***Is** it your bike?* – Question words: ***Where** is Greenwich? **Who** is it? **What** colour is your dog? **How old** are you?*", de:"Fragen: **am/is/are** nach vorne. Fragewörter: What? Where? Who? How old?"},
+      {bild:"🚫", titel:"Negatives", text:"I**’m not** late. – He **isn’t** at home. – We **aren’t** in the garden.", de:"Verneinung: **I’m not**, **isn’t**, **aren’t**."}
+    ]}
+  },
+  levels: [
+    { id:"sort", typ:"sortieren", lernen:"be", icon:"🔥", titel:"am, is or are?", art:"Sort",
+      anleitung:"Which word fits: **am**, **is** or **are**? Tap the right box.",
+      anleitungDe:"Welches Wort passt: **am**, **is** oder **are**? Tippe auf das richtige Kästchen.",
+      tipp:"I → am · he/she/it → is · we/you/they → are",
+      koerbe:[ {t:"am", info:"I"}, {t:"is", info:"he · she · it"}, {t:"are", info:"we · you · they"} ],
+      items:[ {t:"I ___ Olivia.", k:0}, {t:"Sherlock ___ a dog.", k:1, e:"*Sherlock* = he → **is**."}, {t:"We ___ in the park.", k:2}, {t:"You ___ my friend.", k:2},
+              {t:"It ___ a cat.", k:1}, {t:"They ___ my pets.", k:2}, {t:"My sister ___ five.", k:1}, {t:"I ___ eleven.", k:0},
+              {t:"Luke and David ___ friends.", k:2, e:"*Luke and David* = they → **are**."}, {t:"The bike ___ red.", k:1}, {t:"Mum and I ___ at home.", k:2, e:"*Mum and I* = we → **are**."}, {t:"Greenwich ___ in London.", k:1} ]},
+    { id:"qw", typ:"memory", lernen:"be", icon:"❓", titel:"Question Pairs", art:"Questions & answers · memory",
+      anleitung:"Find the pairs: **question + answer**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Frage + Antwort**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"What = was, Where = wo, Who = wer, How old = wie alt.",
+      paare:[ {a:"How old are you?", b:"I’m eleven."}, {a:"Where are you from?", b:"I’m from Greenwich."}, {a:"What’s your name?", b:"My name is Ben."}, {a:"Who is it?", b:"It’s me."},
+              {a:"Are you ready?", b:"Yes, I am."}, {a:"Is it your dog?", b:"No, it isn’t."}, {a:"What colour is your bike?", b:"It’s blue."}, {a:"Where is the book?", b:"It’s under the bed."} ]},
+    { id:"neg", typ:"quiz", lernen:"be", icon:"🚫", titel:"Not on Fire Island!", art:"Negatives · quiz",
+      anleitung:"Choose the right **negative** form.",
+      anleitungDe:"Wähle die richtige **verneinte** Form.",
+      tipp:"I’m not · isn’t · aren’t",
+      fragen:[
+        {q:"I **___** late.", o:["'m not","isn't","aren't"], c:0}, {q:"She **___** at school today.", o:["isn't","aren't","'m not"], c:0},
+        {q:"They **___** in the garden.", o:["aren't","isn't","'m not"], c:0}, {q:"It **___** a bat. It’s a bird.", o:["isn't","aren't","not is"], c:0},
+        {q:"We **___** twelve. We’re eleven.", o:["aren't","isn't","not are"], c:0}, {q:"My room **___** a mess!", o:["isn't","aren't","am not"], c:0},
+        {q:"– Are you ready? – No, I **___**.", o:["'m not","isn't","aren't"], c:0, e:"Short answer: No, I’m not."}, {q:"– Is Sherlock crazy? – Yes, he **___**.", o:["is","are","am"], c:0}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🧱", titel:"Lava Sentences", art:"Sentence builder",
+      anleitung:"Build the sentence or question.",
+      anleitungDe:"Bau den Satz oder die Frage, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Fragen beginnen mit dem Fragewort oder mit am/is/are.",
+      punkte:2,
+      saetze:[
+        {w:["My","name","is","Ben"], hint:"🇩🇪 Ich heiße Ben."}, {w:["Where","are","you","from","?"], hint:"🇩🇪 Woher kommst du?"},
+        {w:["Is","it","your","dog","?"], hint:"🇩🇪 Ist das dein Hund?"}, {w:["We","aren't","in","the","park"], hint:"🇩🇪 Wir sind nicht im Park."},
+        {w:["How","old","is","your","sister","?"], hint:"🇩🇪 Wie alt ist deine Schwester?"}, {w:["They","are","my","friends"], hint:"🇩🇪 Das sind meine Freunde."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"📸", titel:"My Photo", art:"Text · fill in the gaps",
+      anleitung:"Read Olivia’s text about her photo. Tap a gap and choose the right word.",
+      anleitungDe:"Lies Olivias Text über ihr Foto. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"am – is – are",
+      ueberschrift:"This is my family",
+      text:"Hi! I [[am|is|are]] Olivia and I [[am|is|are]] from Greenwich. This [[is|am|are]] a photo of my family. My dad [[is|are|am]] in the garden. My sister Lucy [[is|are|am]] five. She [[isn't|aren't|am not]] at school yet.\nWe [[are|is|am]] a family of four. [[Are|Is|Am]] you in the photo, too? No, you [[aren't|isn't|am not]]! Sherlock and Holly [[are|is|am]] our pets. They’re crazy!",
+      erklaerung:"**am** (I) · **is** (he/she/it) · **are** (we/you/they)."}
+  ]
+});
+</script>
+</body>
+</html>

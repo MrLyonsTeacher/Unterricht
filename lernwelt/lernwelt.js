@@ -253,7 +253,7 @@ function render(){
 // oder ein Name aus W.lernen (dann teilen sich mehrere Spiele dieselben Folien).
 const deckOf = l => !l || !l.lernen ? null : (typeof l.lernen === "string" ? (W.lernen||{})[l.lernen] : l.lernen);
 const deckKey = l => typeof l.lernen === "string" ? l.lernen : l.id;
-const yearNum = j => { const m = String(j||"").match(/(\d[\d,]*)/); if(!m) return null; const n = +m[1].replace(/,/g,""); return /BC/i.test(j) ? -n : n; };
+const yearNum = j => { const t = String(j||"").replace(/\b(c\.|AD|BC)\s*/gi,"").trim(); if(!/^\d[\d,]*s?$/.test(t)) return null; const n = +t.replace(/[,s]/g,""); return /BC/i.test(j) ? -n : n; };
 const plain = t => String(t||"").replace(/\*\*|~~|\*/g, "");
 function learnScreen(l){
   const D = deckOf(l), F = D.folien, key = deckKey(l), seen = !!S.seen[key];

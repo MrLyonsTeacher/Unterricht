@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Special Days in Britain – Country & people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"country", id:"fest5", icon:"🎃", kartenSymbol:"🎆",
+  titel:"Special Days in Britain", untertitel:"Halloween, Bonfire Night, Christmas & more",
+  text:"Trick or treat, fireworks and Christmas crackers: celebrate the special days of the year with British kids!",
+  lernen: {
+    days: { titel:"A year of special days", folien:[
+      {bild:"💃", jahr:"August", titel:"Notting Hill Carnival", text:"In August there is a big **carnival** in London with music, **dancers** and colourful costumes from the **Caribbean**.", de:"Im August gibt es in London einen großen **Karneval** mit Musik, **Tänzern** und bunten Kostümen aus der **Karibik**."},
+      {bild:"🎃", jahr:"31 October", titel:"Halloween", text:"Children wear **scary costumes** and go from house to house. They say **“Trick or treat!”** and get **sweets**.", de:"Kinder tragen **gruselige Kostüme**, gehen von Haus zu Haus, sagen **„Trick or treat!“** und bekommen **Süßigkeiten**."},
+      {video:"iNGOwZIn0oA", titel:"Watch: Who was Guy Fawkes?", text:"A one-minute video about **Guy Fawkes** and **Bonfire Night**.", de:"Ein Ein-Minuten-Video über **Guy Fawkes** und die **Bonfire Night**."},
+      {bild:"🎆", jahr:"5 November", titel:"Bonfire Night", text:"There are big **fires** (bonfires) and **fireworks**. People remember **Guy Fawkes**. In **1605** he wanted to blow up Parliament – but he was caught.", de:"Es gibt große **Feuer** und **Feuerwerk**. Man erinnert an **Guy Fawkes**, der **1605** das Parlament sprengen wollte – aber erwischt wurde."},
+      {bild:"🎄", jahr:"25 December", titel:"Christmas", text:"British children open their **presents** on the **morning of 25 December**. **Father Christmas** brings them in **stockings**. At dinner people pull **Christmas crackers** – with a paper crown, a joke and a small present inside.", de:"In Großbritannien packt man die **Geschenke am Morgen des 25. Dezember** aus. **Father Christmas** bringt sie in **Strümpfen**. Beim Essen zieht man **Christmas crackers** auf – mit Papierkrone, Witz und kleinem Geschenk."},
+      {bild:"🎁", jahr:"26 December", titel:"Boxing Day", text:"The day after Christmas is **Boxing Day** – a holiday. Many families visit friends or go for a walk.", de:"Der Tag nach Weihnachten heißt **Boxing Day** – ein Feiertag."},
+      {bild:"🔴", titel:"Red Nose Day", text:"On **Red Nose Day** people wear a **red nose** and do funny things. They **collect money** for children and people who need help.", de:"Am **Red Nose Day** tragen viele eine **rote Nase** und machen lustige Sachen. Sie **sammeln Geld** für Menschen, die Hilfe brauchen."},
+      {bild:"🌙", titel:"Eid, Hanukkah, Easter", text:"In Britain people celebrate many festivals: **Eid** is a special day for **Muslims**, **Hanukkah** is a Jewish festival of lights, and at **Easter** children look for chocolate eggs.", de:"In Großbritannien feiert man viele Feste: **Eid** (Muslime), **Hanukkah** (jüdisches Lichterfest) und **Ostern** mit Schokoladeneiern."}
+    ]}
+  },
+  levels: [
+    { id:"when", typ:"zeitstrahl", lernen:"days", icon:"📅", titel:"Through the Year", art:"Order · special days",
+      anleitung:"Put the special days in the right order – **start in August**.",
+      anleitungDe:"Bring die besonderen Tage in die richtige Reihenfolge – **beginne im August**.",
+      tipp:"August → Oktober → November → Dezember.",
+      items:[ {j:"August", t:"Notting Hill Carnival"}, {j:"31 October", t:"Halloween"}, {j:"5 November", t:"Bonfire Night"}, {j:"25 December", t:"Christmas Day"}, {j:"26 December", t:"Boxing Day"} ]},
+    { id:"quiz", typ:"quiz", lernen:"days", icon:"🎃", titel:"Special Days Quiz", art:"Quiz",
+      anleitung:"What do you know about special days in Britain?",
+      anleitungDe:"Was weißt du über besondere Tage in Großbritannien?",
+      tipp:"Schau dir die Infokarten an.",
+      fragen:[
+        {q:"What do children say at Halloween?", o:["Trick or treat!","Happy Easter!","Merry Christmas!"], c:0},
+        {q:"What do people have on Bonfire Night?", o:["fires and fireworks","Easter eggs","pancakes"], c:0},
+        {q:"Who wanted to blow up Parliament in 1605?", o:["Guy Fawkes","Father Christmas","King Charles"], c:0},
+        {q:"When do British children open their Christmas presents?", o:["on the morning of 25 December","on 24 December in the evening","on 6 December"], c:0},
+        {q:"What is inside a Christmas cracker?", o:["a paper crown, a joke and a small present","a real fire","a pancake"], c:0},
+        {q:"What do people wear on Red Nose Day?", o:["a red nose","a green hat","a scary costume"], c:0},
+        {q:"Eid is a special day for …", o:["Muslims","football fans","teachers"], c:0},
+        {q:"The day after Christmas is …", o:["Boxing Day","Pancake Day","Bonfire Night"], c:0}
+      ]},
+    { id:"words", typ:"memory", lernen:"days", icon:"🎈", titel:"Party Words", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Wörter rund um Feste.",
+      paare:[ {a:"costume", b:"Kostüm"}, {a:"scary", b:"gruselig"}, {a:"fireworks", b:"Feuerwerk"}, {a:"present", b:"Geschenk"},
+              {a:"to celebrate", b:"feiern"}, {a:"invitation", b:"Einladung"}, {a:"to decorate", b:"schmücken"}, {a:"candle", b:"Kerze"} ]},
+    { id:"party", typ:"sortieren", icon:"🎉", titel:"Which Special Day?", art:"Sort",
+      anleitung:"Which special day is it? Tap the right box.",
+      anleitungDe:"Welcher besondere Tag ist gemeint? Tippe auf das richtige Kästchen.",
+      tipp:"Halloween = Kostüme, Bonfire Night = Feuer, Christmas = Geschenke.",
+      koerbe:[ {t:"Halloween", info:"🎃"}, {t:"Bonfire Night", info:"🎆"}, {t:"Christmas", info:"🎄"} ],
+      items:[ {t:"Trick or treat!", k:0}, {t:"scary costumes", k:0}, {t:"pumpkins", k:0}, {t:"Guy Fawkes", k:1}, {t:"big fires", k:1}, {t:"5 November", k:1},
+              {t:"Father Christmas", k:2}, {t:"crackers", k:2}, {t:"stockings", k:2} ]},
+    { id:"story", typ:"lueckentext", icon:"🎂", titel:"Jay’s Birthday Party", art:"Text · fill in the gaps",
+      anleitung:"Read about Jay’s party. Tap a gap and choose the right word.",
+      anleitungDe:"Lies über Jays Party. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Wörter aus Unit 4.",
+      ueberschrift:"A fancy dress party",
+      text:"Jay’s [[birthday|birthdate|birth]] is on 31st October – at Halloween! So he has a fancy dress [[party|parting|pardy]]. Everyone gets an [[invitation|invention|information]]. Dave wears a pirate [[costume|custom|costum]] and Olivia is an alien. Holly is [[scared|scary|scare]] of the alien!\nThey [[decorate|decide|declare]] the room with balloons. Jay’s mum makes a big chocolate [[cake|cage|kake]] with twelve [[candles|candies|handles]]. Everyone sings “Happy birthday!” and Jay opens his [[presents|presence|parents]]. It’s brilliant!",
+      erklaerung:"Party words: **birthday, party, invitation, costume, scared, decorate, cake, candles, presents**."}
+  ]
+});
+</script>
+</body>
+</html>

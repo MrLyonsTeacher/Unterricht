@@ -34,7 +34,23 @@ const FRS = {
 
   englisch: {
     klassen: [
-      { k:5,  id:"e5",  themen:[] },
+      { k:5,  id:"e5",  themen:[
+        { id:"be5", kat:"grammar", titel:"Volcano Hello", untertitel:"to be: am, is, are", pfad:"englisch/klasse5/to-be.html", icon:"👋", max:50 },
+        { id:"imp5", kat:"grammar", titel:"Lava Lab Rules", untertitel:"Imperative", pfad:"englisch/klasse5/imperative.html", icon:"🧪", max:41 },
+        { id:"spr5", kat:"grammar", titel:"Dragon Days", untertitel:"Simple present · word order", pfad:"englisch/klasse5/simple-present.html", icon:"🐉", max:54 },
+        { id:"spq5", kat:"grammar", titel:"Dragon Questions", untertitel:"don’t, doesn’t, Do, Does", pfad:"englisch/klasse5/dont-doesnt.html", icon:"🔥", max:44 },
+        { id:"past5", kat:"grammar", titel:"Time Travel Volcano", untertitel:"Simple past · was/were", pfad:"englisch/klasse5/simple-past.html", icon:"⏳", max:59 },
+        { id:"pastq5", kat:"grammar", titel:"Ember Detectives", untertitel:"Simple past: didn’t, Did …?", pfad:"englisch/klasse5/simple-past-negatives.html", icon:"🔎", max:56 },
+        { id:"word5", kat:"grammar", titel:"The Word Forge", untertitel:"Plurals, ’s, a/an, I–me–my", pfad:"englisch/klasse5/word-workshop.html", icon:"⚒️", max:46 },
+        { id:"vu1", kat:"vocabulary", titel:"Unit 1 Words", untertitel:"Family, colours, my room", pfad:"englisch/klasse5/words-unit1.html", icon:"🏠", max:49 },
+        { id:"vu2", kat:"vocabulary", titel:"Unit 2 Words", untertitel:"School things, subjects, days", pfad:"englisch/klasse5/words-unit2.html", icon:"🎒", max:49 },
+        { id:"vu3", kat:"vocabulary", titel:"Unit 3 Words", untertitel:"Animals, time, free time", pfad:"englisch/klasse5/words-unit3.html", icon:"🐒", max:49 },
+        { id:"vu4", kat:"vocabulary", titel:"Unit 4 Words", untertitel:"Months, birthdays, food, shopping", pfad:"englisch/klasse5/words-unit4.html", icon:"🎂", max:47 },
+        { id:"gre5", kat:"country", titel:"Hello Greenwich!", untertitel:"Greenwich, London & the UK", pfad:"englisch/klasse5/greenwich-london.html", icon:"🕰️", max:31 },
+        { id:"sch5", kat:"country", titel:"School in England", untertitel:"Uniforms, tutor groups, school days", pfad:"englisch/klasse5/school-in-england.html", icon:"👔", max:38 },
+        { id:"fest5", kat:"country", titel:"Special Days in Britain", untertitel:"Halloween, Bonfire Night, Christmas", pfad:"englisch/klasse5/special-days.html", icon:"🎃", max:39 },
+        { id:"shop5", kat:"country", titel:"At the Corner Shop", untertitel:"Money, food & shopping", pfad:"englisch/klasse5/corner-shop.html", icon:"💷", max:42 }
+      ] },
       { k:6,  id:"e6",  themen:[
         { id:"sp6",  kat:"grammar",    titel:"Time Travel Agency",       untertitel:"Simple past: statements",           pfad:"englisch/klasse6/simple-past.html",          icon:"⏰", max:59 },
         { id:"spn6", kat:"grammar",    titel:"Shipwreck Detectives",     untertitel:"Simple past: was/were, didn’t, Did …?", pfad:"englisch/klasse6/shipwreck-detectives.html", icon:"🔎", max:56 },

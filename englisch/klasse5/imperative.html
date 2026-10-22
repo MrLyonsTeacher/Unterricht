@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Lava Lab Rules – Imperative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"grammar", id:"imp5", icon:"🧪", kartenSymbol:"🧯",
+  titel:"Lava Lab Rules", untertitel:"Imperative: Go home. Don’t go home.",
+  text:"In the lava lab there are lots of rules! Give and understand instructions – in the classroom and on Fire Island.",
+  lernen: {
+    imp: { titel:"The imperative", folien:[
+      {bild:"👉", titel:"Do it!", text:"The **imperative** tells people what to do. Just use the **verb**: *Sit down. Open your books. Look at the board.*", de:"Mit dem **Imperativ** (Befehlsform) sagst du, was jemand tun soll. Einfach das **Verb** am Anfang."},
+      {bild:"✋", titel:"Don’t do it!", text:"**Don’t + verb** says what people **must not** do: *Don’t talk. Don’t eat in the classroom.*", de:"Verbot: **Don’t + Verb**: Don’t talk! (Rede nicht!)"},
+      {bild:"🙏", titel:"Be polite!", text:"Say **please**: *Close the window, **please**.* – *Can I have your pencil, **please**?*", de:"Höflich: **please** dazusagen."}
+    ]}
+  },
+  levels: [
+    { id:"do", typ:"swipe", lernen:"imp", icon:"✅", titel:"Do or Don’t?", art:"Classroom rules · swipe",
+      anleitung:"Good rule for the classroom or not? Swipe **right for Do** and **left for Don’t**.",
+      anleitungDe:"Ist das eine gute Regel im Klassenzimmer? Wische nach **rechts für Do** (mach das) und nach **links für Don’t** (lass das).",
+      tipp:"Was macht ein guter Schüler?",
+      links:{t:"Don't", icon:"✋"}, rechts:{t:"Do", icon:"👍"},
+      karten:[
+        {t:"… put your hands up.", r:"r"}, {t:"… eat in the classroom.", r:"l"}, {t:"… listen to your teacher.", r:"r"}, {t:"… shout.", r:"l"},
+        {t:"… open your exercise book.", r:"r"}, {t:"… forget your homework.", r:"l"}, {t:"… say “please” and “thank you”.", r:"r"}, {t:"… chew gum at school.", r:"l"},
+        {t:"… help your friends.", r:"r"}, {t:"… run in the classroom.", r:"l"}
+      ]},
+    { id:"phr", typ:"memory", lernen:"imp", icon:"🏫", titel:"Classroom Phrases", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Diese Sätze hörst du jeden Tag im Englischunterricht.",
+      paare:[ {a:"Sit down.", b:"Setz dich."}, {a:"Don’t talk.", b:"Rede nicht."}, {a:"Close the window.", b:"Schließ das Fenster."}, {a:"Open your books.", b:"Öffnet eure Bücher."},
+              {a:"Look at the board.", b:"Schaut an die Tafel."}, {a:"Put your hands up.", b:"Meldet euch."}, {a:"Take out your pens.", b:"Holt eure Stifte raus."}, {a:"Write it on the board.", b:"Schreib es an die Tafel."} ]},
+    { id:"quiz", typ:"quiz", lernen:"imp", icon:"🧪", titel:"What Do You Say?", art:"Imperative · quiz",
+      anleitung:"What do you say? Choose the right sentence.",
+      anleitungDe:"Was sagst du? Wähle den richtigen Satz.",
+      tipp:"Imperativ: Verb an den Anfang. Verbot: Don’t + Verb.",
+      fragen:[
+        {q:"It’s cold. Your friend is next to the window.", o:["Close the window, please.","You close window.","Closing the window."], c:0},
+        {q:"Your little brother wants to touch the hot lava.", o:["Don't touch it!","Not touch it!","You don't touch!"], c:0},
+        {q:"The teacher wants the students to look at the board.", o:["Look at the board, please.","Looks at the board.","Don't look at the board."], c:0},
+        {q:"Your friend talks in the test.", o:["Don't talk, please!","No talking you!","Talk, please!"], c:0},
+        {q:"You want to play football with your friends.", o:["Let's play football!","Plays football!","Don't play football!"], c:0, e:"**Let’s** (= let us) + verb: Lass uns …"},
+        {q:"Your dog is on the table.", o:["Get down, Sherlock!","Gets down, Sherlock!","Don't get down!"], c:0}
+      ]},
+    { id:"build", typ:"satzbau", icon:"🧱", titel:"Instructions", art:"Sentence builder",
+      anleitung:"Build the instruction.",
+      anleitungDe:"Bau die Anweisung, indem du die Wörter in der richtigen Reihenfolge antippst.",
+      tipp:"Das Verb steht am Anfang.",
+      punkte:2,
+      saetze:[
+        {w:["Open","your","books,","please"], hint:"🇩🇪 Öffnet bitte eure Bücher."}, {w:["Don't","eat","in","the","classroom"], hint:"🇩🇪 Esst nicht im Klassenzimmer."},
+        {w:["Do","exercise","1","in","your","exercise","book"], hint:"🇩🇪 Macht Übung 1 in eurem Übungsheft."}, {w:["Put","your","book","on","the","table"], hint:"🇩🇪 Leg dein Buch auf den Tisch."},
+        {w:["Don't","forget","your","homework"], hint:"🇩🇪 Vergiss deine Hausaufgaben nicht."}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🌋", titel:"Volcano Safety", art:"Text · fill in the gaps",
+      anleitung:"Read the rules for the volcano trip. Tap a gap and choose the right word.",
+      anleitungDe:"Lies die Regeln für den Vulkanausflug. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Do → Verb. Don’t → Don’t + Verb.",
+      ueberschrift:"Rules for our volcano trip",
+      text:"1. [[Listen|Listens|Listening]] to your guide.\n2. [[Don't|Not|No]] go near the lava!\n3. [[Wear|Wears|Don't wear]] good shoes.\n4. [[Take|Takes|Taking]] water with you – it’s hot!\n5. Don’t [[run|runs|running]] on the rocks.\n6. [[Stay|Stays|Don't stay]] with your group.\n7. Have fun and [[take|takes|took]] lots of photos!",
+      erklaerung:"Imperative: **verb** – or **Don’t + verb**."}
+  ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Time Travel Volcano – Simple past</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"grammar", id:"past5", icon:"⏳", kartenSymbol:"⏳",
+  titel:"Time Travel Volcano", untertitel:"Simple past: -ed, irregular verbs, was/were",
+  text:"Jump into the time volcano and travel to the past! Tell stories about yesterday with the simple past.",
+  lernen: {
+    past: { titel:"The simple past", folien:[
+      {bild:"⏪", titel:"Yesterday, last week, ago", text:"We use the **simple past** for things that are **finished**: *I **played** netball yesterday. We **watched** a film last night.*", de:"Das **simple past** benutzt man für **abgeschlossene** Handlungen in der Vergangenheit. Signalwörter: yesterday, last …, … ago."},
+      {bild:"➕", titel:"Regular verbs: -ed", text:"*play → play**ed**, watch → watch**ed**, like → like**d**, stop → sto**pped**, cry → cr**ied***", de:"Regelmäßige Verben bekommen **-ed**. Achtung bei -e, Konsonant + y und kurzen Verben."},
+      {bild:"🧠", titel:"Irregular verbs", text:"Some verbs are **irregular** – you have to learn them: *go → **went**, see → **saw**, eat → **ate**, have → **had**, buy → **bought***.", de:"**Unregelmäßige** Verben musst du lernen: go → went, see → saw …"},
+      {bild:"🌋", titel:"was and were", text:"*I / he / she / it **was** … – we / you / they **were** …* – *It **was** sunny. We **were** there.*", de:"**was** bei I/he/she/it – **were** bei we/you/they."}
+    ]}
+  },
+  levels: [
+    { id:"signal", typ:"swipe", icon:"🦖", titel:"Dino Valley", art:"Signal words · swipe",
+      anleitung:"Past or present? Swipe **right for Past** and **left for Present**.",
+      anleitungDe:"Vergangenheit oder Gegenwart? Wische nach **rechts für Past** (Vergangenheit) und nach **links für Present** (Gegenwart). Du kannst auch auf die Knöpfe tippen.",
+      tipp:"Signalwörter wie *yesterday* oder *ago* zeigen dir: Das ist Vergangenheit.",
+      links:{t:"Present", icon:"🔁"}, rechts:{t:"Past", icon:"⏪"},
+      karten:[
+        {t:"yesterday", r:"r", e:"**Yesterday** = gestern → simple past."},
+        {t:"every day", r:"l", e:"**Every day** = jeden Tag → something you do again and again: simple present."},
+        {t:"last summer", r:"r", e:"**last** + time (last week, last year …) → simple past."},
+        {t:"always", r:"l", e:"**Always** → a habit: simple present."},
+        {t:"two days ago", r:"r", e:"**ago** = vor (zeitlich) → simple past."},
+        {t:"usually", r:"l", e:"**Usually** → a habit: simple present."},
+        {t:"in 2015", r:"r", e:"A year in the past → simple past."},
+        {t:"on Saturdays", r:"l", e:"**On Saturdays** = jeden Samstag → simple present."},
+        {t:"last night", r:"r", e:"**last night** = gestern Abend → simple past."},
+        {t:"when I was six", r:"r", e:"**when I was …** → simple past."},
+        {t:"often", r:"l", e:"**Often** → a habit: simple present."},
+        {t:"an hour ago", r:"r", e:"**ago** → simple past."}
+      ]},
+    { id:"edlab", typ:"sortieren", lernen:"past", icon:"🏛️", titel:"Roman -ed Lab", art:"Regular verbs · sort",
+      anleitung:"How do you write the **-ed** form? Tap the right box.",
+      anleitungDe:"Wie schreibt man die **-ed**-Form? Tippe auf das richtige Kästchen.",
+      tipp:"Achte auf das Ende des Verbs: -e, Konsonant + y, oder kurzes Verb mit Vokal + Konsonant.",
+      koerbe:[
+        {t:"+ ed", info:"jump → jumped", tipp:"Most verbs just get **-ed**: jump → jumped. Vowel + y also just gets -ed: play → played."},
+        {t:"+ d", info:"love → loved", tipp:"Verbs ending in **-e** only get **-d**: like → liked."},
+        {t:"y → ied", info:"hurry → hurried", tipp:"**Consonant + y** → **ied**: cry → cried. But vowel + y stays: play → played."},
+        {t:"double + ed", info:"rob → robbed", tipp:"Short verbs with **vowel + consonant** at the end double the last letter: stop → stopped."}
+      ],
+      items:[
+        {t:"play", k:0, e:"play → **played** (vowel + y: just add -ed)"},
+        {t:"watch", k:0}, {t:"clean", k:0}, {t:"help", k:0},
+        {t:"live", k:1}, {t:"dance", k:1}, {t:"like", k:1}, {t:"smile", k:1},
+        {t:"study", k:2}, {t:"carry", k:2}, {t:"cry", k:2}, {t:"try", k:2},
+        {t:"stop", k:3}, {t:"plan", k:3}, {t:"drop", k:3}, {t:"hug", k:3}
+      ]},
+    { id:"memory", typ:"memory", lernen:"past", icon:"🏰", titel:"Castle Memory", art:"Irregular verbs · memory",
+      anleitung:"Find the pairs: **verb + past form**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Verb + Vergangenheitsform**. Je weniger Züge du brauchst, desto mehr Flaggen bekommst du.",
+      tipp:"Diese Verben sind unregelmäßig. Sie bekommen kein -ed – du musst sie auswendig lernen.",
+      paare:[
+        {a:"go", b:"went"}, {a:"see", b:"saw"}, {a:"eat", b:"ate"}, {a:"have", b:"had"},
+        {a:"buy", b:"bought"}, {a:"take", b:"took"}, {a:"come", b:"came"}, {a:"write", b:"wrote"}
+      ]},
+    { id:"rush", typ:"rush", icon:"🚀", titel:"Moon Rush", art:"Speed game · 60 seconds",
+      anleitung:"Choose the right **past form** – fast! **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wähle so schnell wie möglich die richtige **Vergangenheitsform**! **Ziel: 12 richtige** in 60 Sekunden.",
+      tipp:"Regelmäßig oder unregelmäßig? Achte genau auf die Schreibweise.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"go", o:["went","goed","gone"], c:0}, {q:"see", o:["saw","seed","seen"], c:0},
+        {q:"eat", o:["ate","eated","eaten"], c:0}, {q:"have", o:["had","haved","has"], c:0},
+        {q:"buy", o:["bought","buyed","brought"], c:0}, {q:"take", o:["took","taked","taken"], c:0},
+        {q:"come", o:["came","comed","comes"], c:0}, {q:"write", o:["wrote","writed","written"], c:0},
+        {q:"make", o:["made","maked","makes"], c:0}, {q:"get", o:["got","getted","geted"], c:0},
+        {q:"give", o:["gave","gived","given"], c:0}, {q:"find", o:["found","finded","fand"], c:0},
+        {q:"run", o:["ran","runned","run"], c:0}, {q:"swim", o:["swam","swimmed","swum"], c:0},
+        {q:"sing", o:["sang","singed","sung"], c:0}, {q:"drink", o:["drank","drinked","drunk"], c:0},
+        {q:"sleep", o:["slept","sleeped","slapt"], c:0}, {q:"meet", o:["met","meeted","meat"], c:0},
+        {q:"play", o:["played","plaied","playd"], c:0}, {q:"stop", o:["stopped","stoped","stopt"], c:0},
+        {q:"study", o:["studied","studyed","studid"], c:0}, {q:"live", o:["lived","liveed","livd"], c:0},
+        {q:"be (I / he / she / it)", o:["was","were","been"], c:0}, {q:"be (we / you / they)", o:["were","was","be"], c:0}
+      ]},
+    { id:"london", typ:"lueckentext", icon:"🎡", titel:"London Story", art:"Story · fill in the gaps",
+      anleitung:"Tap a gap and choose the **simple past** of the verb in brackets.",
+      anleitungDe:"Tippe auf eine Lücke und wähle die **Simple-Past-Form** des Verbs in Klammern.",
+      tipp:"*was* steht bei I, he, she, it – *were* bei we, you, they.",
+      ueberschrift:"My trip to London",
+      text:"Last summer my family and I (go) [[went|goed|go]] to London. We (be) [[were|was|are]] there for five days. On the first day we (visit) [[visited|visitted|visit]] the Tower of London. It (be) [[was|were|is]] very old and a bit scary! My little brother (see) [[saw|seed|sees]] the crown jewels and (say) [[said|sayed|says]]: “Wow!”\nIn the afternoon we (take) [[took|taked|take]] a boat on the river. I (eat) [[ate|eated|eat]] fish and chips. It (taste) [[tasted|tastet|tastes]] great. In the evening we (be) [[were|was|be]] really tired, so we (stay) [[stayed|staied|stay]] in the hotel.",
+      erklaerung:"Remember: **was** for I / he / she / it – **were** for we / you / they."}
+  ]
+});
+</script>
+</body>
+</html>

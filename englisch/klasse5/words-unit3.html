@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Unit 3 Words – My free time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../lernwelt/lernwelt.css">
+<link rel="stylesheet" href="../../lernwelt/themes.css">
+</head>
+<body>
+<main class="lw" id="app"></main>
+<script src="../../qrcode.js"></script>
+<script src="../../ergebnis.js"></script>
+<script src="../../lernwelt/lernwelt.js"></script>
+<script src="../../lernwelt/thema.js"></script>
+<script>
+TH.start({
+  k:5, kat:"vocabulary", id:"vu3", icon:"🐒", kartenSymbol:"🦒",
+  titel:"Unit 3 Words: My free time", untertitel:"Animals, numbers, daily routines, time, hobbies",
+  text:"Monkeys, numbers up to 100, your daily routine, telling the time and free-time activities – all words from Unit 3.",
+  levels: [
+    { id:"animals", typ:"memory", icon:"🐒", titel:"Animal Memory", art:"English – German · memory",
+      anleitung:"Find the pairs: **English + German**. Fewer moves = more flags.",
+      anleitungDe:"Finde die Paare: **Englisch + Deutsch**. Je weniger Züge, desto mehr Flaggen.",
+      tipp:"Tiere aus Unit 3.",
+      paare:[ {a:"monkey", b:"Affe"}, {a:"bear", b:"Bär"}, {a:"snake", b:"Schlange"}, {a:"parrot", b:"Papagei"},
+              {a:"giraffe", b:"Giraffe"}, {a:"penguin", b:"Pinguin"}, {a:"mouse – mice", b:"Maus – Mäuse"}, {a:"raccoon", b:"Waschbär"} ]},
+    { id:"time", typ:"quiz", icon:"⏰", titel:"What Time Is It?", art:"Telling the time · quiz",
+      anleitung:"What time is it? Choose the right answer.",
+      anleitungDe:"Wie spät ist es? Wähle die richtige Antwort.",
+      tipp:"past = nach, to = vor, quarter = Viertel, half past = halb (nächste Stunde!).",
+      fragen:[
+        {q:"🕝 2:30", o:["It's half past two.","It's half past three.","It's half to two."], c:0, e:"**half past two** = halb drei!"},
+        {q:"🕘 9:05", o:["It's five past nine.","It's five to nine.","It's nine past five."], c:0},
+        {q:"🕐 12:15", o:["It's quarter past twelve.","It's quarter to twelve.","It's fifteen to twelve."], c:0},
+        {q:"🕖 7:45", o:["It's quarter to eight.","It's quarter past seven.","It's quarter to seven."], c:0},
+        {q:"🕗 8:50", o:["It's ten to nine.","It's ten past eight.","It's ten to eight."], c:0},
+        {q:"🕕 6:00", o:["It's six o'clock.","It's six clock.","It's six o'clocks."], c:0},
+        {q:"**sixty-seven** is …", o:["67","76","17"], c:0}, {q:"**forty** is …", o:["40","14","44"], c:0}
+      ]},
+    { id:"free", typ:"sortieren", icon:"⚽", titel:"play, go or others?", art:"Free-time activities · sort",
+      anleitung:"Which word goes with the activity? Tap the right box.",
+      anleitungDe:"Welches Wort passt zur Aktivität? Tippe auf das richtige Kästchen.",
+      tipp:"play + Spiel/Sportart mit Ball · go + -ing · andere Verben.",
+      koerbe:[ {t:"play …", info:"play football"}, {t:"go …", info:"go swimming"}, {t:"other verbs", info:"ride my bike"} ],
+      items:[ {t:"… chess", k:0}, {t:"… basketball", k:0}, {t:"… computer games", k:0}, {t:"… handball", k:0},
+              {t:"… skateboarding", k:1}, {t:"… shopping", k:1}, {t:"… horse riding", k:1}, {t:"… to the cinema", k:1},
+              {t:"… TV (watch)", k:2}, {t:"… judo (do)", k:2}, {t:"… to music (listen)", k:2}, {t:"… in a choir (sing)", k:2} ]},
+    { id:"rush", typ:"rush", icon:"⚡", titel:"Word Test Rush", art:"German → English · 60 seconds",
+      anleitung:"What’s the English word? **Goal: 12** in 60 seconds.",
+      anleitungDe:"Wie heißt das Wort auf Englisch? **Ziel: 12** in 60 Sekunden.",
+      tipp:"Achte auf die Schreibweise – wie in einem Vokabeltest.",
+      zeit:60, ziel:12,
+      items:[
+        {q:"Freizeit",o:["free time","free day","freetimes"],c:0},{q:"aufstehen",o:["get up","get off","get on"],c:0},{q:"frühstücken",o:["have breakfast","eat breakfest","make breakfast"],c:0},
+        {q:"ins Bett gehen",o:["go to bed","go in bed","go at bed"],c:0},{q:"Mannschaft",o:["team","teem","tim"],c:0},{q:"gewinnen",o:["win","wine","winn"],c:0},
+        {q:"berühmt",o:["famous","famos","famouse"],c:0},{q:"Kino",o:["cinema","sinema","kino"],c:0},{q:"Monat",o:["month","mounth","moon"],c:0},
+        {q:"Tierpfleger",o:["zookeeper","zookiper","animal keeper"],c:0},{q:"Fleisch",o:["meat","meet","mead"],c:0},{q:"Frucht; Obst",o:["fruit","frut","froot"],c:0},
+        {q:"Winter",o:["winter","wintar","wintor"],c:0},{q:"früh",o:["early","erly","earli"],c:0},{q:"dreckig",o:["dirty","dirthy","durty"],c:0},
+        {q:"Käfig",o:["cage","case","cake"],c:0},{q:"Rätsel; Geheimnis",o:["mystery","mistery","mysterie"],c:0},{q:"hungrig",o:["hungry","hangry","angry"],c:0},
+        {q:"schlau",o:["clever","clevar","klever"],c:0},{q:"Hinweis; Spur",o:["clue","glue","clew"],c:0}
+      ]},
+    { id:"story", typ:"lueckentext", icon:"🕵️", titel:"A Busy Day", art:"Text · fill in the gaps",
+      anleitung:"Read about Holly’s day. Tap a gap and choose the right word.",
+      anleitungDe:"Lies über Hollys Tag. Tippe auf eine Lücke und wähle das richtige Wort.",
+      tipp:"Alle Wörter kommen aus Unit 3.",
+      ueberschrift:"Holly’s busy day",
+      text:"On Wednesdays I [[get up|get on|stand up]] early – at six [[o'clock|clock|o'clocks]]. First I [[have breakfast|have lunch|go to bed]]. After [[that|than|this's]] I walk the dog.\nAt school I love [[netball|basketbal|netbal]] practice – I’m the [[captain|captian|kaptain]] of the team! In the [[afternoon|after noon|evening's]] I go to the zoo and help the [[zookeeper|zoo keeper|keepzoo]]. The monkeys are always [[hungry|angry|hungy]]! At half past nine I go to bed.",
+      erklaerung:"Unit 3 words: **get up, o’clock, have breakfast, after that, netball, captain, afternoon, zookeeper, hungry**."}
+  ]
+});
+</script>
+</body>
+</html>
