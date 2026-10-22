@@ -333,3 +333,4 @@ input[type=range]{width:100%;height:48px;accent-color:var(--accent)}
   .ln-dot small{font-size:.6rem}
 }
 @media (max-width:640px){ .ln-dot small{display:none} .ln-b{padding:.4rem .7rem} }
+.ln-b[hidden]{display:none}

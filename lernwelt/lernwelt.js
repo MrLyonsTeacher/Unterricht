@@ -259,7 +259,8 @@ function learnScreen(l){
   const D = deckOf(l), F = D.folien, key = deckKey(l), seen = !!S.seen[key];
   APP.innerHTML = topbar({back:true, title:D.titel || l.titel, icon:"📖", art:T.learn}) + howBox(T.learnFirst, W.sprache==="en"?TXT.de.learnFirst:null) + `<div id="area"></div>`;
   document.title = (D.titel || l.titel)+" – "+W.titel; fit();
-  const A = $("#area"), canSpeak = "speechSynthesis" in window && window.SpeechSynthesisUtterance;
+  const A = $("#area"), hasTTS = "speechSynthesis" in window && window.SpeechSynthesisUtterance, canSpeak = !!(W.audio || hasTTS);
+  let player = null;
   A.innerHTML = `<div class="learn">
     <div class="panel ln-stage" id="lnStage"></div>
     <div class="ln-track"><span class="ln-line"><i id="lnFill"></i></span>${F.map((f,k)=>`<button class="ln-dot" data-k="${k}" aria-label="${k+1}"><i>${f.video?"▶":""}</i>${f.jahr?`<small>${esc(f.jahr)}</small>`:""}</button>`).join("")}</div>
@@ -272,14 +273,30 @@ function learnScreen(l){
       <button class="btn big" id="lnGo" ${seen?"":"disabled"}>${T.startGame}</button>
     </div></div>`;
   let i = -1, auto = false, voice = false, tm = null, raf = null;
-  const stop = () => { clearTimeout(tm); cancelAnimationFrame(raf); try{ canSpeak && speechSynthesis.cancel(); }catch(e){} };
+  const hush = () => { if(player){ player.onended = player.onerror = null; try{ player.pause(); }catch(e){} player = null; } try{ hasTTS && speechSynthesis.cancel(); }catch(e){} };
+  const stop = () => { clearTimeout(tm); cancelAnimationFrame(raf); hush(); };
   cleanups.push(stop);
-  function voiceFor(){ try{ const v = speechSynthesis.getVoices(), lang = W.sprache==="en" ? "en" : "de";
-    return (lang==="en" && v.find(x=>/en[-_]GB/i.test(x.lang))) || v.find(x=>x.lang && x.lang.toLowerCase().startsWith(lang)) || null; }catch(e){ return null; } }
-  function say(f, then){
+  // Stimme: zuerst die vorbereitete Audiodatei (natürliche Stimme), sonst die beste Systemstimme mit passendem Akzent
+  const ACC = W.akzent || (W.sprache==="en" ? "en-GB" : "de-DE");
+  function voiceFor(){ try{ const v = speechSynthesis.getVoices().filter(x=>x.lang && x.lang.replace("_","-").toLowerCase().startsWith(ACC.slice(0,2).toLowerCase()));
+    const same = v.filter(x=>x.lang.replace("_","-").toLowerCase()===ACC.toLowerCase()), pool = same.length ? same : v;
+    const score = x => (/premium|enhanced|natural|neural/i.test(x.name)?100:0) + (/google|siri|daniel|serena|kate|arthur|martha|samantha|ava|allison|evan|nathan|zoe|aaron|nicky/i.test(x.name)?20:0) + (x.localService?0:5) - (/compact|eloquence|novelty|whisper|bad news|bells|boing|jester|organ|zarvox|trinoids|albert|fred|junior|ralph/i.test(x.name)?100:0);
+    return pool.sort((a,b)=>score(b)-score(a))[0] || null; }catch(e){ return null; } }
+  function sayTTS(f, then){
+    if(!hasTTS){ then && then(); return; }
     try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(plain((f.titel?f.titel+". ":"")+(f.text||"")));
-      const v = voiceFor(); if(v) u.voice = v; u.lang = v ? v.lang : (W.sprache==="en"?"en-GB":"de-DE"); u.rate = .9;
+      const v = voiceFor(); if(v) u.voice = v; u.lang = v ? v.lang : ACC; u.rate = .92;
       u.onend = () => then && then(); speechSynthesis.speak(u); }catch(e){ then && then(); }
+  }
+  function say(f, then){
+    hush(); if(f.video){ then && then(); return; }
+    if(W.audio){
+      const a = new Audio(`${W.audio}${encodeURIComponent(key)}-${F.indexOf(f)}.mp3`); player = a;
+      let fell = false; const fallback = () => { if(fell || player!==a) return; fell = true; player = null; sayTTS(f, then); };
+      a.onended = () => { if(player===a){ player = null; then && then(); } }; a.onerror = fallback;
+      const p = a.play(); if(p && p.catch) p.catch(fallback); return;
+    }
+    sayTTS(f, then);
   }
   function schedule(){
     clearTimeout(tm); const f = F[i];
@@ -298,7 +315,8 @@ function learnScreen(l){
     raf = requestAnimationFrame(step);
   }
   function show(k){
-    const prev = F[i]; i = k; const f = F[i]; cancelAnimationFrame(raf); try{ canSpeak && speechSynthesis.cancel(); }catch(e){}
+    const prev = F[i]; i = k; const f = F[i]; cancelAnimationFrame(raf); hush();
+    const vb = $("#lnVoice"); if(vb) vb.hidden = !!f.video;
     const st = $("#lnStage");
     st.innerHTML = f.video
       ? `<div class="ln-video"><div class="ln-vbox" id="lnV"><button class="ln-play" data-yt="${esc(f.video)}" aria-label="Play video">▶</button><p>${T.videoNote}</p></div>
@@ -319,7 +337,7 @@ function learnScreen(l){
     if(e.target.closest("#lnPrev") && i>0){ show(i-1); return; }
     if(e.target.closest("#lnNext") && i<F.length-1){ show(i+1); return; }
     if(e.target.closest("#lnAuto")){ if(!auto && i===F.length-1) show(0); setAuto(!auto); return; }
-    if(e.target.closest("#lnVoice")){ voice = !voice; const b=$("#lnVoice"); b.setAttribute("aria-pressed", voice); if(voice){ if(!F[i].video) say(F[i], auto ? ()=>{ tm=setTimeout(()=>{ if(auto) (i<F.length-1 ? show(i+1) : setAuto(false)); }, 900); } : null); } else { try{ speechSynthesis.cancel(); }catch(err){} if(auto) schedule(); } return; }
+    if(e.target.closest("#lnVoice")){ voice = !voice; const b=$("#lnVoice"); b.setAttribute("aria-pressed", voice); if(voice){ if(!F[i].video) say(F[i], auto ? ()=>{ tm=setTimeout(()=>{ if(auto) (i<F.length-1 ? show(i+1) : setAuto(false)); }, 900); } : null); } else { hush(); if(auto) schedule(); } return; }
     const y = e.target.closest("[data-yt]");
     if(y){ setAuto(false); $("#lnV").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(y.dataset.yt)}?rel=0&autoplay=1&playsinline=1" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`; return; }
     if(e.target.closest("#lnGo")){ stop(); S.seen[key] = 1; save(); location.hash = "l="+encodeURIComponent(l.id); }
