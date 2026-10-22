@@ -168,8 +168,8 @@ export async function start(o){
   const fly = (pos, look, d=1.5) => { from={pos:curPos.clone(), look:curLook.clone()}; to={pos:new THREE.Vector3(...pos), look:new THREE.Vector3(...look)}; t0=performance.now(); dur=d*1000; };
   function focusOn(k){ const s = spots[k]; focus = k;
     const c = s.cam || {}, dist = c.dist || 26, side = c.side ?? -.3, up = c.up ?? .5, portrait = cam.aspect < 1;
-    const dd = portrait ? dist*1.45 : dist, lookShift = portrait ? 0 : dist*.22;
-    fly([s.top[0]+dd*side, (c.y ?? s.base ?? s.top[1]*.6) + dd*up, s.top[2]+dd], [s.top[0]+lookShift, (c.lookY ?? (s.base ?? s.top[1]*.6)+4), s.top[2]]);
+    const dd = portrait ? dist*1.45 : dist, lookShift = portrait ? 0 : dist*.28, drop = portrait ? dd*.32 : 0;
+    fly([s.top[0]+dd*side, (c.y ?? s.base ?? s.top[1]*.6) + dd*up, s.top[2]+dd], [s.top[0]+lookShift, (c.lookY ?? (s.base ?? s.top[1]*.6)+4) - drop, s.top[2]]);
     for(const j in labels) labels[j].el.classList.toggle("hide", j!==k); }
   function goHome(){ focus = null; for(const j in labels) labels[j].el.classList.remove("hide"); fly(homeFor().pos, homeFor().look); }
 
@@ -199,7 +199,8 @@ export async function start(o){
     for(const k in labels){ const L=labels[k]; if(L.beam) L.beam.material.opacity = (focus && focus!==k) ? .03 : .14 + .05*Math.sin(now/600+k.length); }
     composer ? composer.render() : renderer.render(scene, cam);
     for(const k in labels){ const L=labels[k]; v.copy(L.v).project(cam); const vis = v.z < 1;
-      L.el.style.transform = `translate(${((v.x+1)/2*innerWidth).toFixed(1)}px, ${((1-v.y)/2*innerHeight).toFixed(1)}px) translate(-50%,-100%)`; L.el.style.visibility = vis?"visible":"hidden"; }
+      const hw = (L.w || (L.w = L.el.offsetWidth || 160))/2 + 8, px = Math.min(innerWidth-hw, Math.max(hw, (v.x+1)/2*innerWidth));
+      L.el.style.transform = `translate(${px.toFixed(1)}px, ${((1-v.y)/2*innerHeight).toFixed(1)}px) translate(-50%,-100%)`; L.el.style.visibility = vis?"visible":"hidden"; }
   }
   function resize(){ renderer.setSize(innerWidth, innerHeight); if(composer) composer.setSize(innerWidth, innerHeight); cam.aspect = innerWidth/innerHeight; cam.updateProjectionMatrix();
     if(!focus && !to){ curPos.set(...homeFor().pos); curLook.set(...homeFor().look); } }

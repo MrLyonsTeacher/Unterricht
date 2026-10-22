@@ -69,6 +69,24 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .wpanel.many .q-ic{font-size:1.5rem}
 .wpanel.many h2{font-size:24px}
 @media (max-aspect-ratio:1/1){ .wpanel.many{max-height:60dvh} }
+/* Themen als Kacheln */
+.qgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px}
+.qt{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;min-height:140px;padding:12px 8px 10px;border-radius:16px;text-decoration:none;color:inherit;
+  background:rgba(255,255,255,.1);border:2px solid var(--ui-border);transition:transform .15s,background .15s}
+.qt:hover,.qt:focus-visible{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+.qt:active{transform:scale(.97)}
+.qt-ic{font-size:2.1rem;line-height:1;margin-bottom:2px}
+.qt-m{position:absolute;top:5px;right:5px}
+.qt-t{font:700 15px/1.15 Fredoka,sans-serif;hyphens:auto;-webkit-hyphens:auto}
+.qt-s{font-size:12px;line-height:1.2;color:var(--ui-sub);margin-bottom:6px}
+.qt-f{margin-top:auto;width:100%;display:flex;align-items:center;gap:6px}
+.qt-f .q-bar{flex:1;margin:0}
+.qt-p{font-size:12px;font-weight:700;color:var(--ui-sub);white-space:nowrap}
+.qt.played .qt-p{color:var(--ui-text)}
+.wpanel{width:min(480px,calc(100vw - 32px))}
+body.area-open .wlbl{opacity:0;pointer-events:none}
+@media (max-aspect-ratio:1/1){ .wpanel{width:min(560px,calc(100vw - 24px));bottom:108px !important} }
+@media (max-width:420px){ .qgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
 .empty{padding:.8rem;border:1.5px dashed var(--ui-border);border-radius:14px;color:var(--ui-sub);text-align:center}
 .wback{margin-top:14px;min-height:48px;padding:.4rem 1rem;border:0;border-radius:12px;background:var(--ui-accent);color:var(--ui-accent-ink);font:700 16px Fredoka}
 
@@ -182,16 +200,18 @@ async function main(){
     if(W3) W3.focus(k);
     document.querySelectorAll("#dock button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.kat===k));
     P.innerHTML = `<h2>${kat.icon} ${esc(kat.name)}</h2><p class="ort">${esc(ort)} · ${list.length} ${list.length===1?"quest":"quests"}</p>
-      ${list.length ? list.map(t=>{ const p=prog(t), pct=p?Math.round(p.pts/p.max*100):0, tier=p?LW.tierOf(p.pts,p.max):0;
-        return `<a class="quest" href="../${esc(t.pfad)}"><span class="q-ic" aria-hidden="true">${t.icon||"🎯"}</span>
-          <span class="q-t"><b>${esc(t.titel)}</b><small>${esc(t.untertitel||"")}${p?` · ${p.n}/${p.of} games`:" · new"}</small><span class="q-bar"><i style="width:${pct}%"></i></span></span>
-          <span class="q-r">${p&&tier?LW.medal(tier,22):""}${p?`${p.pts}/${p.max}`:""}<span class="q-go">START ▸</span></span></a>`; }).join("")
+      ${list.length ? `<div class="qgrid">${list.map(t=>{ const p=prog(t), pct=p?Math.round(p.pts/p.max*100):0, tier=p?LW.tierOf(p.pts,p.max):0;
+        return `<a class="qt${p?" played":""}" href="../${esc(t.pfad)}"><span class="qt-ic" aria-hidden="true">${t.icon||"🎯"}</span>
+          ${tier?`<span class="qt-m">${LW.medal(tier,26)}</span>`:""}
+          <b class="qt-t">${esc(t.titel)}</b><small class="qt-s">${esc(t.untertitel||"")}</small>
+          <span class="qt-f"><span class="q-bar"><i style="width:${pct}%"></i></span><span class="qt-p">${p?`${p.pts}/${p.max}`:"new"}</span></span></a>`; }).join("")}</div>`
         : `<div class="empty">No quests here yet – coming soon!</div>`}
       <button class="wback" id="back">← Back to ${esc(WI.name)}</button>`;
     P.classList.toggle("many", list.length > 4);
+    document.body.classList.add("area-open");
     setTimeout(()=>P.classList.add("on"), W3 ? 450 : 0);
   }
-  function closeArea(){ P.classList.remove("on"); document.querySelectorAll("#dock button").forEach(b=>b.setAttribute("aria-pressed","false")); if(W3) W3.home(); }
+  function closeArea(){ P.classList.remove("on"); document.body.classList.remove("area-open"); document.querySelectorAll("#dock button").forEach(b=>b.setAttribute("aria-pressed","false")); if(W3) W3.home(); }
   $("#dock").addEventListener("click", e=>{ const b=e.target.closest("[data-kat]"); if(!b) return; if(b.getAttribute("aria-pressed")==="true") closeArea(); else openArea(b.dataset.kat); });
   P.addEventListener("click", e=>{ if(e.target.closest("#back")) closeArea(); });
 

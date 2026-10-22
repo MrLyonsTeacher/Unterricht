@@ -22,6 +22,24 @@ TH.start({
   k:6, kat:"country", id:"fd6", icon:"🍟", kartenSymbol:"🍽️",
   titel:"The Galley Café", untertitel:"British food & ordering",
   text:"Welcome to the ship’s café! Discover British food, learn food words and order like a real Brit.",
+  lernen: {
+    british: { titel:"Food in Britain", folien:[
+      {bild:"🍟", titel:"Chips or crisps?", text:"Careful! In Britain **chips** are *Pommes frites*. *Kartoffelchips* are called **crisps**.", de:"Vorsicht! In Großbritannien sind **chips** Pommes frites. Kartoffelchips heißen **crisps**."},
+      {bild:"🐟", titel:"Fish and chips", text:"**Fish and chips** is a very popular take-away meal. Many people put **salt and vinegar** (Essig) on it.", de:"**Fish and chips** ist ein sehr beliebtes Essen zum Mitnehmen. Viele geben **Salz und Essig** darauf."},
+      {bild:"🍳", titel:"A full English breakfast", text:"A **full English** is a big hot breakfast: **eggs, bacon, sausages, baked beans**, tomatoes, mushrooms and toast.", de:"Ein **full English** ist ein großes warmes Frühstück: **Eier, Speck, Würstchen, Bohnen in Tomatensoße**, Tomaten, Pilze und Toast."},
+      {bild:"🍞", titel:"Beans on toast", text:"**Baked beans on toast** is a quick and cheap meal. Many British children love it.", de:"**Bohnen auf Toast** ist ein schnelles, günstiges Essen. Viele britische Kinder lieben es."},
+      {bild:"🍖", titel:"Sunday roast", text:"On Sundays many families eat a **Sunday roast**: roast meat with potatoes, vegetables and **gravy** (Bratensoße).", de:"Sonntags essen viele Familien einen **Sunday roast**: Braten mit Kartoffeln, Gemüse und **gravy** (Bratensoße)."},
+      {bild:"🫖", titel:"Tea time", text:"Most British people drink their **tea with milk**. **Afternoon tea** means tea with sandwiches, **scones** with cream and jam, and cakes.", de:"Die meisten Briten trinken **Tee mit Milch**. **Afternoon tea** heißt: Tee mit Sandwiches, **Scones** mit Sahne und Marmelade und Kuchen."},
+      {bild:"🍮", titel:"Pudding", text:"“What’s for **pudding**?” – In Britain *pudding* can also mean **dessert**.", de:"„What’s for **pudding**?“ – In Großbritannien kann *pudding* auch einfach **Nachtisch** bedeuten."}
+    ]},
+    cafe: { titel:"At the café – useful phrases", folien:[
+      {bild:"🙋", titel:"Ordering", text:"Say it politely: “**Can I have** a cheese sandwich, **please**?” or “**I’d like** an orange juice, please.”", de:"Bestell höflich: „**Can I have** a cheese sandwich, **please**?“ oder „**I’d like** an orange juice, please.“ (Ich hätte gern …)"},
+      {bild:"💬", titel:"The waiter asks", text:"“**What would you like?**” = Was möchtest du? – “**Anything else?**” = Sonst noch etwas? – “**Eat in or take away?**” = Hier essen oder mitnehmen?", de:"„What would you like?“ = Was möchtest du? – „Anything else?“ = Sonst noch etwas? – „Eat in or take away?“ = Hier essen oder mitnehmen?"},
+      {bild:"💷", titel:"Paying", text:"Ask: “**How much is it?**” In the UK you pay with **pounds** (£). 100 **pence** = 1 pound. “£4.50” = four pounds fifty.", de:"Frag: „**How much is it?**“ (Wie viel kostet das?) Im UK zahlt man mit **Pfund** (£). 100 **Pence** = 1 Pfund. „£4.50“ = vier Pfund fünfzig."},
+      {bild:"🤲", titel:"Here you are", text:"When you give something to someone, say “**Here you are.**” At the end say “**Thank you. Bye!**”", de:"Wenn du jemandem etwas gibst, sagst du „**Here you are.**“ (Bitte schön). Am Ende: „**Thank you. Bye!**“"},
+      {bild:"🧺", titel:"some or any?", text:"Use **some** in statements and offers: “Would you like **some** ketchup?” Use **any** in questions and negatives: “We haven’t got **any** milk.”", de:"**some** in Aussagen und Angeboten: „Would you like some ketchup?“ – **any** in Fragen und Verneinungen: „We haven’t got any milk.“"}
+    ]}
+  },
   levels: [
     { id:"pairs", typ:"memory", icon:"🥕", titel:"Food Pairs", art:"English – German · memory",
       anleitung:"Find the pairs: **English word + German word**. Fewer moves = more flags.",
@@ -29,7 +47,7 @@ TH.start({
       tipp:"Manche Wörter sind leicht (*cheese – Käse*), andere musst du lernen (*peas – Erbsen*).",
       paare:[ {a:"cucumber", b:"Gurke"}, {a:"mushrooms", b:"Pilze"}, {a:"beans", b:"Bohnen"}, {a:"sausage", b:"Würstchen"},
               {a:"peas", b:"Erbsen"}, {a:"onion", b:"Zwiebel"}, {a:"pear", b:"Birne"}, {a:"cheese", b:"Käse"} ]},
-    { id:"british", typ:"quiz", icon:"🇬🇧", titel:"Typically British", art:"British food · quiz",
+    { id:"british", lernen:"british", typ:"quiz", icon:"🇬🇧", titel:"Typically British", art:"British food · quiz",
       anleitung:"What do you know about food in Britain? Choose the right answer.",
       anleitungDe:"Was weißt du über das Essen in Großbritannien? Wähle die richtige Antwort.",
       tipp:"Vorsicht, Falle: *chips* sind in Großbritannien Pommes, *crisps* sind Kartoffelchips!",
@@ -53,7 +71,7 @@ TH.start({
               {t:"crisps", k:1}, {t:"biscuits", k:1}, {t:"sweets", k:1},
               {t:"tea", k:2}, {t:"coffee", k:2}, {t:"hot chocolate", k:2},
               {t:"soup", k:3}, {t:"cereal", k:3, e:"**cereal** = Frühstücksflocken – you eat them from a bowl."}, {t:"salad", k:3} ]},
-    { id:"order", typ:"quiz", icon:"🧾", titel:"At the Counter", art:"Ordering food · quiz",
+    { id:"order", lernen:"cafe", typ:"quiz", icon:"🧾", titel:"At the Counter", art:"Ordering food · quiz",
       anleitung:"You are in a British café. What do you say?",
       anleitungDe:"Du bist in einem britischen Café. Was sagst du?",
       tipp:"Höflich bestellen: *Can I have …, please?* – *I’d like …, please.*",

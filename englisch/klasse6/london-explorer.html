@@ -22,8 +22,28 @@ TH.start({
   k:6, kat:"country", id:"lon6", icon:"🎡", kartenSymbol:"💂",
   titel:"London Explorer", untertitel:"Sights, the Tube & history",
   text:"Our ship has reached the River Thames! Explore London’s famous sights, ride the Tube and travel through its history.",
+  lernen: {
+    sights: { titel:"London’s famous sights", folien:[
+      {bild:"🎡", titel:"The London Eye", text:"The **London Eye** is a giant wheel next to the **River Thames**. It is **135 metres** high. From the top you can see all of London.", de:"Das **London Eye** ist ein Riesenrad an der **Themse**. Es ist **135 Meter** hoch. Von oben siehst du ganz London."},
+      {bild:"🕰️", titel:"Big Ben", text:"**Big Ben** is the name of the big **bell** in the clock tower at the Houses of Parliament. The tower is called the **Elizabeth Tower**.", de:"**Big Ben** ist der Name der großen **Glocke** im Uhrturm am Parlament. Der Turm heißt **Elizabeth Tower**."},
+      {bild:"🏰", titel:"The Tower of London", text:"The **Tower of London** is a very old castle. William the Conqueror started it in **1078**. Here you can see the **Crown Jewels**.", de:"Der **Tower of London** ist eine sehr alte Burg. Wilhelm der Eroberer begann ihn **1078**. Hier kannst du die **Kronjuwelen** sehen."},
+      {bild:"💂", titel:"Buckingham Palace", text:"**Buckingham Palace** is the King’s official home in London. Watch the **Changing of the Guard** – the guards wear tall black bearskin hats.", de:"**Buckingham Palace** ist der offizielle Wohnsitz des Königs in London. Schau dir die **Wachablösung** an – die Wachen tragen hohe schwarze Bärenfellmützen."},
+      {bild:"🌉", titel:"Tower Bridge", text:"**Tower Bridge** opened in **1894**. It can **open in the middle** so that tall ships can go through.", de:"Die **Tower Bridge** wurde **1894** eröffnet. Sie kann sich **in der Mitte öffnen**, damit hohe Schiffe durchfahren können."},
+      {bild:"🏙️", titel:"The Shard", text:"**The Shard** is a very tall glass building – about **310 metres** high. It is the highest building in the UK and looks like a piece of broken glass.", de:"**The Shard** ist ein sehr hohes Glasgebäude – etwa **310 Meter**. Es ist das höchste Gebäude im UK und sieht aus wie eine Glasscherbe."},
+      {bild:"🏺", titel:"The British Museum", text:"In the **British Museum** you can see mummies from Egypt and treasures from all over the world – and it is **free**!", de:"Im **British Museum** siehst du Mumien aus Ägypten und Schätze aus aller Welt – und der Eintritt ist **kostenlos**!"},
+      {bild:"🌊", titel:"The River Thames", text:"The **Thames** flows through London to the North Sea. It is about **346 km** long. About **9 million** people live in London – the capital of England and the UK.", de:"Die **Themse** fließt durch London bis zur Nordsee. Sie ist etwa **346 km** lang. Rund **9 Millionen** Menschen leben in London – der Hauptstadt Englands und des UK."}
+    ]},
+    tube: { titel:"Getting around London", folien:[
+      {bild:"🚇", titel:"The Tube", text:"London’s underground is called **the Tube**. It opened in **1863** – it is the oldest underground in the world.", de:"Die Londoner U-Bahn heißt **the Tube**. Sie wurde **1863** eröffnet – die älteste U-Bahn der Welt."},
+      {bild:"⚠️", titel:"Mind the gap!", text:"On the Tube you often hear “**Mind the gap!**” – be careful, there is a **gap** between the train and the platform.", de:"In der Tube hörst du oft „**Mind the gap!**“ – Vorsicht, zwischen Zug und Bahnsteig ist eine **Lücke**."},
+      {bild:"🚌", titel:"Red double-deckers", text:"London buses are **red**. A bus with two floors is a **double-decker**. Sit at the top for the best view!", de:"Londoner Busse sind **rot**. Ein Bus mit zwei Etagen heißt **double-decker**. Oben hast du die beste Aussicht!"},
+      {bild:"🚕", titel:"Black cabs", text:"London taxis are called **black cabs**. The drivers must learn all the streets of London by heart.", de:"Londoner Taxis heißen **black cabs**. Die Fahrer müssen alle Straßen Londons auswendig lernen."},
+      {bild:"🎫", titel:"Tickets", text:"A **single** ticket is for one way. A **return** ticket is there and back. You can also pay with an **Oyster card** or a bank card.", de:"Ein **single** ticket gilt für eine Strecke, ein **return** ticket für hin und zurück. Du kannst auch mit der **Oyster card** oder einer Bankkarte zahlen."},
+      {bild:"⬅️", titel:"Drive on the left", text:"In the UK people drive on the **left**. When you cross the road, look **right** first!", de:"Im UK fährt man **links**. Wenn du über die Straße gehst, schau zuerst nach **rechts**!"}
+    ]}
+  },
   levels: [
-    { id:"sights", typ:"quiz", icon:"🏰", titel:"Famous Sights", art:"Sights · quiz",
+    { id:"sights", lernen:"sights", typ:"quiz", icon:"🏰", titel:"Famous Sights", art:"Sights · quiz",
       anleitung:"Which London sight is it? Choose the right answer.",
       anleitungDe:"Welche Sehenswürdigkeit in London ist gemeint? Wähle die richtige Antwort.",
       tipp:"Denk an die Bilder aus dem Englischbuch: Riesenrad, Palast, Turm, Brücke …",
@@ -37,7 +57,7 @@ TH.start({
         {q:"It is a very tall building made of glass. It looks like a piece of broken glass.", o:["the Shard","the Gherkin","St Paul’s Cathedral"], c:0, e:"**The Shard** is about 310 metres high."},
         {q:"In this big museum you can see mummies from Egypt – and it is free!", o:["the British Museum","Madame Tussauds","the London Dungeon"], c:0, e:"Entry to the **British Museum** is free."}
       ]},
-    { id:"tube", typ:"quiz", icon:"🚇", titel:"Mind the Gap!", art:"Travelling in London · quiz",
+    { id:"tube", lernen:"tube", typ:"quiz", icon:"🚇", titel:"Mind the Gap!", art:"Travelling in London · quiz",
       anleitung:"How do you travel in London? Choose the right answer.",
       anleitungDe:"Wie reist man in London? Wähle die richtige Antwort.",
       tipp:"Die Londoner U-Bahn heißt *the Underground* oder *the Tube*.",
@@ -79,7 +99,15 @@ TH.start({
         {q:"How many people live in London? (million)", min:1, max:20, step:0.5, start:4, unit:"million", dec:1, ans:9, tol:1, e:"About **9 million** people live in London."},
         {q:"How long is the River Thames?", min:50, max:1000, step:10, start:150, unit:"km", dec:0, ans:346, tol:30, e:"The Thames is about **346 km** long."}
       ]},
-    { id:"history", typ:"zeitstrahl", icon:"📜", titel:"Through London’s History", art:"Timeline · 7 events",
+    { id:"history", lernen:{ titel:"London through time", folien:[
+        {bild:"🏛️", jahr:"c. AD 50", titel:"Londinium", text:"The **Romans** build a town by the river Thames. They call it **Londinium**.", de:"Die **Römer** bauen eine Stadt an der Themse. Sie nennen sie **Londinium**."},
+        {bild:"🏰", jahr:"1078", titel:"The Tower of London", text:"**William the Conqueror** starts building the **Tower of London**.", de:"**Wilhelm der Eroberer** beginnt mit dem Bau des **Tower of London**."},
+        {bild:"🔥", jahr:"1666", titel:"The Great Fire", text:"A fire starts in a **bakery** and burns for days. It destroys most of the old city.", de:"In einer **Bäckerei** bricht ein Feuer aus und brennt tagelang. Es zerstört den größten Teil der alten Stadt."},
+        {bild:"🚂", jahr:"1863", titel:"The first Tube train", text:"The first **Underground** train runs – the first underground in the world.", de:"Die erste **U-Bahn** fährt – die erste U-Bahn der Welt."},
+        {bild:"🌉", jahr:"1894", titel:"Tower Bridge", text:"**Tower Bridge** opens. Its middle part can go up for tall ships.", de:"Die **Tower Bridge** wird eröffnet. Ihr Mittelteil kann für hohe Schiffe hochgeklappt werden."},
+        {bild:"🎡", jahr:"2000", titel:"The London Eye", text:"The **London Eye** opens for the new millennium.", de:"Das **London Eye** wird zum neuen Jahrtausend eröffnet."},
+        {bild:"🏅", jahr:"2012", titel:"The Olympic Games", text:"London hosts the **Olympic Games** – for the third time!", de:"London ist Gastgeber der **Olympischen Spiele** – schon zum dritten Mal!"}
+      ]}, typ:"zeitstrahl", icon:"📜", titel:"Through London’s History", art:"Timeline · 7 events",
       anleitung:"Put the events in the right order – **the oldest first**.",
       anleitungDe:"Bring die Ereignisse in die richtige Reihenfolge – **das älteste zuerst**.",
       tipp:"Die Römer waren sehr früh da. Das London Eye ist ziemlich neu.",

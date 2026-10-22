@@ -108,15 +108,15 @@ export function build(A){
 
   return {
     W, D, blocks, spots:S, exposure:1.2, fov:40,
-    sky:[[0,"#5FD3F2"],[.3,"#2E9BD0"],[.6,"#0E5C8C"],[1,"#062A46"]], fog:[0x0E5C8C, 55, 175],
+    sky:[[0,"#5FD3F2"],[.3,"#2E9BD0"],[.6,"#0E5C8C"],[1,"#062A46"]], fog:[0x0E5C8C, 85, 250],
     hemi:[0x9FEFFF, 0x1A4A6A, 1.9], sun:{color:0xDFFBFF, int:1.6, pos:[-30,90,40]}, bloom:[.38,.45,.9],
     lights:[{pos:[S.grammar.x,S.grammar.y+18,S.grammar.z], color:0x7FE3FF, int:260, dist:34}, {pos:[S.vocabulary.x,S.vocabulary.y+3,S.vocabulary.z], color:0xFFFFFF, int:90, dist:16}],
-    planes:[{y:3.99, tex:T.sand, repeat:200, size:500}, {y:42, tex:T.surface, repeat:60, size:400, em:.4, opacity:.35, anim:[.02,.01]}],
+    planes:[{y:3.99, tex:T.sand, repeat:200, size:500}, {y:150, tex:T.surface, repeat:60, size:400, em:.4, opacity:.35, anim:[.02,.01]}],
     rays:{n:16, color:0xBFF4FF},
-    particles:[{n:520, area:[0,W,2,40,0,D], vy:2.2, wob:.8, color:0xE6FBFF, size:.34, opacity:.8},
+    particles:[{n:520, area:[0,W,2,80,0,D+30], vy:2.2, wob:.8, color:0xE6FBFF, size:.34, opacity:.8},
                {n:380, area:[0,W,2,30,0,D], vy:0, wob:.3, color:0xA8F0D8, size:.14, opacity:.7, add:true, twinkle:true}],
     movers,
-    home:{pos:[W/2,40,D+48], look:[W/2,6,D/2-4]}, homePortrait:{pos:[W/2,58,D+92], look:[W/2,6,D/2-4]},
+    home:{pos:[W/2,60,D+50], look:[W/2,3,D/2-2]}, homePortrait:{pos:[W/2,112,D+78], look:[W/2,0,D/2-12]},
     ui:{bg:"rgba(4,34,58,.88)", border:"#7FE3FF", glow:"rgba(80,210,255,.5)", text:"#E8FBFF", sub:"#9FD7EA", accent:"#FF8A5A", "accent-ink":"#1A0E08", chip:"rgba(4,30,52,.8)"}
   };
 }

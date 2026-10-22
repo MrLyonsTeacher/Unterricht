@@ -51,7 +51,9 @@ const FRS = {
         { id:"bi7", kat:"country", titel:"Discover the British Isles", untertitel:"Countries, history & culture", pfad:"englisch/klasse7/british-isles.html", icon:"🧭", max:79 }
       ]},
       { k:8,  id:"e8",  themen:[] },
-      { k:9,  id:"e9",  themen:[] },
+      { k:9,  id:"e9",  themen:[
+        { id:"emp9", kat:"country", titel:"Rise and Fall of the British Empire", untertitel:"History, colonies & the Commonwealth", pfad:"englisch/klasse9/british-empire.html", icon:"🌍", max:55 }
+      ] },
       { k:10, id:"e10", themen:[] }
     ]
   },

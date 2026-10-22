@@ -26,7 +26,9 @@ const TXT = {
       german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
       island:"Welt",medalNames:["Noch keine Medaille","Bronze-Medaille","Silber-Medaille","Gold-Medaille"],
       medalNext:(n,p,name)=>`Noch ${n} ${p} bis ${name}`,medalTop:"Höchste Medaille erreicht!",
-      medalWon:"Du hast eine neue Medaille gewonnen!",medalOk:"Super!",perfect:"PERFEKT!"},
+      medalWon:"Du hast eine neue Medaille gewonnen!",medalOk:"Super!",perfect:"PERFEKT!",
+      review:"Lerne aus deinen Fehlern",gap:"Lücke",learn:"Erst lernen",learnAgain:"Infos nochmal ansehen",startGame:"Zum Spiel ▸",read:"Vorlesen",auto:"Abspielen",pause:"Pause",prev:"Zurück",
+      videoNote:"Das Video wird von YouTube geladen.",learnFirst:"Schau dir zuerst die Infos an – danach startet das Spiel. Tipp: **Abspielen** und **Vorlesen** antippen."},
   en:{map:"Games",pts:"points",stars:"stars",next:"Next",check:"Check",again:"Play again",nextLvl:"Next game",
       toMap:"All games",right:"Correct!",wrong:"Not quite.",correctIs:"Correct answer:",timeUp:"Time’s up!",
       start:"Start",record:"New best score!",best:"Best",open:"not played yet",result:"See results",
@@ -47,7 +49,9 @@ const TXT = {
       german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
       island:"World",medalNames:["No medal yet","Bronze medal","Silver medal","Gold medal"],
       medalNext:(n,p,name)=>`${n} more ${p} for the ${name.toLowerCase()}`,medalTop:"Top medal – well done!",
-      medalWon:"You won a new medal!",medalOk:"Great!",perfect:"PERFECT!"}
+      medalWon:"You won a new medal!",medalOk:"Great!",perfect:"PERFECT!",
+      review:"Learn from your mistakes",gap:"Gap",learn:"Learn first",learnAgain:"Learn again",startGame:"Start the game ▸",read:"Read aloud",auto:"Play",pause:"Pause",prev:"Back",
+      videoNote:"The video is loaded from YouTube.",learnFirst:"First learn the facts – then play the game. Tip: tap **Play** and **Read aloud**."}
 };
 
 /* ---------- Medaillen ---------- */
@@ -97,13 +101,16 @@ const best = id => (S.lv[id] && S.lv[id].best) || 0;
 const played = id => !!S.lv[id];
 const total = () => LV().reduce((a,l)=>a+best(l.id),0);
 // Live-Stand: Es zählt pro Spiel der beste Versuch. Während eines Spiels zählt der laufende Versuch mit, sobald er den Bestwert übertrifft.
+// Fehler sammeln: am Ende eines Spiels als Lern-Box zeigen
+let MISS = [];
+function miss(q, a, e){ if(!CUR) return; q=String(q??""); if(q && MISS.some(m=>m.q===q)) return; MISS.push({q, a:String(a??""), e:e||""}); }
 function liveTotal(){ if(!CUR) return total(); return total() - best(CUR.id) + Math.max(best(CUR.id), Math.min(RUN, maxOf(CUR))); }
 function starsFor(pts,max){ if(!max) return 0; const p=pts/max; return p>=.9?3:p>=.6?2:pts>0?1:0; }
 const starHtml = n => `<span class="stars" aria-label="${n} von 3">${[0,1,2].map(i=>i<n?"★":`<span class="off">★</span>`).join("")}</span>`;
 
 function load(){
-  S = {lv:{}, name:"", done:false};
-  try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r){ S.lv=r.lv||{}; S.name=r.name||""; S.done=!!(r.done || (r.ab && r.ab.done)); } }catch(e){}
+  S = {lv:{}, name:"", done:false, seen:{}};
+  try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r){ S.lv=r.lv||{}; S.name=r.name||""; S.done=!!(r.done || (r.ab && r.ab.done)); S.seen=r.seen||{}; } }catch(e){}
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
@@ -176,9 +183,9 @@ function topbar(o){
     ${o.pill?`<button class="pill-fin" ${finTarget()}><span aria-hidden="true">🏁</span> ${T.finishPill}</button>`:""}
     <span class="chip" id="ptsChip"><span class="chip-ic" aria-hidden="true">${W.sammel||"⭐"}</span><span id="ptsNum">${liveTotal()}</span><span class="chip-max">/${MAX}</span></span></div>`;
 }
-function howBox(text, de, tip){
+function howBox(text, de, tip, extra){
   if(!text) return "";
-  return `<div class="how"><div class="how-t">${rich(text)}</div>${de?`
+  return `<div class="how"><div class="how-t">${rich(text)}</div>${extra||""}${de?`
     <button class="flag" data-tr aria-label="${T.showGerman}" aria-expanded="false">${FLAG_DE}</button>
     <div class="tr-pop" hidden role="dialog" aria-label="${T.german}">
       <button class="tr-x" data-trx aria-label="${T.close}">×</button>
@@ -211,7 +218,7 @@ function home(){
     return `<button class="panel lvl" data-go="l=${esc(l.id)}">
       <span class="ic" aria-hidden="true">${l.icon||"🎯"}</span>
       <span class="t">${esc(l.titel)}</span>
-      <span class="k">${esc(l.art||"")}</span>
+      <span class="k">${deckOf(l)?"📖 ":""}${esc(l.art||"")}</span>
       <span class="s"><span>${played(l.id)?`${T.best}: ${b}/${m}`:T.open}</span>${starHtml(starsFor(b,m))}</span></button>`;}).join("")}</div>
   <div class="foot"><span>${T.saved}</span><button id="lwReset">${T.reset}</button></div>`;
 }
@@ -219,21 +226,105 @@ function home(){
 function render(){
   cleanups.forEach(f=>{ try{f();}catch(e){} }); cleanups=[];
   document.querySelectorAll("#confetti,.pop,.flyer,.medal-pop").forEach(x=>x.remove());
-  closeSheet(); CUR=null; RUN=0;
+  closeSheet(); CUR=null; RUN=0; MISS=[];
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
   const h = location.hash.slice(1);
   if(h==="fertig" && W.insel){ location.replace(W.insel.href+"#fertig"); return; }
   if(h==="fertig"){
     APP.innerHTML = topbar({back:true, title:T.codeTitle, icon:"🏁"}) + howBox(T.codeHow, W.sprache==="en"?TXT.de.codeHow:null) + `<div id="area"></div>`;
     document.title = T.codeTitle+" – "+W.titel; fit(); finale($("#area")); return;
   }
+  const lm = h.match(/^learn=(.+)$/), ll = lm && LV().find(x=>x.id===decodeURIComponent(lm[1]));
+  if(ll && deckOf(ll)){ learnScreen(ll); return; }
   const m = h.match(/^l=(.+)$/), l = m && LV().find(x=>x.id===decodeURIComponent(m[1]));
   if(!l){ APP.innerHTML = home(); document.title = W.titel; return; }
+  if(deckOf(l) && !S.seen[deckKey(l)]){ history.replaceState(null, "", "#learn="+encodeURIComponent(l.id)); learnScreen(l); return; }
   CUR = l;
-  APP.innerHTML = topbar({back:true, title:l.titel, icon:l.icon, art:l.art, pill:true}) + howBox(l.anleitung, l.anleitungDe, l.tipp) + `<div id="area"></div>`;
+  const again = deckOf(l) ? `<button class="ln-again" data-go="learn=${esc(l.id)}" aria-label="${T.learnAgain}" title="${T.learnAgain}">📖</button>` : "";
+  APP.innerHTML = topbar({back:true, title:l.titel, icon:l.icon, art:l.art, pill:true}) + howBox(l.anleitung, l.anleitungDe, l.tipp, again) + `<div id="area"></div>`;
   document.title = l.titel+" – "+W.titel;
   fit();
   const A = $("#area");
   GAMES[l.typ](l, A, (pts, info)=>finish(l, A, pts, info));
+}
+
+/* ---------- Erst lernen: animierte Info-Folien vor einem Spiel ---------- */
+// level.lernen = { titel, folien:[{bild, jahr, titel, text, de} | {video:"YouTube-ID", titel, text, de}] }
+// oder ein Name aus W.lernen (dann teilen sich mehrere Spiele dieselben Folien).
+const deckOf = l => !l || !l.lernen ? null : (typeof l.lernen === "string" ? (W.lernen||{})[l.lernen] : l.lernen);
+const deckKey = l => typeof l.lernen === "string" ? l.lernen : l.id;
+const yearNum = j => { const m = String(j||"").match(/(\d[\d,]*)/); if(!m) return null; const n = +m[1].replace(/,/g,""); return /BC/i.test(j) ? -n : n; };
+const plain = t => String(t||"").replace(/\*\*|~~|\*/g, "");
+function learnScreen(l){
+  const D = deckOf(l), F = D.folien, key = deckKey(l), seen = !!S.seen[key];
+  APP.innerHTML = topbar({back:true, title:D.titel || l.titel, icon:"📖", art:T.learn}) + howBox(T.learnFirst, W.sprache==="en"?TXT.de.learnFirst:null) + `<div id="area"></div>`;
+  document.title = (D.titel || l.titel)+" – "+W.titel; fit();
+  const A = $("#area"), canSpeak = "speechSynthesis" in window && window.SpeechSynthesisUtterance;
+  A.innerHTML = `<div class="learn">
+    <div class="panel ln-stage" id="lnStage"></div>
+    <div class="ln-track"><span class="ln-line"><i id="lnFill"></i></span>${F.map((f,k)=>`<button class="ln-dot" data-k="${k}" aria-label="${k+1}"><i>${f.video?"▶":""}</i>${f.jahr?`<small>${esc(f.jahr)}</small>`:""}</button>`).join("")}</div>
+    <div class="ln-ctrl">
+      <button class="btn alt ln-b" id="lnPrev" aria-label="${T.prev}">◀</button>
+      <button class="btn alt ln-b" id="lnAuto" aria-pressed="false">▶ ${T.auto}</button>
+      ${canSpeak?`<button class="btn alt ln-b" id="lnVoice" aria-pressed="false">🔊 ${T.read}</button>`:""}
+      <button class="btn alt ln-b" id="lnNext" aria-label="${T.next}">${T.next} ▸</button>
+      <span class="sp"></span>
+      <button class="btn big" id="lnGo" ${seen?"":"disabled"}>${T.startGame}</button>
+    </div></div>`;
+  let i = -1, auto = false, voice = false, tm = null, raf = null;
+  const stop = () => { clearTimeout(tm); cancelAnimationFrame(raf); try{ canSpeak && speechSynthesis.cancel(); }catch(e){} };
+  cleanups.push(stop);
+  function voiceFor(){ try{ const v = speechSynthesis.getVoices(), lang = W.sprache==="en" ? "en" : "de";
+    return (lang==="en" && v.find(x=>/en[-_]GB/i.test(x.lang))) || v.find(x=>x.lang && x.lang.toLowerCase().startsWith(lang)) || null; }catch(e){ return null; } }
+  function say(f, then){
+    try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(plain((f.titel?f.titel+". ":"")+(f.text||"")));
+      const v = voiceFor(); if(v) u.voice = v; u.lang = v ? v.lang : (W.sprache==="en"?"en-GB":"de-DE"); u.rate = .9;
+      u.onend = () => then && then(); speechSynthesis.speak(u); }catch(e){ then && then(); }
+  }
+  function schedule(){
+    clearTimeout(tm); const f = F[i];
+    if(!auto) { if(voice && !f.video) say(f); return; }
+    if(f.video){ setAuto(false); return; }
+    const go = () => { if(!auto) return; if(i < F.length-1) show(i+1); else setAuto(false); };
+    if(voice) say(f, ()=>{ tm = setTimeout(go, 900); });
+    else tm = setTimeout(go, Math.max(4500, plain(f.titel+" "+f.text).split(/\s+/).length*360));
+  }
+  function setAuto(on){ auto = on; const b=$("#lnAuto"); if(b){ b.setAttribute("aria-pressed", on); b.textContent = on ? "⏸ "+T.pause : "▶ "+T.auto; } if(on) schedule(); else { clearTimeout(tm); } }
+  function countYear(el, from, to, label){
+    if(from===null || to===null || from===to || reduced()){ el.textContent = label; return; }
+    const t0 = performance.now(), dur = 1000;
+    const step = now => { const k = Math.min(1,(now-t0)/dur), e = 1-Math.pow(1-k,3), n = Math.round(from+(to-from)*e);
+      el.textContent = k<1 ? (n<0 ? `${-n} BC` : String(n)) : label; if(k<1) raf = requestAnimationFrame(step); };
+    raf = requestAnimationFrame(step);
+  }
+  function show(k){
+    const prev = F[i]; i = k; const f = F[i]; cancelAnimationFrame(raf); try{ canSpeak && speechSynthesis.cancel(); }catch(e){}
+    const st = $("#lnStage");
+    st.innerHTML = f.video
+      ? `<div class="ln-video"><div class="ln-vbox" id="lnV"><button class="ln-play" data-yt="${esc(f.video)}" aria-label="Play video">▶</button><p>${T.videoNote}</p></div>
+          <div class="ln-body"><h2 class="disp ln-t">${rich(f.titel||"")}</h2><p class="ln-x">${rich(f.text||"")}</p>${f.de?`<details class="ln-de"><summary>${FLAG_DE} Deutsch</summary><p>${rich(f.de)}</p></details>`:""}</div></div>`
+      : `<div class="ln-art"><span>${f.bild||"📌"}</span></div>
+         <div class="ln-body">${f.jahr?`<div class="ln-year" id="lnYear">${esc(f.jahr)}</div>`:""}<h2 class="disp ln-t">${rich(f.titel||"")}</h2><p class="ln-x">${rich(f.text||"")}</p>
+           ${f.de?`<details class="ln-de"><summary>${FLAG_DE} Deutsch</summary><p>${rich(f.de)}</p></details>`:""}</div>`;
+    st.insertAdjacentHTML("beforeend", `<span class="ln-n">${i+1} / ${F.length}</span>`);
+    if(f.jahr) countYear($("#lnYear"), prev && prev.jahr ? yearNum(prev.jahr) : null, yearNum(f.jahr), f.jahr);
+    A.querySelectorAll(".ln-dot").forEach((d,n)=>{ d.classList.toggle("on", n===i); d.classList.toggle("done", n<i); });
+    $("#lnFill").style.width = (F.length>1 ? i/(F.length-1)*100 : 100)+"%";
+    $("#lnPrev").disabled = i===0; $("#lnNext").disabled = i===F.length-1;
+    if(i===F.length-1){ $("#lnGo").disabled = false; }
+    schedule();
+  }
+  A.onclick = e => {
+    const d = e.target.closest("[data-k]"); if(d){ show(+d.dataset.k); return; }
+    if(e.target.closest("#lnPrev") && i>0){ show(i-1); return; }
+    if(e.target.closest("#lnNext") && i<F.length-1){ show(i+1); return; }
+    if(e.target.closest("#lnAuto")){ if(!auto && i===F.length-1) show(0); setAuto(!auto); return; }
+    if(e.target.closest("#lnVoice")){ voice = !voice; const b=$("#lnVoice"); b.setAttribute("aria-pressed", voice); if(voice){ if(!F[i].video) say(F[i], auto ? ()=>{ tm=setTimeout(()=>{ if(auto) (i<F.length-1 ? show(i+1) : setAuto(false)); }, 900); } : null); } else { try{ speechSynthesis.cancel(); }catch(err){} if(auto) schedule(); } return; }
+    const y = e.target.closest("[data-yt]");
+    if(y){ setAuto(false); $("#lnV").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(y.dataset.yt)}?rel=0&autoplay=1&playsinline=1" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`; return; }
+    if(e.target.closest("#lnGo")){ stop(); S.seen[key] = 1; save(); location.hash = "l="+encodeURIComponent(l.id); }
+  };
+  show(0);
 }
 
 function finish(l, A, pts, info){
@@ -243,8 +334,9 @@ function finish(l, A, pts, info){
   const tierBefore = tierOf(before, MAX), tierAfter = tierOf(total(), MAX), perfect = m>0 && pts===m;
   CUR = null; RUN = 0; updateChip(false);
   const st = starsFor(pts, m), idx = LV().indexOf(l), nx = LV()[idx+1];
-  const msg = (W.lob||{})[st] || "";
-  A.innerHTML = `<div class="panel result" role="status">
+  const msg = (W.lob||{})[st] || "", rv = MISS.slice(0, 40);
+  const rvHtml = rv.length ? `<section class="panel review" aria-label="${T.review}"><h3 class="rv-h">📚 ${T.review}</h3><ul class="rv-list">${rv.map(x=>`<li>${x.q?`<span class="rv-q">${rich(x.q)}</span>`:""}<span class="rv-a">✔ ${rich(x.a)}</span>${x.e?`<span class="rv-e">${rich(x.e)}</span>`:""}</li>`).join("")}</ul></section>` : "";
+  A.innerHTML = `<div class="res-wrap${rv.length?" has-rv":""}"><div class="panel result" role="status">
     ${perfect?`<div class="stamp" aria-hidden="true">${T.perfect}</div>`:""}
     <div class="bigstars">${starHtml(st)}</div>
     <p class="pts">${pts} / ${m}</p>
@@ -252,7 +344,7 @@ function finish(l, A, pts, info){
     ${msg?`<p class="res-msg">${esc(msg)}</p>`:""}
     ${rec?`<span class="rec">${T.record}</span>`:""}
     <div class="row">${nx?`<button class="btn big" data-go="l=${esc(nx.id)}">${T.nextLvl}: ${esc(nx.titel)}</button>`:`<button class="btn big" ${finTarget()}>🏁 ${T.finishBtn}</button>`}
-      <button class="btn alt" data-again>${T.again}</button><button class="btn alt" data-go="">${T.toMap}</button></div></div>`;
+      <button class="btn alt" data-again>${T.again}</button><button class="btn alt" data-go="">${T.toMap}</button></div></div>${rvHtml}</div>`;
   if(perfect || st===3) confetti(140); else if(st===2) confetti(45);
   if(tierAfter > tierBefore) setTimeout(()=>medalPop(tierAfter), perfect||st===3 ? 1300 : 600);
 }
@@ -324,7 +416,7 @@ GAMES.quiz = (l, A, done) => {
     const q = qs[i], ok = j===q.c;
     A.querySelectorAll(".opt").forEach(b=>{ const k=+b.dataset.j; b.disabled=true; if(k===q.c) b.classList.add("right"); else if(k===j) b.classList.add("wrong"); });
     res.push(ok);
-    if(ok){ pts+=P; score(A.querySelector(`.opt[data-j="${q.c}"]`), P); } else A.querySelector(".qpanel").classList.add("shake");
+    if(ok){ pts+=P; score(A.querySelector(`.opt[data-j="${q.c}"]`), P); } else { A.querySelector(".qpanel").classList.add("shake"); miss((q.szene?q.szene+" – ":"")+q.q, q.o[q.c], q.e); }
     const head = ok ? `${l.richtigText||T.right} +${P}` : `${j===-1?T.timeUp:T.wrong} ${T.correctIs} „${q.o[q.c]}“`;
     sheet(ok?"ok":"no", esc(head), rich(q.e||""), i<qs.length-1?T.next:T.result, ()=>{ i++; if(i<qs.length) show(); else done(pts, T.correctN(res.filter(Boolean).length)+" / "+qs.length); });
   }
@@ -360,6 +452,7 @@ GAMES.swipe = (l, A, done) => {
     el.style.transition="transform .3s, opacity .3s"; el.style.transform=`translateX(${d==="l"?-420:420}px) rotate(${d==="l"?-18:18}deg)`; el.style.opacity="0";
     A.querySelectorAll("#sbtn .btn").forEach(b=>b.disabled=true);
     const corr = c.r==="l"?l.links.t:l.rechts.t;
+    if(!ok) miss(c.t, corr, c.e);
     const head = c.r==="beide" ? T.grey+" +1" : ok ? T.right+" +1" : `${T.wrong} ${T.correctIs} „${corr}“`;
     sheet(ok?"ok":"no", esc(head), `<span class="quote">„${rich(c.t)}“</span> ${rich(c.e||"")}`, i<cs.length-1?T.next:T.result,
       ()=>{ i++; if(i<cs.length) show(); else done(pts, T.correctN(pts)+" / "+cs.length); });
@@ -387,7 +480,7 @@ GAMES.sortieren = (l, A, done) => {
     if(ok){ pts++; score(b,1);
       if(it.e){ sheet("ok", esc(T.right+" +1"), rich(it.e)); tm=setTimeout(nextItem, 1600); } else tm=setTimeout(nextItem, 650);
     } else {
-      b.classList.add("miss","shake"); $("#si").classList.add("shake");
+      b.classList.add("miss","shake"); $("#si").classList.add("shake"); miss(it.t, l.koerbe[it.k].t, it.e||l.koerbe[it.k].tipp);
       sheet("no", esc(`${T.wrong} ${T.correctIs} „${l.koerbe[it.k].t}“`), rich(it.e||l.koerbe[it.k].tipp||""), i<its.length-1?T.next:T.result, nextItem);
     }
   };
@@ -426,7 +519,7 @@ GAMES.rush = (l, A, done) => {
       if(hits<=l.ziel) score(o, 1); else pop(o, "🔥");
       $("#rs").textContent=hits; $("#rbar").style.width=Math.min(100,hits/l.ziel*100)+"%";
       $("#cb").textContent = combo>=3 ? `🔥 ×${combo}` : ""; setTimeout(next, 280);
-    } else { combo=0; $("#cb").textContent=""; o.classList.add("wrong","shake");
+    } else { combo=0; $("#cb").textContent=""; o.classList.add("wrong","shake"); miss(cur.q, cur.o[cur.c], cur.e);
       A.querySelector(`.opt[data-j="${cur.c}"]`).classList.add("right"); setTimeout(next, 900); }
   };
 };
@@ -450,6 +543,7 @@ GAMES.zeitstrahl = (l, A, done) => {
     const u=e.target.closest("[data-un]"); if(u){ ord.splice(+u.dataset.un,1); show(); return; }
     if(e.target.closest("#chk")){
       checked=true; pts=ord.filter((ev,k)=>ev===k).length; show();
+      l.items.forEach((x,k)=>{ if(ord[k]!==k) miss(x.t, x.j, x.e); });
       score(A.querySelector(".slots"), pts);
       sheet(pts===l.items.length?"ok":"mid", esc(T.levelOf(pts,l.items.length)+" ✓"), "", T.result, ()=>done(pts));
     }
@@ -483,6 +577,7 @@ GAMES.satzbau = (l, A, done) => {
       const ok = okList.includes(got); res.push(ok); checked=true; if(ok) pts+=P; show();
       if(ok) score($("#ans"),P);
       const sol = norm(s.w).replace(/^./,c=>c.toUpperCase());
+      if(!ok) miss(s.hint||s.aufgabe||"", sol, s.e);
       sheet(ok?"ok":"no", esc(ok?T.right+" +"+P:T.wrong), `${ok?"":`${T.solution} <strong>${esc(sol)}</strong> `}${s.e?rich(s.e):""}`, i<ss.length-1?T.next:T.result,
         ()=>{ i++; if(i<ss.length) setup(); else done(pts, T.correctN(res.filter(Boolean).length)+" / "+ss.length); });
     }
@@ -508,7 +603,8 @@ GAMES.schaetzen = (l, A, done) => {
     const s=e.target.closest("[data-st]"); if(s && !locked){ v=Math.min(q.max,Math.max(q.min,+(v+(+s.dataset.st)*q.step).toFixed(3))); $("#rg").value=v; $("#ev").textContent=`${fmt(v,q.dec)} ${q.unit}`; return; }
     if(e.target.closest("#lock") && !locked){
       locked=true; $("#rg").disabled=true; A.querySelectorAll("[data-st],#lock").forEach(b=>b.disabled=true);
-      const d=Math.abs(v-q.ans), p = d<=q.tol+1e-9?2 : d<=2*q.tol+1e-9?1 : 0; pts+=p; res.push(p===2?true:p===0?false:null);
+      const d=Math.abs(v-q.ans), p = d<=q.tol+1e-9?2 : d<=2*q.tol+1e-9?1 : 0; pts+=p;
+      if(p<2) miss(q.q, `${fmt(q.ans,q.dec)} ${q.unit}`, q.e); res.push(p===2?true:p===0?false:null);
       if(p) score($("#ev"),p);
       sheet(p===2?"ok":p===1?"mid":"no", esc(`${p===2?T.bull:p===1?T.close:T.off}${p?" +"+p:""} · ${T.yours} ${fmt(v,q.dec)} ${q.unit}`), rich(q.e), i<fs.length-1?T.next:T.result,
         ()=>{ i++; if(i<fs.length) show(); else done(pts); });
@@ -538,6 +634,8 @@ GAMES.lueckentext = (l, A, done) => {
         const nx = pick.findIndex((x,k)=>x===null && k>act), first = pick.findIndex(x=>x===null);
         act = nx>=0 ? nx : (first>=0 ? first : null); story(); chooser(); return; }
       if(e.target.closest("#chk")){ checked=true; pts=pick.filter((v,k)=>v===gaps[k].ans).length; story();
+        { let g=-1, before=""; parts.forEach(p=>{ if(/^\[\[/.test(p)){ g++; if(pick[g]!==gaps[g].ans){ const w=before.replace(/\[\[([^|\]]+)[^\]]*\]\]/g,"$1").split(/\s+/).filter(Boolean).slice(-6).join(" "); miss(`${T.gap} ${g+1}: …${w} ___`, gaps[g].ans, ""); } }
+          before += /^\[\[/.test(p) ? gaps[g].ans+" " : p; }); }
         score(A.querySelector(".story"), pts);
         sheet(pts===gaps.length?"ok":"mid", esc(T.levelOf(pts,gaps.length)+" ✓"), l.erklaerung?rich(l.erklaerung):"", T.result, ()=>done(pts)); }
     };
@@ -598,7 +696,7 @@ const LW = {
       const g = e.target.closest("[data-go]");
       if(g){ const to=g.dataset.go; if(location.hash.slice(1)===to) render(); else location.hash=to; return; }
       if(e.target.closest("[data-again]")){ render(); window.scrollTo(0,0); return; }
-      if(e.target.closest("#lwReset") && confirm(T.resetQ)){ S={lv:{},name:"",done:false}; save(); render(); }
+      if(e.target.closest("#lwReset") && confirm(T.resetQ)){ S={lv:{},name:"",done:false,seen:{}}; save(); render(); }
     });
     document.addEventListener("keydown", e=>{ if(e.key==="Escape") document.querySelectorAll(".tr-pop:not([hidden])").forEach(p=>{ p.hidden=true; }); });
     window.addEventListener("hashchange", ()=>{ render(); window.scrollTo(0,0); });
