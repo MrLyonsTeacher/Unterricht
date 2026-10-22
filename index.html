@@ -51,7 +51,7 @@ main{max-width:1120px;margin:0 auto;padding:1.4rem 1.2rem 3rem}
 .sec-h p{margin:0;color:var(--muted)}
 
 /* Klassenkarten */
-.classes{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.classes{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;align-items:start}
 .cls{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 0 var(--line)}
 .cls-map{position:relative;background:#3A9FE0;aspect-ratio:16/9;overflow:hidden}
 .cls-map img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -61,6 +61,20 @@ main{max-width:1120px;margin:0 auto;padding:1.4rem 1.2rem 3rem}
 .cls-t{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem}
 .cls-t b{font-family:"Fredoka",sans-serif;font-size:1.25rem}
 .cls-t span{color:var(--muted);font-size:.9rem;white-space:nowrap}
+.tdet{border:2px solid var(--line, #d6dbe3);border-radius:12px;background:var(--bg)}
+.tdet summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;font-weight:700;min-height:46px}
+.tdet summary::-webkit-details-marker{display:none}
+.ts-n{display:flex;gap:.5rem;font-size:.92rem}
+.ts-n span{background:var(--surface);border-radius:999px;padding:.1rem .5rem}
+.ts-l{flex:1;text-align:right;color:var(--muted);font-size:.9rem}
+.ts-a{transition:transform .2s}
+.tdet[open] .ts-a{transform:rotate(180deg)}
+.tdet[open] .ts-l{font-size:0}
+.tdet[open] .ts-l::after{content:"Einklappen";font-size:.9rem}
+.tdet[open]{padding-bottom:.4rem}
+.tgrp{margin:.45rem .7rem .25rem;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.tdet .topics{padding:0 .4rem}
+.tdet .topics li{background:var(--surface)}
 .topics{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
 .topics li{display:flex;align-items:center;gap:.55rem;padding:.4rem .5rem;border-radius:10px;background:var(--bg)}
 .topics .ti{font-size:1.2rem}
@@ -170,6 +184,8 @@ if(!FAECHER.some(f=>f.id===tab)) tab = "englisch";
 function renderTabs(){
   document.getElementById("tabs").innerHTML = FAECHER.map(f=>`<button class="tab" role="tab" aria-selected="${f.id===tab}" data-tab="${f.id}">${f.icon} ${esc(f.name)}<span class="n">${f.n}</span></button>`).join("");
 }
+const OPEN = new Set();
+document.addEventListener("toggle", e=>{ const d=e.target; if(d.classList && d.classList.contains("tdet")){ const k=+d.dataset.k; d.open ? OPEN.add(k) : OPEN.delete(k); } }, true);
 function englisch(){
   return `<div class="sec-h"><h2>Englisch · Klassenwelten</h2><p>Ein QR-Code pro Klasse – die Schüler landen direkt in ihrer 3D-Welt mit Grammar, Vocabulary und Country &amp; people.</p></div>
   <div class="classes">${FRS.englisch.klassen.map(c=>{
@@ -179,9 +195,10 @@ function englisch(){
       <div class="cls-map"><img src="englisch/welten/vorschau-k${c.k}.jpg" alt="" loading="lazy"><span class="cls-k">Klasse ${c.k}</span><span class="cls-w">${FRS.welt(c.k).icon} ${esc(FRS.welt(c.k).name)}</span></div>
       <div class="cls-body">
         <div class="cls-t"><b>${esc(FRS.welt(c.k).name)}</b><span>${list.length} ${list.length===1?"Lernwelt":"Lernwelten"} · ${bereiche.length} Bereiche</span></div>
-        ${list.length ? `<ul class="topics">${list.map(t=>`<li><span class="ti" aria-hidden="true">${t.icon||"🎯"}</span>
-            <span class="tt"><b>${esc(t.titel)}</b><small>${esc(FRS.kategorien[t.kat].de)} · ${esc(t.untertitel||"")}</small></span>
-            <button class="qr-mini" data-qr="${esc(t.pfad)}" data-t="${esc(t.titel)}" data-s="Englisch · Klasse ${c.k}" aria-label="QR-Code für ${esc(t.titel)}">QR</button></li>`).join("")}</ul>`
+        ${list.length ? `<details class="tdet" data-k="${c.k}"${OPEN.has(c.k)?" open":""}><summary><span class="ts-n">${bereiche.filter(b=>c.themen.some(t=>t.kat===b)).map(b=>`<span>${FRS.kategorien[b].icon} ${c.themen.filter(t=>t.kat===b).length}</span>`).join("")}</span><span class="ts-l">Lernwelten anzeigen</span><span class="ts-a" aria-hidden="true">▾</span></summary>
+          ${bereiche.filter(b=>c.themen.some(t=>t.kat===b)).map(b=>`<p class="tgrp">${FRS.kategorien[b].icon} ${esc(FRS.kategorien[b].de)}</p><ul class="topics">${c.themen.filter(t=>t.kat===b).map(t=>`<li><span class="ti" aria-hidden="true">${t.icon||"🎯"}</span>
+            <span class="tt"><b>${esc(t.titel)}</b><small>${esc(t.untertitel||"")}</small></span>
+            <button class="qr-mini" data-qr="${esc(t.pfad)}" data-t="${esc(t.titel)}" data-s="Englisch · Klasse ${c.k}" aria-label="QR-Code für ${esc(t.titel)}">QR</button></li>`).join("")}</ul>`).join("")}</details>`
           : `<p class="empty">Noch keine Lernwelten – die Welt ist schon startklar.</p>`}
         <div class="cls-act"><button class="btn" data-qr="englisch/welt.html?k=${c.k}" data-t="Klasse ${c.k} · ${esc(FRS.welt(c.k).name)}" data-s="Englisch">QR-Code Klasse ${c.k}</button>
           <a class="btn ghost" href="englisch/welt.html?k=${c.k}" target="_blank" rel="noopener">Öffnen</a></div>
