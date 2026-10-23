@@ -1,4 +1,5 @@
-// Klasse 5 · Fire World – Vulkaninsel im Lavameer
+// Klasse 5 · Fire World – Vulkaninsel im Lavameer, ringsum glühende Vulkane, darüber kreist ein Drache
+import { dragon } from "./tiere.js";
 export function build(A){
   const { rand, fbm, pick, set, get, fill, tex, P, noise, stripes, bricks, rings, topEdge, planks } = A;
   const T = {
@@ -23,14 +24,14 @@ export function build(A){
     planks: planks(["#6A2A3A","#7A3244","#62263A"], "#3A1622"),
     shelf: tex(g=>{ for(let y=0;y<16;y++) for(let x=0;x<16;x++){ const band=y<2||y>13||y===7||y===8; P(g,x,y, band?pick(["#6A2A3A","#7A3244"]):(x%3===2?"#2A0E14":["#C8413A","#3E63DD","#E9A81C","#3FA34D","#7C5CFF"][((x/3|0)+(y>8?2:0))%5])); } }),
     soil: noise(["#4E3B32","#5C463B","#3E2E27","#55413A"]),
-    woolR: noise(["#C8302A","#D63A32","#B8261F"]), woolY: noise(["#F2C230","#FFD24A","#E0AE20"]), woolW: noise(["#F2EBE2","#FFFFFF","#E4DCD2"])
+    iron: tex(g=>{ for(let x=0;x<16;x++) for(let y=0;y<16;y++) P(g,x,y,(x%4===0||y%4===0)?"#3A3A40":"rgba(0,0,0,0)"); }), woolR: noise(["#C8302A","#D63A32","#B8261F"]), woolY: noise(["#F2C230","#FFD24A","#E0AE20"]), woolW: noise(["#F2EBE2","#FFFFFF","#E4DCD2"])
   };
   const blocks = {
     netherrack:{side:T.netherrack}, blackstone:{side:T.blackstone}, basalt:{side:T.basaltS, top:T.basaltT}, obsidian:{side:T.obsidian},
     magma:{side:T.magma, em:.9}, lava:{side:T.lava, em:1.25, anim:[.11,.07]}, glow:{side:T.glow, em:1.15}, brick:{side:T.brick},
     nylium:{side:T.nylS, top:T.nylT, bottom:T.netherrack}, stem:{side:T.stemS, top:T.stemT}, wart:{side:T.wart}, shroom:{side:T.shroom, em:1.1},
     gold:{side:T.gold, em:.15}, planks:{side:T.planks}, shelf:{side:T.shelf, top:T.planks}, soil:{side:T.soil},
-    woolR:{side:T.woolR}, woolY:{side:T.woolY}, woolW:{side:T.woolW}
+    woolR:{side:T.woolR}, iron:{side:T.iron, alpha:.95, cross:true}, woolY:{side:T.woolY}, woolW:{side:T.woolW}
   };
   const W=96, D=72, LL=3, VX=48, VZ=13;
   const S = {
@@ -103,17 +104,47 @@ export function build(A){
   for(const [fx,fz,fy,r] of [[14,14,26,4],[84,12,30,3],[92,28,22,2]]){
     for(let a=-r;a<=r;a++) for(let b=-r;b<=r;b++){ const d=Math.hypot(a,b); if(d>r+.3) continue; const dep=Math.max(1,Math.round((r-d)*1.4)); fill(fx+a,fy-dep,fz+b,fx+a,fy,fz+b,"blackstone"); set(fx+a,fy,fz+b, rand()<.25?"magma":"blackstone"); }
     set(fx,fy+1,fz,"glow"); }
+  // mehr Details: Banner und Fallgitter an der Festung, Kohlebecken, Waren auf dem Markt
+  { const {x,y,z} = S.grammar;
+    for(const a of [-4,4]){ fill(x+a,y+9,z+3,x+a,y+13,z+3,"woolR"); set(x+a,y+11,z+3,"woolY"); set(x+a,y+14,z+3,"gold"); }
+    for(const a of [-6,6]){ fill(x+a,y+7,z+7,x+a,y+10,z+7,"woolR"); set(x+a,y+8,z+7,"gold"); }
+    for(let a=-1;a<=1;a++) set(x+a,y+3,z+6, "iron"); fill(x-1,y+4,z+6,x+1,y+4,z+6,"iron");
+    for(const a of [-3,3]){ set(x+a,y+1,z+13,"blackstone"); set(x+a,y+2,z+13,"magma"); set(x+a,y+3,z+13,"glow"); } }
+  { const {x,y,z} = S.country;
+    for(const [a,b,t] of [[-5,1,"gold"],[-4,1,"woolY"],[4,1,"woolR"],[5,2,"gold"],[0,5,"planks"],[1,5,"planks"],[0,6,"planks"],[-1,-6,"planks"],[0,-6,"gold"]]) set(x+a,y,z+b,t);
+    for(const [a,b] of [[-3,4],[3,4]]){ fill(x+a,y,z+b,x+a,y+1,z+b,"planks"); set(x+a,y+2,z+b,"shroom"); } }
   for(const k in S){ S[k].base = S[k].y; }
+
+  // Landschaft bis zum Horizont: Vulkane mit glühenden Kratern, Felsinseln im Lavameer
+  const F = A.far; F.cell = 3;
+  const volcs = [[-74,-58,34,46],[172,-62,34,50],[48,-124,52,112],[-120,-10,30,44],[218,-10,30,48],[-74,-132,34,68],[172,-142,34,74],[-170,-70,30,52],[262,-80,34,58]];
+  const away = (x,z) => Math.hypot(Math.max(0,-x,x-W), Math.max(0,-z,z-D));
+  const fh = (x,z) => { const m = Math.min(1, Math.max(0,(away(x,z)-28)/40)); let h = LL-4 + (fbm(x*.03+7,z*.03)-.5)*44*m;
+    for(const [vx,vz,r,ph] of volcs){ const d=Math.hypot(x-vx,z-vz); if(d<r){ const v = d<r*.2 ? ph*.8 : ph*Math.pow(1-d/r,1.15); if(v>h) h=v; } }
+    return h; };
+  const inCrater = (x,z) => volcs.some(([vx,vz,r])=>Math.hypot(x-vx,z-vz)<r*.2);
+  const nearCrater = (x,z) => volcs.some(([vx,vz,r])=>{ const d=Math.hypot(x-vx,z-vz); return d>=r*.2 && d<r*.25; });
+  const lavaStreak = (x,z) => volcs.some(([vx,vz,r])=>{ const d=Math.hypot(x-vx,z-vz); if(d>r*.95) return false; const a=Math.atan2(z-vz,x-vx)*6+vx; return d<r*.75 && Math.abs(Math.sin(a+d*.06))>.992; });
+  A.farTerrain({ x0:-260, x1:W+260, z0:-260, z1:D+70, base:0,
+    skip:(x,z)=> (x>-6 && x<W+6 && z>-6 && z<D+90) || fh(x,z) < LL+1,
+    h: fh,
+    top:(x,z,y,hc)=> inCrater(x,z) ? "lava" : nearCrater(x,z) ? "magma" : lavaStreak(x,z) ? "lava" : (rand()<.7 ? "blackstone" : "basalt"),
+    fill:(x,z,y,hc)=> lavaStreak(x,z) && y>=hc-2 ? "magma" : (y%3===0 ? "basalt" : "blackstone") });
   S.grammar.cam = {dist:38}; S.vocabulary.cam = {dist:30}; S.country.cam = {dist:28};
   return {
     W, D, blocks, spots:S, exposure:1.15,
-    sky:[[0,"#1E0404"],[.35,"#6A1608"],[.55,"#C2460F"],[.7,"#F08A30"],[1,"#7A1C0A"]], fog:[0x8A2A0E,110,230],
+    sky:[[0,"#1E0404"],[.35,"#6A1608"],[.55,"#C2460F"],[.7,"#F08A30"],[1,"#7A1C0A"]], fog:[0x6A1E0A,90,340],
     hemi:[0xFFC8A0, 0x5A1A0E, 1.7], sun:{color:0xFFC890, int:2.0, pos:[-50,80,60]}, bloom:[.55,.4,.86],
     lights:[{pos:[VX,40,VZ], color:0xFF6A1A, int:850, dist:60, flicker:true}, {pos:[S.grammar.x,S.grammar.y+5,S.grammar.z+3], color:0xFF8A3A, int:160, dist:22}, {pos:[S.country.x,S.country.y+5,S.country.z], color:0xFF8A3A, int:120, dist:20}],
-    planes:[{y:LL-.02, tex:T.lavaSea, repeat:130, size:260, em:.9, anim:[.033,.022]}],
-    particles:[{n:900, area:[0,W,LL,42,0,D], vy:2.4, wob:.6, color:0xFF9A3A, size:.32, add:true}],
-    puffs:[{n:14, pos:[VX,36,VZ], dx:8, dy:22, dz:-4, s0:4, s1:14, color:0x5A5050, opacity:.55, speed:.05}],
-    home:{pos:[W/2+4,58,D+66], look:[W/2,10,D/2-6]}, homePortrait:{pos:[W/2+4,84,D+116], look:[W/2,10,D/2-6]},
+    planes:[{y:LL-.02, tex:T.lavaSea, repeat:450, size:900, em:.9, anim:[.033,.022]}],
+    particles:[{n:900, area:[0,W,LL,42,0,D], vy:2.4, wob:.6, color:0xFF9A3A, size:.32, add:true}, {n:500, area:[-120,W+120,LL,90,-150,0], vy:3, wob:1, color:0xFF8A2A, size:.9, add:true, soft:true}],
+    puffs:[{n:14, pos:[VX,36,VZ], dx:8, dy:22, dz:-4, s0:4, s1:14, color:0x5A5050, opacity:.55, speed:.05},
+           {n:12, pos:[48,96,-120], dx:30, dy:60, dz:-10, s0:16, s1:40, color:0x4A3A36, opacity:.5, speed:.03, spread:8},
+           {n:10, pos:[146,60,-40], dx:-20, dy:50, dz:-10, s0:12, s1:34, color:0x4A3A36, opacity:.45, speed:.035, spread:6},
+           {n:10, pos:[-46,52,-26], dx:20, dy:46, dz:-10, s0:12, s1:30, color:0x4A3A36, opacity:.45, speed:.035, spread:6},
+           {n:8, pos:[48,96,-120], dx:0, dy:6, dz:0, s0:22, s1:10, color:0xFF6A1A, opacity:.35, speed:.05, spread:4, add:true}],
+    creatures:[{ ...dragon(), orbit:{c:[48,40,14], r:[50,26], speed:.16, ph:1.2, bob:2.5, bank:-.28} }],
+    home:{pos:[W/2+4,54,D+66], look:[W/2,15,D/2-6]}, homePortrait:{pos:[W/2+4,84,D+116], look:[W/2,10,D/2-6]},
     ui:{bg:"rgba(34,8,4,.9)", border:"#FF9A4A", glow:"rgba(255,110,30,.55)", text:"#FFF1E2", sub:"#E8B48C", accent:"#FFB23A", "accent-ink":"#2A0A04", chip:"rgba(30,8,4,.8)"}
   };
 }

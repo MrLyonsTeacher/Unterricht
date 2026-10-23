@@ -1,4 +1,5 @@
-// Klasse 8 · Sky Castle – schwebende Inseln über einem Wolkenmeer
+// Klasse 8 · Sky Castle – schwebende Inseln über einem Wolkenmeer; am Horizont Berggipfel und ferne Inseln, ein riesiger Adler kreist
+import { eagle, bird } from "./tiere.js";
 export function build(A){
   const { rand, fbm, vn, pick, set, get, fill, walls, disk, ring, cyl, tube, ball, dome, cone, line, topAt, tex, P, noise, stripes, bricks, rings, topEdge, planks, glassT } = A;
   const T = {
@@ -13,7 +14,7 @@ export function build(A){
     planks: planks(["#C08A50","#CC965C","#B07C44"], "#7A5530"), woolR: noise(["#E04848","#EC5A5A","#C83636"]), woolW: noise(["#F4F4F4","#FFFFFF","#E8E8E8"]),
     woolY: noise(["#F5C542","#FFD95A","#E8B030"]), iron: noise(["#C4C8D0","#B4B8C0","#D2D6DC"]), rope: stripes(["#C8A878","#B8986A"], false),
     flowerR: noise(["#FF4A6A","#FF6A80"], 4, ["#FFE27A"]), flowerY: noise(["#FFE27A","#FFD24A"], 4, ["#FF9A3A"]), flowerB: noise(["#7AA8FF","#9AC0FF"], 4, ["#FFFFFF"]),
-    crystal: noise(["#BFF8FF","#8AEAFF","#E6FFFF"], 6, ["#FFFFFF"]), lamp: noise(["#FFE6A8","#FFD27A","#FFF2CC"])
+    snowP: noise(["#F4F8FF","#E6EEF8","#FFFFFF"], 6, ["#C8D4E4"]), crystal: noise(["#BFF8FF","#8AEAFF","#E6FFFF"], 6, ["#FFFFFF"]), lamp: noise(["#FFE6A8","#FFD27A","#FFF2CC"])
   };
   const blocks = {
     grass:{side:T.grassSide, top:T.grass, bottom:T.dirt}, dirt:{side:T.dirt}, rock:{side:T.rock},
@@ -21,7 +22,7 @@ export function build(A){
     water:{side:T.water, alpha:.75, anim:[0,-.6], em:.2}, pool:{side:T.water, alpha:.8, anim:[.05,.03], em:.15}, cloud:{side:T.cloud, alpha:.92, em:.15},
     blossom:{side:T.leaves}, leaves:{side:T.leavesG}, log:{side:T.log, top:T.logTop}, planks:{side:T.planks},
     woolR:{side:T.woolR}, woolW:{side:T.woolW}, woolY:{side:T.woolY}, iron:{side:T.iron}, rope:{side:T.rope},
-    flowerR:{side:T.flowerR}, flowerY:{side:T.flowerY}, flowerB:{side:T.flowerB}, crystal:{side:T.crystal, em:1.0}, lamp:{side:T.lamp, em:1.1}
+    flowerR:{side:T.flowerR}, flowerY:{side:T.flowerY}, flowerB:{side:T.flowerB}, crystal:{side:T.crystal, em:1.0}, snowP:{side:T.snowP}, lamp:{side:T.lamp, em:1.1}
   };
   const W=92, D=70;
   // Schwebende Insel: Oberfläche bei yt, darunter ein zerklüfteter Felskegel
@@ -111,23 +112,39 @@ export function build(A){
   // Kristalle unter den Inseln
   for(const s of Object.values(S)) for(let i=0;i<6;i++){ const a=rand()*Math.PI*2, x=Math.round(s.x+Math.cos(a)*s.r*.5), z=Math.round(s.z+Math.sin(a)*s.r*.5); let y=s.y-4; while(get(x,y,z) && y>s.y-40) y--; for(let k=0;k<3;k++) set(x,y-k,z,"crystal"); }
 
-  // Vögel
-  const bird = [[0,0,0,0xFFFFFF],[1,0,0,0xFFFFFF],[-1,0,0,0xF0A030],[0,0,1,0xE8E8E8],[0,0,-1,0xE8E8E8],[0,1,2,0xE8E8E8],[0,1,-2,0xE8E8E8]];
-  const movers=[]; for(let i=0;i<9;i++) movers.push({cubes:bird, center:[46+(i%3)*2,40+(i%4),30+(i%2)*3], radius:[40,24], speed:.12, ph:i*.1, scale:.5, bob:1, face:Math.PI/2});
+  // Landschaft bis zum Horizont: Berggipfel ragen aus dem Wolkenmeer, ferne schwebende Inseln
+  const F = A.far; F.cell = 3;
+  const peaks = [[-90,-70,52,70],[186,-84,58,84],[46,-210,80,130],[-170,10,44,52],[262,10,48,58],[-60,-190,50,90],[150,-200,56,100]];
+  const ph = (x,z) => { let h = -10; for(const [px,pz,r,hh] of peaks){ const d=Math.hypot(x-px,z-pz)/r; if(d<1){ const v = hh*Math.pow(1-d,1.4)*(.8+.4*fbm(x*.06,z*.06)); if(v>h) h=v; } } return h; };
+  A.farTerrain({ x0:-260, x1:W+260, z0:-280, z1:D+40, base:0, skip:(x,z)=> ph(x,z) < 4, h: ph,
+    top:(x,z,y,hc)=> y*3 > 36 ? "snowP" : (y*3 > 20 && rand()<.4 ? "snowP" : "rock"), fill:(x,z,y,hc)=> y*3 > 40 ? "snowP" : "rock" });
+  const fset = (x,y,z,t) => F.set(Math.floor(x/3),Math.floor(y/3),Math.floor(z/3),t);
+  const farIsland = (cx,cy,cz,r,deco) => { for(let x=cx-r;x<=cx+r;x+=3) for(let z=cz-r;z<=cz+r;z+=3){ const d=Math.hypot(x-cx,z-cz)/r; if(d>1) continue;
+      const dep = 3 + (1-d)*r*1.1; fset(x,cy,z,"grass"); for(let y=cy-3;y>cy-dep;y-=3) fset(x,y,z, y>cy-6?"dirt":"rock"); }
+    if(deco==="tree"){ for(let y=cy+3;y<cy+12;y+=3) fset(cx,y,cz,"log"); for(let a=-6;a<=6;a+=3) for(let b=-6;b<=6;b+=3) for(let c=0;c<=6;c+=3) if(a*a+b*b+(c-3)**2<50) fset(cx+a,cy+12+c,cz+b, rand()<.5?"blossom":"leaves"); }
+    if(deco==="tower"){ for(let y=cy+3;y<cy+24;y+=3) fset(cx,y,cz,"qbrick"); fset(cx,cy+24,cz,"roof"); fset(cx,cy+27,cz,"gold"); fset(cx+3,cy+3,cz,"qbrick"); fset(cx+3,cy+6,cz,"roof"); }
+    if(deco==="fall"){ for(let y=cy;y>2;y-=3) fset(cx+r-3,y,cz,"water"); } };
+  for(const [x,y,z,r,d] of [[-44,30,-24,9,"tree"],[146,38,-14,10,"tower"],[96,52,-74,12,"fall"],[0,46,-94,9,"tree"],[-96,26,40,8,"fall"],[186,30,58,9,"tree"],[60,64,-150,14,"tower"],[-120,58,-110,12,"tree"],[230,50,-60,11,"fall"],[-70,40,-48,6,"tower"]]) farIsland(x,y,z,r,d);
+
+  // Riesiger Adler und kleine Vögel
+  const creatures = [{ ...eagle(), orbit:{c:[46,40,-26], r:[88,30], speed:.07, ph:.2, bob:3, bank:-.3}, scale:1.7 },
+                     { ...eagle(), orbit:{c:[60,70,-90], r:[90,40], speed:.06, ph:3, bob:4, bank:-.25}, scale:1.2, noShadow:true }];
+  for(let i=0;i<9;i++) creatures.push({ ...bird(i%3?0xFFFFFF:0xE8EEF8), orbit:{c:[46+(i%3)*2,30+(i%4),30+(i%2)*3], r:[40,24], speed:.12, ph:i*.1, bob:1}, scale:.5, noShadow:true });
   const ship=[]; for(let a=-4;a<=4;a++){ ship.push([a,0,0,0xC08A50],[a,0,1,0xC08A50],[a,0,-1,0xC08A50]); for(let b=-2;b<=2;b++) for(let c=-2;c<=2;c++) if((a/4.6)**2+(b/2.2)**2+(c/2.2)**2<=1) ship.push([a,4+b,c, (a+8)%3?0xF4F4F4:0x3A78E0]); }
-  movers.push({cubes:ship, center:[46,44,-6], radius:[56,8], speed:.04, ph:1, scale:1, bob:1.5, face:Math.PI/2});
+  const movers = [{cubes:ship, center:[46,40,-16], radius:[56,8], speed:.04, ph:1, scale:1, bob:1.5, face:Math.PI/2}];
 
   return {
     W, D, blocks, spots:S, exposure:1.1, fov:40,
-    sky:[[0,"#2E7BE8"],[.45,"#7EC0FF"],[.75,"#FFD8C0"],[1,"#FFF2E6"]], fog:[0xE6F0FF, 110, 260],
+    sky:[[0,"#2E7BE8"],[.45,"#7EC0FF"],[.75,"#FFD8C0"],[1,"#FFF2E6"]], fog:[0xE6F0FF, 120, 420],
     hemi:[0xDDEBFF, 0x8A9AB0, 1.7], sun:{color:0xFFF4E0, int:2.1, pos:[60,120,90]}, bloom:[.32,.5,.9],
     lights:[{pos:[S.grammar.x,S.grammar.y+14,S.grammar.z+8], color:0xFFE6A8, int:120, dist:30}],
-    planes:[{y:2, tex:T.cloud, repeat:80, size:600, color:0xFFFFFF, em:.35, anim:[.01,0]}],
-    puffs:[{n:26, pos:[-60,3,-40], dx:220, dy:2, dz:0, s0:16, s1:20, color:0xFFFFFF, opacity:.85, speed:.012, spread:60, flat:.45},
+    planes:[{y:2, tex:T.cloud, repeat:150, size:1100, color:0xFFFFFF, em:.35, anim:[.01,0]}],
+    puffs:[{n:20, pos:[-160,10,-160], dx:400, dy:2, dz:0, s0:30, s1:30, color:0xFFFFFF, opacity:.8, speed:.008, spread:120, flat:.4},
+           {n:26, pos:[-60,3,-40], dx:220, dy:2, dz:0, s0:16, s1:20, color:0xFFFFFF, opacity:.85, speed:.012, spread:60, flat:.45},
            {n:18, pos:[-60,8,40], dx:220, dy:1, dz:0, s0:12, s1:14, color:0xFFFFFF, opacity:.7, speed:.016, spread:50, flat:.5}],
     particles:[{n:180, area:[0,W,4,60,0,D], vy:.2, wob:.6, color:0xFFFFFF, size:.18, opacity:.7, add:true, twinkle:true},
                {n:90, area:[S.vocabulary.x-8,S.vocabulary.x+8,S.vocabulary.y+2,S.vocabulary.y+16,S.vocabulary.z-8,S.vocabulary.z+8], vy:-1, wob:1.2, color:0xFFB8D8, size:.3, opacity:.9}],
-    movers,
+    movers, creatures,
     home:{pos:[W/2,50,D+66], look:[W/2,19,D/2-4]}, homePortrait:{pos:[W/2,66,D+104], look:[W/2,20,D/2-6]},
     ui:{bg:"rgba(255,255,255,.9)", border:"#6AA8FF", glow:"rgba(106,168,255,.45)", text:"#16305A", sub:"#4A6A98", accent:"#FFC24A", "accent-ink":"#2A1E06", chip:"rgba(255,255,255,.85)"}
   };

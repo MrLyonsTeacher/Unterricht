@@ -1,4 +1,5 @@
-// Klasse 6 · Water World – Unterwasser-Königreich mit Korallen, Kelp und Schiffswrack
+// Klasse 6 · Water World – Unterwasser-Königreich mit Korallen, Kelp und Schiffswrack; ringsum Meeresboden mit Felsen, Bögen und einem großen Wrack
+import { whale, fish, jelly } from "./tiere.js";
 export function build(A){
   const { rand, fbm, pick, set, get, fill, walls, disk, ring, cyl, tube, ball, dome, line, topAt, tex, P, noise, stripes, bricks, rings, planks, glassT } = A;
   const T = {
@@ -97,26 +98,58 @@ export function build(A){
   // eingestürzte Bögen
   for(const [bx,bz] of [[30,52],[56,56],[8,24]]){ const t=topAt(bx,bz,60)+1; fill(bx,t,bz,bx,t+6,bz,"pbrick"); fill(bx+5,t,bz,bx+5,t+4,bz,"pbrick"); fill(bx,t+6,bz,bx+3,t+6,bz,"pbrick"); set(bx,t+7,bz,"lantern"); }
 
-  // Fische und Wal
-  const fish = col => [[0,0,0,col],[-1,0,0,col],[1,0,0,0xFFFFFF],[-2,0,0,col],[-2,1,0,col],[-2,-1,0,col]];
-  const movers = [];
-  [[0xFF8A3A,[44,16,36],[26,18],.25,0],[0xFFD23F,[30,12,44],[14,10],.32,1.5],[0x3FA0FF,[60,14,30],[18,12],.28,3],[0xFF6FA0,[48,20,48],[30,16],.2,4.2]].forEach(([c,ctr,rad,sp,ph])=>{
-    for(let i=0;i<6;i++) movers.push({cubes:fish(c), center:[ctr[0]+((i*3)%5)-2, ctr[1]+(i%3)*1.4, ctr[2]+((i*7)%5)-2], radius:rad, speed:sp, ph:ph+i*.12, scale:.38, bob:.5, face:Math.PI/2}); });
-  const whale = []; for(let a=-8;a<=8;a++){ const r=Math.round(2.6*Math.sqrt(Math.max(0,1-(a/9)**2))); for(let b=-r;b<=r;b++) for(let c=-r;c<=r;c++) if(b*b+c*c<=r*r && (Math.abs(b)===r||Math.abs(c)===r||a===8||a===-8)) whale.push([a,b,c, b<0?0xC9D8E6:0x3E5A78]); }
-  whale.push([-9,0,-1,0x3E5A78],[-10,0,-2,0x3E5A78],[-10,0,2,0x3E5A78],[-11,0,3,0x3E5A78],[-11,0,-3,0x3E5A78],[7,1,2,0x111111],[7,1,-2,0x111111],[0,-2,4,0x3E5A78],[0,-3,5,0x3E5A78]);
-  movers.push({cubes:whale, center:[44,30,10], radius:[50,14], speed:.05, ph:2, scale:1, bob:1.2, face:Math.PI/2});
+  // Großes Wrack (Galeone, zerbrochen) links hinten außerhalb der Lernwelt
+  { const gx=-30, gz=16, gy=3, L=17;
+    for(let a=-L;a<=L;a++){ if(a>3 && a<7) continue; const w=Math.round(5*Math.sqrt(Math.max(0,1-(a/(L+1))**2)));
+      const tilt = a>5 ? 2 : 0;
+      for(let hh=0;hh<=8;hh++){ const ww=Math.round(w*(.55+hh*.06)); for(let b=-ww;b<=ww;b++){ if(hh===0 || Math.abs(b)===ww) set(gx+a,gy+hh+tilt,gz+b, hh===5?"iron":"planks"); } }
+      if(Math.abs(a)>L-2) for(let b=-w;b<=w;b++) for(let hh=1;hh<=8;hh++) if(rand()<.85) set(gx+a,gy+hh,gz+b,"planks");
+      if(a%3===0 && a<3) fill(gx+a,gy+8,gz-w,gx+a,gy+8,gz+w,"planks"); }
+    for(let a=-L+2;a<L-2;a+=5) for(const b of [-1,1]) if(a<3||a>7) set(gx+a,gy+5,gz+b*Math.round(5*Math.sqrt(Math.max(0,1-(a/(L+1))**2))*.85),"dark"); // Kanonenluken
+    for(let hh=0;hh<16;hh++) set(gx-6,gy+9+hh,gz,"planks"); fill(gx-6,gy+20,gz-5,gx-6,gy+20,gz+5,"planks");
+    for(let hh=0;hh<8;hh++) for(let b=-4;b<=4;b++) if(rand()<.6) set(gx-5,gy+12+hh,gz+b,"sail");
+    line(gx+12,gy+9,gz,gx+24,gy+2,gz+3,"planks"); line(gx+12,gy+10,gz,gx+24,gy+3,gz+3,"planks");            // umgestürzter Mast
+    fill(gx-L-2,gy+5,gz,gx-L-5,gy+7,gz,"planks"); set(gx-L-6,gy+6,gz,"gold");                            // Bugspriet mit Galionsfigur
+    for(let i=0;i<14;i++) set(gx-10+Math.floor(rand()*18), gy+1, gz-3+Math.floor(rand()*6), rand()<.5?"gold":"pearl");
+    for(let i=0;i<30;i++){ const x=gx-L+Math.floor(rand()*L*2), z=gz-5+Math.floor(rand()*10), t=topAt(x,z,40)+1; if(t>2) set(x,t,z,pick(["coralP","coralO","coralY","kelp","kelp"])); } }
+
+  // Landschaft bis zum Horizont: Dünen, Felsrücken, Felsbögen, Kelpwälder
+  const F = A.far; F.cell = 3;
+  const away = (x,z) => Math.hypot(Math.max(0,-x,x-W), Math.max(0,-z,z-D));
+  const fh = (x,z) => { const m=Math.min(1,Math.max(0,(away(x,z)-4)/30)); let h = 4.5 + fbm(x*.05,z*.05)*3;
+    const ridge = Math.max(0, fbm(x*.022+11,z*.022+4)-.52)*95*m; h += ridge;
+    if(z<0) h += Math.min(14, -z*.12) * (.5+fbm(x*.04,z*.04)); return h; };
+  A.farTerrain({ x0:-150, x1:W+150, z0:-180, z1:D+90, base:1,
+    skip:(x,z)=> (x>-1 && x<W+1 && z>-1 && z<D+1) || (x>-52 && x<-6 && z>-2 && z<34) || fh(x,z) < 7,
+    h: fh,
+    top:(x,z,y,hc)=> y*3>14 ? (rand()<.25?"prism":"rock") : (rand()<.03 ? "rock" : "sand"),
+    fill:(x,z,y,hc)=> y*3>10 ? (rand()<.3?"dark":"rock") : "sandstone" });
+  const fset = (x,y,z,t) => F.set(Math.floor(x/3),Math.floor(y/3),Math.floor(z/3),t);
+  // Felsbogen rechts hinten, Felsnadel hinten, Säulenruinen
+  { const cx=124, cz=-6, cy=4; for(let a=0;a<=Math.PI;a+=.04){ const x=cx+Math.cos(a)*22, y=cy+Math.sin(a)*30; for(let k=-2;k<=2;k++) for(let t=-3;t<=3;t+=3) fset(x+t,y,cz+k*3, (k+t)%3?"rock":"prism"); } }
+  { const cx=30, cz=-48; for(let y=0;y<70;y+=3){ const r=12*(1-y/80)+fbm(y*.1,3)*3; for(let a=-r;a<=r;a+=3) for(let b=-r;b<=r;b+=3) if(a*a+b*b<=r*r) fset(cx+a,y,cz+b, y>50?"prism":"rock"); } }
+  for(const [cx,cz,hh] of [[104,48,26],[112,58,18],[100,64,30],[-20,60,22],[-30,48,14]]){ for(let y=4;y<hh;y+=3) fset(cx,y,cz,"pbrick"); fset(cx,hh,cz,"lantern"); }
+  for(let i=0;i<110;i++){ const x=-180+rand()*(W+360), z=-200+rand()*(D+300); if(away(x,z)<6 || z>D-4 || (x>-52 && x<-6 && z>-2 && z<34)) continue;
+    const t=fh(x,z); if(t>12) continue; const hh=6+rand()*18; for(let y=t;y<t+hh;y+=3) fset(x,y,z,"kelp"); }
+
+  // Fische, Quallen und Wal
+  const creatures = [];
+  [["clown",[44,16,36],[26,18],.25,0],["yellow",[30,12,44],[14,10],.32,1.5],["tang",[60,14,30],[18,12],.28,3],["pink",[48,20,48],[30,16],.2,4.2],["tang",[-20,14,14],[22,12],.22,2],["yellow",[110,12,20],[20,14],.26,5]].forEach(([k,ctr,rad,sp,ph])=>{
+    for(let i=0;i<6;i++) creatures.push({ ...fish(k), orbit:{c:[ctr[0]+((i*3)%5)-2, ctr[1]+(i%3)*1.4, ctr[2]+((i*7)%5)-2], r:rad, speed:sp, ph:ph+i*.12, bob:.5}, scale:.42, noShadow:true }); });
+  for(const [jx,jy,jz,col] of [[30,24,22,0xFF8AD8],[58,28,18,0xB8A0FF],[36,30,40,0x8AE6FF],[62,22,44,0xFF8AD8]]) creatures.push({ ...jelly(col), at:[jx,jy,jz], hover:[1.2,.8], scale:.7 });
+  creatures.push({ ...whale(), orbit:{c:[44,30,-14], r:[74,26], speed:.05, ph:2.6, bob:1.4, bank:.12, dir:-1}, scale:1.1 });
 
   return {
     W, D, blocks, spots:S, exposure:1.2, fov:40,
-    sky:[[0,"#5FD3F2"],[.3,"#2E9BD0"],[.6,"#0E5C8C"],[1,"#062A46"]], fog:[0x0E5C8C, 85, 250],
+    sky:[[0,"#5FD3F2"],[.3,"#2E9BD0"],[.6,"#0E5C8C"],[1,"#062A46"]], fog:[0x0E5C8C, 80, 300],
     hemi:[0x9FEFFF, 0x1A4A6A, 1.9], sun:{color:0xDFFBFF, int:1.6, pos:[-30,90,40]}, bloom:[.38,.45,.9],
     lights:[{pos:[S.grammar.x,S.grammar.y+18,S.grammar.z], color:0x7FE3FF, int:260, dist:34}, {pos:[S.vocabulary.x,S.vocabulary.y+3,S.vocabulary.z], color:0xFFFFFF, int:90, dist:16}],
-    planes:[{y:3.99, tex:T.sand, repeat:200, size:500}, {y:150, tex:T.surface, repeat:60, size:400, em:.4, opacity:.35, anim:[.02,.01]}],
-    rays:{n:16, color:0xBFF4FF},
+    planes:[{y:5.2, tex:T.sand, repeat:400, size:1000}, {y:150, tex:T.surface, repeat:60, size:400, em:.4, opacity:.35, anim:[.02,.01]}],
+    rays:{n:26, color:0xBFF4FF, area:[-60,W+60,-60,D]},
     particles:[{n:520, area:[0,W,2,80,0,D+30], vy:2.2, wob:.8, color:0xE6FBFF, size:.34, opacity:.8},
                {n:380, area:[0,W,2,30,0,D], vy:0, wob:.3, color:0xA8F0D8, size:.14, opacity:.7, add:true, twinkle:true}],
-    movers,
-    home:{pos:[W/2,60,D+50], look:[W/2,3,D/2-2]}, homePortrait:{pos:[W/2,112,D+78], look:[W/2,0,D/2-12]},
+    creatures,
+    home:{pos:[W/2,48,D+52], look:[W/2,10,D/2-4]}, homePortrait:{pos:[W/2,112,D+78], look:[W/2,0,D/2-12]},
     ui:{bg:"rgba(4,34,58,.88)", border:"#7FE3FF", glow:"rgba(80,210,255,.5)", text:"#E8FBFF", sub:"#9FD7EA", accent:"#FF8A5A", "accent-ink":"#1A0E08", chip:"rgba(4,30,52,.8)"}
   };
 }

@@ -18,6 +18,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 #stage canvas{display:block}
 .ico-flag{width:1.6em;height:.8em;vertical-align:-.08em;border-radius:2px;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 
+.clean .wbar,.clean .wdock,.clean #labels,.clean .wpanel{display:none!important}
 /* Kopfzeile */
 .wbar{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0)) 14px 10px;pointer-events:none}
 .wbar>*{pointer-events:auto}
@@ -157,6 +158,7 @@ const $ = s => document.querySelector(s);
 const K = +new URLSearchParams(location.search).get("k");
 const KL = FRS.klasse(K), WI = FRS.welt(K);
 
+if(new URLSearchParams(location.search).has("clean")) document.documentElement.classList.add("clean");
 if(!KL){
   $("#bar").innerHTML = `<span class="wk">FRS</span><span class="wt">Choose your class</span>`;
   document.body.insertAdjacentHTML("beforeend", `<main class="pick">${FRS.englisch.klassen.map(c=>{ const w=FRS.welt(c.k); return `<a href="?k=${c.k}"><img src="welten/vorschau-k${c.k}.jpg" alt=""><span>Class ${c.k} · ${esc(w.name)}</span></a>`; }).join("")}</main>`);
@@ -196,7 +198,7 @@ async function main(){
     const mod = await import(`../lernwelt/welten/${WI.file}.js`);
     const { start } = await import("../lernwelt/welt3d.js");
     let ui = null;
-    W3 = await start({ seed:K*101, canvasHost:$("#stage"), labelHost:$("#labels"), names, counts, icons, lite: new URLSearchParams(location.search).has("lite"),
+    W3 = await start({ seed:K*101, canvasHost:$("#stage"), labelHost:$("#labels"), names, counts, icons, lite: new URLSearchParams(location.search).has("lite"), still: new URLSearchParams(location.search).has("still"), banner: new URLSearchParams(location.search).has("banner"),
       build: api => { const w = mod.build(api); ui = w.ui; spotsInfo = w.spots; return w; }, onSelect: k => openArea(k) });
     if(ui) for(const k in ui) document.documentElement.style.setProperty("--ui-"+k, ui[k]);
     window.__blocks = W3.count;
