@@ -24,9 +24,12 @@ const TXT = {
       codeShow:"Zeig diesen Code deiner Lehrkraft.",codeLater:"Spielst du weiter, komm danach wieder hierher – der Code passt sich an.",
       total:"Gesamt",noQR:"QR-Code konnte nicht erstellt werden. Zeig deiner Lehrkraft den Text darunter.",
       german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
-      island:"Welt",medalNames:["Noch keine Medaille","Bronze-Medaille","Silber-Medaille","Gold-Medaille"],
+      island:"Welt",medalNames:["Noch keine Medaille","Bronze-Medaille","Silber-Medaille","Gold-Medaille","Platin-Medaille"],
       medalNext:(n,p,name)=>`Noch ${n} ${p} bis ${name}`,medalTop:"Höchste Medaille erreicht!",
-      medalWon:"Du hast eine neue Medaille gewonnen!",medalOk:"Super!",perfect:"PERFEKT!",
+      medalWon:"Du hast eine neue Medaille gewonnen!",medalOk:"Super!",perfect:"PERFEKT!",platinum:"PLATIN!",
+      newFlags:n=>n===1?"+1 neue Flagge":`+${n} neue Flaggen`,noNew:"Keine neuen Flaggen – diese hattest du schon richtig.",thisRound:"Diese Runde",
+      platHint:"Platin gibt es nur, wenn jedes Spiel beim ersten Versuch fehlerfrei war.",platGame:"Platin: beim ersten Versuch fehlerfrei!",
+      rankNew:"Neuer Rang!",rankNext:(n,name)=>`noch ${n} bis ${name}`,rankTop:"Höchster Rang!",today:"heute",rankOk:"Weiter!",
       review:"Lerne aus deinen Fehlern",gap:"Lücke",learn:"Erst lernen",learnAgain:"Infos nochmal ansehen",startGame:"Zum Spiel ▸",read:"Vorlesen",auto:"Abspielen",pause:"Pause",prev:"Zurück",
       videoNote:"Das Video wird von YouTube geladen.",learnFirst:"Schau dir zuerst die Infos an – danach startet das Spiel. Tipp: **Abspielen** und **Vorlesen** antippen."},
   en:{map:"Games",pts:"points",stars:"stars",next:"Next",check:"Check",again:"Play again",nextLvl:"Next game",
@@ -47,9 +50,12 @@ const TXT = {
       codeShow:"Show this code to your teacher.",codeLater:"If you play more, come back here – the code updates.",
       total:"Total",noQR:"The QR code could not be created. Show your teacher the text below.",
       german:"Auf Deutsch",showGerman:"Aufgabe auf Deutsch anzeigen",close:"Schließen",tip:"Tipp:",
-      island:"World",medalNames:["No medal yet","Bronze medal","Silver medal","Gold medal"],
+      island:"World",medalNames:["No medal yet","Bronze medal","Silver medal","Gold medal","Platinum medal"],
       medalNext:(n,p,name)=>`${n} more ${p} for the ${name.toLowerCase()}`,medalTop:"Top medal – well done!",
-      medalWon:"You won a new medal!",medalOk:"Great!",perfect:"PERFECT!",
+      medalWon:"You won a new medal!",medalOk:"Great!",perfect:"PERFECT!",platinum:"PLATINUM!",
+      newFlags:n=>n===1?"+1 new flag":`+${n} new flags`,noNew:"No new flags – you already had these right.",thisRound:"This round",
+      platHint:"Platinum only if every game was perfect on the first try.",platGame:"Platinum: perfect on the first try!",
+      rankNew:"New rank!",rankNext:(n,name)=>`${n} more to ${name}`,rankTop:"Top rank!",today:"today",rankOk:"Keep going!",
       review:"Learn from your mistakes",gap:"Gap",learn:"Learn first",learnAgain:"Learn again",startGame:"Start the game ▸",read:"Read aloud",auto:"Play",pause:"Pause",prev:"Back",
       videoNote:"The video is loaded from YouTube.",learnFirst:"First learn the facts – then play the game. Tip: tap **Play** and **Read aloud**."}
 };
@@ -59,20 +65,21 @@ const TIERS = [0.5, 0.75, 0.9];                  // Bronze ab 50 %, Silber ab 75
 function tierOf(pts, max){ let t=0; if(max) TIERS.forEach((p,i)=>{ if(pts/max >= p-1e-9) t=i+1; }); return t; }
 let MEDAL_UID = 0;
 function medalSvg(t, size){
-  const C = [["#EEF1F5","#C9D0DA","#9AA3AF"],["#F7C9A0","#C27A45","#7E441C"],["#FBFCFE","#B4BCC8","#6E7887"],["#FFE68A","#E3A51A","#9A6500"]][t];
+  const C = [["#EEF1F5","#C9D0DA","#9AA3AF"],["#F7C9A0","#C27A45","#7E441C"],["#FBFCFE","#B4BCC8","#6E7887"],["#FFE68A","#E3A51A","#9A6500"],["#FFFFFF","#BFE6F5","#4F8FB0"]][t];
   const id = "mg"+(++MEDAL_UID), cx=50, cy=78;
   const star = Array.from({length:10},(_,i)=>{ const r=i%2?7.5:17, a=-Math.PI/2+i*Math.PI/5; return (cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1); }).join(" ");
   return `<svg class="medal" viewBox="0 0 100 120" width="${size}" height="${size*1.2}" aria-hidden="true">
     <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C[0]}"/><stop offset=".55" stop-color="${C[1]}"/><stop offset="1" stop-color="${C[2]}"/></linearGradient></defs>
-    ${t?`<path d="M28 0 L48 52 L35 58 L15 5 Z" fill="#2F5DA8"/><path d="M72 0 L52 52 L65 58 L85 5 Z" fill="#E0362C"/>`:`<path d="M28 0 L48 52 L35 58 L15 5 Z M72 0 L52 52 L65 58 L85 5 Z" fill="#D5DAE2"/>`}
+    ${t?`<path d="M28 0 L48 52 L35 58 L15 5 Z" fill="${t===4?"#6B4FD8":"#2F5DA8"}"/><path d="M72 0 L52 52 L65 58 L85 5 Z" fill="${t===4?"#2BB3C8":"#E0362C"}"/>`:`<path d="M28 0 L48 52 L35 58 L15 5 Z M72 0 L52 52 L65 58 L85 5 Z" fill="#D5DAE2"/>`}
     <circle cx="${cx}" cy="${cy}" r="36" fill="url(#${id})" stroke="${C[2]}" stroke-width="4" ${t?"":'stroke-dasharray="7 6"'}/>
     <circle cx="${cx}" cy="${cy}" r="27" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/>
+    ${t===4?`<circle cx="${cx}" cy="${cy}" r="40" fill="none" stroke="#9FE7FF" stroke-width="2" stroke-dasharray="3 5"/>`:""}
     ${t?`<polygon points="${star}" fill="#fff" fill-opacity=".9" stroke="${C[2]}" stroke-width="2.5" stroke-linejoin="round"/>`:`<text x="50" y="90" text-anchor="middle" font-size="34" font-weight="800" fill="#9AA3AF" font-family="system-ui,sans-serif">?</text>`}
   </svg>`;
 }
 const FLAG_DE = `<svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>`;
 
-let W, T, S, KEY, APP, MAX = 0, cleanups = [], CUR = null, RUN = 0;
+let W, T, S, KEY, APP, MAX = 0, cleanups = [], CUR = null, RUN = 0, RUNGAIN = 0, TIER0 = 0, RANKED = false, RANK_I = 0;
 const LV = () => W.levels;
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -97,20 +104,29 @@ function maxOf(lv){
   }
   return 0;
 }
-const best = id => (S.lv[id] && S.lv[id].best) || 0;
-const played = id => !!S.lv[id];
+// Punkte pro Aufgabe: S.lv[id].it = {aufgabe: punkte}. Eine Aufgabe zählt nur einmal – Wiederholen bringt nur Flaggen für vorher falsche Aufgaben.
+const lvById = id => LV().find(l=>l.id===id);
+function lvRec(id){ const r = S.lv[id] || (S.lv[id] = {best:0, runs:0, it:{}}); if(!r.it) r.it = {}; return r; }
+function best(id){ const r = S.lv[id]; if(!r) return 0; const l = lvById(id), m = l ? maxOf(l) : Infinity;
+  const sum = Object.values(r.it||{}).reduce((a,b)=>a+b,0); return Math.min(m, Math.max(r.legacy||0, sum, r.it ? 0 : (r.best||0))); }
+const played = id => !!(S.lv[id] && (S.lv[id].runs || Object.keys(S.lv[id].it||{}).length || S.lv[id].legacy));
+const platGame = id => !!(S.lv[id] && S.lv[id].pf);
+// Medaille der Lernwelt: Bronze/Silber/Gold nach Punkten, Platin nur wenn jedes Spiel beim ersten Versuch fehlerfrei war
+function topicTier(){ const t = tierOf(total(), MAX); return (t===3 && LV().every(l=>platGame(l.id))) ? 4 : t; }
 const total = () => LV().reduce((a,l)=>a+best(l.id),0);
 // Live-Stand: Es zählt pro Spiel der beste Versuch. Während eines Spiels zählt der laufende Versuch mit, sobald er den Bestwert übertrifft.
 // Fehler sammeln: am Ende eines Spiels als Lern-Box zeigen
 let MISS = [];
 function miss(q, a, e){ if(!CUR) return; q=String(q??""); if(q && MISS.some(m=>m.q===q)) return; MISS.push({q, a:String(a??""), e:e||""}); }
-function liveTotal(){ if(!CUR) return total(); return total() - best(CUR.id) + Math.max(best(CUR.id), Math.min(RUN, maxOf(CUR))); }
+function liveTotal(){ return total(); }
 function starsFor(pts,max){ if(!max) return 0; const p=pts/max; return p>=.9?3:p>=.6?2:pts>0?1:0; }
 const starHtml = n => `<span class="stars" aria-label="${n} von 3">${[0,1,2].map(i=>i<n?"★":`<span class="off">★</span>`).join("")}</span>`;
 
 function load(){
   S = {lv:{}, name:"", done:false, seen:{}};
   try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r){ S.lv=r.lv||{}; S.name=r.name||""; S.done=!!(r.done || (r.ab && r.ab.done)); S.seen=r.seen||{}; } }catch(e){}
+  // ältere Spielstände (nur Bestwert pro Spiel) übernehmen
+  for(const id in S.lv){ const r = S.lv[id]; if(!r.it){ r.it = {}; r.legacy = r.best || 0; } }
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
@@ -121,11 +137,31 @@ function pop(el, text){
   d.className="pop"; d.textContent=text; d.style.left=(r.left+r.width/2)+"px"; d.style.top=(r.top+8)+"px";
   document.body.appendChild(d); setTimeout(()=>d.remove(), 950);
 }
+const todayN = () => RANKED ? UH.today(W.insel.k) : 0;
+function chipInner(){
+  if(!RANKED) return `<span class="chip-ic" aria-hidden="true">${W.sammel||"⭐"}</span><span id="ptsNum">${liveTotal()}</span><span class="chip-max">/${MAX}</span>`;
+  const n = todayN(), r = UH.rank(W.insel.k, n);
+  return `<span class="chip-ic" aria-hidden="true">${W.sammel||"⭐"}</span><span id="ptsNum">${n}</span>
+    <span class="rk" title="${esc(r.top?T.rankTop:T.rankNext(r.toNext, r.nextName))}"><span class="rk-n">${r.icon} ${esc(r.name)}</span><span class="rk-bar"><i style="width:${Math.round(r.pct*100)}%"></i></span></span>`;
+}
 function updateChip(bump){
-  const n=$("#ptsNum"); if(!n) return;
-  const v = liveTotal(), old = +n.textContent;
-  n.textContent = v;
-  if(bump && v>old){ const c=$("#ptsChip"); if(c && c.animate) c.animate([{transform:"scale(1)"},{transform:"scale(1.18)"},{transform:"scale(1)"}],{duration:320}); }
+  const c=$("#ptsChip"); if(!c) return;
+  const old = +(($("#ptsNum")||{}).textContent||0);
+  c.innerHTML = chipInner();
+  const v = +(($("#ptsNum")||{}).textContent||0);
+  if(bump && v>old && c.animate) c.animate([{transform:"scale(1)"},{transform:"scale(1.18)"},{transform:"scale(1)"}],{duration:320});
+  if(RANKED){ const r = UH.rank(W.insel.k, todayN()); if(r.i > RANK_I){ RANK_I = r.i; if(bump) setTimeout(()=>rankPop(r), 350); } }
+}
+function rankPop(r){
+  if(document.querySelector(".medal-pop")) { setTimeout(()=>rankPop(r), 1200); return; }
+  const d=document.createElement("div"); d.className="medal-pop rank-pop"; d.setAttribute("role","dialog"); d.setAttribute("aria-label", T.rankNew);
+  d.innerHTML = `<div class="mp-card"><div class="rk-big" aria-hidden="true">${r.icon}</div>
+    <p class="rk-kicker">${T.rankNew}</p><h2 class="disp">${esc(r.name)}</h2>
+    <p class="mp-pts">${W.sammel||"⭐"} ${todayN()} ${T.today}</p>
+    <p class="rk-next">${r.top ? T.rankTop : esc(T.rankNext(r.toNext, r.nextIcon+" "+r.nextName))}</p>
+    <button class="btn big">${T.rankOk}</button></div>`;
+  document.body.appendChild(d); confetti(120);
+  const b=d.querySelector(".btn"); b.focus({preventScroll:true}); b.onclick=()=>d.remove();
 }
 function fly(fromEl, onLand){
   const to = $("#ptsChip");
@@ -153,7 +189,17 @@ function confetti(n){
     if(++t<110 && c.isConnected) requestAnimationFrame(f); else c.remove(); })();
 }
 // Punkte gutschreiben: "+n" zeigen, Symbol zum Zähler fliegen lassen, Zähler beim Ankommen erhöhen
-function score(el, n){ if(!n) return; RUN += n; pop(el, "+"+n); fly(el, ()=>updateChip(true)); }
+function score(el, n){ if(!n) return; pop(el, "+"+n); fly(el, ()=>updateChip(true)); }
+// Aufgaben gutschreiben: list = [[aufgabe, punkte], …]. Flaggen gibt es nur für Punkte, die diese Aufgabe vorher noch nicht hatte.
+function award(list, el){
+  if(!CUR) return 0;
+  const r = lvRec(CUR.id), before = best(CUR.id);
+  list.forEach(([k,p])=>{ if(p > (r.it[k]||0)) r.it[k] = p; });
+  const gain = best(CUR.id) - before, any = list.some(([k,p])=>p>0);
+  if(gain > 0){ RUNGAIN += gain; r.best = best(CUR.id); save(); if(RANKED) UH.addToday(W.insel.k, gain); score(el, gain); }
+  else if(any && el) pop(el, "✓");
+  return gain;
+}
 
 /* ---------- Untere Leiste (Feedback + Weiter) ---------- */
 function closeSheet(){ const s=$("#sheet"); if(s) s.remove(); const a=$("#area"); if(a) a.style.paddingBottom=""; }
@@ -181,7 +227,7 @@ function topbar(o){
     ${o.island?`<button class="back" data-href="${esc(W.insel.href)}" aria-label="${T.island}"><span aria-hidden="true">${W.insel.icon||"🗺️"}</span><span class="bl"> ${T.island}</span></button>`:""}
     ${o.title?`<div class="tb-title"><span class="ic" aria-hidden="true">${o.icon||"🎯"}</span><div style="min-width:0">${o.art?`<p class="tb-art">${esc(o.art)}</p>`:""}<h1 class="disp">${esc(o.title)}</h1></div></div>`:`<span class="sp"></span>`}
     ${o.pill?`<button class="pill-fin" ${finTarget()}><span aria-hidden="true">🏁</span> ${T.finishPill}</button>`:""}
-    <span class="chip" id="ptsChip"><span class="chip-ic" aria-hidden="true">${W.sammel||"⭐"}</span><span id="ptsNum">${liveTotal()}</span><span class="chip-max">/${MAX}</span></span></div>`;
+    <span class="chip${RANKED?" rchip":""}" id="ptsChip">${chipInner()}</span></div>`;
 }
 function howBox(text, de, tip, extra){
   if(!text) return "";
@@ -203,7 +249,7 @@ function fit(){
 function home(){
   const lvls = LV();
   const st = lvls.reduce((a,l)=>a+starsFor(best(l.id),maxOf(l)),0);
-  const tier = tierOf(total(), MAX), nextP = TIERS[tier] !== undefined ? Math.ceil(TIERS[tier]*MAX - 1e-9) - total() : 0;
+  const tier = topicTier(), nextP = TIERS[tier] !== undefined ? Math.ceil(TIERS[tier]*MAX - 1e-9) - total() : 0;
   return topbar({island:!!W.insel}) + `<header class="hero">${W.hero}</header>
   <button class="finish-banner" ${finTarget()}><span class="fb-flag" aria-hidden="true"></span>
     <span class="fb-txt"><b>${T.finishBtn}</b><span>${T.finishSub}</span></span><span class="fb-arrow" aria-hidden="true">🏁</span></button>
@@ -211,7 +257,7 @@ function home(){
     <div class="panel stat"><b>${total()}<small> / ${MAX}</small></b><span>${T.pts}</span><div class="meter"><i style="width:${Math.round(total()/MAX*100)}%"></i></div></div>
     <div class="panel stat"><b>${st}<small> / ${lvls.length*3}</small></b><span>${T.stars}</span><div class="meter"><i style="width:${Math.round(st/(lvls.length*3)*100)}%"></i></div></div>
     <div class="panel stat medal-stat${tier?" has":""}">${medalSvg(tier, 46)}<div><b class="m-name">${T.medalNames[tier]}</b>
-      <span>${tier>=3 ? T.medalTop : T.medalNext(nextP, T.pts, T.medalNames[tier+1])}</span></div></div>
+      <span>${tier>=4 ? T.medalTop : tier===3 ? T.platHint : T.medalNext(nextP, T.pts, T.medalNames[tier+1])}</span></div></div>
   </div>
   <div class="levels">${lvls.map(l=>{
     const m=maxOf(l), b=best(l.id);
@@ -219,14 +265,14 @@ function home(){
       <span class="ic" aria-hidden="true">${l.icon||"🎯"}</span>
       <span class="t">${esc(l.titel)}</span>
       <span class="k">${deckOf(l)?"📖 ":""}${esc(l.art||"")}</span>
-      <span class="s"><span>${played(l.id)?`${T.best}: ${b}/${m}`:T.open}</span>${starHtml(starsFor(b,m))}</span></button>`;}).join("")}</div>
+      <span class="s"><span>${played(l.id)?`${b}/${m}`:T.open}</span>${platGame(l.id)?`<span class="plat-b" title="${esc(T.platGame)}">${medalSvg(4,16)}</span>`:""}${starHtml(starsFor(b,m))}</span></button>`;}).join("")}</div>
   <div class="foot"><span>${T.saved}</span><button id="lwReset">${T.reset}</button></div>`;
 }
 
 function render(){
   cleanups.forEach(f=>{ try{f();}catch(e){} }); cleanups=[];
   document.querySelectorAll("#confetti,.pop,.flyer,.medal-pop").forEach(x=>x.remove());
-  closeSheet(); CUR=null; RUN=0; MISS=[];
+  closeSheet(); CUR=null; RUN=0; RUNGAIN=0; MISS=[];
   try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
   const h = location.hash.slice(1);
   if(h==="fertig" && W.insel){ location.replace(W.insel.href+"#fertig"); return; }
@@ -239,13 +285,13 @@ function render(){
   const m = h.match(/^l=(.+)$/), l = m && LV().find(x=>x.id===decodeURIComponent(m[1]));
   if(!l){ APP.innerHTML = home(); document.title = W.titel; return; }
   if(deckOf(l) && !S.seen[deckKey(l)]){ history.replaceState(null, "", "#learn="+encodeURIComponent(l.id)); learnScreen(l); return; }
-  CUR = l;
+  CUR = l; TIER0 = topicTier();
   const again = deckOf(l) ? `<button class="ln-again" data-go="learn=${esc(l.id)}" aria-label="${T.learnAgain}" title="${T.learnAgain}">📖</button>` : "";
   APP.innerHTML = topbar({back:true, title:l.titel, icon:l.icon, art:l.art, pill:true}) + howBox(l.anleitung, l.anleitungDe, l.tipp, again) + `<div id="area"></div>`;
   document.title = l.titel+" – "+W.titel;
   fit();
   const A = $("#area");
-  GAMES[l.typ](l, A, (pts, info)=>finish(l, A, pts, info));
+  GAMES[l.typ](l, A, (pts, info, pf)=>finish(l, A, pts, info, pf));
 }
 
 /* ---------- Erst lernen: animierte Info-Folien vor einem Spiel ---------- */
@@ -345,31 +391,33 @@ function learnScreen(l){
   show(0);
 }
 
-function finish(l, A, pts, info){
+function finish(l, A, pts, info, perfectRun){
   closeSheet();
-  const m = maxOf(l), old = S.lv[l.id], rec = old && pts > old.best, before = total();
-  S.lv[l.id] = {best: Math.max(pts, old?old.best:0), runs:(old?old.runs:0)+1}; save();
-  const tierBefore = tierOf(before, MAX), tierAfter = tierOf(total(), MAX), perfect = m>0 && pts===m;
+  const m = maxOf(l), r = lvRec(l.id), first = !r.runs;
+  const perfect = perfectRun !== undefined ? !!perfectRun : (m>0 && pts>=m);
+  if(first) r.pf = perfect;
+  r.runs = (r.runs||0) + 1; r.best = best(l.id); save();
+  const plat = first && perfect, tierAfter = topicTier(), gain = RUNGAIN;
   CUR = null; RUN = 0; updateChip(false);
-  const st = starsFor(pts, m), idx = LV().indexOf(l), nx = LV()[idx+1];
-  const msg = (W.lob||{})[st] || "", rv = MISS.slice(0, 40);
+  const lvScore = best(l.id), st = starsFor(lvScore, m), idx = LV().indexOf(l), nx = LV()[idx+1];
+  const msg = (W.lob||{})[starsFor(pts, m)] || "", rv = MISS.slice(0, 40);
   const rvHtml = rv.length ? `<section class="panel review" aria-label="${T.review}"><h3 class="rv-h">📚 ${T.review}</h3><ul class="rv-list">${rv.map(x=>`<li>${x.q?`<span class="rv-q">${rich(x.q)}</span>`:""}<span class="rv-a">✔ ${rich(x.a)}</span>${x.e?`<span class="rv-e">${rich(x.e)}</span>`:""}</li>`).join("")}</ul></section>` : "";
   A.innerHTML = `<div class="res-wrap${rv.length?" has-rv":""}"><div class="panel result" role="status">
-    ${perfect?`<div class="stamp" aria-hidden="true">${T.perfect}</div>`:""}
-    <div class="bigstars">${starHtml(st)}</div>
-    <p class="pts">${pts} / ${m}</p>
-    ${info?`<p class="res-info">${esc(info)}</p>`:""}
+    ${plat?`<div class="stamp plat" aria-hidden="true">${T.platinum}</div>`:perfect?`<div class="stamp" aria-hidden="true">${T.perfect}</div>`:""}
+    <div class="bigstars">${starHtml(st)}${platGame(l.id)?`<span class="plat-b big" title="${esc(T.platGame)}">${medalSvg(4,34)}</span>`:""}</div>
+    <p class="pts">${lvScore} / ${m}</p>
+    <p class="res-gain${gain?"":" none"}">${gain ? `${W.sammel||"⭐"} ${T.newFlags(gain)}` : T.noNew}</p>
+    <p class="res-info">${T.thisRound}: ${pts} / ${m}${info?` · ${esc(info)}`:""}</p>
     ${msg?`<p class="res-msg">${esc(msg)}</p>`:""}
-    ${rec?`<span class="rec">${T.record}</span>`:""}
     <div class="row">${nx?`<button class="btn big" data-go="l=${esc(nx.id)}">${T.nextLvl}: ${esc(nx.titel)}</button>`:`<button class="btn big" ${finTarget()}>🏁 ${T.finishBtn}</button>`}
       <button class="btn alt" data-again>${T.again}</button><button class="btn alt" data-go="">${T.toMap}</button></div></div>${rvHtml}</div>`;
-  if(perfect || st===3) confetti(140); else if(st===2) confetti(45);
-  if(tierAfter > tierBefore) setTimeout(()=>medalPop(tierAfter), perfect||st===3 ? 1300 : 600);
+  if(plat || perfect || st===3) confetti(plat?200:140); else if(gain && st===2) confetti(45);
+  if(tierAfter > TIER0) setTimeout(()=>medalPop(tierAfter), perfect||st===3 ? 1300 : 600);
 }
 function medalPop(t){
   const d=document.createElement("div"); d.className="medal-pop"; d.setAttribute("role","dialog"); d.setAttribute("aria-label", T.medalNames[t]);
   d.innerHTML = `<div class="mp-card"><div class="mp-medal">${medalSvg(t, 150)}</div>
-    <h2 class="disp">${T.medalNames[t]}</h2><p>${T.medalWon}</p><p class="mp-pts">${W.sammel||"⭐"} ${total()} / ${MAX}</p>
+    <h2 class="disp">${T.medalNames[t]}</h2><p>${T.medalWon}</p><p class="mp-pts">${W.sammel||"⭐"} ${total()} / ${MAX}</p>${t===4?`<p class="mp-plat">${T.platHint}</p>`:""}
     <button class="btn big">${T.medalOk}</button></div>`;
   document.body.appendChild(d); confetti(160);
   const b=d.querySelector(".btn"); b.focus({preventScroll:true}); b.onclick=()=>d.remove();
@@ -399,10 +447,9 @@ GAMES.memory = (l, A, done) => {
       const p = l.paare[cards[x].i];
       $("#memInfo").innerHTML = `<b>${T.pair}:</b> ${esc(p.a)} – ${esc(p.b)} · ${T.moves(moves)}`;
       if(found.size===l.paare.length){
-        const N=l.paare.length, extra=Math.max(0,moves-N-2), pts=Math.max(Math.ceil(N/2), N-Math.floor(extra/2));
-        lock=true; score($("#memInfo"), pts);
-        setTimeout(()=>done(pts, T.moves(moves)), 1100);
-      } else pop(b,"✓");
+        const N=l.paare.length; award([["m"+cards[x].i,1]], b);
+        lock=true; setTimeout(()=>done(N, T.moves(moves), moves <= N + Math.ceil(N/2)), 1100);
+      } else award([["m"+cards[x].i,1]], b);
     } else {
       lock=true; $("#memInfo").textContent = T.moves(moves);
       setTimeout(()=>{ [x,y].forEach(z=>A.querySelector(`[data-k="${z}"]`).classList.remove("open")); open=[]; lock=false; }, 1100);
@@ -434,7 +481,7 @@ GAMES.quiz = (l, A, done) => {
     const q = qs[i], ok = j===q.c;
     A.querySelectorAll(".opt").forEach(b=>{ const k=+b.dataset.j; b.disabled=true; if(k===q.c) b.classList.add("right"); else if(k===j) b.classList.add("wrong"); });
     res.push(ok);
-    if(ok){ pts+=P; score(A.querySelector(`.opt[data-j="${q.c}"]`), P); } else { A.querySelector(".qpanel").classList.add("shake"); miss((q.szene?q.szene+" – ":"")+q.q, q.o[q.c], q.e); }
+    if(ok){ pts+=P; award([["q"+l.fragen.indexOf(q), P]], A.querySelector(`.opt[data-j="${q.c}"]`)); } else { A.querySelector(".qpanel").classList.add("shake"); miss((q.szene?q.szene+" – ":"")+q.q, q.o[q.c], q.e); }
     const head = ok ? `${l.richtigText||T.right} +${P}` : `${j===-1?T.timeUp:T.wrong} ${T.correctIs} „${q.o[q.c]}“`;
     sheet(ok?"ok":"no", esc(head), rich(q.e||""), i<qs.length-1?T.next:T.result, ()=>{ i++; if(i<qs.length) show(); else done(pts, T.correctN(res.filter(Boolean).length)+" / "+qs.length); });
   }
@@ -465,7 +512,7 @@ GAMES.swipe = (l, A, done) => {
   function decide(d){
     if(busy) return; busy=true;
     const c=cs[i], el=$("#sc"), ok = c.r==="beide" || c.r===d, btn=$(`#sbtn [data-d="${d}"]`);
-    if(ok){ pts++; score(btn, 1); }
+    if(ok){ pts++; award([["c"+l.karten.indexOf(c), 1]], btn); }
     res.push(ok);
     el.style.transition="transform .3s, opacity .3s"; el.style.transform=`translateX(${d==="l"?-420:420}px) rotate(${d==="l"?-18:18}deg)`; el.style.opacity="0";
     A.querySelectorAll("#sbtn .btn").forEach(b=>b.disabled=true);
@@ -495,7 +542,7 @@ GAMES.sortieren = (l, A, done) => {
     const b = e.target.closest("[data-b]"); if(!b || lock) return; lock=true;
     const j=+b.dataset.b, it=its[i], ok = j===it.k; cnt[it.k]++; res.push(ok);
     const right = A.querySelector(`[data-b="${it.k}"]`); right.classList.add("hit"); right.querySelector(".cnt").textContent=cnt[it.k];
-    if(ok){ pts++; score(b,1);
+    if(ok){ pts++; award([["i"+l.items.indexOf(it), 1]], b);
       if(it.e){ sheet("ok", esc(T.right+" +1"), rich(it.e)); tm=setTimeout(nextItem, 1600); } else tm=setTimeout(nextItem, 650);
     } else {
       b.classList.add("miss","shake"); $("#si").classList.add("shake"); miss(it.t, l.koerbe[it.k].t, it.e||l.koerbe[it.k].tipp);
@@ -534,7 +581,7 @@ GAMES.rush = (l, A, done) => {
     const o = e.target.closest(".opt"); if(!o || lock || over) return; lock=true;
     const j=+o.dataset.j;
     if(j===cur.c){ hits++; combo++; o.classList.add("right");
-      if(hits<=l.ziel) score(o, 1); else pop(o, "🔥");
+      if(hits<=l.ziel) award([["hits", hits]], o); else pop(o, "🔥");
       $("#rs").textContent=hits; $("#rbar").style.width=Math.min(100,hits/l.ziel*100)+"%";
       $("#cb").textContent = combo>=3 ? `🔥 ×${combo}` : ""; setTimeout(next, 280);
     } else { combo=0; $("#cb").textContent=""; o.classList.add("wrong","shake"); miss(cur.q, cur.o[cur.c], cur.e);
@@ -562,7 +609,7 @@ GAMES.zeitstrahl = (l, A, done) => {
     if(e.target.closest("#chk")){
       checked=true; pts=ord.filter((ev,k)=>ev===k).length; show();
       l.items.forEach((x,k)=>{ if(ord[k]!==k) miss(x.t, x.j, x.e); });
-      score(A.querySelector(".slots"), pts);
+      award(l.items.map((_,k)=>["p"+k, ord[k]===k?1:0]), A.querySelector(".slots"));
       sheet(pts===l.items.length?"ok":"mid", esc(T.levelOf(pts,l.items.length)+" ✓"), "", T.result, ()=>done(pts));
     }
   };
@@ -593,7 +640,7 @@ GAMES.satzbau = (l, A, done) => {
     if(e.target.closest("#chk")){
       const s=ss[i], got=norm(picked.map(k=>tiles[k].w)), okList=[s.w].concat(s.alt||[]).map(norm);
       const ok = okList.includes(got); res.push(ok); checked=true; if(ok) pts+=P; show();
-      if(ok) score($("#ans"),P);
+      if(ok) award([["s"+l.saetze.indexOf(s), P]], $("#ans"));
       const sol = norm(s.w).replace(/^./,c=>c.toUpperCase());
       if(!ok) miss(s.hint||s.aufgabe||"", sol, s.e);
       sheet(ok?"ok":"no", esc(ok?T.right+" +"+P:T.wrong), `${ok?"":`${T.solution} <strong>${esc(sol)}</strong> `}${s.e?rich(s.e):""}`, i<ss.length-1?T.next:T.result,
@@ -623,7 +670,7 @@ GAMES.schaetzen = (l, A, done) => {
       locked=true; $("#rg").disabled=true; A.querySelectorAll("[data-st],#lock").forEach(b=>b.disabled=true);
       const d=Math.abs(v-q.ans), p = d<=q.tol+1e-9?2 : d<=2*q.tol+1e-9?1 : 0; pts+=p;
       if(p<2) miss(q.q, `${fmt(q.ans,q.dec)} ${q.unit}`, q.e); res.push(p===2?true:p===0?false:null);
-      if(p) score($("#ev"),p);
+      if(p) award([["f"+i, p]], $("#ev"));
       sheet(p===2?"ok":p===1?"mid":"no", esc(`${p===2?T.bull:p===1?T.close:T.off}${p?" +"+p:""} · ${T.yours} ${fmt(v,q.dec)} ${q.unit}`), rich(q.e), i<fs.length-1?T.next:T.result,
         ()=>{ i++; if(i<fs.length) show(); else done(pts); });
     }
@@ -654,7 +701,7 @@ GAMES.lueckentext = (l, A, done) => {
       if(e.target.closest("#chk")){ checked=true; pts=pick.filter((v,k)=>v===gaps[k].ans).length; story();
         { let g=-1, before=""; parts.forEach(p=>{ if(/^\[\[/.test(p)){ g++; if(pick[g]!==gaps[g].ans){ const w=before.replace(/\[\[([^|\]]+)[^\]]*\]\]/g,"$1").split(/\s+/).filter(Boolean).slice(-6).join(" "); miss(`${T.gap} ${g+1}: …${w} ___`, gaps[g].ans, ""); } }
           before += /^\[\[/.test(p) ? gaps[g].ans+" " : p; }); }
-        score(A.querySelector(".story"), pts);
+        award(gaps.map((g,k)=>["g"+k, pick[k]===g.ans?1:0]), A.querySelector(".story"));
         sheet(pts===gaps.length?"ok":"mid", esc(T.levelOf(pts,gaps.length)+" ✓"), l.erklaerung?rich(l.erklaerung):"", T.result, ()=>done(pts)); }
     };
   }
@@ -701,7 +748,8 @@ const LW = {
     W = world; T = Object.assign({}, TXT[W.sprache||"de"], W.punkteName?{pts:W.punkteName}:{}); KEY = "lw-"+W.id+"-v1"; APP = document.getElementById("app");
     MAX = W.levels.reduce((a,l)=>a+maxOf(l),0);
     load();
-    try{ localStorage.setItem("lw-meta-"+W.id, JSON.stringify({max:MAX, titel:W.titel, ids:W.levels.map(l=>l.id)})); }catch(e){}
+    try{ localStorage.setItem("lw-meta-"+W.id, JSON.stringify({max:MAX, titel:W.titel, ids:W.levels.map(l=>l.id), maxima:W.levels.map(maxOf)})); }catch(e){}
+    RANKED = !!(W.insel && W.insel.k && window.UH && UH.rank); if(RANKED) RANK_I = UH.rank(W.insel.k, todayN()).i;
     document.addEventListener("click", e=>{
       // Übersetzung
       const tr = e.target.closest("[data-tr]");

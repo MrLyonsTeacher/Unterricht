@@ -56,6 +56,11 @@ label{font-weight:700}
 .last b{display:block;font-size:1.25rem}
 .count{color:var(--muted);margin-top:.6rem}
 .tablewrap{overflow-x:auto}
+.cfg{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin:0 0 .7rem;padding:.6rem .8rem;border-radius:10px;background:#F4F6F5;font-size:.92rem}
+.cfg input{width:4.2rem;padding:.3rem .4rem;border:1px solid var(--line);border-radius:8px;font:inherit}
+.cfg-i{color:var(--muted);font-size:.82rem}
+.cfg[hidden]{display:none}
+.tot-sub{display:block;color:var(--mu);font-size:.72rem;font-weight:400;white-space:nowrap}
 table{border-collapse:collapse;width:100%;font-size:.95rem}
 th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
 th{font-size:.85rem;color:var(--muted)}
@@ -174,6 +179,11 @@ details summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;alig
         <select id="fGrp" aria-label="Lerngruppe"></select>
       </div>
     </div>
+    <div class="cfg" id="cfgRow" hidden>
+      <label>Stundenziel <input type="number" id="cfgZiel" min="1" max="40" inputmode="numeric"> Spiele</label>
+      <label>Gewichtung: <input type="number" id="cfgW" min="0" max="100" step="5" inputmode="numeric"> % Qualität</label>
+      <span class="cfg-i">Gesamt = Qualität (wie gut) × Gewichtung + Umfang (wie viele Spiele, gemessen am Stundenziel) × Rest.</span>
+    </div>
     <div class="tablewrap" id="table"></div>
     <div class="row" style="margin-top:1rem">
       <button class="btn" id="showReport">Klassenübersicht anzeigen</button>
@@ -218,11 +228,24 @@ function vals(r, C){
   if(C.insel) return C.ids.map(id => r.topics && Object.prototype.hasOwnProperty.call(r.topics,id) ? r.topics[id] : null);
   return C.heads.map((_,i)=> r.parts[i]===undefined || r.parts[i]==="" ? null : +r.parts[i]);
 }
-// Prozent eines Eintrags: bei Inseln bezogen auf die bearbeiteten Themen
+// Klassenwelten: Stundenziel (Anzahl Spiele) und Gewichtung Qualität/Umfang – auf diesem Gerät gespeichert
+let ZIEL = 8, WQ = 0.7;
+try{ ZIEL = +localStorage.getItem("uh-ziel") || 8; WQ = (localStorage.getItem("uh-gewicht") !== null ? +localStorage.getItem("uh-gewicht") : 70) / 100; }catch(e){}
+// Maximum der tatsächlich gespielten Spiele eines Themas (neue Codes) – sonst das Themen-Maximum
+const tmax = (r, C, i) => { const ti = r.tinfo && r.tinfo[C.ids[i]]; return ti && ti.pmax ? ti.pmax : C.smax[i]; };
+const tpct = (r, C, i) => { const v = vals(r,C)[i]; return v===null ? null : Math.min(1, v / (tmax(r,C,i)||1)); };
+// Kennzahlen einer Klassenwelt: Qualität (wie gut), Umfang (wie viele Spiele, gemessen am Stundenziel), Gesamt
+function metrics(r, C){
+  const v = vals(r,C); let p=0, m=0, g=0, topics=0;
+  v.forEach((x,i)=>{ if(x===null) return; topics++; p += x; m += tmax(r,C,i); const ti = r.tinfo && r.tinfo[C.ids[i]]; g += ti && ti.games!==null ? ti.games : 1; });
+  const Q = m ? Math.min(1, p/m) : 0, U = Math.min(1, g / Math.max(1, ZIEL));
+  const k = (matInfo(r.id).k) || 5;
+  return { Q, U, G: topics ? WQ*Q + (1-WQ)*U : 0, games:g, topics, today:r.today, rank: (r.today!==null && r.today!==undefined && UH.rank) ? UH.rank(k, r.today) : null };
+}
+// Prozent eines Eintrags: bei Klassenwelten die Gesamt-Bewertung, sonst Punkte / Maximum
 function pctOf(r, C){
   if(!C.insel) return r.max ? r.pts/r.max : 0;
-  const v = vals(r,C); let m=0, p=0; v.forEach((x,i)=>{ if(x!==null){ m+=C.smax[i]; p+=x; } });
-  return m ? p/m : 0;
+  return metrics(r,C).G;
 }
 
 let DATA = [];
@@ -334,6 +357,22 @@ function renderTable(){
   if(!rows.length){ document.getElementById("table").innerHTML = `<p class="empty">Noch keine Ergebnisse. Starte die Kamera und lass die Schüler ihren Code zeigen.</p>`; return; }
   const C = cols(info, rows);
   const avg = rows.reduce((a,r)=>a+pctOf(r,C),0)/rows.length;
+  const cfg = document.getElementById("cfgRow"); cfg.hidden = !C.insel;
+  if(C.insel){
+    document.getElementById("table").innerHTML = `<table>
+    <thead><tr><th>Name</th><th>Gruppe</th><th>Rang</th><th>Spiele</th><th>Qualität</th><th>Umfang</th><th>Gesamt</th>${C.heads.map(h=>`<th>${esc(h)}</th>`).join("")}<th>Abgegeben</th><th></th></tr></thead>
+    <tbody>${rows.map(r=>{ const M=metrics(r,C), pc=Math.round(M.G*100);
+      return `<tr class="${r.valid?"":"invalid"}">
+        <td>${r.valid?"":"⚠ "}${esc(r.name)}</td><td>${esc(r.grp)}</td>
+        <td>${M.rank?`${M.rank.icon} ${esc(M.rank.name)} <small>(${M.today})</small>`:"–"}</td>
+        <td class="n">${M.games}</td><td class="n">${Math.round(M.Q*100)} %</td><td class="n">${Math.round(M.U*100)} %</td>
+        <td class="n"><span class="bar" style="width:${Math.round(Math.min(pc,100)*0.6)}px"></span><b>${pc} %</b></td>
+        ${C.ids.map((_,i)=>{ const t=tpct(r,C,i); return `<td class="n">${t===null?"–":Math.round(t*100)+" %"}</td>`; }).join("")}
+        <td>${esc(r.time.replace("T"," "))}</td>
+        <td><button class="del" data-del="${esc(r.key)}" aria-label="${esc(r.name)} löschen">×</button></td></tr>`; }).join("")}</tbody>
+    </table><p class="count">${rows.length} Schüler · Durchschnitt ${Math.round(avg*100)} % (Gesamt = ${Math.round(WQ*100)} % Qualität + ${Math.round((1-WQ)*100)} % Umfang, Ziel ${ZIEL} Spiele)</p>`;
+    return;
+  }
   document.getElementById("table").innerHTML = `<table>
     <thead><tr><th>Name</th><th>Gruppe</th><th>Punkte</th><th>%</th>${C.heads.map(h=>`<th>${esc(h)}</th>`).join("")}<th>Abgegeben</th><th></th></tr></thead>
     <tbody>${rows.map(r=>{ const pc=Math.round(pctOf(r,C)*100), v=vals(r,C);
@@ -343,9 +382,13 @@ function renderTable(){
         ${v.map((x,i)=>`<td class="n">${x===null?"–":x+"/"+C.smax[i]}</td>`).join("")}
         <td>${esc(r.time.replace("T"," "))}</td>
         <td><button class="del" data-del="${esc(r.key)}" aria-label="${esc(r.name)} löschen">×</button></td></tr>`; }).join("")}</tbody>
-  </table><p class="count">${rows.length} Schüler · Durchschnitt ${Math.round(avg*100)} %${C.insel?" (bezogen auf die bearbeiteten Themen)":""}</p>`;
+  </table><p class="count">${rows.length} Schüler · Durchschnitt ${Math.round(avg*100)} %</p>`;
 }
 fMat.onchange = renderTable; fGrp.onchange = renderTable;
+const cfgZ = document.getElementById("cfgZiel"), cfgW = document.getElementById("cfgW");
+cfgZ.value = ZIEL; cfgW.value = Math.round(WQ*100);
+cfgZ.oninput = ()=>{ ZIEL = Math.max(1, +cfgZ.value || 1); try{ localStorage.setItem("uh-ziel", ZIEL); }catch(e){} renderTable(); };
+cfgW.oninput = ()=>{ WQ = Math.min(100, Math.max(0, +cfgW.value || 0))/100; try{ localStorage.setItem("uh-gewicht", Math.round(WQ*100)); }catch(e){} renderTable(); };
 document.addEventListener("click",e=>{
   const d=e.target.closest("[data-del]");
   if(d && confirm("Diesen Eintrag löschen?")){ DATA = DATA.filter(x=>x.key!==d.dataset.del); save(); renderTable(); }
@@ -359,8 +402,11 @@ document.getElementById("csv").onclick = ()=>{
   const rows = shown(); if(!rows.length) return;
   const info = matInfo(fMat.value), C = cols(info, rows);
   const q = v => `"${String(v).replace(/"/g,'""')}"`;
-  const lines = [["Name","Gruppe","Punkte","Maximal","Prozent",...C.heads,"Abgegeben","Code gültig"].map(q).join(";")]
-    .concat(rows.map(r=>[r.name,r.grp,r.pts,r.max,Math.round(pctOf(r,C)*100),...vals(r,C).map(x=>x===null?"":x),r.time.replace("T"," "),r.valid?"ja":"NEIN"].map(q).join(";")));
+  const lines = C.insel
+    ? [["Name","Gruppe","Rang","Flaggen heute","Spiele","Qualität %","Umfang %","Gesamt %",...C.heads.map(h=>h+" %"),"Abgegeben","Code gültig"].map(q).join(";")]
+      .concat(rows.map(r=>{ const M=metrics(r,C); return [r.name,r.grp,M.rank?M.rank.name:"",M.today??"",M.games,Math.round(M.Q*100),Math.round(M.U*100),Math.round(M.G*100),...C.ids.map((_,i)=>{ const t=tpct(r,C,i); return t===null?"":Math.round(t*100); }),r.time.replace("T"," "),r.valid?"ja":"NEIN"].map(q).join(";"); }))
+    : [["Name","Gruppe","Punkte","Maximal","Prozent",...C.heads,"Abgegeben","Code gültig"].map(q).join(";")]
+      .concat(rows.map(r=>[r.name,r.grp,r.pts,r.max,Math.round(pctOf(r,C)*100),...vals(r,C).map(x=>x===null?"":x),r.time.replace("T"," "),r.valid?"ja":"NEIN"].map(q).join(";")));
   const blob = new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
   a.download = `Ergebnisse ${info.titel.replace(/[^\wäöüÄÖÜß &-]/g,"")} ${new Date().toISOString().slice(0,10)}.csv`;
@@ -373,7 +419,7 @@ function colorOf(p){ return p>=0.8 ? "#2E9E66" : p>=0.5 ? "#D9A21B" : "#D2493A";
 // Kurz-Rückmeldung: starke und schwache Bereiche (Inseln) bzw. Stationen
 function feedback(r, C){
   const v = vals(r,C), units = {};
-  v.forEach((x,i)=>{ if(x===null) return; const u = C.insel ? C.groups[i] : i; (units[u] = units[u] || {p:0,m:0}); units[u].p += x; units[u].m += C.smax[i]; });
+  v.forEach((x,i)=>{ if(x===null) return; const u = C.insel ? C.groups[i] : i; (units[u] = units[u] || {p:0,m:0}); units[u].p += x; units[u].m += C.insel ? tmax(r,C,i) : C.smax[i]; });
   const keys = Object.keys(units);
   if(!keys.length) return `<span class="fb-none">noch nichts bearbeitet</span>`;
   const nm = u => C.insel ? (FRS.kategorien[u] ? FRS.kategorien[u].de : u) : C.heads[u];
@@ -391,7 +437,8 @@ function renderReport(){
   const base = valid.length ? valid : all;
   const avg = base.reduce((a,r)=>a+pctOf(r,C),0)/base.length;
   const done = C.heads.map((_,i)=> base.filter(r=>vals(r,C)[i]!==null));
-  const stAvg = C.heads.map((_,i)=> done[i].length ? done[i].reduce((a,r)=>a+vals(r,C)[i],0)/done[i].length/C.smax[i] : null);
+  const stAvg = C.heads.map((_,i)=> done[i].length ? (C.insel ? done[i].reduce((a,r)=>a+tpct(r,C,i),0)/done[i].length : done[i].reduce((a,r)=>a+vals(r,C)[i],0)/done[i].length/C.smax[i]) : null);
+  const avgM = C.insel ? { Q: base.reduce((a,r)=>a+metrics(r,C).Q,0)/base.length, g: base.reduce((a,r)=>a+metrics(r,C).games,0)/base.length } : null;
   const weakest = stAvg.map((p,i)=>({p,i})).filter(x=>x.p!==null).sort((a,b)=>a.p-b.p).slice(0,2).filter(x=>x.p<0.8);
   const rows = valid.slice().sort(rpSort==="pts" ? (a,b)=>pctOf(b,C)-pctOf(a,C) || a.name.localeCompare(b.name,"de") : (a,b)=>a.name.localeCompare(b.name,"de")).concat(invalid);
   const grp = fGrp.value==="*" ? ([...new Set(all.map(r=>r.grp))].filter(Boolean).join(", ") || "alle Gruppen") : (fGrp.value || "ohne Gruppe");
@@ -409,7 +456,8 @@ function renderReport(){
       <div class="rp-kpis">
         <div class="rp-kpi"><b>${base.length}</b><span>Schüler</span></div>
         <div class="rp-kpi"><b>${Math.round(avg*100)} %</b><span>Durchschnitt</span></div>
-        <div class="rp-kpi"><b>${Math.round(bestP*100)} %</b><span>Bestes Ergebnis</span></div>
+        ${C.insel ? `<div class="rp-kpi"><b>${Math.round(avgM.Q*100)} %</b><span>Ø Qualität</span></div><div class="rp-kpi"><b>${avgM.g.toFixed(1).replace(".",",")}</b><span>Ø Spiele</span></div>`
+                 : `<div class="rp-kpi"><b>${Math.round(bestP*100)} %</b><span>Bestes Ergebnis</span></div>`}
       </div>
     </div>
     <div class="rp-grid${C.heads.length>6?" wide":""}">
@@ -422,7 +470,7 @@ function renderReport(){
         <div class="rp-note">${weakest.length
           ? `<b>Wiederholen lohnt sich bei:</b> ${weakest.map(w=>esc(C.heads[w.i])+" ("+Math.round(w.p*100)+" %)").join(" und ")}`
           : `<b>Alles im grünen Bereich.</b>`}
-          <br><span style="color:var(--mu)">${C.insel?"„–“ heißt: Thema noch nicht bearbeitet. Prozente beziehen sich nur auf bearbeitete Themen.":"Niedrige Werte können auch heißen, dass eine Station noch nicht bearbeitet wurde."}</span></div>
+          <br><span style="color:var(--mu)">${C.insel?`„–“ heißt: Thema noch nicht bearbeitet. Themen-Prozente beziehen sich nur auf die gespielten Spiele. Gesamt = ${Math.round(WQ*100)} % Qualität + ${Math.round((1-WQ)*100)} % Umfang (Ziel: ${ZIEL} Spiele). Q = Qualität, U = Umfang.`:"Niedrige Werte können auch heißen, dass eine Station noch nicht bearbeitet wurde."}</span></div>
       </div>
       <div>
         <h3>Einzelergebnisse (in Prozent)</h3>
@@ -430,9 +478,9 @@ function renderReport(){
           <thead>${groupRow}<tr><th>Name</th><th style="text-align:left">Gesamt</th>${C.heads.map(h=>`<th>${esc(h)}</th>`).join("")}<th style="text-align:left">Kurz-Rückmeldung</th></tr></thead>
           <tbody>${rows.map(r=>{ const pc=pctOf(r,C), v=vals(r,C);
             return `<tr><td class="nm" title="${esc(r.name)}">${r.valid?"":"⚠ "}${esc(r.name)}</td>
-              <td class="tot"><span class="tb" style="width:${Math.round(Math.min(pc,1)*50)}px"></span><b>${Math.round(pc*100)} %</b> <span style="color:var(--mu)">${r.pts}/${r.max}</span></td>
-              ${v.map((x,i)=>{ if(x===null) return `<td class="c-n">–</td>`; const p=x/C.smax[i];
-                return `<td class="${cls(p)}" title="${x} von ${C.smax[i]} Punkten">${Math.round(Math.min(p,1)*100)}</td>`; }).join("")}
+              <td class="tot"><span class="tb" style="width:${Math.round(Math.min(pc,1)*50)}px"></span><b>${Math.round(pc*100)} %</b> ${C.insel ? (()=>{ const M=metrics(r,C); return `<span class="tot-sub">Q ${Math.round(M.Q*100)} · U ${Math.round(M.U*100)} · ${M.games} Sp.${M.rank?` · ${M.rank.icon} ${esc(M.rank.name)}`:""}</span>`; })() : `<span style="color:var(--mu)">${r.pts}/${r.max}</span>`}</td>
+              ${v.map((x,i)=>{ if(x===null) return `<td class="c-n">–</td>`; const p = C.insel ? tpct(r,C,i) : x/C.smax[i];
+                return `<td class="${cls(p)}" title="${x} Punkte">${Math.round(Math.min(p,1)*100)}</td>`; }).join("")}
               <td class="fbk">${feedback(r,C)}</td></tr>`; }).join("")}</tbody>
         </table>
         <div class="rp-legend"><span><i class="c-g"></i>ab 80 %</span><span><i class="c-y"></i>50–79 %</span><span><i class="c-r"></i>unter 50 %</span>${C.insel?`<span><i class="c-n"></i>nicht bearbeitet</span>`:""}</div>

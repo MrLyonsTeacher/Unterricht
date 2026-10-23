@@ -25,6 +25,13 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .wt{flex:1;min-width:0;font:700 clamp(22px,4vw,32px) Fredoka;color:#fff;text-shadow:0 0 16px var(--ui-glow),0 3px 0 rgba(0,0,0,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wchip{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;background:var(--ui-chip);border:2px solid var(--ui-border);border-radius:12px;padding:5px 12px;font:700 16px Fredoka;box-shadow:0 0 14px var(--ui-glow)}
 .wchip small{opacity:.7}
+.wrk{display:flex;flex-direction:column;gap:3px;line-height:1;min-width:84px}
+.wrk b{font:700 13px Fredoka;white-space:nowrap}
+.wrk i{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.25);overflow:hidden}
+.wrk u{display:block;height:100%;background:var(--ui-accent)}
+.wreset{flex:0 0 auto;min-height:40px;padding:0 12px;border-radius:12px;border:2px solid var(--ui-border);background:var(--ui-chip);color:var(--ui-text);font:700 16px Fredoka;opacity:.85}
+@media (max-width:700px){ .wreset .long{display:none} }
+.qr-card .rank-l{margin:.15rem 0 0;font:700 1.25rem Fredoka}
 .wfin{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-height:46px;padding:0 14px 0 0;border-radius:12px;border:2px dashed #fff;background:var(--ui-accent);color:var(--ui-accent-ink);font:700 16px Fredoka;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.35)}
 .wfin .chk{align-self:stretch;width:26px;background:repeating-conic-gradient(#1A1A1A 0 25%,#fff 0 50%) 0 0/12px 12px}
 @media (max-width:760px){ .wfin .long{display:none} } @media (min-width:761px){ .wfin .short{display:none} }
@@ -162,7 +169,9 @@ function prog(t){
     if(!r || !r.lv) return null;
     const ids = meta && meta.ids ? meta.ids : Object.keys(r.lv).filter(id => !["urkunde","certificate"].includes(id));
     const played = ids.filter(id => r.lv[id]); if(!played.length) return null;
-    return { pts: played.reduce((a,id)=>a+(r.lv[id].best||0),0), max: (meta && meta.max) || t.max, n: played.length, of: ids.length };
+    const max = (meta && meta.max) || t.max, mx = id => meta && meta.maxima ? meta.maxima[ids.indexOf(id)] || 0 : max/ids.length;
+    return { pts: played.reduce((a,id)=>a+(r.lv[id].best||0),0), max, n: played.length, of: ids.length,
+             pmax: Math.round(played.reduce((a,id)=>a+mx(id),0)), plat: ids.length>0 && ids.every(id=>r.lv[id] && r.lv[id].pf) };
   }catch(e){ return null; }
 }
 
@@ -171,11 +180,13 @@ async function main(){
   const BER = FRS.bereicheFuer(K), byKat = b => KL.themen.filter(t=>t.kat===b);
   const names = {}, counts = {}, icons = {};
   BER.forEach(b=>{ names[b]=FRS.kategorien[b].name; counts[b]=byKat(b).length; icons[b]=FRS.kategorien[b].icon; });
+  const RK = () => UH.rank(K, UH.today(K));
   const allMax = KL.themen.reduce((a,t)=>a+t.max,0), sum = () => KL.themen.reduce((a,t)=>{ const p=prog(t); return a+(p?p.pts:0); },0);
   const NAME_KEY = "insel-"+KL.id+"-name"; let NAME = ""; try{ NAME = localStorage.getItem(NAME_KEY) || ""; }catch(e){}
 
   $("#bar").innerHTML = `<span class="wk">Class ${K}</span><span class="wt">${WI.icon} ${esc(WI.name)}</span>
-    ${allMax?`<span class="wchip">${UK} ${sum()}<small>/${allMax}</small></span>`:""}
+    ${allMax?`<span class="wchip" title="${esc(RK().top?"Top rank!":RK().toNext+" more to "+RK().nextName)}">${UK} ${UH.today(K)}<span class="wrk"><b>${RK().icon} ${esc(RK().name)}</b><i><u style="width:${Math.round(RK().pct*100)}%"></u></i></span></span>`:""}
+    <button class="wreset" id="resetBtn" title="Reset everything / Alles zurücksetzen" aria-label="Reset everything">↺<span class="long"> Reset</span></button>
     <button class="wfin" id="finBtn"><span class="chk" aria-hidden="true"></span><span class="long">If you’re finished, click here</span><span class="short">Finished?</span></button>`;
   $("#dock").innerHTML = BER.map(b=>`<button data-kat="${b}" aria-pressed="false"><span aria-hidden="true">${icons[b]}</span><span class="lbl-long">${esc(names[b])}</span><span class="n">${counts[b]}</span></button>`).join("");
 
@@ -200,7 +211,7 @@ async function main(){
     if(W3) W3.focus(k);
     document.querySelectorAll("#dock button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.kat===k));
     P.innerHTML = `<h2>${kat.icon} ${esc(kat.name)}</h2><p class="ort">${esc(ort)} · ${list.length} ${list.length===1?"quest":"quests"}</p>
-      ${list.length ? `<div class="qgrid">${list.map(t=>{ const p=prog(t), pct=p?Math.round(p.pts/p.max*100):0, tier=p?LW.tierOf(p.pts,p.max):0;
+      ${list.length ? `<div class="qgrid">${list.map(t=>{ const p=prog(t), pct=p?Math.round(p.pts/p.max*100):0, tier=p?(p.plat?4:LW.tierOf(p.pts,p.max)):0;
         return `<a class="qt${p?" played":""}" href="../${esc(t.pfad)}"><span class="qt-ic" aria-hidden="true">${t.icon||"🎯"}</span>
           ${tier?`<span class="qt-m">${LW.medal(tier,26)}</span>`:""}
           <b class="qt-t">${esc(t.titel)}</b><small class="qt-s">${esc(t.untertitel||"")}</small>
@@ -226,14 +237,18 @@ async function main(){
     if(NAME) draw(false);
   }
   function draw(fx){
-    const played = [], rows = []; let tot = 0;
+    const played = [], rows = []; let tot = 0, pmax = 0, games = 0;
     BER.forEach(b=>{ const list = byKat(b); if(!list.length) return;
       rows.push(`<tr><th colspan="3">${FRS.kategorien[b].icon} ${esc(FRS.kategorien[b].name)}</th></tr>`);
-      list.forEach(t=>{ const p=prog(t); if(p){ played.push(`${t.id}-${p.pts}`); tot+=p.pts; }
-        rows.push(`<tr class="${p?"":"none"}"><td>${t.icon||""} ${esc(t.titel)}</td><td>${p&&LW.tierOf(p.pts,p.max)?LW.medal(LW.tierOf(p.pts,p.max),20):""}</td><td>${p?`${p.pts}/${p.max}`:"–"}</td></tr>`); }); });
-    const code = UH.make(KL.id, NAME, tot, allMax, played), img = UH.qrImage(UH.link(code), 6);
-    $("#out").innerHTML = `<div class="fin-grid"><div class="qr-card">${img?`<img src="${img}" alt="QR code">`:""}<p class="who">${esc(NAME)}</p><p class="tot">${UK} ${tot} / ${allMax}</p></div>
-      <div><table class="fin-tab">${rows.join("") || "<tr><td>No quests yet.</td></tr>"}</table><p class="fin-note">If you play more, come back here – the code updates.</p><code class="fin-code">${esc(code)}</code></div></div>`;
+      list.forEach(t=>{ const p=prog(t); if(p){ played.push(`${t.id}-${p.pts}-${p.pmax}-${p.n}`); tot+=p.pts; pmax+=p.pmax; games+=p.n; }
+        const tier = p ? (p.plat ? 4 : LW.tierOf(p.pts,p.max)) : 0;
+        rows.push(`<tr class="${p?"":"none"}"><td>${t.icon||""} ${esc(t.titel)}${p?` <small>· ${p.n}/${p.of} games</small>`:""}</td><td>${tier?LW.medal(tier,20):""}</td><td>${p?`${p.pts}/${p.max}`:"–"}</td></tr>`); }); });
+    const today = UH.today(K), rk = UH.rank(K, today);
+    played.push("~"+today);
+    const code = UH.make(KL.id, NAME, tot, pmax, played), img = UH.qrImage(UH.link(code), 6);
+    $("#out").innerHTML = `<div class="fin-grid"><div class="qr-card">${img?`<img src="${img}" alt="QR code">`:""}<p class="who">${esc(NAME)}</p>
+        <p class="rank-l">${rk.icon} ${esc(rk.name)}</p><p class="tot">${UK} ${today} flags today · ${games} ${games===1?"game":"games"}</p></div>
+      <div><table class="fin-tab">${rows.join("") || "<tr><td>No quests yet.</td></tr>"}</table><p class="fin-note">If you play more, come back here – the code updates.<br><b>Before you give back the iPad:</b> show your code, then tap ↺ Reset.</p><code class="fin-code">${esc(code)}</code></div></div>`;
     if(fx) LW.confetti(120);
   }
   F.addEventListener("click", e=>{
@@ -245,6 +260,10 @@ async function main(){
   F.addEventListener("keydown", e=>{ if(e.key==="Enter" && e.target.id==="nm"){ e.preventDefault(); $("#mk").click(); } });
   document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ if(!F.hidden) F.hidden=true; else closeArea(); } });
   $("#finBtn").addEventListener("click", openFinish);
+  $("#resetBtn").addEventListener("click", ()=>{
+    if(!confirm("Reset everything? All flags, games and your initials on this iPad will be deleted.\n\nAlles zurücksetzen? Alle Flaggen, Spiele und dein Kürzel auf diesem iPad werden gelöscht.\n\n(Show your result code to your teacher first!)")) return;
+    UH.resetClass(K, KL.themen.map(t=>t.id), KL.id); location.replace(location.pathname + "?k=" + K);
+  });
   window.addEventListener("hashchange", ()=>{ if(location.hash==="#fertig") openFinish(); });
   if(location.hash==="#fertig") openFinish();
   const startA = new URLSearchParams(location.search).get("a");

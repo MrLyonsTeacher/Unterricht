@@ -334,3 +334,21 @@ input[type=range]{width:100%;height:48px;accent-color:var(--accent)}
 }
 @media (max-width:640px){ .ln-dot small{display:none} .ln-b{padding:.4rem .7rem} }
 .ln-b[hidden]{display:none}
+
+/* Rang im Punkte-Chip (Klassenwelten) */
+.chip.rchip{gap:.45rem;padding-right:.7rem}
+.rk{display:flex;flex-direction:column;gap:2px;min-width:5.6rem;line-height:1}
+.rk-n{font-size:.78rem;font-weight:800;white-space:nowrap}
+.rk-bar{display:block;height:5px;border-radius:3px;background:var(--track);overflow:hidden}
+.rk-bar i{display:block;height:100%;background:var(--accent);transition:width .5s}
+@media (max-width:560px){ .rk{min-width:4rem} .rk-n{font-size:.7rem} }
+.rank-pop .rk-big{font-size:6rem;line-height:1;margin:.2rem 0 .4rem;animation:lnPop .8s cubic-bezier(.2,.9,.3,1.35) both}
+.rk-kicker{margin:0;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.rk-next{margin:.3rem 0 .8rem;color:var(--muted)}
+/* Platin */
+.stamp.plat{background:linear-gradient(135deg,#E9FBFF,#B9E3F3);color:#1B4F6B;border-color:#4F8FB0}
+.plat-b{display:inline-flex;vertical-align:middle;margin-left:.3rem}
+.plat-b.big{margin-left:.6rem}
+.mp-plat{margin:.2rem 0 .6rem;color:var(--muted);font-size:.9rem}
+.res-gain{margin:.2rem 0;font-weight:800;color:var(--ok,#139A65)}
+.res-gain.none{color:var(--muted);font-weight:600;font-size:.92rem}
