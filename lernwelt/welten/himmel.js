@@ -127,7 +127,7 @@ export function build(A){
   for(const [x,y,z,r,d] of [[-44,30,-24,9,"tree"],[146,38,-14,10,"tower"],[96,52,-74,12,"fall"],[0,46,-94,9,"tree"],[-96,26,40,8,"fall"],[186,30,58,9,"tree"],[60,64,-150,14,"tower"],[-120,58,-110,12,"tree"],[230,50,-60,11,"fall"],[-70,40,-48,6,"tower"]]) farIsland(x,y,z,r,d);
 
   // Riesiger Adler und kleine Vögel
-  const creatures = [{ ...eagle(), orbit:{c:[46,40,-26], r:[88,30], speed:.07, ph:.2, bob:3, bank:-.3}, scale:1.7 },
+  const creatures = [{ ...eagle(), orbit:{c:[46,46,16], r:[30,22], speed:.11, ph:3.6, bob:2, bank:-.32}, scale:.85 },
                      { ...eagle(), orbit:{c:[60,70,-90], r:[90,40], speed:.06, ph:3, bob:4, bank:-.25}, scale:1.2, noShadow:true }];
   for(let i=0;i<9;i++) creatures.push({ ...bird(i%3?0xFFFFFF:0xE8EEF8), orbit:{c:[46+(i%3)*2,30+(i%4),30+(i%2)*3], r:[40,24], speed:.12, ph:i*.1, bob:1}, scale:.5, noShadow:true });
   const ship=[]; for(let a=-4;a<=4;a++){ ship.push([a,0,0,0xC08A50],[a,0,1,0xC08A50],[a,0,-1,0xC08A50]); for(let b=-2;b<=2;b++) for(let c=-2;c<=2;c++) if((a/4.6)**2+(b/2.2)**2+(c/2.2)**2<=1) ship.push([a,4+b,c, (a+8)%3?0xF4F4F4:0x3A78E0]); }

@@ -1,5 +1,5 @@
 // Klasse 9 · Woodlands – Elbenstadt in Riesenbäumen: Baumhäuser auf Plattformen, Hängebrücken, Wasserfälle, Mondbrunnen, Nebel und Glühwürmchen
-import { unicorn, bird } from "./tiere.js";
+import { stag, bird } from "./tiere.js";
 export function build(A){
   const { rand, fbm, pick, set, get, fill, walls, disk, ring, cyl, tube, ball, ellip, dome, cone, line, topAt, terrain, tex, P, noise, stripes, bricks, rings, topEdge, planks, glassT } = A;
   const T = {
@@ -166,7 +166,7 @@ export function build(A){
   for(let i=0;i<28;i++){ const x=-150+rand()*(W+340), z=-170+rand()*(D+200); const aw=away(x,z); if(aw<14 || z>D+10 && Math.abs(x-W/2)<W*.7) continue; farTree(x,z, 4+Math.floor(rand()*2)*3, 46+Math.floor(rand()*36)); }
 
   // Glühwürmchen, Nebel, Lichtstrahlen, Einhorn, Vögel
-  const creatures = [{ ...unicorn(), at:[S.vocabulary.x+1, 13, S.vocabulary.z-5], yaw:.35, scale:.85 }];
+  const creatures = [{ ...stag(), at:[S.vocabulary.x+1, 13, S.vocabulary.z-5], yaw:.35, scale:.75 }];
   for(let i=0;i<6;i++) creatures.push({ ...bird(0xF4F0DC), orbit:{c:[48+i*2,52+(i%3)*2,22+(i%2)*4], r:[44,26], speed:.11, ph:i*.15, bob:1}, scale:.5, noShadow:true });
   return {
     W, D, blocks, spots:S, exposure:1.18, fov:40, creatures,

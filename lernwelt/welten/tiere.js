@@ -130,15 +130,41 @@ export function unicorn(){
 }
 
 /* ---------- Eisbär (Eiswelt) ---------- */
-export function polarBear(){
-  const F=0xF2EEE0, F2=0xE4DECC, DARK=0x1A1A1A;
+export function polarBear(o={}){
+  const F=0xF2EEE0, F2=0xE4DECC, DARK=0x1A1A1A, step=o.walk ? (o.speed||5) : 0;
   const body = M(); body.ell(0,5,0,4.5,2.6,2.4,(x,y,z)=> (x+y+z)%4===0 ? F2 : F);
-  body.ell(-1,6,0,2,2.6,2.4,F);
-  for(const [lx,lz] of [[2.5,-1.5],[2.5,1.5],[-2.5,-1.5],[-2.5,1.5]]){ body.box(lx,0,lz,lx+1,3,lz+(lz>0?-1:1)*0,F); body.box(lx,0,lz,lx+1,0,lz,F2); }
-  body.put(-5,6,0,F);
+  body.ell(-1,6,0,2,2.6,2.4,F); body.put(-5,6,0,F);
   const head = M(); head.ell(6,6,0,1.8,1.5,1.4,F).box(8,5,-1,9,6,1,F).put(10,6,0,DARK).put(10,5,0,F2);
   head.put(8,7,-1,DARK).put(8,7,1,DARK).put(5,8,-1,F2).put(5,8,1,F2);
-  return { parts:[ part(body,[0,0,0]), part(head,[4,6,0],["y",.4,.6,0]) ] };
+  const parts = [ part(body,[0,0,0]), part(head,[4,6,0], step ? ["z",.12,step,0] : ["y",.4,.6,0]) ];
+  [[2.5,-1.5,0],[2.5,1.5,Math.PI],[-2.5,-1.5,Math.PI],[-2.5,1.5,0]].forEach(([lx,lz,ph])=>{ const l=M().box(lx,0,lz,lx+1,3,lz,F).box(lx,0,lz,lx+1,0,lz,F2); parts.push(part(l,[lx+.5,3.5,lz], step?["z",.45,step,ph]:null)); });
+  return { parts };
+}
+
+/* ---------- Hirsch (Waldwelt) ---------- */
+export function stag(){
+  const BR=0x8A5A32, BR2=0x7A4E2A, LIGHT=0xD8B88A, WHITE=0xF4EEE2, ANT=0xE8D6B0, DARK=0x2A1A10;
+  const body = M(); body.ell(0,7,0,4,2,1.7,(x,y,z)=> y<6 ? LIGHT : ((x+y+z)%4===0?BR2:BR));
+  for(const [lx,lz] of [[2.6,-1],[2.6,1],[-2.6,-1],[-2.6,1]]){ body.box(lx,1,lz,lx,5,lz,BR2); body.put(lx,0,lz,DARK); }
+  body.put(-4,8,0,WHITE).put(-5,8,0,WHITE).put(-5,9,0,BR);
+  body.seg([3,8,0],[5,11,0],1.3,1,BR);
+  const head = M(); head.box(5,11,-1,7,13,1,BR).box(8,11,-1,9,12,1,BR2).put(10,11,0,DARK).put(8,13,-1,DARK).put(8,13,1,DARK).put(7,13,-2,LIGHT).put(7,13,2,LIGHT);
+  head.put(6,14,-2,BR).put(6,14,2,BR);
+  for(const s of [-1,1]){ head.line([6,14,s],[5,18,3*s],ANT).line([5,18,3*s],[4,22,4*s],ANT).line([5,16,2*s],[8,18,2*s],ANT).line([5,19,3*s],[7,21,4*s],ANT).line([4,20,4*s],[2,22,5*s],ANT).line([4,22,4*s],[5,24,4*s],ANT); }
+  const tail = M().put(-5,9,0,BR).put(-5,8,0,WHITE);
+  return { parts:[ part(body,[0,0,0]), part(head,[5,11,0],["z",.28,.7,0,-.25]), part(tail,[-4,9,0],["y",.5,3,0]) ] };
+}
+
+/* ---------- Frostfuchs (Eiswelt) ---------- */
+export function frostFox(o={}){
+  const F=o.col||0xEAF4FF, F2=0xC8DEF4, TIP=0x9ACCF0, DARK=0x1A2230, step=o.walk ? (o.speed||9) : 0;
+  const body = M(); body.ell(0,4,0,3,1.4,1.2,(x,y,z)=> (x+y)%3===0 ? F2 : F);
+  const head = M(); head.ell(4,5,0,1.4,1.2,1.1,F).box(5,4,0,7,4,0,F).put(7,5,0,F).put(8,4,0,DARK).put(5,6,-1,DARK).put(5,6,1,DARK);
+  head.box(3,6,-1,3,8,-1,F2).box(3,6,1,3,8,1,F2).put(3,8,-1,TIP).put(3,8,1,TIP);
+  const tail = M().seg([-3,5,0],[-6,6,0],1.1,1.5,F).seg([-6,6,0],[-8,5,0],1.5,1,TIP);
+  const parts = [ part(body,[0,0,0]), part(head,[3,5,0],["y",.15,step||1.2,0]), part(tail,[-3,5,0],["y",.35,step?step*.5:1.5,0]) ];
+  [[2,-1,0],[2,1,Math.PI],[-2,-1,Math.PI],[-2,1,0]].forEach(([lx,lz,ph])=>{ const l=M().box(lx,0,lz,lx,3,lz,F2).put(lx,0,lz,TIP); parts.push(part(l,[lx,3,lz], step?["z",.7,step,ph]:null)); });
+  return { parts };
 }
 
 /* ---------- Zwerge (Steinwelt) ---------- */
